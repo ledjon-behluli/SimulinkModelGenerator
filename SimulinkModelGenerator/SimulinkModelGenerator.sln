@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimulinkModelGenerator", "SimulinkModelGenerator\SimulinkModelGenerator.csproj", "{ECC2FD7C-BC2D-4FF1-9A95-0EB7476580B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECC2FD7C-BC2D-4FF1-9A95-0EB7476580B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECC2FD7C-BC2D-4FF1-9A95-0EB7476580B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECC2FD7C-BC2D-4FF1-9A95-0EB7476580B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECC2FD7C-BC2D-4FF1-9A95-0EB7476580B9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C96A387-E2A6-4F4E-AE37-36243BAF5857}
+	EndGlobalSection
+EndGlobal
