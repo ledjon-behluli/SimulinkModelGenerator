@@ -9,7 +9,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
         private readonly ModelInformation modelInformation;
         private readonly ModelInformationBuilder modelInformationBuilder;
 
-        private string modelName;
+        private string _ModelName;
 
         public ModelBuilder(ModelInformationBuilder modelInformationBuilder, ModelInformation modelInformation)
         {
@@ -19,7 +19,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
 
         public IModel WithName(string name)
         {
-            modelName = name;
+            _ModelName = name;
             return this;
         }
 
@@ -34,7 +34,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
         {
             this.modelInformation.Model = new Model()
             {
-                Name = modelName,
+                Name = _ModelName,
                 P = new List<P>()
                 {
                     new P(){ Name = "Version", Text = "8.9" },

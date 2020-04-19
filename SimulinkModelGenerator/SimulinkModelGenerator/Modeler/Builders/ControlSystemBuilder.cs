@@ -1,4 +1,6 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders;
+using SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,11 +12,8 @@ namespace SimulinkModelGenerator.Modeler.Builders
         private readonly ModelInformation modelInformation;
 
         private string _Location = "[-1139, 185, -81, 718]";
-        private string _Open = "on";
-        private string _PortBlocksUseCompactNotation = "off";
         private string _TiledPaperMargins = "[0.500000, 0.500000, 0.500000, 0.500000]";
         private string _ReportName = "simulink-default.rpt";
-        private string _SIDHighWatermark = "6";
 
         public ControlSystemBuilder(ModelInformation modelInformation)
         {
@@ -24,18 +23,6 @@ namespace SimulinkModelGenerator.Modeler.Builders
         public IControlSystem SetLocation(int x1, int y1, int x2, int y2)
         {
             _Location = $"[{x1}, {y1}, {x2}, {y2}]";
-            return this;
-        }
-
-        public IControlSystem Closed()
-        {
-            _Open = "off";
-            return this;
-        }
-
-        public IControlSystem PortBlocksUseCompactNotation()
-        {
-            _PortBlocksUseCompactNotation = "on";
             return this;
         }
 
@@ -52,13 +39,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
             return this;
         }
 
-        public IControlSystem SetSIDHighWatermarkLevel(uint level)
-        {
-            _SIDHighWatermark = level.ToString();
-            return this;
-        }
-
-        public ISystemBlock AddBlock<BlockType>(Action<SystemBlockBuilder> action = null)
+        public ISystemBlock AddBlock(Action<SystemBlockBuilder> action = null)
         {
             SystemBlockBuilder builder = new SystemBlockBuilder(modelInformation);
             action?.Invoke(builder);
@@ -79,12 +60,14 @@ namespace SimulinkModelGenerator.Modeler.Builders
             {
                 P = new List<P>()
                 {
-                    new P(){ Name = "Location", Text = _Location },
-                    new P(){ Name = "Open", Text = _Open },
-                    new P(){ Name = "PortBlocksUseCompactNotation", Text = _PortBlocksUseCompactNotation },
+                    // Customizable
+                    new P(){ Name = "Location", Text = _Location },                    
                     new P(){ Name = "TiledPaperMargins", Text = _TiledPaperMargins },
                     new P(){ Name = "ReportName", Text = _ReportName },
-                    new P(){ Name = "SIDHighWatermark", Text = _SIDHighWatermark }
+                    // Default
+                    new P(){ Name = "Open", Text = "on" },
+                    new P(){ Name = "PortBlocksUseCompactNotation", Text = "off" },                    
+                    new P(){ Name = "SIDHighWatermark", Text = "6" }
                 },
                 Block = new List<Block>()
                 {
@@ -97,6 +80,6 @@ namespace SimulinkModelGenerator.Modeler.Builders
             };
 
             return this;
-        }
+        }      
     }
 }

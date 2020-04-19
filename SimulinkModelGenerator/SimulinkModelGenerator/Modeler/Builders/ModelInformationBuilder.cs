@@ -16,13 +16,6 @@ namespace SimulinkModelGenerator.Modeler.Builders
             };
         }
 
-        public IModelInformation WithVersion(string version)
-        {
-            if(!string.IsNullOrEmpty(version))
-                modelInformation.Version = version;
-            return this;
-        }
-
         public IFinalizeModel AddModel(Action<ModelBuilder> action = null)
         {
             ModelBuilder builder = new ModelBuilder(this, modelInformation);

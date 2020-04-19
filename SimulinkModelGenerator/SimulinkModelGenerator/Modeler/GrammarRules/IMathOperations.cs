@@ -5,4 +5,8 @@
         IGain SetGain(decimal gain);
     }
 
+    public interface ISum : ISystemBlock
+    {
+        ISum 
+    }
 }

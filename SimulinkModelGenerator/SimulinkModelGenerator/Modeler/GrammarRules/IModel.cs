@@ -6,6 +6,6 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
     public interface IModel
     {
         IModel WithName(string name);
-        IControlSystem AddSystem(Action<ControlSystemBuilder> action = null);
+        IControlSystem AddControlSystem(Action<ControlSystemBuilder> action = null);
     }
 }
