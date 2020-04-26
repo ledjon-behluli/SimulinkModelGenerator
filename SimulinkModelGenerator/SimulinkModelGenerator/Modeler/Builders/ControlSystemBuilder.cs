@@ -1,9 +1,14 @@
-﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders;
+﻿using System;
+using System.Collections.Generic;
+using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous.PIDControllers;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources;
 using SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders;
 using SimulinkModelGenerator.Modeler.GrammarRules;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SimulinkModelGenerator.Modeler.Builders
 {
@@ -39,20 +44,136 @@ namespace SimulinkModelGenerator.Modeler.Builders
             return this;
         }
 
-        public ISystemBlock AddBlock(Action<SystemBlockBuilder> action = null)
+        #region System Blocks
+
+        #region Continous
+
+        private IControlSystem AddContinous<T>(dynamic action)
         {
-            SystemBlockBuilder builder = new SystemBlockBuilder(modelInformation);
-            action?.Invoke(builder);
-            return builder.Build();
+            Type blockType = typeof(T);            
+            SystemBlockBuilder builder = null;
+
+            if (blockType == typeof(PIDControllerBuilder))
+                builder = new PIDControllerBuilder(modelInformation);
+            else if (blockType == typeof(PDControllerBuilder))
+                builder = new PDControllerBuilder(modelInformation);
+            else if (blockType == typeof(PIControllerBuilder))
+                builder = new PIControllerBuilder(modelInformation);
+            else if (blockType == typeof(IControllerBuilder))
+                builder = new IControllerBuilder(modelInformation);
+            else if (blockType == typeof(PControllerBuilder))
+                builder = new PControllerBuilder(modelInformation);
+            else if (blockType == typeof(IntegratorBuilder))
+                builder = new IntegratorBuilder(modelInformation);
+            else if (blockType == typeof(TransferFunctionBuilder))
+                builder = new TransferFunctionBuilder(modelInformation);
+
+            if (builder == null)
+                throw new SimulinkModelGeneratorException("Unsupported continous builder provided!");
+
+            action?.Invoke((dynamic)builder);
+            builder.Build();
+            return this;
         }
 
-        public ISystemLine AddLine(Action<SystemLineBuilder> action = null)
+        public IControlSystem AddIntegrator(Action<IntegratorBuilder> action = null) => AddContinous<PDControllerBuilder>(action);
+        public IControlSystem AddTransferFunction(Action<TransferFunctionBuilder> action = null) => AddContinous<TransferFunctionBuilder>(action);
+
+        #region PID Controllers
+
+        public IControlSystem AddPIDControler(Action<PIDControllerBuilder> action = null) => AddContinous<PIDControllerBuilder>(action);
+        public IControlSystem AddPDControler(Action<PDControllerBuilder> action = null) => AddContinous<PDControllerBuilder>(action = null);
+        public IControlSystem AddPIControler(Action<PIControllerBuilder> action = null) => AddContinous<PIControllerBuilder>(action = null);
+        public IControlSystem AddIControler(Action<IControllerBuilder> action = null) => AddContinous<IControllerBuilder>(action = null);
+        public IControlSystem AddPControler(Action<PControllerBuilder> action = null) => AddContinous<PControllerBuilder>(action = null);
+
+        #endregion
+
+        #endregion
+
+        #region Math Operations
+
+        private IControlSystem AddMathOperation<T>(dynamic action)
         {
-            SystemLineBuilder builder = new SystemLineBuilder(modelInformation);
-            action?.Invoke(builder);
-            return builder.Build();
+            Type systemBlockType = typeof(T);
+            SystemBlockBuilder builder = null;
+
+            if (systemBlockType == typeof(GainBuilder))
+                builder = new GainBuilder(modelInformation);
+            else if (systemBlockType == typeof(SumBuilder))
+                builder = new SumBuilder(modelInformation);
+            if (builder == null)
+                throw new SimulinkModelGeneratorException("Unsupported math operation builder provided!");
+
+            action?.Invoke((dynamic)builder);
+            builder.Build();
+            return this;
         }
 
+        public IControlSystem AddGain(Action<GainBuilder> action = null) => AddMathOperation<GainBuilder>(action);
+        public IControlSystem AddSum(Action<SumBuilder> action = null) => AddMathOperation<SumBuilder>(action);
+
+        #endregion
+
+        #region Sinks
+
+        private IControlSystem AddSink<T>(dynamic action)
+        {
+            Type systemBlockType = typeof(T);
+            SystemBlockBuilder builder = null;
+
+            if (systemBlockType == typeof(DisplayBuilder))
+                builder = new DisplayBuilder(modelInformation);
+            else if (systemBlockType == typeof(ScopeBuilder))
+                builder = new ScopeBuilder(modelInformation);
+
+            if (builder == null)
+                throw new SimulinkModelGeneratorException("Unsupported sink builder provided!");
+
+            action?.Invoke((dynamic)builder);
+            builder.Build();
+            return this;
+        }
+
+        public IControlSystem AddDisplay(Action<DisplayBuilder> action = null) => AddSink<DisplayBuilder>(action);
+        public IControlSystem AddScope(Action<ScopeBuilder> action = null) => AddSink<ScopeBuilder>(action);
+
+        #endregion
+
+        #region Sources
+
+        private IControlSystem AddSource<T>(dynamic action)
+        {
+            Type systemBlockType = typeof(T);
+            SystemBlockBuilder builder = null;
+
+            if (systemBlockType == typeof(ConstantBuilder))
+                builder = new ConstantBuilder(modelInformation);
+            else if (systemBlockType == typeof(RampBuilder))
+                builder = new RampBuilder(modelInformation);
+            else if (systemBlockType == typeof(StepBuilder))
+                builder = new StepBuilder(modelInformation);
+
+            if (builder == null)
+                throw new SimulinkModelGeneratorException("Unsupported source builder provided!");
+
+            action?.Invoke((dynamic)builder);
+            builder.Build();
+            return this;
+        }
+
+        public IControlSystem AddConstant(Action<ConstantBuilder> action = null) => AddSource<ConstantBuilder>(action);
+        public IControlSystem AddRamp(Action<RampBuilder> action = null) => AddSource<RampBuilder>(action);
+        public IControlSystem AddStep(Action<StepBuilder> action = null) => AddSource<StepBuilder>(action);
+
+        #endregion
+
+        #endregion
+
+        #region System Lines
+
+
+        #endregion
 
         internal IControlSystem Build()
         {
@@ -80,6 +201,6 @@ namespace SimulinkModelGenerator.Modeler.Builders
             };
 
             return this;
-        }      
+        }        
     }
 }

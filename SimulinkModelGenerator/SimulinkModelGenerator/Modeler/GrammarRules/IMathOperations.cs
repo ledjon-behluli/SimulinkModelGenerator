@@ -1,4 +1,6 @@
-﻿namespace SimulinkModelGenerator.Modeler.GrammarRules
+﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
+
+namespace SimulinkModelGenerator.Modeler.GrammarRules
 {   
     public interface IGain : ISystemBlock
     {
@@ -7,6 +9,7 @@
 
     public interface ISum : ISystemBlock
     {
-        ISum 
+        ISum WithIconShape(IconShape shape);
+        ISum SetInputs(params InputType[] inputs);
     }
 }
