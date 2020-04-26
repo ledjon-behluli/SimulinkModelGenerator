@@ -1,0 +1,53 @@
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous.PIDControllers;
+using SimulinkModelGenerator.Modeler.GrammarRules;
+using System;
+
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
+{
+    public sealed class SystemContinuousBuilder : ISystemContinuous
+    {
+        private readonly ModelInformation modelInformation;
+
+        public SystemContinuousBuilder(ModelInformation modelInformation) 
+        {
+            this.modelInformation = modelInformation;
+        }
+
+        public ISystemContinuous AddIntegrator(Action<IntegratorBuilder> action = null) => AddContinous<IntegratorBuilder>(action);       
+        public ISystemContinuous AddTransferFunction(Action<TransferFunctionBuilder> action = null) => AddContinous<TransferFunctionBuilder>(action);
+        public ISystemContinuous AddPIDController(Action<PIDControllerBuilder> action = null) => AddContinous<PIDControllerBuilder>(action);
+        public ISystemContinuous AddPDController(Action<PDControllerBuilder> action = null) => AddContinous<PDControllerBuilder>(action);
+        public ISystemContinuous AddPIController(Action<PIControllerBuilder> action = null) => AddContinous<PIControllerBuilder>(action);
+        public ISystemContinuous AddIController(Action<IControllerBuilder> action = null) => AddContinous<IControllerBuilder>(action);
+        public ISystemContinuous AddPController(Action<PControllerBuilder> action = null) => AddContinous<PControllerBuilder>(action);
+
+        private ISystemContinuous AddContinous<T>(dynamic action)
+        {
+            Type blockType = typeof(T);
+            SystemBlockBuilder builder = null;
+
+            if (blockType == typeof(PIDControllerBuilder))
+                builder = new PIDControllerBuilder(modelInformation);
+            else if (blockType == typeof(PDControllerBuilder))
+                builder = new PDControllerBuilder(modelInformation);
+            else if (blockType == typeof(PIControllerBuilder))
+                builder = new PIControllerBuilder(modelInformation);
+            else if (blockType == typeof(IControllerBuilder))
+                builder = new IControllerBuilder(modelInformation);
+            else if (blockType == typeof(PControllerBuilder))
+                builder = new PControllerBuilder(modelInformation);
+            else if (blockType == typeof(IntegratorBuilder))
+                builder = new IntegratorBuilder(modelInformation);
+            else if (blockType == typeof(TransferFunctionBuilder))
+                builder = new TransferFunctionBuilder(modelInformation);
+
+            if (builder == null)
+                throw new SimulinkModelGeneratorException("Unsupported continuous builder provided!");
+
+            action?.Invoke((dynamic)builder);
+            builder.Build();
+            return this;
+        }
+    }
+}

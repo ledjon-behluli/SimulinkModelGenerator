@@ -48,9 +48,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         Trapezoidal
     }
 
-
     public abstract class PIDBaseControllerBuilder<T> : SystemBlockBuilder<T>, IPIDBaseController, IPIDSampleTime
-        where T : PIDBaseControllerBuilder<T>, IPIDBaseController
+        where T : PIDBaseControllerBuilder<T>
     {
         public abstract string _ControllerType { get; }
 

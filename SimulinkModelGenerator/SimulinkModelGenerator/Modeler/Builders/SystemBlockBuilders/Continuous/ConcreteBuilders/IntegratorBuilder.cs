@@ -4,13 +4,13 @@ using System.Collections.Generic;
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
     public sealed class IntegratorBuilder : SystemBlockBuilder<IntegratorBuilder>, IIntegrator
-    {
+    {        
         private string _InitialCondition = "0";
 
         public IntegratorBuilder(ModelInformation modelInformation)
             : base(modelInformation)
         {
-
+            
         }
 
         public IIntegrator SetInitialCondition(decimal initialCondition)

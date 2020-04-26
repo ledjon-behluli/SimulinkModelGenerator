@@ -1,5 +1,15 @@
-﻿namespace SimulinkModelGenerator.Modeler.GrammarRules
+﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources;
+using System;
+
+namespace SimulinkModelGenerator.Modeler.GrammarRules
 {
+    public interface ISystemSource
+    {
+        ISystemSource AddConstant(Action<ConstantBuilder> action = null);
+        ISystemSource AddRamp(Action<RampBuilder> action = null);
+        ISystemSource AddStep(Action<StepBuilder> action = null);
+    }
+
     public interface IConstant : ISystemBlock
     {
         IConstant SetValue(decimal value);

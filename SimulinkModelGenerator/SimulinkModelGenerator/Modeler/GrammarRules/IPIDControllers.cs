@@ -1,4 +1,5 @@
 ﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous.PIDControllers;
 using System;
 using System.Collections.Generic;
 using System.Text;
