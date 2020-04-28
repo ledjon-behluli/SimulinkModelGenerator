@@ -5,8 +5,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 {
     public sealed class DisplayBuilder : SystemBlockBuilder<DisplayBuilder>, IDisplay
     {     
-        public DisplayBuilder(ModelInformation modelInformation)
-            : base(modelInformation)
+        public DisplayBuilder(Model model)
+            : base(model)
         {
 
         }
@@ -14,7 +14,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 
         internal override void Build()
         {
-            base.modelInformation.Model.System.Block.Add(new Block()
+            base.model.System.Block.Add(new Block()
             {
                 BlockType = "Display",
                 Name = base.GetName("Display"),

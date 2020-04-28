@@ -62,8 +62,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             }
         }
 
-        public SumBuilder(ModelInformation modelInformation)
-            : base(modelInformation)
+        public SumBuilder(Model model)
+            : base(model)
         {
 
         }
@@ -87,7 +87,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
 
         internal override void Build()
         {
-            base.modelInformation.Model.System.Block.Add(new Block()
+            base.model.System.Block.Add(new Block()
             {
                 BlockType = "Sum",
                 Name = base.GetName("Sum"),

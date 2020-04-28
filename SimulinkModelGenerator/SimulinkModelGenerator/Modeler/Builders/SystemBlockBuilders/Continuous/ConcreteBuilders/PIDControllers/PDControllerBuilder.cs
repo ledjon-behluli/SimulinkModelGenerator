@@ -7,8 +7,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
     {
         public override string _ControllerType { get => "PD"; }
 
-        public PDControllerBuilder(ModelInformation modelInformation)
-            : base(modelInformation)
+        public PDControllerBuilder(Model model)
+            : base(model)
         {
 
         }

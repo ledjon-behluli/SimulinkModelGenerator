@@ -6,11 +6,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 {
     public sealed class SystemSinksBuilder : ISystemSink
     {
-        private readonly ModelInformation modelInformation;
+        private readonly Model model;
 
-        public SystemSinksBuilder(ModelInformation modelInformation)
+        public SystemSinksBuilder(Model model)
         {
-            this.modelInformation = modelInformation;
+            this.model = model;
         }
        
         public ISystemSink AddDisplay(Action<DisplayBuilder> action = null) => AddSink<DisplayBuilder>(action);
@@ -22,9 +22,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             SystemBlockBuilder builder = null;
 
             if (systemBlockType == typeof(DisplayBuilder))
-                builder = new DisplayBuilder(modelInformation);
+                builder = new DisplayBuilder(model);
             else if (systemBlockType == typeof(ScopeBuilder))
-                builder = new ScopeBuilder(modelInformation);
+                builder = new ScopeBuilder(model);
 
             if (builder == null)
                 throw new SimulinkModelGeneratorException("Unsupported sink builder provided!");

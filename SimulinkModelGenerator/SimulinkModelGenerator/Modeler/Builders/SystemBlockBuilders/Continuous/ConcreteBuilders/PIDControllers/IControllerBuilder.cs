@@ -7,8 +7,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
     {
         public override string _ControllerType { get => "I"; }
 
-        public IControllerBuilder(ModelInformation modelInformation)
-            : base(modelInformation)
+        public IControllerBuilder(Model model)
+            : base(model)
         {
 
         }

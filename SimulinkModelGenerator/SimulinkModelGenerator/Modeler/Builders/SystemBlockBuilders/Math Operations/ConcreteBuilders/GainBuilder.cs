@@ -7,8 +7,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
     {
         private string _Gain = "1";
 
-        public GainBuilder(ModelInformation modelInformation)
-            : base(modelInformation)
+        public GainBuilder(Model model)
+            : base(model)
         {
 
         }
@@ -23,7 +23,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
 
         internal override void Build()
         {
-            base.modelInformation.Model.System.Block.Add(new Block()
+            base.model.System.Block.Add(new Block()
             {
                 BlockType = "Gain",
                 Name = base.GetName("Gain"),

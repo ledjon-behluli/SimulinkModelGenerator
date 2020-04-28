@@ -4,17 +4,16 @@ using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders
 {
-    public sealed class ModelBuilder : IModel
+    public sealed class ModelBuilder : IModel, IFinalizeModel
     {
-        private readonly ModelInformation modelInformation;
-        private readonly ModelInformationBuilder modelInformationBuilder;
+        private Model model;
+        public string MDL { get; private set; }
 
         private string _ModelName;
 
-        public ModelBuilder(ModelInformationBuilder modelInformationBuilder, ModelInformation modelInformation)
+        public ModelBuilder()
         {
-            this.modelInformation = modelInformation;
-            this.modelInformationBuilder = modelInformationBuilder;
+     
         }
 
         public IModel WithName(string name)
@@ -23,16 +22,16 @@ namespace SimulinkModelGenerator.Modeler.Builders
             return this;
         }
 
-        public IControlSystem AddControlSystem(Action<ControlSystemBuilder> action = null)
+        public IFinalizeModel AddControlSystem(Action<ControlSystemBuilder> action = null)
         {
-            ControlSystemBuilder builder = new ControlSystemBuilder(modelInformation);
+            ControlSystemBuilder builder = new ControlSystemBuilder(model);
             action?.Invoke(builder);
-            return builder.Build();
+            return this;
         }
 
-        internal IFinalizeModel Build()
+        public string Build()
         {
-            this.modelInformation.Model = new Model()
+            this.model = new Model()
             {
                 Name = _ModelName,
                 P = new List<P>()
@@ -59,7 +58,18 @@ namespace SimulinkModelGenerator.Modeler.Builders
                 }
             };
 
-            return modelInformationBuilder;
+            //TODO: Convert to MDL
+            MDL = "test";
+
+            return MDL;
+        }
+
+        public void Save(string path)
+        {
+            if (this.model == null)
+                this.Build();
+
+            //TODO: Save content of 'MDL' locally
         }
     }
 }

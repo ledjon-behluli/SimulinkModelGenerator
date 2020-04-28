@@ -67,8 +67,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         protected bool _UseFilter = false;
 
 
-        public PIDBaseControllerBuilder(ModelInformation modelInformation)
-            : base(modelInformation)
+        public PIDBaseControllerBuilder(Model model)
+            : base(model)
         {
 
         }
@@ -101,7 +101,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
         internal override void Build()
         {
-            base.modelInformation.Model.System.Block.Add(new Block()
+            base.model.System.Block.Add(new Block()
             {
                 BlockType = "Reference",
                 Name = base.GetName("PID Controller"),

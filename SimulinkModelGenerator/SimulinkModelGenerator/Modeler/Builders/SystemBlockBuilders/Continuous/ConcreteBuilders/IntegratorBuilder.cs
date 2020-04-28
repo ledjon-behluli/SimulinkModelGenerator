@@ -7,8 +7,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
     {        
         private string _InitialCondition = "0";
 
-        public IntegratorBuilder(ModelInformation modelInformation)
-            : base(modelInformation)
+        public IntegratorBuilder(Model model)
+            : base(model)
         {
             
         }
@@ -22,7 +22,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
         internal override void Build()
         {
-            base.modelInformation.Model.System.Block.Add(new Block()
+            base.model.System.Block.Add(new Block()
             {
                 BlockType = "Integrator",
                 Name = base.GetName("Integrator"),

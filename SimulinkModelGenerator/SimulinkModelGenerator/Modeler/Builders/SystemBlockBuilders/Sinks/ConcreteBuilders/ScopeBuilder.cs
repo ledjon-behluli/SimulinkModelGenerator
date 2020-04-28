@@ -9,8 +9,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
         private string _NumInputPorts = "1";
         private string _Ports = "[1]";
 
-        public ScopeBuilder(ModelInformation modelInformation)
-            : base(modelInformation)
+        public ScopeBuilder(Model model)
+            : base(model)
         {
 
         }
@@ -31,7 +31,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 
         internal override void Build()
         {
-            base.modelInformation.Model.System.Block.Add(new Block()
+            base.model.System.Block.Add(new Block()
             {
                 BlockType = "Scope",
                 Name = base.GetName("Scope"),

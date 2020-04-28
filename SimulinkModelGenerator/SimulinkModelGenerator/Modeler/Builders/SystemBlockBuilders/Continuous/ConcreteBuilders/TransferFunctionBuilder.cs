@@ -12,8 +12,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         private int _NumeratorCount = 0;
         private int _DenominatorCount = 2;
 
-        public TransferFunctionBuilder(ModelInformation modelInformation)
-            : base(modelInformation)
+        public TransferFunctionBuilder(Model model)
+            : base(model)
         {
 
         }
@@ -73,7 +73,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
                 list.Add(new P() { Name = "Numerator", Text = _Numerator });
             }
 
-            base.modelInformation.Model.System.Block.Add(new Block()
+            base.model.System.Block.Add(new Block()
             {
                 BlockType = "TransferFcn",
                 Name = base.GetName("TransferFcn"),

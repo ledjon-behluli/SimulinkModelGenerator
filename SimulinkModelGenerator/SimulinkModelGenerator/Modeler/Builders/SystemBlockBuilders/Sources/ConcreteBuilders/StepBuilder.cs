@@ -12,8 +12,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         private string _FinalValue = "1";
         private string _SampleTime = "0";
 
-        public StepBuilder(ModelInformation modelInformation)
-            : base(modelInformation)
+        public StepBuilder(Model model)
+            : base(model)
         {
 
         }
@@ -49,7 +49,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 
         internal override void Build()
         {
-            base.modelInformation.Model.System.Block.Add(new Block()
+            base.model.System.Block.Add(new Block()
             {
                 BlockType = "Step",
                 Name = base.GetName("Step"),

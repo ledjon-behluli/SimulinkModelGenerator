@@ -259,13 +259,4 @@ namespace SimulinkModelGenerator
 		[XmlAttribute(AttributeName = "Name")]
 		public string Name { get; set; }
 	}
-
-	[XmlRoot(ElementName = "ModelInformation")]
-	public class ModelInformation
-	{
-		[XmlElement(ElementName = "Model")]
-		public Model Model { get; set; }
-		[XmlAttribute(AttributeName = "Version")]
-		public string Version { get; set; }
-	}
 }

@@ -7,11 +7,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
     public sealed class SystemContinuousBuilder : ISystemContinuous
     {
-        private readonly ModelInformation modelInformation;
+        private readonly Model model;
 
-        public SystemContinuousBuilder(ModelInformation modelInformation) 
+        public SystemContinuousBuilder(Model model) 
         {
-            this.modelInformation = modelInformation;
+            this.model = model;
         }
 
         public ISystemContinuous AddIntegrator(Action<IntegratorBuilder> action = null) => AddContinous<IntegratorBuilder>(action);       
@@ -28,19 +28,19 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             SystemBlockBuilder builder = null;
 
             if (blockType == typeof(PIDControllerBuilder))
-                builder = new PIDControllerBuilder(modelInformation);
+                builder = new PIDControllerBuilder(model);
             else if (blockType == typeof(PDControllerBuilder))
-                builder = new PDControllerBuilder(modelInformation);
+                builder = new PDControllerBuilder(model);
             else if (blockType == typeof(PIControllerBuilder))
-                builder = new PIControllerBuilder(modelInformation);
+                builder = new PIControllerBuilder(model);
             else if (blockType == typeof(IControllerBuilder))
-                builder = new IControllerBuilder(modelInformation);
+                builder = new IControllerBuilder(model);
             else if (blockType == typeof(PControllerBuilder))
-                builder = new PControllerBuilder(modelInformation);
+                builder = new PControllerBuilder(model);
             else if (blockType == typeof(IntegratorBuilder))
-                builder = new IntegratorBuilder(modelInformation);
+                builder = new IntegratorBuilder(model);
             else if (blockType == typeof(TransferFunctionBuilder))
-                builder = new TransferFunctionBuilder(modelInformation);
+                builder = new TransferFunctionBuilder(model);
 
             if (builder == null)
                 throw new SimulinkModelGeneratorException("Unsupported continuous builder provided!");

@@ -11,15 +11,15 @@ namespace SimulinkModelGenerator.Modeler.Builders
 {  
     public sealed class ControlSystemBuilder : IControlSystem
     {
-        private readonly ModelInformation modelInformation;
+        private readonly Model model;
 
         private string _Location = "[-1139, 185, -81, 718]";
         private string _TiledPaperMargins = "[0.500000, 0.500000, 0.500000, 0.500000]";
         private string _ReportName = "simulink-default.rpt";
 
-        public ControlSystemBuilder(ModelInformation modelInformation)
+        public ControlSystemBuilder(Model model)
         {
-            this.modelInformation = modelInformation;
+            this.model = model;
         }
 
         public IControlSystem SetLocation(int x1, int y1, int x2, int y2)
@@ -46,28 +46,28 @@ namespace SimulinkModelGenerator.Modeler.Builders
 
         public IControlSystem AddSources(Action<SystemSourcesBuilder> action = null)
         {
-            SystemSourcesBuilder builder = new SystemSourcesBuilder(modelInformation);
+            SystemSourcesBuilder builder = new SystemSourcesBuilder(model);
             action?.Invoke(builder);
             return this;
         }
 
         public IControlSystem AddSinks(Action<SystemSinksBuilder> action = null)
         {
-            SystemSinksBuilder builder = new SystemSinksBuilder(modelInformation);
+            SystemSinksBuilder builder = new SystemSinksBuilder(model);
             action?.Invoke(builder);
             return this;
         }
 
         public IControlSystem AddMathOperations(Action<SystemMathOperationsBuilder> action = null)
         {
-            SystemMathOperationsBuilder builder = new SystemMathOperationsBuilder(modelInformation);
+            SystemMathOperationsBuilder builder = new SystemMathOperationsBuilder(model);
             action?.Invoke(builder);
             return this;
         }
 
         public IControlSystem AddContinuous(Action<SystemContinuousBuilder> action = null)
         {
-            SystemContinuousBuilder builder = new SystemContinuousBuilder(modelInformation);
+            SystemContinuousBuilder builder = new SystemContinuousBuilder(model);
             action?.Invoke(builder);
             return this;
         }
@@ -81,7 +81,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
 
         internal IControlSystem Build()
         {
-            this.modelInformation.Model.System = new System()
+            this.model.System = new System()
             {
                 P = new List<P>()
                 {

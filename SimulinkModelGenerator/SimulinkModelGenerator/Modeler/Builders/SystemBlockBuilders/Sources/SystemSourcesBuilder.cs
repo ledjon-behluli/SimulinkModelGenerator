@@ -7,11 +7,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public sealed class SystemSourcesBuilder : ISystemSource
     {
-        private readonly ModelInformation modelInformation;
+        private readonly Model model;
 
-        public SystemSourcesBuilder(ModelInformation modelInformation)
+        public SystemSourcesBuilder(Model model)
         {
-            this.modelInformation = modelInformation;
+            this.model = model;
         }
 
        
@@ -25,11 +25,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             SystemBlockBuilder builder = null;
 
             if (systemBlockType == typeof(ConstantBuilder))
-                builder = new ConstantBuilder(modelInformation);
+                builder = new ConstantBuilder(model);
             else if (systemBlockType == typeof(RampBuilder))
-                builder = new RampBuilder(modelInformation);
+                builder = new RampBuilder(model);
             else if (systemBlockType == typeof(StepBuilder))
-                builder = new StepBuilder(modelInformation);
+                builder = new StepBuilder(model);
 
             if (builder == null)
                 throw new SimulinkModelGeneratorException("Unsupported source builder provided!");

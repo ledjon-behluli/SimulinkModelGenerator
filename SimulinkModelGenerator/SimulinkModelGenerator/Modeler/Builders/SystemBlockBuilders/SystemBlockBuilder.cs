@@ -5,17 +5,17 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
 {
     public abstract class SystemBlockBuilder
     {
-        protected readonly ModelInformation modelInformation;
+        protected readonly Model model;
 
         protected string _Name;        
         protected string _SID;
         protected string _Position;
         protected string _ZOrder;
 
-        public SystemBlockBuilder(ModelInformation modelInformation)
+        public SystemBlockBuilder(Model model)
         {
-            this.modelInformation = modelInformation;
-            this._SID = (this.modelInformation.Model.System.Block.Max(b => int.Parse(b.SID)) + 1).ToString();
+            this.model = model;
+            this._SID = (this.model.System.Block.Max(b => int.Parse(b.SID)) + 1).ToString();
             this._ZOrder = this._SID;
         }
        
@@ -24,7 +24,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
             if (!string.IsNullOrEmpty(_Name))
                 return _Name;
 
-            var blocks = modelInformation.Model.System.Block.Where(b => b.BlockType.Contains(blockType));
+            var blocks = this.model.System.Block.Where(b => b.BlockType.Contains(blockType));
             if(blocks != null)
             {
                 return blocks.Count().ToString();
@@ -41,8 +41,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
     {
         private readonly T _blockBuilderInstance;        
       
-        public SystemBlockBuilder(ModelInformation modelInformation) 
-            : base(modelInformation)
+        public SystemBlockBuilder(Model model) 
+            : base(model)
         {
             _blockBuilderInstance = (T)this;
         }

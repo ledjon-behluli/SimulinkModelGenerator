@@ -9,8 +9,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         private string _StartTime = "0";
         private string _InitialOutput = "0";
 
-        public RampBuilder(ModelInformation modelInformation)
-            : base(modelInformation)
+        public RampBuilder(Model model)
+            : base(model)
         {
 
         }
@@ -36,7 +36,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 
         internal override void Build()
         {
-            base.modelInformation.Model.System.Block.Add(new Block()
+            base.model.System.Block.Add(new Block()
             {
                 BlockType = "Reference",
                 Name = base.GetName("Ramp"),

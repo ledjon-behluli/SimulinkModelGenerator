@@ -6,11 +6,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
 {
     public sealed class SystemMathOperationsBuilder : ISystemMathOperation
     {
-        private readonly ModelInformation modelInformation;
+        private readonly Model model;
 
-        public SystemMathOperationsBuilder(ModelInformation modelInformation)
+        public SystemMathOperationsBuilder(Model model)
         {
-            this.modelInformation = modelInformation;
+            this.model = model;
         }
 
         public ISystemMathOperation AddGain(Action<GainBuilder> action = null) => AddMathOperation<GainBuilder>(action);
@@ -22,9 +22,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             SystemBlockBuilder builder = null;
 
             if (systemBlockType == typeof(GainBuilder))
-                builder = new GainBuilder(modelInformation);
+                builder = new GainBuilder(model);
             else if (systemBlockType == typeof(SumBuilder))
-                builder = new SumBuilder(modelInformation);
+                builder = new SumBuilder(model);
             if (builder == null)
                 throw new SimulinkModelGeneratorException("Unsupported math operation builder provided!");
 
