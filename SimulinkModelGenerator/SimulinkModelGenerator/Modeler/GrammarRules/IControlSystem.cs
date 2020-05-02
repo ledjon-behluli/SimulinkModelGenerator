@@ -18,12 +18,21 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IControlSystem AddSinks(Action<SystemSinksBuilder> action = null);
         IControlSystem AddMathOperations(Action<SystemMathOperationsBuilder> action = null);
         IControlSystem AddContinuous(Action<SystemContinuousBuilder> action = null);
+
+        IControlSystemLine Connect(string sourceBlockName, string destinationBlockName);
+    }
+
+    public interface IControlSystemLine
+    {
+        IControlSystemLine AddBranch();
+        IControlSystemLine ThanConnect(string sourceBlockName, string destinationBlockName);
     }
 
     public interface ISystemBlock
     {
         ISystemBlock WithName(string name);
-        ISystemBlock SetPosition(int x1, int y1, int x2, int y2);
+        ISystemBlock SetPosition(uint x, uint y, uint width, uint height);
+        ISystemBlock FlipHorizontally();
     }
 
     public interface ISystemLine

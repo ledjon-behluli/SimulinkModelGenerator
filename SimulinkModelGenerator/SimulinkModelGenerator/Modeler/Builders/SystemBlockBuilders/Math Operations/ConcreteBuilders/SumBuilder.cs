@@ -78,10 +78,15 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         public ISum SetInputs(params InputType[] inputs)
         {
             if (inputs.Length == 0)
-                throw new SimulinkModelGeneratorException("Sum must have at least one input.");
+                throw new ArgumentException("Sum must have at least one input.");
 
             _InputTypes = inputs;
             return this;
+        }
+
+        public override ISystemBlock SetPosition(uint x, uint y, uint width = 20, uint height = 20)
+        {
+            return base.SetPosition(x, y, width, height);
         }
 
 
@@ -91,20 +96,14 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             {
                 BlockType = "Sum",
                 Name = base.GetName("Sum"),
-                SID = base._SID,
                 P = new List<P>()
                 {
                     // Customizable
                     new P() { Name = "Position", Text = base._Position },
-                    new P() { Name = "ZOrder", Text = base._ZOrder },                    
+                    new P() { Name = "BlockMirror", Text = base.BlockMirror },
                     new P() { Name = "IconShape", Text = _IconShape.GetDescription() },
                     new P() { Name = "Inputs", Text = _Inputs },
-                    new P() { Name = "Ports", Text = _Ports },
-                    // Default
-                    new P() { Name = "ShowName", Text = "off" },
-                    new P() { Name = "InputSameDT", Text = "off" },
-                    new P() { Name = "OutDataTypeStr", Text = "Inherit: Inherit via internal rule" },
-                    new P() { Name = "SaturateOnIntegerOverflow", Text = "off" }
+                    new P() { Name = "Ports", Text = _Ports }
                 }
             });
         }

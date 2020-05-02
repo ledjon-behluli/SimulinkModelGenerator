@@ -76,6 +76,11 @@ namespace SimulinkModelGenerator.Modeler.Builders
 
         #region System Lines
 
+        public IControlSystemLine Connect(string sourceBlockName, string destinationBlockName)
+        {
+            SystemLineBuilder builder = new SystemLineBuilder(model);
+            return builder.Build(sourceBlockName, destinationBlockName);
+        }
 
         #endregion
 
@@ -85,14 +90,9 @@ namespace SimulinkModelGenerator.Modeler.Builders
             {
                 P = new List<P>()
                 {
-                    // Customizable
                     new P(){ Name = "Location", Text = _Location },                    
                     new P(){ Name = "TiledPaperMargins", Text = _TiledPaperMargins },
-                    new P(){ Name = "ReportName", Text = _ReportName },
-                    // Default
-                    new P(){ Name = "Open", Text = "on" },
-                    new P(){ Name = "PortBlocksUseCompactNotation", Text = "off" },                    
-                    new P(){ Name = "SIDHighWatermark", Text = "6" }
+                    new P(){ Name = "ReportName", Text = _ReportName }
                 },
                 Block = new List<Block>()
                 {

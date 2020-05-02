@@ -10,7 +10,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
         {
 
         }
-       
+
+        public override ISystemBlock SetPosition(uint x, uint y, uint width = 90, uint height = 30)
+        {
+            return base.SetPosition(x, y, width, height);
+        }
 
         internal override void Build()
         {
@@ -18,12 +22,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             {
                 BlockType = "Display",
                 Name = base.GetName("Display"),
-                SID = base._SID,
                 P = new List<P>()
                 {
-                    new P() { Name = "Ports", Text = "[1]" },
                     new P() { Name = "Position", Text = base._Position },
-                    new P() { Name = "ZOrder", Text = base._ZOrder }
+                    new P() { Name = "BlockMirror", Text = base.BlockMirror }
                 }
             });
         }

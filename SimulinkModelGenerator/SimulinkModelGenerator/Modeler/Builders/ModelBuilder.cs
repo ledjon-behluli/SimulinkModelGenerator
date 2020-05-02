@@ -1,19 +1,38 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 using System;
-using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders
 {
-    public sealed class ModelBuilder : IModel, IFinalizeModel
-    {
-        private Model model;
+    public class ModelBuilder : IModel, IFinalizeModel
+    {        
+        private Model model;                
+        private string _ModelName;
+
         public string MDL { get; private set; }
 
-        private string _ModelName;
+        #region Overrideable Properties
+  
+        internal virtual GraphicalInterface GraphicalInterface { get; } = null;
+        internal virtual Object Object { get; } = null;
+        internal virtual ConfigManagerSettings ConfigManagerSettings { get; } = null;
+        internal virtual EditorSettings EditorSettings { get; } = null;
+        internal virtual SimulationSettings SimulationSettings { get; } = null;
+        internal virtual ExternalMode ExternalMode { get; } = null;
+        internal virtual ModelReferenceSettings ModelReferenceSettings { get; } = null;
+        internal virtual ConcurrentExecutionSettings ConcurrentExecutionSettings { get; } = null;
+        internal virtual SystemDefaults SystemDefaults { get; } = null;
+        internal virtual BlockDefaults BlockDefaults { get; } = null;
+        internal virtual AnnotationDefaults AnnotationDefaults { get; } = null;
+        internal virtual LineDefaults LineDefaults { get; } = null;
+        internal virtual MaskDefaults MaskDefaults { get; } = null;
+        internal virtual MaskParameterDefaults MaskParameterDefaults { get; } = null;
+        internal virtual BlockParameterDefaults BlockParameterDefaults { get; } = null;
+
+        #endregion
 
         public ModelBuilder()
         {
-     
+            
         }
 
         public IModel WithName(string name)
@@ -34,28 +53,21 @@ namespace SimulinkModelGenerator.Modeler.Builders
             this.model = new Model()
             {
                 Name = _ModelName,
-                P = new List<P>()
-                {
-                    new P(){ Name = "Version", Text = "8.9" },
-                    new P(){ Name = "SavedCharacterEncoding", Text = "windows-1252" },
-                    new P(){ Name = "LogicAnalyzerGraphicalSettings", Text = "" },
-                    new P(){ Name = "LogicAnalyzerPlugin", Text = "on" },
-                    new P(){ Name = "LogicAnalyzerSignalOrdering", Text = "" },
-                    new P(){ Name = "DiagnosticSuppressor", Text = "on" },
-                    new P(){ Name = "SuppressorTable", Text = "22 serialization::archive 11 0 6 0 0 0 8 0" },
-                    new P(){ Name = "SLCCPlugin", Text = "on" },
-                    new P(){ Name = "ScopeRefreshTime", Text = "0.035000" },
-                    new P(){ Name = "OverrideScopeRefreshTime", Text = "on" },
-                    new P(){ Name = "DisableAllScopes", Text = "off" },
-                    new P(){ Name = "DataTypeOverride", Text = "UseLocalSettings" },
-                    new P(){ Name = "DataTypeOverrideAppliesTo", Text = "AllNumericTypes" },
-                    new P(){ Name = "MinMaxOverflowLogging", Text = "UseLocalSettings" },
-                    new P(){ Name = "MinMaxOverflowArchiveMode", Text = "Overwrite" },
-                    new P(){ Name = "FPTRunName", Text = "Run 1" },
-                    new P(){ Name = "MaxMDLFileLineLength", Text = "120" },
-                    new P(){ Name = "LastSavedArchitecture", Text = "win64" },
-                    new P(){ Name = "HideAutomaticNames", Text = "on" }                    
-                }
+                GraphicalInterface = this.GraphicalInterface,
+                Object = this.Object,
+                ConfigManagerSettings = this.ConfigManagerSettings,
+                EditorSettings = this.EditorSettings,
+                SimulationSettings = this.SimulationSettings,
+                ExternalMode = this.ExternalMode,
+                ModelReferenceSettings = this.ModelReferenceSettings,
+                ConcurrentExecutionSettings = this.ConcurrentExecutionSettings,
+                SystemDefaults = this.SystemDefaults,
+                BlockDefaults = this.BlockDefaults,
+                AnnotationDefaults = this.AnnotationDefaults,
+                LineDefaults = this.LineDefaults,
+                MaskDefaults = this.MaskDefaults,
+                MaskParameterDefaults = this.MaskParameterDefaults,
+                BlockParameterDefaults = this.BlockParameterDefaults
             };
 
             //TODO: Convert to MDL

@@ -40,10 +40,15 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         public IStep SetSampleTime(decimal sampleTime)
         {
             if (sampleTime < 0)
-                throw new SimulinkModelGeneratorException("SampleTime must be a positive number!");
+                throw new ArgumentException("SampleTime must be a positive number!");
 
             _SampleTime = sampleTime.ToString();
             return this;
+        }
+
+        public override ISystemBlock SetPosition(uint x, uint y, uint width = 30, uint height = 30)
+        {
+            return base.SetPosition(x, y, width, height);
         }
 
 
@@ -53,11 +58,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             {
                 BlockType = "Step",
                 Name = base.GetName("Step"),
-                SID = base._SID,
                 P = new List<P>()
                 {
                     new P() { Name = "Position", Text = base._Position },
-                    new P() { Name = "ZOrder", Text = base._ZOrder },
+                    new P() { Name = "BlockMirror", Text = base.BlockMirror },
                     new P() { Name = "Time", Text = _StepTime },
                     new P() { Name = "Before", Text = _InitialValue },
                     new P() { Name = "After", Text = _FinalValue },

@@ -19,17 +19,21 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             return this;
         }
 
+        public override ISystemBlock SetPosition(uint x, uint y, uint width = 30, uint height = 30)
+        {
+            return base.SetPosition(x, y, width, height);
+        }
+
         internal override void Build()
         {
             base.model.System.Block.Add(new Block()
             {
                 BlockType = "Constant",
                 Name = base.GetName("Constant"),
-                SID = base._SID,
                 P = new List<P>()
                 {
                     new P() { Name = "Position", Text = base._Position },
-                    new P() { Name = "ZOrder", Text = base._ZOrder },
+                    new P() { Name = "BlockMirror", Text = base.BlockMirror },
                     new P() { Name = "Value", Text = _Value }
                 }
             });

@@ -1,7 +1,6 @@
 ﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using System;
-using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {

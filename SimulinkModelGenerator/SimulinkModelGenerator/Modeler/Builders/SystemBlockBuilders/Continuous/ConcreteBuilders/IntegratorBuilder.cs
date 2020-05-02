@@ -19,6 +19,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             return this;
         }
 
+        public override ISystemBlock SetPosition(uint x, uint y, uint width = 30, uint height = 30)
+        {
+            return base.SetPosition(x, y, width, height);
+        }
 
         internal override void Build()
         {
@@ -26,12 +30,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             {
                 BlockType = "Integrator",
                 Name = base.GetName("Integrator"),
-                SID = base._SID,
                 P = new List<P>()
                 {
                     new P() { Name = "Position", Text = base._Position },
-                    new P() { Name = "ZOrder", Text = base._ZOrder },
-                    new P() { Name = "Ports", Text = "[1 1]" },
+                    new P() { Name = "BlockMirror", Text = base.BlockMirror },
                     new P() { Name = "InitialCondition", Text = _InitialCondition }
                 }
             });

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 
@@ -23,11 +24,15 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
                 _Ports = $"[{numberOfPorts}]";
             }
             else
-                throw new SimulinkModelGeneratorException("Scope can not have less than 1 port!");
+                throw new ArgumentException("Scope can not have less than 1 port!");
 
             return this;
         }
 
+        public override ISystemBlock SetPosition(uint x, uint y, uint width = 30, uint height = 32)
+        {
+            return base.SetPosition(x, y, width, height);
+        }
 
         internal override void Build()
         {
@@ -35,13 +40,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             {
                 BlockType = "Scope",
                 Name = base.GetName("Scope"),
-                SID = base._SID,
                 P = new List<P>()
                 {
                     new P() { Name = "Ports", Text = _Ports },
                     new P() { Name = "Position", Text = base._Position },
-                    new P() { Name = "ZOrder", Text = base._ZOrder },
-                    new P() { Name = "ScopeSpecificationString", Text = "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extmgr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('Sources','WiredSimulink',true),extmgr.Configuration('Visuals','Time Domain',true),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true)),'Version','2017a')" },
+                    new P() { Name = "BlockMirror", Text = base.BlockMirror },
                     new P() { Name = "NumInputPorts", Text = _NumInputPorts }
                 }
             });

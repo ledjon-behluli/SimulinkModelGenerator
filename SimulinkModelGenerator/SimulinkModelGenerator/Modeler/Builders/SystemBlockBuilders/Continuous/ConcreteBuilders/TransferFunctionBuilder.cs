@@ -1,6 +1,7 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 using System.Collections.Generic;
 using SimulinkModelGenerator.Exceptions;
+using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
@@ -16,6 +17,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             : base(model)
         {
 
+        }
+
+        public override ISystemBlock SetPosition(uint x, uint y, uint width = 60, uint height = 36)
+        {
+            return base.SetPosition(x, y, width, height);
         }
 
 
@@ -34,12 +40,12 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         {
             if (coefficients.Length == 0)
             {
-                throw new SimulinkModelGeneratorException("Denominator can not have zero number of coefficients!");
+                throw new ArgumentException("Denominator can not have zero number of coefficients!");
             }
             else if (coefficients.Length == 1)
             {
                 if (coefficients[0] == 0)
-                    throw new SimulinkModelGeneratorException("The order of the transfer function numerator must be less than or equal to the order of the denominator!");
+                    throw new InvalidOperationException("The order of the transfer function numerator must be less than or equal to the order of the denominator!");
                 else
                 {
                     _Denominator = $"[{coefficients[0]}]";
@@ -59,12 +65,12 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         internal override void Build()
         {
             if (_NumeratorCount > _DenominatorCount)
-                throw new SimulinkModelGeneratorException("The order of the transfer function numerator must be less than or equal to the order of the denominator!");
+                throw new InvalidOperationException("The order of the transfer function numerator must be less than or equal to the order of the denominator!");
 
             List<P> list = new List<P>()
             {
                 new P() { Name = "Position", Text = base._Position },
-                new P() { Name = "ZOrder", Text = base._ZOrder },
+                new P() { Name = "BlockMirror", Text = base.BlockMirror },
                 new P() { Name = "Denominator", Text = _Denominator }
             };
 
@@ -77,7 +83,6 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             {
                 BlockType = "TransferFcn",
                 Name = base.GetName("TransferFcn"),
-                SID = base._SID,
                 P = list
             });         
         }

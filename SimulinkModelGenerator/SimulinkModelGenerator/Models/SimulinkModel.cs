@@ -8,8 +8,10 @@ namespace SimulinkModelGenerator
 	{
 		[XmlAttribute(AttributeName = "Name")]
 		public string Name { get; set; }
+
 		[XmlText]
 		public string Text { get; set; }
+
 		[XmlAttribute(AttributeName = "Class")]
 		public string Class { get; set; }
 	}
@@ -26,16 +28,22 @@ namespace SimulinkModelGenerator
 	{
 		[XmlElement(ElementName = "P")]
 		public List<P> P { get; set; }
+
 		[XmlAttribute(AttributeName = "PropName")]
 		public string PropName { get; set; }
+
 		[XmlAttribute(AttributeName = "ObjectID")]
 		public string ObjectID { get; set; }
+
 		[XmlAttribute(AttributeName = "ClassName")]
 		public string ClassName { get; set; }
+
 		[XmlElement(ElementName = "Array")]
 		public List<Array> Array { get; set; }
+
 		[XmlAttribute(AttributeName = "Version")]
 		public string Version { get; set; }
+
 		[XmlAttribute(AttributeName = "Reference")]
 		public string Reference { get; set; }
 	}
@@ -59,6 +67,7 @@ namespace SimulinkModelGenerator
 	{
 		[XmlAttribute(AttributeName = "Class")]
 		public string Class { get; set; }
+
 		[XmlText]
 		public string Text { get; set; }
 	}
@@ -68,12 +77,16 @@ namespace SimulinkModelGenerator
 	{
 		[XmlElement(ElementName = "Cell")]
 		public Cell Cell { get; set; }
+
 		[XmlAttribute(AttributeName = "PropName")]
 		public string PropName { get; set; }
+
 		[XmlAttribute(AttributeName = "Type")]
 		public string Type { get; set; }
+
 		[XmlAttribute(AttributeName = "Dimension")]
 		public string Dimension { get; set; }
+
 		[XmlElement(ElementName = "Object")]
 		public Object Object { get; set; }
 	}
@@ -83,6 +96,7 @@ namespace SimulinkModelGenerator
 	{
 		[XmlElement(ElementName = "P")]
 		public List<P> P { get; set; }
+
 		[XmlElement(ElementName = "Object")]
 		public Object Object { get; set; }
 	}
@@ -106,6 +120,7 @@ namespace SimulinkModelGenerator
 	{
 		[XmlElement(ElementName = "Array")]
 		public Array Array { get; set; }
+
 		[XmlElement(ElementName = "Object")]
 		public Object Object { get; set; }
 	}
@@ -115,6 +130,7 @@ namespace SimulinkModelGenerator
 	{
 		[XmlElement(ElementName = "Object")]
 		public Object Object { get; set; }
+
 		[XmlElement(ElementName = "P")]
 		public P P { get; set; }
 	}
@@ -161,21 +177,6 @@ namespace SimulinkModelGenerator
 		public List<P> P { get; set; }
 	}
 
-	[XmlRoot(ElementName = "Block")]
-	public class Block
-	{
-		[XmlElement(ElementName = "P")]
-		public List<P> P { get; set; }
-		[XmlAttribute(AttributeName = "BlockType")]
-		public string BlockType { get; set; }
-		[XmlAttribute(AttributeName = "Name")]
-		public string Name { get; set; }
-		[XmlAttribute(AttributeName = "SID")]
-		public string SID { get; set; }
-		[XmlElement(ElementName = "InstanceData")]
-		public InstanceData InstanceData { get; set; }
-	}
-
 	[XmlRoot(ElementName = "BlockParameterDefaults")]
 	public class BlockParameterDefaults
 	{
@@ -183,36 +184,15 @@ namespace SimulinkModelGenerator
 		public List<Block> Block { get; set; }
 	}
 
-	[XmlRoot(ElementName = "InstanceData")]
-	public class InstanceData
-	{
-		[XmlElement(ElementName = "P")]
-		public List<P> P { get; set; }
-	}
-
-	[XmlRoot(ElementName = "Line")]
-	public class Line
-	{
-		[XmlElement(ElementName = "P")]
-		public List<P> P { get; set; }
-		[XmlElement(ElementName = "Branch")]
-		public List<Branch> Branch { get; set; }
-	}
-
-	[XmlRoot(ElementName = "Branch")]
-	public class Branch
-	{
-		[XmlElement(ElementName = "P")]
-		public List<P> P { get; set; }
-	}
-
 	[XmlRoot(ElementName = "System")]
 	public class System
 	{
 		[XmlElement(ElementName = "P")]
 		public List<P> P { get; set; }
+
 		[XmlElement(ElementName = "Block")]
 		public List<Block> Block { get; set; }
+
 		[XmlElement(ElementName = "Line")]
 		public List<Line> Line { get; set; }
 	}
@@ -222,40 +202,58 @@ namespace SimulinkModelGenerator
 	{
 		[XmlElement(ElementName = "P")]
 		public List<P> P { get; set; }
+
 		[XmlElement(ElementName = "GraphicalInterface")]
 		public GraphicalInterface GraphicalInterface { get; set; }
+
 		[XmlElement(ElementName = "Object")]
 		public Object Object { get; set; }
+
 		[XmlElement(ElementName = "ConfigManagerSettings")]
 		public ConfigManagerSettings ConfigManagerSettings { get; set; }
+
 		[XmlElement(ElementName = "EditorSettings")]
 		public EditorSettings EditorSettings { get; set; }
+
 		[XmlElement(ElementName = "SimulationSettings")]
 		public SimulationSettings SimulationSettings { get; set; }
+
 		[XmlElement(ElementName = "ExternalMode")]
 		public ExternalMode ExternalMode { get; set; }
+
 		[XmlElement(ElementName = "ModelReferenceSettings")]
 		public ModelReferenceSettings ModelReferenceSettings { get; set; }
+
 		[XmlElement(ElementName = "ConfigurationSet")]
 		public ConfigurationSet ConfigurationSet { get; set; }
+
 		[XmlElement(ElementName = "ConcurrentExecutionSettings")]
 		public ConcurrentExecutionSettings ConcurrentExecutionSettings { get; set; }
+
 		[XmlElement(ElementName = "SystemDefaults")]
 		public SystemDefaults SystemDefaults { get; set; }
+
 		[XmlElement(ElementName = "BlockDefaults")]
 		public BlockDefaults BlockDefaults { get; set; }
+
 		[XmlElement(ElementName = "AnnotationDefaults")]
 		public AnnotationDefaults AnnotationDefaults { get; set; }
+
 		[XmlElement(ElementName = "LineDefaults")]
 		public LineDefaults LineDefaults { get; set; }
+
 		[XmlElement(ElementName = "MaskDefaults")]
 		public MaskDefaults MaskDefaults { get; set; }
+
 		[XmlElement(ElementName = "MaskParameterDefaults")]
 		public MaskParameterDefaults MaskParameterDefaults { get; set; }
+
 		[XmlElement(ElementName = "BlockParameterDefaults")]
 		public BlockParameterDefaults BlockParameterDefaults { get; set; }
+
 		[XmlElement(ElementName = "System")]
 		public System System { get; set; }
+
 		[XmlAttribute(AttributeName = "Name")]
 		public string Name { get; set; }
 	}
