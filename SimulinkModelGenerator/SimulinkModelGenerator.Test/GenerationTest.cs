@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using SimulinkModelGenerator.Modeler.Builders;
 using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
+using SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders;
 
 namespace SimulinkModelGenerator.Test
 {
@@ -34,12 +35,13 @@ namespace SimulinkModelGenerator.Test
                        cs.AddSinks(s => s.AddScope());
                        ////////////////////////////////////////////////
 
-                       cs.Connect("", "")
-                            .AddBranch()
-                         .ThanConnect("", "")
-                         .ThanConnect("", "")
-                            .AddBranch();
-                        
+                       cs.Connect("Constant", "Gain3")
+                            .BranchTo("Gain")                            
+                                .ThanConnect("Scope1")
+                            .BranchTo("Gain2")
+                                .ThanConnect("Scope2")
+                            .Done()
+                         .Connect()
 
                    }).Build();
             

@@ -5,8 +5,8 @@ namespace SimulinkModelGenerator.Modeler.Builders
 {
     public class ModelBuilder : IModel, IFinalizeModel
     {        
-        private Model model;                
-        private string _ModelName;
+        private Model model;
+        private string _ModelName = "untitled";
 
         public string MDL { get; private set; }
 
@@ -32,7 +32,24 @@ namespace SimulinkModelGenerator.Modeler.Builders
 
         public ModelBuilder()
         {
-            
+            this.model = new Model()
+            {                
+                GraphicalInterface = this.GraphicalInterface,
+                Object = this.Object,
+                ConfigManagerSettings = this.ConfigManagerSettings,
+                EditorSettings = this.EditorSettings,
+                SimulationSettings = this.SimulationSettings,
+                ExternalMode = this.ExternalMode,
+                ModelReferenceSettings = this.ModelReferenceSettings,
+                ConcurrentExecutionSettings = this.ConcurrentExecutionSettings,
+                SystemDefaults = this.SystemDefaults,
+                BlockDefaults = this.BlockDefaults,
+                AnnotationDefaults = this.AnnotationDefaults,
+                LineDefaults = this.LineDefaults,
+                MaskDefaults = this.MaskDefaults,
+                MaskParameterDefaults = this.MaskParameterDefaults,
+                BlockParameterDefaults = this.BlockParameterDefaults
+            };
         }
 
         public IModel WithName(string name)
@@ -50,25 +67,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
 
         public string Build()
         {
-            this.model = new Model()
-            {
-                Name = _ModelName,
-                GraphicalInterface = this.GraphicalInterface,
-                Object = this.Object,
-                ConfigManagerSettings = this.ConfigManagerSettings,
-                EditorSettings = this.EditorSettings,
-                SimulationSettings = this.SimulationSettings,
-                ExternalMode = this.ExternalMode,
-                ModelReferenceSettings = this.ModelReferenceSettings,
-                ConcurrentExecutionSettings = this.ConcurrentExecutionSettings,
-                SystemDefaults = this.SystemDefaults,
-                BlockDefaults = this.BlockDefaults,
-                AnnotationDefaults = this.AnnotationDefaults,
-                LineDefaults = this.LineDefaults,
-                MaskDefaults = this.MaskDefaults,
-                MaskParameterDefaults = this.MaskParameterDefaults,
-                BlockParameterDefaults = this.BlockParameterDefaults
-            };
+            this.model.Name = _ModelName;
 
             //TODO: Convert to MDL
             MDL = "test";

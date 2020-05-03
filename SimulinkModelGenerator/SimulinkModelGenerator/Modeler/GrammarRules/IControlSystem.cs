@@ -10,10 +10,6 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 {
     public interface IControlSystem
     {
-        IControlSystem SetLocation(int x1, int y1, int x2, int y2);
-        IControlSystem SetTiledPaperMargins(uint x1, uint y1, uint x2, uint y2);
-        IControlSystem WithReportName(string name);
-
         IControlSystem AddSources(Action<SystemSourcesBuilder> action = null);
         IControlSystem AddSinks(Action<SystemSinksBuilder> action = null);
         IControlSystem AddMathOperations(Action<SystemMathOperationsBuilder> action = null);
@@ -24,8 +20,14 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IControlSystemLine
     {
-        IControlSystemLine AddBranch();
-        IControlSystemLine ThanConnect(string sourceBlockName, string destinationBlockName);
+        IControlSystemLine ThanConnect(string destinationBlockName);
+        IControlSystemLine BranchTo(string destinationBlockName, BranchType type = BranchType.RightTurn);
+        IControlSystemNewConnection Done();
+    }
+
+    public interface IControlSystemNewConnection
+    {
+        IControlSystemLine Connect(string sourceBlockName, string destinationBlockName);
     }
 
     public interface ISystemBlock

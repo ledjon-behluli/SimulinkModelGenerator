@@ -9,40 +9,20 @@ using SimulinkModelGenerator.Modeler.GrammarRules;
 
 namespace SimulinkModelGenerator.Modeler.Builders
 {  
-    public sealed class ControlSystemBuilder : IControlSystem
+    public sealed class ControlSystemBuilder : IControlSystem, IControlSystemNewConnection
     {
         private readonly Model model;
 
-        private string _Location = "[-1139, 185, -81, 718]";
-        private string _TiledPaperMargins = "[0.500000, 0.500000, 0.500000, 0.500000]";
-        private string _ReportName = "simulink-default.rpt";
-
         public ControlSystemBuilder(Model model)
         {
+            model.System = new System()
+            {
+                Block = new List<Block>(),
+                Line = new List<Line>()
+            };
+
             this.model = model;
         }
-
-        public IControlSystem SetLocation(int x1, int y1, int x2, int y2)
-        {
-            _Location = $"[{x1}, {y1}, {x2}, {y2}]";
-            return this;
-        }
-
-        public IControlSystem SetTiledPaperMargins(uint x1, uint y1, uint x2, uint y2)
-        {
-            _TiledPaperMargins = $"[{x1}, {y1}, {x2}, {y2}]";
-            return this;
-        }
-
-        public IControlSystem WithReportName(string name)
-        {
-            if (!string.IsNullOrEmpty(name))
-                _ReportName = name;
-            return this;
-        }
-
-     
-        #region System Blocks
 
         public IControlSystem AddSources(Action<SystemSourcesBuilder> action = null)
         {
@@ -72,39 +52,11 @@ namespace SimulinkModelGenerator.Modeler.Builders
             return this;
         }
 
-        #endregion
-
-        #region System Lines
 
         public IControlSystemLine Connect(string sourceBlockName, string destinationBlockName)
-        {
-            SystemLineBuilder builder = new SystemLineBuilder(model);
+        {            
+            SystemLineBuilder builder = new SystemLineBuilder(this, model, sourceBlockName);
             return builder.Build(sourceBlockName, destinationBlockName);
         }
-
-        #endregion
-
-        internal IControlSystem Build()
-        {
-            this.model.System = new System()
-            {
-                P = new List<P>()
-                {
-                    new P(){ Name = "Location", Text = _Location },                    
-                    new P(){ Name = "TiledPaperMargins", Text = _TiledPaperMargins },
-                    new P(){ Name = "ReportName", Text = _ReportName }
-                },
-                Block = new List<Block>()
-                {
-
-                },
-                Line = new List<Line>()
-                {
-
-                }
-            };
-
-            return this;
-        }        
     }
 }

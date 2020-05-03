@@ -23,7 +23,7 @@ namespace SimulinkModelGenerator
 			if(!string.IsNullOrEmpty(x_srcBlock) && !string.IsNullOrEmpty(y_srcBlock) 
 				&& !string.IsNullOrEmpty(x_dstBlock) && !string.IsNullOrEmpty(y_dstBlock))
 			{
-				if(x_srcBlock == y_srcBlock && y_srcBlock == y_dstBlock)
+				if(x_srcBlock == y_srcBlock && x_dstBlock == y_dstBlock)
 				{
 					return true;
 				}
