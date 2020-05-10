@@ -3,113 +3,63 @@ using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
 {
-    public enum BranchType
-    {
-        Direct,
-        RightTurn
-    }
-
     public sealed class SystemLineBuilder : ISystemLine, IControlSystemLine
     {
         private readonly Model model;
-        private readonly ControlSystemBuilder controlSystemBuilder;
-
         private string previousBlockName;
-        private Line activeLine;
 
-        private string _SourcBlockName;
-        private string _DestinationBlockName;
-
-        public SystemLineBuilder(ControlSystemBuilder controlSystemBuilder, Model model, string startingBlockName)
-        {
-            this.controlSystemBuilder = controlSystemBuilder;
+        public SystemLineBuilder(Model model, string startingBlockName)
+        {            
             this.model = model;
             this.previousBlockName = startingBlockName;
         }
 
-        public IControlSystemLine ThanConnect(string destinationBlockName) => Build(previousBlockName, destinationBlockName);
+        public IControlSystemLine Connect(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1) =>
+            Build(sourceBlockName, destinationBlockName, sourceBlockPort, destinationBlockPort);
 
-        public IControlSystemLine BranchTo(string destinationBlockName, BranchType type = BranchType.RightTurn)
+        public IControlSystemLine ThanConnect(string destinationBlockName, uint destinationBlockPort = 1) =>
+            Build(previousBlockName, destinationBlockName, 1, destinationBlockPort);        
+
+        public IControlSystemLine Branch(Action<SystemBranchBuilder> action)
         {
-            if (string.IsNullOrEmpty(destinationBlockName))
-                throw new ArgumentException("Destination block name can not be null or empty.");
-
-            Block destBlock = this.model.System.Block.Find(b => b.Name == destinationBlockName);            
-
-            if (destBlock == null)
-                throw new ArgumentException($"Could not find block with name '{destinationBlockName}' in model.");
-
-            if (type == BranchType.RightTurn)
-            {
-                Block prevBlock = this.model.System.Block.Find(b => b.Name == previousBlockName);
-
-                Point destCenterPoint = destBlock.GetCenterPoint();
-                Point prevCenterPoint = prevBlock.GetCenterPoint();
-
-                int offsetY = -1 * (prevCenterPoint.Y - destCenterPoint.Y);
-
-                this.activeLine.Branch.Add(new Branch()
-                {
-                    P = new List<P>()
-                    {
-                        new P() { Name = "DstBlock", Text = destinationBlockName },
-                        new P() { Name = "Points", Text = $"[0, {offsetY}]" },
-                        new P() { Name = "DstPort", Text = "1" }
-                    }
-                });
-            }
-            else
-            {
-                this.activeLine.Branch.Add(new Branch()
-                {
-                    P = new List<P>()
-                    {
-                        new P() { Name = "DstBlock", Text = destinationBlockName },
-                        new P() { Name = "DstPort", Text = "1" }
-                    }
-                });
-            }
-
-            this.previousBlockName = destinationBlockName;
-
+            SystemBranchBuilder builder = new SystemBranchBuilder(this, model, previousBlockName);
+            action?.Invoke(builder);
             return this;
         }
 
-
-        public IControlSystemNewConnection Done()
-        {
-            return this.controlSystemBuilder;
-        }
-
-
-        internal IControlSystemLine Build(string sourceBlockName, string destinationBlockName)
+        internal IControlSystemLine Build(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1)
         {
             if (string.IsNullOrEmpty(sourceBlockName))
                 throw new ArgumentNullException("Source block name can not be null or empty.");
 
-            if (string.IsNullOrEmpty(sourceBlockName))
+            if (string.IsNullOrEmpty(destinationBlockName))
                 throw new ArgumentNullException("Destination block name can not be null or empty.");
 
+            if(sourceBlockPort == 0)
+                throw new ArgumentException("Source block port number can not be zero.");
+
+            if(destinationBlockPort == 0)
+                throw new ArgumentException("Destination block port number can not be zero.");
 
             Line newLine = new Line()
             {
                 P = new List<P>()
                 {
                     new P() { Name = "SrcBlock", Text = sourceBlockName },
-                    new P() { Name = "DstBlock", Text = destinationBlockName }
+                    new P() { Name = "DstBlock", Text = destinationBlockName },
+                    new P() { Name = "SrcPort", Text = sourceBlockPort.ToString() },
+                    new P() { Name = "DstPort", Text = destinationBlockPort.ToString() },
                 }
             };
 
-            if (this.model.System.Line.Contains(newLine))
-                throw new SimulinkModelGeneratorException("Connection already defined!");
+            if (this.model.System.Line.Exists(newLine))
+                throw new SimulinkModelGeneratorException("Connection already exists!");
 
             this.model.System.Line.Add(newLine);
-            this.previousBlockName = destinationBlockName;
-            this.activeLine = newLine;
+            this.previousBlockName = destinationBlockName;            
 
             return this;
         }

@@ -1,5 +1,6 @@
 ﻿using System.Xml.Serialization;
 using System.Collections.Generic;
+using System;
 
 namespace SimulinkModelGenerator
 {
@@ -20,6 +21,29 @@ namespace SimulinkModelGenerator
 
 		[XmlElement(ElementName = "InstanceData")]
 		public InstanceData InstanceData { get; set; }
+
+		public override string ToString()
+		{
+			string properties = string.Empty;
+			foreach(P p in P)
+			{
+				properties += p.ToString() + Environment.NewLine;
+			}
+
+			if(InstanceData != null)
+			{
+				foreach(P p in InstanceData.P)
+				{
+					properties += p.ToString() + Environment.NewLine;
+				}
+			}
+
+			return $@"Block {{
+						BlockType {BlockType}
+						Name ""{Name}""	
+						{properties}
+					}}";
+		}
 	}
 
 

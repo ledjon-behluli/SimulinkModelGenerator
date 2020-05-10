@@ -27,7 +27,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
             var blocks = this.model.System.Block.Where(b => b.BlockType.Contains(blockType));
             if(blocks != null)
             {
-                return blocks.Count().ToString();
+                string number = blocks.Count() == 0 ? string.Empty : blocks.Count().ToString();
+                return $"{blockType}{number}";
             }
 
             return blockType;

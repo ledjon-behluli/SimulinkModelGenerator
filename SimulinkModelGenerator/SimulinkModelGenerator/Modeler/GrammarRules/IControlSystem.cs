@@ -14,20 +14,24 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IControlSystem AddSinks(Action<SystemSinksBuilder> action = null);
         IControlSystem AddMathOperations(Action<SystemMathOperationsBuilder> action = null);
         IControlSystem AddContinuous(Action<SystemContinuousBuilder> action = null);
-
-        IControlSystemLine Connect(string sourceBlockName, string destinationBlockName);
+        IControlSystem AddConnections(string startingBlockName, Action<SystemLineBuilder> action = null);
     }
 
     public interface IControlSystemLine
     {
-        IControlSystemLine ThanConnect(string destinationBlockName);
-        IControlSystemLine BranchTo(string destinationBlockName, BranchType type = BranchType.RightTurn);
-        IControlSystemNewConnection Done();
+        IControlSystemLine ThanConnect(string destinationBlockName, uint destinationBlockPort = 1);
+        IControlSystemLine Connect(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1);
+        IControlSystemLine Branch(Action<SystemBranchBuilder> action);
     }
 
-    public interface IControlSystemNewConnection
+    public interface IControlSystemBranch
     {
-        IControlSystemLine Connect(string sourceBlockName, string destinationBlockName);
+        IControlSystemBranchNewLine Towards(string destinationBlockName, uint destinationBlockPort = 1);
+    }
+
+    public interface IControlSystemBranchNewLine
+    {
+        IControlSystemBranchNewLine ThanConnect(string destinationBlockName, uint destinationBlockPort = 1);
     }
 
     public interface ISystemBlock

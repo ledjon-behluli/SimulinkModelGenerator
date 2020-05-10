@@ -9,7 +9,7 @@ using SimulinkModelGenerator.Modeler.GrammarRules;
 
 namespace SimulinkModelGenerator.Modeler.Builders
 {  
-    public sealed class ControlSystemBuilder : IControlSystem, IControlSystemNewConnection
+    public sealed class ControlSystemBuilder : IControlSystem
     {
         private readonly Model model;
 
@@ -52,11 +52,11 @@ namespace SimulinkModelGenerator.Modeler.Builders
             return this;
         }
 
-
-        public IControlSystemLine Connect(string sourceBlockName, string destinationBlockName)
-        {            
-            SystemLineBuilder builder = new SystemLineBuilder(this, model, sourceBlockName);
-            return builder.Build(sourceBlockName, destinationBlockName);
+        public IControlSystem AddConnections(string startingBlockName, Action<SystemLineBuilder> action = null)
+        {
+            SystemLineBuilder builder = new SystemLineBuilder(model, startingBlockName);
+            action?.Invoke(builder);
+            return this;
         }
     }
 }
