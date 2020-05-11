@@ -1,5 +1,4 @@
-﻿using SimulinkModelGenerator.Exceptions;
-using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous.PIDControllers
 {
@@ -51,27 +50,21 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
         public IPIDController SetIntegratorMethod(IntegratorMethod method)
         {
-            if (base._TimeDomain == TimeDomain.ContinuousTime)
-                throw new SimulinkModelGeneratorException("IntegratorMethod can only be set when TimeDomain is of type Discrete-time");
-
+            base._TimeDomain = TimeDomain.DiscreteTime;
             base._IntegratorMethod = method;
             return this;
         }
 
         public IPIDController SetFilterMethod(FilterMethod method)
         {
-            if (base._TimeDomain == TimeDomain.ContinuousTime)
-                throw new SimulinkModelGeneratorException("FilterMethod can only be set when TimeDomain is of type Discrete-time");
-
+            base._TimeDomain = TimeDomain.DiscreteTime;             
             base._FilterMethod = method;
             return this;
         }
 
         public IPIDController UseDerivativeFilter()
         {
-            if (base._TimeDomain == TimeDomain.ContinuousTime)
-                throw new SimulinkModelGeneratorException("DerivativeFilter can only be set to true when TimeDomain is of type Discrete-time");
-
+            base._TimeDomain = TimeDomain.DiscreteTime;            
             base._UseFilter = true;
             return this;
         }

@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using SimulinkModelGenerator.Modeler.Builders;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous;
 using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
 using SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders;
 
@@ -117,23 +118,22 @@ namespace SimulinkModelGenerator.Test
         public void Testn()
         {
             ModelBuilder builder = new ModelBuilder();
-            var a = builder.WithName("test3")
+            builder
+                   .WithName("test3")
                    .AddControlSystem(cs =>
                    {
                        cs.AddSources(s => s.AddStep(sp => sp.SetPosition(190, 145)));
-                       cs.AddMathOperations(mo => mo.AddSum(sum => sum.SetInputs(InputType.Minus))
-                                                    .AddGain(g => g.SetGain(3)).SetPosition(515, 230));
+                       cs.AddMathOperations(mo => mo.AddSum(sum => sum.SetInputs(InputType.Plus, InputType.Minus).SetPosition(320, 150))
+                                                    .AddGain(g => g.SetGain(3).FlipHorizontally().SetPosition(515, 230)));
                        cs.AddContinuous(co =>
                        {
-                           co.AddPIDController(pid =>
-                           {
-                               pid.SetPosition(435, 142).SetDerivative(3).SetIntegral(3).SetProportional(3);
-                           });
-                           co.AddTransferFunction(tf => tf.SetNumerator(1).SetDenominator(1, 2));
+                           co.AddPIDController(pid => pid.SetDerivative(3).SetIntegral(3).SetProportional(3).SetPosition(435, 142));                         
+                           co.AddTransferFunction(tf => tf.SetNumerator(1).SetDenominator(3, 1, 2).SetPosition(595, 142));
                        });
-                       cs.AddSinks(s => s.AddScope());                     
-                   }).Build();
-
+                       cs.AddSinks(s => s.AddScope(scope => scope.SetPosition(820, 144)));
+                       //TODO: cs.AddConnections();
+                   })
+                   .Save(path);
         }
     }
 }

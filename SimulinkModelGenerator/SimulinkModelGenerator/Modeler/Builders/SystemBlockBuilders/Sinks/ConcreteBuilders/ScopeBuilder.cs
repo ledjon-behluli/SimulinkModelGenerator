@@ -7,6 +7,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 {
     public sealed class ScopeBuilder : SystemBlockBuilder<ScopeBuilder>, IScope
     {
+        internal override SizeU Size => new SizeU(30, 32);
+
         private string _NumInputPorts = "1";
         private string _Ports = "[1]";
 
@@ -27,11 +29,6 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
                 throw new ArgumentException("Scope can not have less than 1 port!");
 
             return this;
-        }
-
-        public override ISystemBlock SetPosition(uint x, uint y, uint width = 30, uint height = 32)
-        {
-            return base.SetPosition(x, y, width, height);
         }
 
         internal override void Build()

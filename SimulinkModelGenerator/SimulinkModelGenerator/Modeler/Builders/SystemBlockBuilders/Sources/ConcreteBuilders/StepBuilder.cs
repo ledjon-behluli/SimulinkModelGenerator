@@ -7,6 +7,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public sealed class StepBuilder : SystemBlockBuilder<StepBuilder>, IStep
     {
+        internal override SizeU Size => new SizeU(30, 30);
+
         private string _StepTime = "1";
         private string _InitialValue = "0";
         private string _FinalValue = "1";
@@ -45,12 +47,6 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             _SampleTime = sampleTime.ToString();
             return this;
         }
-
-        public override ISystemBlock SetPosition(uint x, uint y, uint width = 30, uint height = 30)
-        {
-            return base.SetPosition(x, y, width, height);
-        }
-
 
         internal override void Build()
         {

@@ -5,6 +5,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public sealed class ConstantBuilder : SystemBlockBuilder<ConstantBuilder>, IConstant
     {
+        internal override SizeU Size => new SizeU(30, 30);
+
         private string _Value = "1";
 
         public ConstantBuilder(Model model)
@@ -17,11 +19,6 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         {
             _Value = value.ToString();
             return this;
-        }
-
-        public override ISystemBlock SetPosition(uint x, uint y, uint width = 30, uint height = 30)
-        {
-            return base.SetPosition(x, y, width, height);
         }
 
         internal override void Build()

@@ -1,15 +1,36 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
 {
+    internal class SizeU
+    {
+        internal uint Width { get; private set; }
+        internal uint Height { get; private set; }
+
+        internal SizeU(uint width, uint height)
+        {
+            if (width < 1)
+                throw new ArgumentException("Zero or negative values for width are not allowed.");
+
+            if (height < 1)
+                throw new ArgumentException("Zero or negative values for height are not allowed.");
+
+            Width = width;
+            Height = height;
+        }
+    }
+
     public abstract class SystemBlockBuilder
     {
         protected readonly Model model;
 
         protected string _Name;     
         protected string _Position;
+
+        internal abstract SizeU Size { get; }
 
         internal bool blockMirror = false;
         protected string BlockMirror => blockMirror ? "on" : "off";
@@ -54,15 +75,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
             return _blockBuilderInstance;
         }
 
-        public virtual ISystemBlock SetPosition(uint x, uint y, uint width, uint height)
+        public ISystemBlock SetPosition(uint x, uint y)
         {
-            if (width < 1)
-                throw new ArgumentException("Zero or negative values for width are not allowed.");
-
-            if(height < 1)
-                throw new ArgumentException("Zero or negative values for height are not allowed.");
-
-            base._Position = $"[{x}, {y}, {x + width}, {y + height}]";
+            
+            base._Position = $"[{x}, {y}, {x + Size.Width}, {y + Size.Height}]";
             return _blockBuilderInstance;
         }
 

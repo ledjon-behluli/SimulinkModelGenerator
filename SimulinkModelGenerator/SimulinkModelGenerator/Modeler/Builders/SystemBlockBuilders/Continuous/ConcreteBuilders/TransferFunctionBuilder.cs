@@ -7,6 +7,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
     public sealed class TransferFunctionBuilder : SystemBlockBuilder<TransferFunctionBuilder>, ITransferFunction
     {
+        internal override SizeU Size => new SizeU(60, 36);
+
         private string _Numerator = null;
         private string _Denominator = "[1 1]";
 
@@ -17,11 +19,6 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             : base(model)
         {
 
-        }
-
-        public override ISystemBlock SetPosition(uint x, uint y, uint width = 60, uint height = 36)
-        {
-            return base.SetPosition(x, y, width, height);
         }
 
 

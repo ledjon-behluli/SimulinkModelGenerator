@@ -1,5 +1,4 @@
-﻿using SimulinkModelGenerator.Exceptions;
-using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous.PIDControllers
 {
@@ -27,9 +26,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
         public IIController SetIntegratorMethod(IntegratorMethod method)
         {
-            if (base._TimeDomain == TimeDomain.ContinuousTime)
-                throw new SimulinkModelGeneratorException("IntegratorMethod can only be set when TimeDomain is of type Discrete-time");
-
+            base._TimeDomain = TimeDomain.DiscreteTime;              
             base._IntegratorMethod = method;
             return this;
         }

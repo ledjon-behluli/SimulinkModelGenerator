@@ -5,6 +5,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
 {
     public sealed class GainBuilder : SystemBlockBuilder<GainBuilder>, IGain
     {
+        internal override SizeU Size => new SizeU(30, 30);
+
         private string _Gain = "1";
 
         public GainBuilder(Model model)
@@ -12,19 +14,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         {
 
         }
-
+        
 
         public IGain SetGain(decimal gain)
         {
             _Gain = gain.ToString();
             return this;
         }
-
-        public override ISystemBlock SetPosition(uint x, uint y, uint width = 30, uint height = 30)
-        {
-            return base.SetPosition(x, y, width, height);
-        }
-
 
         internal override void Build()
         {

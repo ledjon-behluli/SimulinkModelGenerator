@@ -51,6 +51,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
     public abstract class PIDBaseControllerBuilder<T> : SystemBlockBuilder<T>, IPIDBaseController, IPIDSampleTime
         where T : PIDBaseControllerBuilder<T>
     {
+        internal override SizeU Size => new SizeU(40, 36);
+
         public abstract string _ControllerType { get; }
 
         protected string _Proportional = "1";
@@ -87,8 +89,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
         public IPIDBaseController SetSampleTime(double sampleTime)
         {
-            if (_TimeDomain == TimeDomain.ContinuousTime)
-                throw new SimulinkModelGeneratorException("SampleTime can only be set when TimeDomain is of type Discrete-time");
+            _TimeDomain = TimeDomain.DiscreteTime;
 
             if (sampleTime < 0 && sampleTime != -1)                
                 throw new SimulinkModelGeneratorException("SampleTime can not be negative, besides -1 for inherited types");
@@ -96,11 +97,6 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             _SampleTime = sampleTime.ToString();
 
             return this;
-        }
-
-        public override ISystemBlock SetPosition(uint x, uint y, uint width = 40, uint height = 36)
-        {
-            return base.SetPosition(x, y, width, height);
         }
 
 
@@ -131,7 +127,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
                         new P() { Name = "IntegratorMethod", Text = _IntegratorMethod.GetDescription() },
                         new P() { Name = "FilterMethod", Text = _FilterMethod.GetDescription() },
                         new P() { Name = "SampleTime", Text = _SampleTime },
-                        new P() { Name = "UseFilter", Text = _UseFilter ? "on" : "off" }                     
+                        new P() { Name = "UseFilter", Text = _UseFilter ? "on" : "off" },
+                        new P() { Name = "SourceBlock", Text = "simulink/Continuous/PID Controller" },
+                        new P() { Name = "SourceType", Text = "PID 1dof" }
                     }
                 }
             });

@@ -5,6 +5,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public sealed class RampBuilder : SystemBlockBuilder<RampBuilder>, IRamp
     {
+        internal override SizeU Size => new SizeU(30, 30);
+
         private string _Slope = "1";
         private string _StartTime = "0";
         private string _InitialOutput = "0";
@@ -33,12 +35,6 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             _InitialOutput = initialOutput.ToString();
             return this;
         }
-
-        public override ISystemBlock SetPosition(uint x, uint y, uint width = 30, uint height = 30)
-        {
-            return base.SetPosition(x, y, width, height);
-        }
-
 
         internal override void Build()
         {

@@ -28,6 +28,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
 
     public sealed class SumBuilder : SystemBlockBuilder<SumBuilder>, ISum
     {
+        internal override SizeU Size => new SizeU(20, 20);
+
         private IconShape _IconShape = IconShape.Round;
         private string _Ports
         {
@@ -83,12 +85,6 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             _InputTypes = inputs;
             return this;
         }
-
-        public override ISystemBlock SetPosition(uint x, uint y, uint width = 20, uint height = 20)
-        {
-            return base.SetPosition(x, y, width, height);
-        }
-
 
         internal override void Build()
         {

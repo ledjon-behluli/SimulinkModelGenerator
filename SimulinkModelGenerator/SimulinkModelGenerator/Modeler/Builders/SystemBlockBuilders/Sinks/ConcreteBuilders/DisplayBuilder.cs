@@ -4,17 +4,15 @@ using System.Collections.Generic;
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 {
     public sealed class DisplayBuilder : SystemBlockBuilder<DisplayBuilder>, IDisplay
-    {     
+    {
+        internal override SizeU Size => new SizeU(90, 30);
+
         public DisplayBuilder(Model model)
             : base(model)
         {
 
         }
 
-        public override ISystemBlock SetPosition(uint x, uint y, uint width = 90, uint height = 30)
-        {
-            return base.SetPosition(x, y, width, height);
-        }
 
         internal override void Build()
         {
