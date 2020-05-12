@@ -115,25 +115,33 @@ namespace SimulinkModelGenerator.Test
         }
 
         [Test]
-        public void Testn()
+        public void Test4()
         {
-            ModelBuilder builder = new ModelBuilder();
-            builder
-                   .WithName("test3")
-                   .AddControlSystem(cs =>
-                   {
-                       cs.AddSources(s => s.AddStep(sp => sp.SetPosition(190, 145)));
-                       cs.AddMathOperations(mo => mo.AddSum(sum => sum.SetInputs(InputType.Plus, InputType.Minus).SetPosition(320, 150))
-                                                    .AddGain(g => g.SetGain(3).FlipHorizontally().SetPosition(515, 230)));
-                       cs.AddContinuous(co =>
-                       {
-                           co.AddPIDController(pid => pid.SetDerivative(3).SetIntegral(3).SetProportional(3).SetPosition(435, 142));                         
-                           co.AddTransferFunction(tf => tf.SetNumerator(1).SetDenominator(3, 1, 2).SetPosition(595, 142));
-                       });
-                       cs.AddSinks(s => s.AddScope(scope => scope.SetPosition(820, 144)));
-                       //TODO: cs.AddConnections();
-                   })
-                   .Save(path);
+            new ModelBuilder()     
+                .WithName("test4")
+                .AddControlSystem(cs =>
+                {
+                    cs.AddSources(s => s.AddStep(sp => sp.SetPosition(190, 145))
+                                        .AddConstant(c => c.SetValue(3).SetPosition(190, 225)));
+                    cs.AddMathOperations(mo => mo.AddSum(sum => sum.SetInputs(InputType.Plus, InputType.Minus, InputType.Minus).WithIconShape(IconShape.Rectangular).SetPosition(320, 150))
+                                                .AddGain(g => g.SetGain(3).FlipHorizontally().SetPosition(515, 230))
+                                                .AddGain(g => g.SetGain(2).FlipHorizontally().SetPosition(515, 300)));
+                    cs.AddContinuous(co =>
+                    {
+                        co.AddPIDController(pid => pid.SetDerivative(3).SetIntegral(3).SetProportional(3).SetPosition(435, 142));                         
+                        co.AddTransferFunction(tf => tf.SetNumerator(1).SetDenominator(3, 1, 2).SetPosition(595, 142));
+                    });
+                    cs.AddSinks(s => s.AddScope(scope => scope.SetInputPorts(2).SetPosition(820, 144)));
+                    cs.AddConnections("Step", c =>
+                    {
+                        c.ThanConnect("Sum").ThanConnect("PID Controller").ThanConnect("TransferFcn")
+                        .Branch(b => b.Towards("Scope", 1))
+                        .Branch(b => b.Towards("Gain").ThanConnect("Sum", 2))
+                        .Branch(b => b.Towards("Gain1").ThanConnect("Sum", 3))
+                        .Connect("Constant", "Scope", 1, 2);
+                    });
+                })
+                .Save(path);
         }
     }
 }
