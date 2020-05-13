@@ -40,7 +40,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
                 if (_InputTypes.Length == 0)
                     ports = "3, 1";
                 else
-                    ports = $"{_InputTypes.Length + 1}, 1";
+                    ports = $"{_InputTypes.Length}, 1";
 
                 return $"[{ports}]";
             }
