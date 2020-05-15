@@ -18,19 +18,19 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         }
 
         
-        public IRamp SetSlope(decimal slope)
+        public IRamp SetSlope(double slope)
         {
             _Slope = slope.ToString();
             return this;
         }
 
-        public IRamp SetStartTime(decimal startTime)
+        public IRamp SetStartTime(double startTime)
         {
             _StartTime = startTime.ToString();
             return this;
         }
 
-        public IRamp SetInitialOutput(decimal initialOutput)
+        public IRamp SetInitialOutput(double initialOutput)
         {
             _InitialOutput = initialOutput.ToString();
             return this;
@@ -53,7 +53,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
                     {
                         new P() { Name = "slope", Text = _Slope },
                         new P() { Name = "start", Text = _StartTime },
-                        new P() { Name = "X0", Text = _InitialOutput }
+                        new P() { Name = "X0", Text = _InitialOutput },
+                        new P() { Name = "SourceBlock", Text = "simulink/Sources/Ramp" },
+                        new P() { Name = "SourceType", Text = "Ramp" },
+                        new P() { Name = "Ports", Text = "[0, 1]" },
+                        new P() { Name = "LibraryVersion", Text = "1.391" },
                     }
                 }
             });

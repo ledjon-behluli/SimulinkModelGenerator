@@ -15,7 +15,32 @@ namespace SimulinkModelGenerator.Test
         {
             path = @"D:\New folder (5)\Simulink-Model-Parsing-Tools-master";
         }
-        
+
+        [Test]
+        public void Test0()
+        {
+            new ModelBuilder()
+                .WithName("test0")
+                .AddControlSystem(cs =>
+                {
+                    cs.AddSources(s => s.AddStep(s => s.SetPosition(100, 100))
+                                        .AddConstant(c => c.SetPosition(100, 170))
+                                        .AddRamp(r => r.SetPosition(100, 240)));
+                    cs.AddMathOperations(mo => mo.AddSum(s => s.SetPosition(200, 105))
+                                                 .AddGain(g => g.SetPosition(200, 170)));
+                    cs.AddContinuous(co => co.AddTransferFunction(tf => tf.SetPosition(300, 100))
+                                             .AddIntegrator(i => i.SetPosition(300, 170))
+                                             .AddPIDController(pid => pid.SetPosition(300, 240))
+                                             .AddPDController(pd => pd.SetPosition(300, 310))
+                                             .AddPIController(pi => pi.SetPosition(300, 380))                                             
+                                             .AddIController(i => i.SetPosition(300, 450))
+                                             .AddPController(p => p.SetPosition(300, 520)));
+                    cs.AddSinks(s => s.AddScope(s => s.SetPosition(425, 104))
+                                      .AddDisplay(d => d.SetPosition(425, 170)));
+                })
+                .Save(path);
+        }
+
         [Test]
         public void Test1()
         {

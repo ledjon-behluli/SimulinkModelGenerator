@@ -2,7 +2,7 @@
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous.PIDControllers
 {
-    public sealed class PDControllerBuilder : PIDBaseControllerBuilder<PIDControllerBuilder>, IPDController
+    public sealed class PDControllerBuilder : PIDBaseControllerBuilder<PDControllerBuilder>, IPDController
     {
         public override string _ControllerType { get => "PD"; }
 

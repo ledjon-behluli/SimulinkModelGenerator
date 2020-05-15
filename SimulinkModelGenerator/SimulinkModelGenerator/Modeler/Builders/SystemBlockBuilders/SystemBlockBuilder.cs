@@ -27,8 +27,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
     {
         protected readonly Model model;
 
-        protected string _Name;     
-        protected string _Position;
+        protected string _Name;
+        private string _position;
+        protected string _Position
+        {
+            get => !string.IsNullOrEmpty(_position) ? _position : $"[0, 0, {Size.Width}, {Size.Height}]";
+            set => _position = value;
+        }
 
         internal abstract SizeU Size { get; }
 

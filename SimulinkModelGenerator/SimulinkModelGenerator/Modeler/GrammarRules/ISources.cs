@@ -17,16 +17,16 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IStep : ISystemBlock
     {
-        IStep SetStepTime(decimal stepTime);
-        IStep SetInitialValue(decimal initialValue);
-        IStep SetFinalValue(decimal finalValue);
-        IStep SetSampleTime(decimal sampleTime);
+        IStep SetStepTime(double stepTime);
+        IStep SetInitialValue(double initialValue);
+        IStep SetFinalValue(double finalValue);
+        IStep SetSampleTime(double sampleTime);
     }
 
     public interface IRamp : ISystemBlock
     {
-        IRamp SetSlope(decimal slope);
-        IRamp SetStartTime(decimal startTime);
-        IRamp SetInitialOutput(decimal initialOutput);
+        IRamp SetSlope(double slope);
+        IRamp SetStartTime(double startTime);
+        IRamp SetInitialOutput(double initialOutput);
     }
 }

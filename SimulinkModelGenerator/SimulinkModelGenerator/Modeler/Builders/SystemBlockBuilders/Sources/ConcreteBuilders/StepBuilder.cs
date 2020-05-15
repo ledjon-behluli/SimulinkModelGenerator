@@ -21,25 +21,25 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         }
 
 
-        public IStep SetStepTime(decimal stepTime)
+        public IStep SetStepTime(double stepTime)
         {
             _StepTime = stepTime.ToString();
             return this;
         }
 
-        public IStep SetInitialValue(decimal initialValue)
+        public IStep SetInitialValue(double initialValue)
         {
             _InitialValue = initialValue.ToString();
             return this;
         }
 
-        public IStep SetFinalValue(decimal finalValue)
+        public IStep SetFinalValue(double finalValue)
         {
             _FinalValue = finalValue.ToString();
             return this;
         }
 
-        public IStep SetSampleTime(decimal sampleTime)
+        public IStep SetSampleTime(double sampleTime)
         {
             if (sampleTime < 0)
                 throw new ArgumentException("SampleTime must be a positive number!");
