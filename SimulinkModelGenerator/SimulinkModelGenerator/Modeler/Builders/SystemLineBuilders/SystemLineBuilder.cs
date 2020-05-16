@@ -3,6 +3,7 @@ using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using System;
 using System.Collections.Generic;
+using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
 {
@@ -46,12 +47,12 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
 
             Line newLine = new Line()
             {
-                P = new List<P>()
+                P = new List<Parameter>()
                 {
-                    new P() { Name = "SrcBlock", Text = sourceBlockName },
-                    new P() { Name = "DstBlock", Text = destinationBlockName },
-                    new P() { Name = "SrcPort", Text = sourceBlockPort.ToString() },
-                    new P() { Name = "DstPort", Text = destinationBlockPort.ToString() },
+                    new Parameter() { Name = "SrcBlock", Text = sourceBlockName },
+                    new Parameter() { Name = "DstBlock", Text = destinationBlockName },
+                    new Parameter() { Name = "SrcPort", Text = sourceBlockPort.ToString() },
+                    new Parameter() { Name = "DstPort", Text = destinationBlockPort.ToString() },
                 }
             };
 

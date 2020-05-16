@@ -1,4 +1,5 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
@@ -27,11 +28,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             {
                 BlockType = "Constant",
                 Name = base.GetName("Constant"),
-                P = new List<P>()
+                P = new List<Parameter>()
                 {
-                    new P() { Name = "Position", Text = base._Position },
-                    new P() { Name = "BlockMirror", Text = base.BlockMirror },
-                    new P() { Name = "Value", Text = _Value }
+                    new Parameter() { Name = "Position", Text = base._Position },
+                    new Parameter() { Name = "BlockMirror", Text = base.BlockMirror },
+                    new Parameter() { Name = "Value", Text = _Value }
                 }
             });
         }

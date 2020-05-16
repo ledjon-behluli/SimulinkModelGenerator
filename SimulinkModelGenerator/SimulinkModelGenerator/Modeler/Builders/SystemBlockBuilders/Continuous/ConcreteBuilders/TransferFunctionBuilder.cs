@@ -1,7 +1,7 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 using System.Collections.Generic;
-using SimulinkModelGenerator.Exceptions;
 using System;
+using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
@@ -64,16 +64,16 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             if (_NumeratorCount > _DenominatorCount)
                 throw new InvalidOperationException("The order of the transfer function numerator must be less than or equal to the order of the denominator!");
 
-            List<P> list = new List<P>()
+            List<Parameter> list = new List<Parameter>()
             {
-                new P() { Name = "Position", Text = base._Position },
-                new P() { Name = "BlockMirror", Text = base.BlockMirror },
-                new P() { Name = "Denominator", Text = _Denominator }
+                new Parameter() { Name = "Position", Text = base._Position },
+                new Parameter() { Name = "BlockMirror", Text = base.BlockMirror },
+                new Parameter() { Name = "Denominator", Text = _Denominator }
             };
 
             if(_NumeratorCount > 0)
             {
-                list.Add(new P() { Name = "Numerator", Text = _Numerator });
+                list.Add(new Parameter() { Name = "Numerator", Text = _Numerator });
             }
 
             base.model.System.Block.Add(new Block()

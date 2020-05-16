@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SimulinkModelGenerator.Modeler.GrammarRules;
+using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
@@ -28,11 +29,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             {
                 BlockType = "Gain",
                 Name = base.GetName("Gain"),
-                P = new List<P>()
+                P = new List<Parameter>()
                 {
-                    new P() { Name = "Position", Text = base._Position },
-                    new P() { Name = "BlockMirror", Text = base.BlockMirror },
-                    new P() { Name = "Gain", Text = _Gain },                    
+                    new Parameter() { Name = "Position", Text = base._Position },
+                    new Parameter() { Name = "BlockMirror", Text = base.BlockMirror },
+                    new Parameter() { Name = "Gain", Text = _Gain },                    
                 }
             });
         }

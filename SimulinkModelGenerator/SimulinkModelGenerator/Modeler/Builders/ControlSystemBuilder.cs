@@ -6,6 +6,7 @@ using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks;
 using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources;
 using SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders;
 using SimulinkModelGenerator.Modeler.GrammarRules;
+using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders
 {  
@@ -15,7 +16,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
 
         public ControlSystemBuilder(Model model)
         {
-            model.System = new System()
+            model.System = new Models.System()
             {
                 Block = new List<Block>(),
                 Line = new List<Line>()

@@ -1,4 +1,5 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
@@ -42,22 +43,22 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             {
                 BlockType = "Reference",
                 Name = base.GetName("Ramp"),
-                P = new List<P>()
+                P = new List<Parameter>()
                 {
-                    new P() { Name = "Position", Text = base._Position },
-                    new P() { Name = "BlockMirror", Text = base.BlockMirror }
+                    new Parameter() { Name = "Position", Text = base._Position },
+                    new Parameter() { Name = "BlockMirror", Text = base.BlockMirror }
                 },
                 InstanceData = new InstanceData()
                 {
-                    P = new List<P>()
+                    P = new List<Parameter>()
                     {
-                        new P() { Name = "slope", Text = _Slope },
-                        new P() { Name = "start", Text = _StartTime },
-                        new P() { Name = "X0", Text = _InitialOutput },
-                        new P() { Name = "SourceBlock", Text = "simulink/Sources/Ramp" },
-                        new P() { Name = "SourceType", Text = "Ramp" },
-                        new P() { Name = "Ports", Text = "[0, 1]" },
-                        new P() { Name = "LibraryVersion", Text = "1.391" },
+                        new Parameter() { Name = "slope", Text = _Slope },
+                        new Parameter() { Name = "start", Text = _StartTime },
+                        new Parameter() { Name = "X0", Text = _InitialOutput },
+                        new Parameter() { Name = "SourceBlock", Text = "simulink/Sources/Ramp" },
+                        new Parameter() { Name = "SourceType", Text = "Ramp" },
+                        new Parameter() { Name = "Ports", Text = "[0, 1]" },
+                        new Parameter() { Name = "LibraryVersion", Text = "1.391" },
                     }
                 }
             });

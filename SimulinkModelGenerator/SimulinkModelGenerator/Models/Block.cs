@@ -1,38 +1,26 @@
-﻿using System.Xml.Serialization;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 
-namespace SimulinkModelGenerator
+namespace SimulinkModelGenerator.Models
 {
-	[XmlRoot(ElementName = "Block")]
 	public class Block
 	{
-		[XmlElement(ElementName = "P")]
-		public List<P> P { get; set; }
-
-		[XmlAttribute(AttributeName = "BlockType")]
+		public List<Parameter> P { get; set; }
 		public string BlockType { get; set; }
-
-		[XmlAttribute(AttributeName = "Name")]
 		public string Name { get; set; }
-
-		[XmlAttribute(AttributeName = "SID")]
-		public string SID { get; set; }
-
-		[XmlElement(ElementName = "InstanceData")]
 		public InstanceData InstanceData { get; set; }
 
 		public override string ToString()
 		{
 			string properties = string.Empty;
-			foreach(P p in P)
+			foreach(Parameter p in P)
 			{
 				properties += p.ToString() + Environment.NewLine;
 			}
 
 			if(InstanceData != null)
 			{
-				foreach(P p in InstanceData.P)
+				foreach(Parameter p in InstanceData.P)
 				{
 					properties += p.ToString() + Environment.NewLine;
 				}
@@ -46,11 +34,8 @@ namespace SimulinkModelGenerator
 		}
 	}
 
-
-	[XmlRoot(ElementName = "InstanceData")]
 	public class InstanceData
 	{
-		[XmlElement(ElementName = "P")]
-		public List<P> P { get; set; }
+		public List<Parameter> P { get; set; }
 	}
 }

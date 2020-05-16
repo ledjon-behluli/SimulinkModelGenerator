@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
+using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 {
@@ -37,12 +37,12 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             {
                 BlockType = "Scope",
                 Name = base.GetName("Scope"),
-                P = new List<P>()
+                P = new List<Parameter>()
                 {
-                    new P() { Name = "Ports", Text = _Ports },
-                    new P() { Name = "Position", Text = base._Position },
-                    new P() { Name = "BlockMirror", Text = base.BlockMirror },
-                    new P() { Name = "NumInputPorts", Text = _NumInputPorts }
+                    new Parameter() { Name = "Ports", Text = _Ports },
+                    new Parameter() { Name = "Position", Text = base._Position },
+                    new Parameter() { Name = "BlockMirror", Text = base.BlockMirror },
+                    new Parameter() { Name = "NumInputPorts", Text = _NumInputPorts }
                 }
             });
         }

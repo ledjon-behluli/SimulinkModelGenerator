@@ -2,18 +2,17 @@ using NUnit.Framework;
 using SimulinkModelGenerator.Modeler.Builders;
 using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous;
 using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
-using SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders;
 
 namespace SimulinkModelGenerator.Test
 {
-    public class GenerationTest
+    public class Tests
     {
         private string path;
 
         [SetUp]
         public void Setup()
         {
-            path = @"D:\New folder (5)\Simulink-Model-Parsing-Tools-master";
+            path = @"C:\SimulinkModelGenerator";
         }
 
         [Test]
@@ -148,7 +147,7 @@ namespace SimulinkModelGenerator.Test
                 {
                     cs.AddSources(s => s.AddStep(sp => sp.SetPosition(190, 145))
                                         .AddConstant(c => c.SetValue(3).SetPosition(190, 225)));
-                    cs.AddMathOperations(mo => mo.AddSum(sum => sum.SetInputs(InputType.Plus, InputType.Minus, InputType.Minus).WithIconShape(IconShape.Rectangular).SetPosition(320, 150))
+                    cs.AddMathOperations(mo => mo.AddSum(sum => sum.SetInputs(InputType.Plus, InputType.Minus, InputType.Minus).SetPosition(320, 150))
                                                 .AddGain(g => g.SetGain(3).FlipHorizontally().SetPosition(515, 230))
                                                 .AddGain(g => g.SetGain(2).FlipHorizontally().SetPosition(515, 300)));
                     cs.AddContinuous(co =>
@@ -161,8 +160,8 @@ namespace SimulinkModelGenerator.Test
                     {
                         c.ThanConnect("Sum").ThanConnect("PID Controller").ThanConnect("TransferFcn")
                         .Branch(b => b.Towards("Scope", 1))
-                        .Branch(b => b.Towards("Gain").ThanConnect("Sum", 2))
-                        .Branch(b => b.Towards("Gain1").ThanConnect("Sum", 3))
+                        .Branch(b => b.Towards("Gain").ThanConnect("Sum", 3))
+                        .Branch(b => b.Towards("Gain1").ThanConnect("Sum", 2))
                         .Connect("Constant", "Scope", 1, 2);
                     });
                 })
