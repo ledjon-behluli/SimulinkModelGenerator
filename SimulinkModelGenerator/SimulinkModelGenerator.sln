@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimulinkModelGenerator", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimulinkModelGenerator.Test", "SimulinkModelGenerator.Test\SimulinkModelGenerator.Test.csproj", "{ABC1B17B-224D-4E31-B774-B0F7C45BBFA9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{DB11CCE1-70B8-4255-AA41-DCAE0C90669A}"
+	ProjectSection(SolutionItems) = preProject
+		E:\Libraries\Desktop\simulink-icon.png = E:\Libraries\Desktop\simulink-icon.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

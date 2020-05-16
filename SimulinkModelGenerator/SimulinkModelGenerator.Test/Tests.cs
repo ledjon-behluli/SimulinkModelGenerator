@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using SimulinkModelGenerator.Modeler.Builders;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous;
 using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
 
 namespace SimulinkModelGenerator.Test
