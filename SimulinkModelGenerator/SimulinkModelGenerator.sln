@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimulinkModelGenerator.Test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{DB11CCE1-70B8-4255-AA41-DCAE0C90669A}"
 	ProjectSection(SolutionItems) = preProject
+		scope-output.png = scope-output.png
+		simulink-diagram.png = simulink-diagram.png
 		simulink-icon.png = simulink-icon.png
 	EndProjectSection
 EndProject
