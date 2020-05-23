@@ -1,4 +1,5 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
@@ -20,10 +21,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             {
                 BlockType = "Display",
                 Name = base.GetName("Display"),
-                P = new List<P>()
+                P = new List<Parameter>()
                 {
-                    new P() { Name = "Position", Text = base._Position },
-                    new P() { Name = "BlockMirror", Text = base.BlockMirror }
+                    new Parameter() { Name = "Position", Text = base._Position },
+                    new Parameter() { Name = "BlockMirror", Text = base.BlockMirror }
                 }
             });
         }

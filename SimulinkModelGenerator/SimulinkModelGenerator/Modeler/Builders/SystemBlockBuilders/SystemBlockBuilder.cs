@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Drawing;
 using System.Linq;
 using SimulinkModelGenerator.Modeler.GrammarRules;
+using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
 {

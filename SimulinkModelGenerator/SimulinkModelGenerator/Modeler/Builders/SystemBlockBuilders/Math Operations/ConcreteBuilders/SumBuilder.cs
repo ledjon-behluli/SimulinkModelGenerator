@@ -1,10 +1,9 @@
-﻿using SimulinkModelGenerator.Exceptions;
-using SimulinkModelGenerator.Extensions;
+﻿using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
+using SimulinkModelGenerator.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
@@ -92,14 +91,14 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             {
                 BlockType = "Sum",
                 Name = base.GetName("Sum"),
-                P = new List<P>()
+                P = new List<Parameter>()
                 {
                     // Customizable
-                    new P() { Name = "Position", Text = base._Position },
-                    new P() { Name = "BlockMirror", Text = base.BlockMirror },
-                    new P() { Name = "IconShape", Text = _IconShape.GetDescription() },
-                    new P() { Name = "Inputs", Text = _Inputs },
-                    new P() { Name = "Ports", Text = _Ports }
+                    new Parameter() { Name = "Position", Text = base._Position },
+                    new Parameter() { Name = "BlockMirror", Text = base.BlockMirror },
+                    new Parameter() { Name = "IconShape", Text = _IconShape.GetDescription() },
+                    new Parameter() { Name = "Inputs", Text = _Inputs },
+                    new Parameter() { Name = "Ports", Text = _Ports }
                 }
             });
         }

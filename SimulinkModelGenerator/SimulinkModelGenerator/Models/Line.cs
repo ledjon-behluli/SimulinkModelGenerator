@@ -1,28 +1,23 @@
-﻿using System.Xml.Serialization;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 
-namespace SimulinkModelGenerator
+namespace SimulinkModelGenerator.Models
 {
-	[XmlRoot(ElementName = "Line")]
 	public class Line : IEqualityComparer<Line>
 	{	
 		public Line()
 		{
 			Branch = new List<Branch>();
-			P = new List<P>();
+			P = new List<Parameter>();
 		}
 
-		[XmlElement(ElementName = "P")]
-		public List<P> P { get; set; }
-
-		[XmlElement(ElementName = "Branch")]
+		public List<Parameter> P { get; set; }
 		public List<Branch> Branch { get; set; }
 
 		public override string ToString()
 		{
 			string properties = string.Empty;
-			foreach (P p in P)
+			foreach (Parameter p in P)
 			{
 				properties += p.ToString() + Environment.NewLine;
 			}
@@ -72,16 +67,14 @@ namespace SimulinkModelGenerator
 		}
 	}
 
-	[XmlRoot(ElementName = "Branch")]
 	public class Branch
 	{
-		[XmlElement(ElementName = "P")]
-		public List<P> P { get; set; }
+		public List<Parameter> P { get; set; }
 
 		public override string ToString()
 		{
 			string properties = string.Empty;
-			foreach (P p in P)
+			foreach (Parameter p in P)
 			{
 				properties += p.ToString() + Environment.NewLine;
 			}

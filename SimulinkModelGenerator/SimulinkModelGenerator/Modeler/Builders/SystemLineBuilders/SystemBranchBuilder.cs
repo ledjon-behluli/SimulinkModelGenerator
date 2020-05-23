@@ -1,12 +1,9 @@
 ﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
+using SimulinkModelGenerator.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
 {
@@ -29,20 +26,20 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             {
                 this.model.System.Line.Add(new Line()
                 {
-                    P = new List<P>()
+                    P = new List<Parameter>()
                     {
-                        new P() { Name = "SrcBlock", Text = previousBlockName },
-                        new P() { Name = "SrcPort", Text = "1" },
-                        new P() { Name = "Points", Text = "[0, 0]" }
+                        new Parameter() { Name = "SrcBlock", Text = previousBlockName },
+                        new Parameter() { Name = "SrcPort", Text = "1" },
+                        new Parameter() { Name = "Points", Text = "[0, 0]" }
                     },
                     Branch = new List<Branch>()
                     {
                         new Branch()
                         {
-                            P = new List<P>()
+                            P = new List<Parameter>()
                             {
-                                new P() { Name = "DstBlock", Text = destinationBlockName },
-                                new P() { Name = "DstPort", Text = destinationBlockPort.ToString() }
+                                new Parameter() { Name = "DstBlock", Text = destinationBlockName },
+                                new Parameter() { Name = "DstPort", Text = destinationBlockPort.ToString() }
                             }
                         }
                     }
@@ -52,10 +49,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             {
                 matchedLine.Branch.Add(new Branch()
                 {
-                    P = new List<P>()
+                    P = new List<Parameter>()
                     {
-                        new P() { Name = "DstBlock", Text = destinationBlockName },
-                        new P() { Name = "DstPort", Text = destinationBlockPort.ToString() }
+                        new Parameter() { Name = "DstBlock", Text = destinationBlockName },
+                        new Parameter() { Name = "DstPort", Text = destinationBlockPort.ToString() }
                     }
                 });
             }
@@ -75,12 +72,12 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
 
             Line newLine = new Line()
             {
-                P = new List<P>()
+                P = new List<Parameter>()
                 {
-                    new P() { Name = "SrcBlock", Text = previousBlockName },
-                    new P() { Name = "SrcPort", Text = "1" },
-                    new P() { Name = "DstBlock", Text = destinationBlockName },
-                    new P() { Name = "DstPort", Text = destinationBlockPort.ToString() }
+                    new Parameter() { Name = "SrcBlock", Text = previousBlockName },
+                    new Parameter() { Name = "SrcPort", Text = "1" },
+                    new Parameter() { Name = "DstBlock", Text = destinationBlockName },
+                    new Parameter() { Name = "DstPort", Text = destinationBlockPort.ToString() }
                 }
             };                                
 

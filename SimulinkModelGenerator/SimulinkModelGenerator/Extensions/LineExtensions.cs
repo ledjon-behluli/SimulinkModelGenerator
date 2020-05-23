@@ -1,7 +1,5 @@
-﻿using System;
+﻿using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace SimulinkModelGenerator.Extensions
 {

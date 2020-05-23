@@ -1,5 +1,5 @@
-﻿using SimulinkModelGenerator.Exceptions;
-using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+using SimulinkModelGenerator.Models;
 using System;
 using System.Collections.Generic;
 
@@ -54,14 +54,14 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             {
                 BlockType = "Step",
                 Name = base.GetName("Step"),
-                P = new List<P>()
+                P = new List<Parameter>()
                 {
-                    new P() { Name = "Position", Text = base._Position },
-                    new P() { Name = "BlockMirror", Text = base.BlockMirror },
-                    new P() { Name = "Time", Text = _StepTime },
-                    new P() { Name = "Before", Text = _InitialValue },
-                    new P() { Name = "After", Text = _FinalValue },
-                    new P() { Name = "SampleTime", Text = _SampleTime }
+                    new Parameter() { Name = "Position", Text = base._Position },
+                    new Parameter() { Name = "BlockMirror", Text = base.BlockMirror },
+                    new Parameter() { Name = "Time", Text = _StepTime },
+                    new Parameter() { Name = "Before", Text = _InitialValue },
+                    new Parameter() { Name = "After", Text = _FinalValue },
+                    new Parameter() { Name = "SampleTime", Text = _SampleTime }
                 }
             });
         }
