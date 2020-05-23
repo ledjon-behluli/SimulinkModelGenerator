@@ -18,13 +18,13 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface ITransferFunction : ISystemBlock
     {
-        ITransferFunction SetNumerator(params decimal[] coefficients);
-        ITransferFunction SetDenominator(params decimal[] coefficients);
+        ITransferFunction SetNumerator(params double[] coefficients);
+        ITransferFunction SetDenominator(params double[] coefficients);
     }
 
     public interface IIntegrator : ISystemBlock
     {
-        IIntegrator SetInitialCondition(decimal initialCondition);
+        IIntegrator SetInitialCondition(double initialCondition);
     }
 
     public interface IPIDBaseController : ISystemBlock

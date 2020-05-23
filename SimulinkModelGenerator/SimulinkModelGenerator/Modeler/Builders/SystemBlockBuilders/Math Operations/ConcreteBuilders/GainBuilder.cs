@@ -16,7 +16,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         }
         
 
-        public IGain SetGain(decimal gain)
+        public IGain SetGain(double gain)
         {
             _Gain = gain.ToString();
             return this;

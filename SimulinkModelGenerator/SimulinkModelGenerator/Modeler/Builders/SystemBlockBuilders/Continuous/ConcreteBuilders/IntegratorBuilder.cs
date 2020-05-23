@@ -15,7 +15,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             
         }
 
-        public IIntegrator SetInitialCondition(decimal initialCondition)
+        public IIntegrator SetInitialCondition(double initialCondition)
         {
             _InitialCondition = initialCondition.ToString();
             return this;

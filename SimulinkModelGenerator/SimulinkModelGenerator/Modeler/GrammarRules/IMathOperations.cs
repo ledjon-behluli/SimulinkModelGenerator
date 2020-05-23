@@ -14,7 +14,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IGain : ISystemBlock
     {
-        IGain SetGain(decimal gain);
+        IGain SetGain(double gain);
     }
 
     public interface ISum : ISystemBlock

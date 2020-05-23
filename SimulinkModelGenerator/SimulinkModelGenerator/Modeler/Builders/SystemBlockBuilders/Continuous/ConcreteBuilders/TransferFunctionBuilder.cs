@@ -22,7 +22,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         }
 
 
-        public ITransferFunction SetNumerator(params decimal[] coefficients)
+        public ITransferFunction SetNumerator(params double[] coefficients)
         {
             if (coefficients.Length > 0)
             {
@@ -33,7 +33,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             return this;
         }
 
-        public ITransferFunction SetDenominator(params decimal[] coefficients)
+        public ITransferFunction SetDenominator(params double[] coefficients)
         {
             if (coefficients.Length == 0)
             {
