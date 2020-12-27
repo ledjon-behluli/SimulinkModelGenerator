@@ -28,6 +28,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
         protected readonly Model model;
 
         protected string _Name;
+
         private string _position;
         protected string _Position
         {
@@ -38,13 +39,17 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
         internal abstract SizeU Size { get; }
 
         internal bool blockMirror = false;
-        protected string BlockMirror => blockMirror ? "on" : "off";
+        protected string _BlockMirror => blockMirror ? "on" : "off";
 
         public SystemBlockBuilder(Model model)
         {
             this.model = model;
         }
        
+        /// <summary>
+        /// Get a new name for the <paramref name="blockType"/> by appending a number at the end if the name is taken.
+        /// Otherwise returns the name of the <paramref name="blockType"/>.
+        /// </summary>
         protected string GetName(string blockType)
         {
             if (!string.IsNullOrEmpty(_Name))
@@ -58,6 +63,14 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
             }
 
             return blockType;
+        }
+
+        /// <summary>
+        /// Get the total number of <see cref="Block"/>s with the same <paramref name="blockType"/>.
+        /// </summary>
+        protected int GetBlockTypeCount(string blockType)
+        {
+            return this.model.System.Block.Count(b => b.BlockType.Contains(blockType));
         }
 
         internal abstract void Build();

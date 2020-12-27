@@ -41,7 +41,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
                 {
                     new Parameter() { Name = "Ports", Text = _Ports },
                     new Parameter() { Name = "Position", Text = base._Position },
-                    new Parameter() { Name = "BlockMirror", Text = base.BlockMirror },
+                    new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },
                     new Parameter() { Name = "NumInputPorts", Text = _NumInputPorts }
                 }
             });

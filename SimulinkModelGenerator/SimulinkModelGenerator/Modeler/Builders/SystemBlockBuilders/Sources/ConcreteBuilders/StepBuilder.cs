@@ -57,7 +57,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
-                    new Parameter() { Name = "BlockMirror", Text = base.BlockMirror },
+                    new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },
                     new Parameter() { Name = "Time", Text = _StepTime },
                     new Parameter() { Name = "Before", Text = _InitialValue },
                     new Parameter() { Name = "After", Text = _FinalValue },

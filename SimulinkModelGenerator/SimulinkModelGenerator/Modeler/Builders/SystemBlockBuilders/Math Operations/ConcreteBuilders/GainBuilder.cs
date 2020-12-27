@@ -32,7 +32,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
-                    new Parameter() { Name = "BlockMirror", Text = base.BlockMirror },
+                    new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },
                     new Parameter() { Name = "Gain", Text = _Gain },                    
                 }
             });

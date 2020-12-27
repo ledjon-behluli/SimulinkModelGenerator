@@ -95,7 +95,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
                 {
                     // Customizable
                     new Parameter() { Name = "Position", Text = base._Position },
-                    new Parameter() { Name = "BlockMirror", Text = base.BlockMirror },
+                    new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },
                     new Parameter() { Name = "IconShape", Text = _IconShape.GetDescription() },
                     new Parameter() { Name = "Inputs", Text = _Inputs },
                     new Parameter() { Name = "Ports", Text = _Ports }

@@ -1,7 +1,4 @@
-﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources;
+﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
 using System;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules

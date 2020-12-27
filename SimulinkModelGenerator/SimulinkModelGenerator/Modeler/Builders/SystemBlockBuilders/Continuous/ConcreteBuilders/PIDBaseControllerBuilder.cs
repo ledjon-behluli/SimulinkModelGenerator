@@ -106,11 +106,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             base.model.System.Block.Add(new Block()
             {
                 BlockType = "Reference",
-                Name = base.GetName("PID Controller"),
+                Name = $"PID Controller{GetBlockTypeCount("Reference")}",
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
-                    new Parameter() { Name = "BlockMirror", Text = base.BlockMirror }
+                    new Parameter() { Name = "BlockMirror", Text = base._BlockMirror }
                 },
                 InstanceData = new InstanceData()
                 {
