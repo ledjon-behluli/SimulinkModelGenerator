@@ -1,5 +1,5 @@
 ![alt text](https://github.com/ledjon-behluli/SimulinkModelGenerator/blob/master/SimulinkModelGenerator/simulink-icon.png?raw=true)
-# Simulink Model Generator
+# Simulink Model Generator 
 Fully .NET managed solution for creating [Simulink](https://www.mathworks.com/products/simulink.html) models in fluent style.
 
 Library is available through [NuGet](https://www.nuget.org/packages/SimulinkModelGenerator/).
