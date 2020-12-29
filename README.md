@@ -46,7 +46,7 @@ Scope output for 10s simulation time:
 
 ![alt text](https://github.com/ledjon-behluli/SimulinkModelGenerator/blob/master/SimulinkModelGenerator/scope-output.png?raw=true)
 
-C# code to generate '.mdl' file of the above model. Other examples can be found [here](https://github.com/ledjon-behluli/SimulinkModelGenerator/blob/master/SimulinkModelGenerator/SimulinkModelGenerator.Test/Tests.cs)
+C# code to generate '.mdl' file of the above model. Other examples can be found [here](https://github.com/ledjon-behluli/SimulinkModelGenerator/blob/master/SimulinkModelGenerator/SimulinkModelGenerator.Samples/Program.cs)
 
 ```csharp
 using SimulinkModelGenerator.Modeler.Builders;
