@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 		simulink-icon.png = simulink-icon.png
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulinkModelGenerator.Samples", "SimulinkModelGenerator.Samples\SimulinkModelGenerator.Samples.csproj", "{266F5B61-105D-4E39-8B44-F91A76704439}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{ABC1B17B-224D-4E31-B774-B0F7C45BBFA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABC1B17B-224D-4E31-B774-B0F7C45BBFA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABC1B17B-224D-4E31-B774-B0F7C45BBFA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{266F5B61-105D-4E39-8B44-F91A76704439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{266F5B61-105D-4E39-8B44-F91A76704439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{266F5B61-105D-4E39-8B44-F91A76704439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{266F5B61-105D-4E39-8B44-F91A76704439}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

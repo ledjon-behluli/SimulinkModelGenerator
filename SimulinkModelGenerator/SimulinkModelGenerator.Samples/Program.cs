@@ -1,24 +1,26 @@
-using NUnit.Framework;
-using SimulinkModelGenerator.Modeler.Builders;
+﻿using SimulinkModelGenerator.Modeler.Builders;
 using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
 
-namespace SimulinkModelGenerator.Test
+namespace SimulinkModelGenerator.Samples
 {
-    public class Tests
+    class Program
     {
-        private string path;
+        static string path = @"C:\SimulinkModelGenerator";
 
-        [SetUp]
-        public void Setup()
+        static void Main(string[] args)
         {
-            path = @"C:\SimulinkModelGenerator";
+            Sample0();
+            Sample1();
+            Sample2();
+            Sample3();
+            Sample4();
+            Sample5();
         }
 
-        [Test]
-        public void Test0()
+        static void Sample0()
         {
             new ModelBuilder()
-                .WithName("test0")
+                .WithName("sample0")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s => s.AddStep(s => s.SetPosition(100, 100))
@@ -30,7 +32,7 @@ namespace SimulinkModelGenerator.Test
                                              .AddIntegrator(i => i.SetPosition(300, 170))
                                              .AddPIDController(pid => pid.SetPosition(300, 240))
                                              .AddPDController(pd => pd.SetPosition(300, 310))
-                                             .AddPIController(pi => pi.SetPosition(300, 380))                                             
+                                             .AddPIController(pi => pi.SetPosition(300, 380))
                                              .AddIController(i => i.SetPosition(300, 450))
                                              .AddPController(p => p.SetPosition(300, 520)));
                     cs.AddSinks(s => s.AddScope(s => s.SetPosition(425, 104))
@@ -39,11 +41,10 @@ namespace SimulinkModelGenerator.Test
                 .Save(path);
         }
 
-        [Test]
-        public void Test1()
+        static void Sample1()
         {
             ModelBuilder builder = new ModelBuilder();
-            builder.WithName("test1")
+            builder.WithName("sample1")
                    .AddControlSystem(cs =>
                    {
                        cs.AddSources(s => {
@@ -61,17 +62,16 @@ namespace SimulinkModelGenerator.Test
                        .AddConnections("Step", c =>
                        {
                            c.Branch(b => b.Towards("Gain1").ThanConnect("Scope1"));
-                           c.Branch(b => b.Towards("Gain2").ThanConnect("Scope2"));                            
+                           c.Branch(b => b.Towards("Gain2").ThanConnect("Scope2"));
                        });
                    })
                    .Save(path);
         }
 
-        [Test]
-        public void Test2()
+        static void Sample2()
         {
             new ModelBuilder()
-                .WithName("test2")
+                .WithName("sample2")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s =>
@@ -102,11 +102,10 @@ namespace SimulinkModelGenerator.Test
                 .Save(path);
         }
 
-        [Test]
-        public void Test3()
+        static void Sample3()
         {
             new ModelBuilder()
-                .WithName("test3")
+                .WithName("sample3")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s =>
@@ -137,11 +136,10 @@ namespace SimulinkModelGenerator.Test
                 .Save(path);
         }
 
-        [Test]
-        public void Test4()
+        static void Sample4()
         {
-            new ModelBuilder()     
-                .WithName("test4")
+            new ModelBuilder()
+                .WithName("sample4")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s => s.AddStep(sp => sp.SetPosition(190, 145))
@@ -151,7 +149,7 @@ namespace SimulinkModelGenerator.Test
                                                 .AddGain(g => g.SetGain(2).FlipHorizontally().SetPosition(515, 300)));
                     cs.AddContinuous(co =>
                     {
-                        co.AddPIDController(pid => pid.SetDerivative(3).SetIntegral(3).SetProportional(3).SetPosition(435, 142));                         
+                        co.AddPIDController(pid => pid.SetDerivative(3).SetIntegral(3).SetProportional(3).SetPosition(435, 142));
                         co.AddTransferFunction(tf => tf.SetNumerator(1).SetDenominator(3, 1, 2).SetPosition(595, 142));
                     });
                     cs.AddSinks(s => s.AddScope(scope => scope.SetInputPorts(2).SetPosition(820, 144)));
@@ -167,11 +165,10 @@ namespace SimulinkModelGenerator.Test
                 .Save(path);
         }
 
-        [Test]
-        public void Test5()
+        static void Sample5()
         {
             new ModelBuilder()
-                .WithName("test5")
+                .WithName("sample5")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s => s.AddStep(sp => sp.SetStepTime(0).SetPosition(190, 145))
