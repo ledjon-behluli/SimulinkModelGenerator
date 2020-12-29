@@ -34,10 +34,23 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IRamp SetInitialOutput(double initialOutput);
     }
 
-    public interface IInport : ISystemBlock
+    public interface IInPort : ISystemBlock
     {
-        IInport SetPortNumber(int port);
-        IInport WithIconDisplay(IconDisplay iconDisplay);
+        IInPort SetPortNumber(int port);
+        IInPort WithIconDisplay(IconDisplay iconDisplay);
+    }
+
+    public interface IRepeatingSequence : ISystemBlock
+    {
+        IRepeatingSequence SetTimeStamps(params double[] values);
+        IRepeatingSequence SetOutputValues(params double[] values);
+    }
+
+    public interface IFromWorkspace : ISystemBlock
+    {
+        IFromWorkspace SetVariableName(string name);
+        IFromWorkspace ExtrapolateData();
+        IFromWorkspace DisableZeroCrossingDetection();
     }
 
     #endregion
@@ -80,7 +93,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     #endregion
 
-    #region Signal Generators
+    #region Generators
 
     public interface IGenerator : ISystemBlock
     {
@@ -95,10 +108,6 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         ISignalGenerator SetFrequency(double frequency);
     }
 
-    public interface ISineWaveGenerator : IGenerator
-    {
-
-    }
 
     public interface IPulseGenerator<in TParam, out TResult> : IGenerator
         where TParam : struct
@@ -119,6 +128,25 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         ISampleBasedPulseGenerator SetSampleTime(double sampleTime);
     }
 
+
+    public interface ISineWaveGenerator<out TResult> : IGenerator
+        where TResult : IGenerator
+    {
+        TResult SetBias(double bias);
+        TResult SetSampleTime(double sampleTime);
+    }
+
+    public interface ITimeBasedSineWaveGenerator : ISineWaveGenerator<ITimeBasedSineWaveGenerator>
+    {
+        ITimeBasedSineWaveGenerator SetFrequency(double frequency);     
+        ITimeBasedSineWaveGenerator SetPhase(double phase);    
+    }
+
+    public interface ISampleBasedSineWaveGenerator : ISineWaveGenerator<ISampleBasedSineWaveGenerator>
+    {
+        ISampleBasedSineWaveGenerator SetSamples(int samplesPerPeriod);   
+        ISampleBasedSineWaveGenerator SetOffset(double numOfOffsetSamples);    
+    }
 
     #endregion
 }

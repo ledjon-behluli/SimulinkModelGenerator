@@ -8,7 +8,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Co
     public sealed class SampleBasedPulseGeneratorBuilder : PulseGeneratorBuilder<SampleBasedPulseGeneratorBuilder>, 
         ISampleBasedPulseGenerator
     {
-        internal override string PulseType => "Sample based";
+        protected override string PulseType => "Sample based";
 
         public SampleBasedPulseGeneratorBuilder(Model model)
             : base(model)

@@ -7,7 +7,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Co
     public sealed class TimeBasedPulseGeneratorBuilder : PulseGeneratorBuilder<TimeBasedPulseGeneratorBuilder>, 
         ITimeBasedPulseGenerator
     {
-        internal override string PulseType => "Time based";
+        protected override string PulseType => "Time based";
 
         public TimeBasedPulseGeneratorBuilder(Model model)
             : base(model)

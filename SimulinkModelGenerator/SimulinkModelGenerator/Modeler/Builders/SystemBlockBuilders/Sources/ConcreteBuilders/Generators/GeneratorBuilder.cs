@@ -18,8 +18,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Co
         where T : GeneratorBuilder<T>
     {
         internal override SizeU Size => new SizeU(30, 30);
-        internal abstract string BlockType { get; }
-        internal abstract string BlockName { get; }
+        protected abstract string BlockType { get; }
+        protected abstract string BlockName { get; }
 
         protected string _Amplitude = "1";
         protected TimeSourceType _TimeSourceType;
@@ -45,7 +45,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Co
         }
 
 
-        protected Block GetBlock()
+        protected virtual Block GetBlock()
         {
             return new Block()
             {

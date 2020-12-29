@@ -17,14 +17,14 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Co
         Both
     }
 
-    public sealed class InportBuilder : SystemBlockBuilder<InportBuilder>, IInport
+    public sealed class InPortBuilder : SystemBlockBuilder<InPortBuilder>, IInPort
     {
         internal override SizeU Size => new SizeU(30, 14);
 
         private string _PortNumber = string.Empty;
         private IconDisplay _IconDisplay = IconDisplay.PortNumber;
 
-        public InportBuilder(Model model)
+        public InPortBuilder(Model model)
             : base(model)
         {
 
@@ -33,7 +33,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Co
         /// <summary>
         /// Position of port on parent block.
         /// </summary>
-        public IInport SetPortNumber(int port)
+        public IInPort SetPortNumber(int port)
         {
             if (port < 1 || port > 65535)
                 throw new ArgumentException("Port number must be a positive integer constant between 1 and 65535");
@@ -45,7 +45,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Co
         /// <summary>
         /// Specify the information displayed on the block icon.
         /// </summary>
-        public IInport WithIconDisplay(IconDisplay iconDisplay)
+        public IInPort WithIconDisplay(IconDisplay iconDisplay)
         {
             _IconDisplay = iconDisplay;
             return this;
@@ -56,7 +56,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Co
             int _count = GetBlockTypeCount("Inport");
             string _portNumber = string.IsNullOrEmpty(_PortNumber) ? (_count + 1).ToString() : _PortNumber;
 
-            base.model.System.Block.Add(new Block()
+            model.System.Block.Add(new Block()
             {
                 BlockType = "Inport",
                 Name = $"In{_count + 1}",

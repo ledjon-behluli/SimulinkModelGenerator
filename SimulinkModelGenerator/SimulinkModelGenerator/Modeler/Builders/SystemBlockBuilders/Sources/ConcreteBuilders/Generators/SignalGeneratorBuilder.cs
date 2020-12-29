@@ -28,8 +28,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Co
 
     public sealed class SignalGeneratorBuilder : GeneratorBuilder<SignalGeneratorBuilder>, ISignalGenerator
     {
-        internal override string BlockType => "SignalGenerator";
-        internal override string BlockName => "Signal\\nGenerator";
+        protected override string BlockType => "SignalGenerator";
+        protected override string BlockName => "Signal\\nGenerator";
 
         private FrequencyUnit _Unit = FrequencyUnit.RadiansPerSec;
         private WaveForm _WaveForm = WaveForm.Sine;
