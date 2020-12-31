@@ -9,6 +9,8 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         ISystemSink AddScope(Action<ScopeBuilder> action = null);
     }
 
+    #region Uncategorized
+
     public interface IScope : ISystemBlock
     {
         IScope SetInputPorts(uint numberOfPorts);
@@ -18,4 +20,11 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
     {
 
     }
+
+    public interface IOutPort : IPort
+    {
+        IOutPort WithSignalName(string name);
+    }
+
+    #endregion
 }

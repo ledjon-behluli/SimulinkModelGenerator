@@ -1,5 +1,5 @@
-﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.ConcreteBuilders;
+﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Common;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources;
 using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.ConcreteBuilders.Generators;
 using System;
 
@@ -34,10 +34,9 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IRamp SetInitialOutput(double initialOutput);
     }
 
-    public interface IInPort : ISystemBlock
+    public interface IInPort : IPort
     {
-        IInPort SetPortNumber(int port);
-        IInPort WithIconDisplay(IconDisplay iconDisplay);
+      
     }
 
     public interface IRepeatingSequence : ISystemBlock
