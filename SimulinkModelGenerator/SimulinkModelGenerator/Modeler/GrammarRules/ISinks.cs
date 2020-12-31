@@ -9,9 +9,8 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         ISystemSink AddScope(Action<ScopeBuilder> action = null);
         ISystemSink AddOutPort(Action<OutPortBuilder> action = null);
         ISystemSink AddToWorkspace(Action<ToWorkspaceBuilder> action = null);
+        ISystemSink AddXYGraph(Action<XYGraphBuilder> action = null);
     }
-
-    #region Uncategorized
 
     public interface IScope : ISystemBlock
     {
@@ -38,5 +37,12 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IToWorkspace LogFixedPointDataAsFiObject();
     }
 
-    #endregion
+    public interface IXYGraph : ISystemBlock
+    {
+        IXYGraph SetXMin(double value);
+        IXYGraph SetXMax(double value);
+        IXYGraph SetYMin(double value);
+        IXYGraph SetYMax(double value);
+        IXYGraph SetSampleTime(double sampleTime);
+    }
 }

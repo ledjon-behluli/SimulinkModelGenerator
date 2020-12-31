@@ -18,6 +18,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
         public ISystemSink AddScope(Action<ScopeBuilder> action = null) => AddSink<ScopeBuilder>(action);
         public ISystemSink AddOutPort(Action<OutPortBuilder> action = null) => AddSink<OutPortBuilder>(action);
         public ISystemSink AddToWorkspace(Action<ToWorkspaceBuilder> action = null) => AddSink<ToWorkspaceBuilder>(action);
+        public ISystemSink AddXYGraph(Action<XYGraphBuilder> action = null) => AddSink<XYGraphBuilder>(action);
 
 
         private ISystemSink AddSink<T>(dynamic action)
@@ -33,6 +34,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
                 builder = new OutPortBuilder(model);
             else if (systemBlockType == typeof(ToWorkspaceBuilder))
                 builder = new ToWorkspaceBuilder(model);
+            else if (systemBlockType == typeof(XYGraphBuilder))
+                builder = new XYGraphBuilder(model);
 
             if (builder == null)
                 throw new SimulinkModelGeneratorException("Unsupported sink builder provided!");
