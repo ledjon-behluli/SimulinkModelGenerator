@@ -36,10 +36,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 
         public IFromWorkspace SetVariableName(string name)
         {
-            if (string.IsNullOrEmpty(name))
-                throw new ArgumentNullException("Variable name can not be null or empty.");
+            if (!string.IsNullOrEmpty(name))
+                _VariableName = name;
 
-            _VariableName = name;
             return this;
         }
 

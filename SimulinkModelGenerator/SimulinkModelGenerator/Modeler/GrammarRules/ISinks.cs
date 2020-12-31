@@ -8,6 +8,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         ISystemSink AddDisplay(Action<DisplayBuilder> action = null);
         ISystemSink AddScope(Action<ScopeBuilder> action = null);
         ISystemSink AddOutPort(Action<OutPortBuilder> action = null);
+        ISystemSink AddToWorkspace(Action<ToWorkspaceBuilder> action = null);
     }
 
     #region Uncategorized
@@ -25,6 +26,16 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
     public interface IOutPort : IPort
     {
         IOutPort WithSignalName(string name);
+    }
+
+    public interface IToWorkspace : ISystemBlock
+    {
+        IToWorkspace SetVariableName(string name);
+        IToWorkspace SetMaxDataPoints(int points);
+        IToWorkspace SetDecimation(int decimation);
+        IToWorkspace WithSignalSaveType(SignalSaveType type);
+        IToWorkspace WithSaveFormat(SaveFormat format);
+        IToWorkspace LogFixedPointDataAsFiObject();
     }
 
     #endregion
