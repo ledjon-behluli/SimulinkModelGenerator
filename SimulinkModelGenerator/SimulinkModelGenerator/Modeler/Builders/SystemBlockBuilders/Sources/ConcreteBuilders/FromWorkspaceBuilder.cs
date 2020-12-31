@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.ConcreteBuilders
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public enum OutputAfterFinalValue
     {

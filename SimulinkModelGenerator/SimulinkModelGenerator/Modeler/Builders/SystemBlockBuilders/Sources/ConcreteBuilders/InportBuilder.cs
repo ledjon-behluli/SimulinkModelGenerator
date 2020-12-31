@@ -2,7 +2,7 @@
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.ConcreteBuilders
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public sealed class InPortBuilder : PortBuilder<InPortBuilder>, IInPort
     {

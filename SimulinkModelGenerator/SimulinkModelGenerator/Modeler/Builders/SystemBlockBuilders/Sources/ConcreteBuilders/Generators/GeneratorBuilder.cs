@@ -4,7 +4,7 @@ using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.ConcreteBuilders.Generators
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators
 {
     public enum TimeSourceType
     {

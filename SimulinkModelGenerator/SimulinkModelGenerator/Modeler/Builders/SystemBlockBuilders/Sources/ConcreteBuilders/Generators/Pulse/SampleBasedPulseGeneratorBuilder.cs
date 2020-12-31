@@ -3,7 +3,7 @@ using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.ConcreteBuilders.Generators.Pulse
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators.Pulse
 {
     public sealed class SampleBasedPulseGeneratorBuilder : PulseGeneratorBuilder<SampleBasedPulseGeneratorBuilder>, 
         ISampleBasedPulseGenerator

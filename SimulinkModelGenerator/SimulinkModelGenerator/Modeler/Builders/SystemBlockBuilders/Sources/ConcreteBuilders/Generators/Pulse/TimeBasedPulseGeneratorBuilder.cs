@@ -2,7 +2,7 @@
 using SimulinkModelGenerator.Models;
 using System;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.ConcreteBuilders.Generators.Pulse
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators.Pulse
 {
     public sealed class TimeBasedPulseGeneratorBuilder : PulseGeneratorBuilder<TimeBasedPulseGeneratorBuilder>, 
         ITimeBasedPulseGenerator

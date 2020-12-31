@@ -1,6 +1,9 @@
-﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Common;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.ConcreteBuilders.Generators;
+﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Clocks;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.RandomNumbers;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators.Pulse;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators.SineWave;
 using System;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules
@@ -10,6 +13,18 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         ISystemSource AddConstant(Action<ConstantBuilder> action = null);
         ISystemSource AddRamp(Action<RampBuilder> action = null);
         ISystemSource AddStep(Action<StepBuilder> action = null);
+        ISystemSource AddInPort(Action<InPortBuilder> action = null);
+        ISystemSource AddRepeatingSequence(Action<RepeatingSequenceBuilder> action = null);
+        ISystemSource AddFromWorkspace(Action<FromWorkspaceBuilder> action = null);
+        ISystemSource AddClock(Action<ClockBuilder> action = null);
+        ISystemSource AddDigitalClock(Action<DigitalClockBuilder> action = null);
+        ISystemSource AddRandomNumber(Action<RandomNumberBuilder> action = null);
+        ISystemSource AddUniformRandomNumber(Action<UniformRandomNumberBuilder> action = null);
+        ISystemSource AddSignalGenerator(Action<SignalGeneratorBuilder> action = null);
+        ISystemSource AddTimeBasedPulseGenerator(Action<TimeBasedPulseGeneratorBuilder> action = null);
+        ISystemSource AddSampleBasedPulseGenerator(Action<SampleBasedPulseGeneratorBuilder> action = null);
+        ISystemSource AddTimeBasedSineWaveGenerator(Action<TimeBasedSineWaveGeneratorBuilder> action = null);
+        ISystemSource AddSampleBasedSineWaveGenerator(Action<SampleBasedSineWaveGeneratorBuilder> action = null);
     }
 
     #region Uncategorized

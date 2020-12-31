@@ -3,7 +3,7 @@ using SimulinkModelGenerator.Models;
 using System;
 using System.Collections.Generic;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.ConcreteBuilders.Clocks
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Clocks
 {
     public sealed class DigitalClockBuilder : SystemBlockBuilder<DigitalClockBuilder>, IDigitalClock
     {

@@ -7,6 +7,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
     {
         ISystemSink AddDisplay(Action<DisplayBuilder> action = null);
         ISystemSink AddScope(Action<ScopeBuilder> action = null);
+        ISystemSink AddOutPort(Action<OutPortBuilder> action = null);
     }
 
     #region Uncategorized

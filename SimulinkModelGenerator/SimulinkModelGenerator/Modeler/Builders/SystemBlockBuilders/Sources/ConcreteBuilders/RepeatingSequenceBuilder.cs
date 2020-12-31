@@ -4,7 +4,7 @@ using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.ConcreteBuilders
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public sealed partial class RepeatingSequenceBuilder : SystemBlockBuilder<InPortBuilder>, IRepeatingSequence
     {

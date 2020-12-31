@@ -1,7 +1,7 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.ConcreteBuilders.Generators.SineWave
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators.SineWave
 {
     public abstract class SineWaveGeneratorBuilder<T> : GeneratorBuilder<T>
         where T : SineWaveGeneratorBuilder<T>

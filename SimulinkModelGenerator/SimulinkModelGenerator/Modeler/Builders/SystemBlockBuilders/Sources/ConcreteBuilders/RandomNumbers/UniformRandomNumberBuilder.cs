@@ -2,7 +2,7 @@
 using SimulinkModelGenerator.Models;
 using System;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.ConcreteBuilders.RandomNumbers
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.RandomNumbers
 {
     public sealed class UniformRandomNumberBuilder : BaseRandomNumberBuilder<RandomNumberBuilder>, IUniformRandomNumber
     {
