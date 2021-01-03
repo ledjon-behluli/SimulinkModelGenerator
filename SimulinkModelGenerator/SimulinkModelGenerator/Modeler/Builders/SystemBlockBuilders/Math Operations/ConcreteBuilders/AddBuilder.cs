@@ -5,13 +5,13 @@ using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class SumBuilder : MathOperationBuilder<SumBuilder>, ISum
+    public sealed class AddBuilder : MathOperationBuilder<AddBuilder>, IAdd
     {
-        internal override SizeU Size => new SizeU(20, 20);
+        internal override SizeU Size => new SizeU(30, 30);
 
         protected override string BlockType => "Sum";
-        protected override string BlockName => "Sum";
-        protected override string OutDataTypeStr => "Inherit: Same as first input";
+        protected override string BlockName => "Add";
+        protected override string OutDataTypeStr => "Inherit: Inherit via internal rule";
 
         private IconShape _IconShape = IconShape.Round;
         private string _Ports
@@ -47,12 +47,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             }
         }
 
-        public SumBuilder(Model model)
+        public AddBuilder(Model model)
             : base(model)
         {
-
+           
         }
-
 
         public IBaseSum WithIconShape(IconShape shape)
         {
@@ -63,11 +62,12 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         public IBaseSum SetInputs(params InputType[] inputs)
         {
             if (inputs.Length == 0)
-                throw new ArgumentException("Sum must have at least one input.");
+                throw new ArgumentException("Add must have at least one input.");
 
             _InputTypes = inputs;
             return this;
         }
+
 
         internal override void Build()
         {

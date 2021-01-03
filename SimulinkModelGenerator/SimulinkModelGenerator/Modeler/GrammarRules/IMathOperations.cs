@@ -9,14 +9,88 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         ISystemMathOperation AddSum(Action<SumBuilder> action = null);
     }
 
-    public interface IGain : ISystemBlock
+    public interface IMathOperation : ISystemBlock
+    {
+        IMathOperation SaturateOnIntegerOverflow();
+        IMathOperation DepriveOnIntegerOverflow();
+        IMathOperation LockOutputDataType();
+        IMathOperation UnlockOutputDataType();
+        IMathOperation WithRoundingMode(IntegerRoundingMode mode);
+        IMathOperation SetMinimumOutputForRangeChecking(double value);
+        IMathOperation SetMaximumOutputForRangeChecking(double value);
+    }
+
+    public interface IGain : IMathOperation
     {
         IGain SetGain(double gain);
     }
 
-    public interface ISum : ISystemBlock
+    public interface IBaseSum : IMathOperation
     {
-        ISum WithIconShape(IconShape shape);
-        ISum SetInputs(params InputType[] inputs);
+        IBaseSum WithIconShape(IconShape shape);
+        IBaseSum SetInputs(params InputType[] inputs);
+    }
+
+    public interface ISum : IBaseSum
+    {
+      
+    }
+
+    public interface IAdd : IBaseSum
+    {
+
+    }
+
+    public interface ISubtract : IBaseSum
+    {
+     
+    }
+
+
+    public interface IAbs : IMathOperation
+    {
+        IAbs DisableZeroCrossingDetection();
+    }
+
+    public interface IProduct : IMathOperation
+    {
+        IProduct SetNumberOfInputs(int count);
+    }
+
+    public interface IDotProduct : IMathOperation
+    {
+
+    }
+
+    public interface IDivide : IMathOperation
+    {
+        IDivide SetNumberOfInputs(int count);
+    }
+
+    public interface IMinMax : IMathOperation
+    {
+        IMinMax DisableZeroCrossingDetection();
+        IMinMax SetNumberOfInputs(int count);
+    }
+
+    public interface ISign : ISystemBlock
+    {
+        ISign DisableZeroCrossingDetection();
+    }
+
+    public interface ISqrt : IMathOperation
+    {
+        ISqrt WithOutputSignal(OutputSignalType type);
+    }
+
+    public interface ISignedSqrt : IMathOperation
+    {
+        ISignedSqrt WithOutputSignal(OutputSignalType type);
+    }
+
+    public interface IReciprocalSqrt : IMathOperation
+    {
+        IReciprocalSqrt WithAlgorithm(RootFindingAlgorithm algorithm);
+        IReciprocalSqrt SetNumberOfIterations(int count);
     }
 }

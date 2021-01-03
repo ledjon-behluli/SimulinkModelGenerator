@@ -3,27 +3,26 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class GainBuilder : MathOperationBuilder<GainBuilder>, IGain
+    public sealed class AbsBuilder : MathOperationBuilder<AbsBuilder>, IAbs
     {
         internal override SizeU Size => new SizeU(30, 30);
 
-        protected override string BlockType => "Gain";
-        protected override string BlockName => "Gain";
+        protected override string BlockType => "Abs";
+        protected override string BlockName => "Abs";
         protected override string OutDataTypeStr => "Inherit: Same as input";
 
 
-        private string _Gain = "1";
+        private bool _EnableZeroCrossingDetection = true;
 
-        public GainBuilder(Model model)
+        public AbsBuilder(Model model)
             : base(model)
         {
 
         }
-        
 
-        public IGain SetGain(double gain)
+        public IAbs DisableZeroCrossingDetection()
         {
-            _Gain = gain.ToString();
+            _EnableZeroCrossingDetection = false;
             return this;
         }
 
@@ -31,7 +30,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "Gain", Text = _Gain });
+            block.P.Add(new Parameter() { Name = "ZeroCross", Text = _EnableZeroCrossingDetection ? "on" : "off" });
 
             model.System.Block.Add(block);
         }
