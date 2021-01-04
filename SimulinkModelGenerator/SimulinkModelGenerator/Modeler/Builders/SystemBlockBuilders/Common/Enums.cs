@@ -12,4 +12,15 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Common
         [Description("Port number and signal name")]
         Both
     }
+
+    public enum OutputSignalType
+    {
+        [Description("auto")]
+        Auto,
+        [Description("real")]
+        Real,
+        [Description("complex")]
+        Complex
+    }
+
 }

@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
+﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Common;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
 using System;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules
@@ -101,5 +102,22 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         ISliderGain DecrementGainBy(double value);
         ISliderGain SetLowEnd(double value);
         ISliderGain SetHighEnd(double value);
+    }
+
+    public interface ITrigonometricFunction : ISystemBlock
+    {
+        ITrigonometricFunction WithFunctionType(TrigonometricFunctionType type);
+        IWithNoneApproximation WithNoneApproximation();
+        IWithCordicApproximation WithCordicApproximation();
+    }
+
+    public interface IWithNoneApproximation
+    {
+        ITrigonometricFunction WithOutputSignalType(OutputSignalType type);
+    }
+
+    public interface IWithCordicApproximation
+    {
+        ITrigonometricFunction SetNumberOfIterations(int count);
     }
 }

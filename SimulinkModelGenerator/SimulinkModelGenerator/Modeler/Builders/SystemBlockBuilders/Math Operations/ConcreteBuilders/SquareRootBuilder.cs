@@ -6,16 +6,6 @@ using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public enum OutputSignalType
-    {
-        [Description("auto")]
-        Auto,
-        [Description("real")]
-        Real,
-        [Description("complex")]
-        Complex
-    }
-
     public enum RootFindingAlgorithm
     {
         [Description("Excat")]
