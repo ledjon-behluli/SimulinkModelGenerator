@@ -93,4 +93,13 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IReciprocalSqrt WithAlgorithm(RootFindingAlgorithm algorithm);
         IReciprocalSqrt SetNumberOfIterations(int count);
     }
+
+    public interface ISliderGain : ISystemBlock
+    {
+        ISliderGain SetGain(double value);
+        ISliderGain IncrementGainBy(double value);
+        ISliderGain DecrementGainBy(double value);
+        ISliderGain SetLowEnd(double value);
+        ISliderGain SetHighEnd(double value);
+    }
 }

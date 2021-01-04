@@ -1,13 +1,12 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Math_Operations.ConcreteBuilders
 {
     public sealed class SignBuilder : SystemBlockBuilder<SignBuilder>, ISign
     {
-        internal override SizeU Size => throw new NotImplementedException();
+        internal override SizeU Size => new SizeU(30, 30);
 
         private bool _EnableZeroCrossingDetection = true;
 
