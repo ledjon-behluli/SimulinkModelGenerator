@@ -1,19 +1,11 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using SimulinkModelGenerator.Extensions;
-using System.ComponentModel;
+using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Common;
 using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public enum RootFindingAlgorithm
-    {
-        [Description("Excat")]
-        Exact,
-        [Description("Newton-Raphson")]
-        Newton_Raphson
-    }
-
     public abstract class BaseSquareRootBuilder<T> : MathOperationBuilder<T>
         where T : BaseSquareRootBuilder<T>
     {

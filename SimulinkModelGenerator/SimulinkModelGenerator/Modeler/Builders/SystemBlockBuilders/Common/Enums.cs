@@ -23,4 +23,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Common
         Complex
     }
 
+    public enum RootFindingAlgorithm
+    {
+        [Description("Excat")]
+        Exact,
+        [Description("Newton-Raphson")]
+        Newton_Raphson
+    }
 }

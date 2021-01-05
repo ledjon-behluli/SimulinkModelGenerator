@@ -120,4 +120,11 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
     {
         ITrigonometricFunction SetNumberOfIterations(int count);
     }
+
+
+    public interface IMathFunction : IMathOperation
+    {
+        IMathFunction WithFunctionType(MathFunctionType type);
+        IMathFunction WithOutputSignalType(OutputSignalType type);
+    }
 }
