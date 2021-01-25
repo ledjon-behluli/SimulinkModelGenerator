@@ -15,6 +15,17 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         ISystemContinuous AddPController(Action<PControllerBuilder> action = null);
     }
 
+    public interface IPIDBaseController : ISystemBlock
+    {
+        IPIDBaseController SetForm(Form form);
+        IPIDSampleTime SetTimeDomain(TimeDomain timeDomain);
+    }
+
+    public interface IPIDSampleTime
+    {
+        IPIDBaseController SetSampleTime(double sampleTime);
+    }
+
 
     public interface ITransferFunction : ISystemBlock
     {
@@ -22,19 +33,23 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         ITransferFunction SetDenominator(params double[] coefficients);
     }
 
+    public interface IZeroPole : ISystemBlock
+    {
+        IZeroPole SetZeros(params double[] coefficients);
+        IZeroPole SetPoles(params double[] coefficients);
+        IZeroPole SetGain(double gain);
+    }
+
+
     public interface IIntegrator : ISystemBlock
     {
         IIntegrator SetInitialCondition(double initialCondition);
     }
 
-    public interface IPIDBaseController : ISystemBlock
+    public interface IDerivative : ISystemBlock
     {
-        IPIDBaseController SetForm(Form form);
-        IPIDSampleTime SetTimeDomain(TimeDomain timeDomain);
-    }    
-
-    public interface IPIDSampleTime
-    {
-        IPIDBaseController SetSampleTime(double sampleTime);
+        IDerivative SetCoefficient(double coefficient);
+        IDerivative WithPositiveInfiniteCoefficient();
+        IDerivative WithNegativeInfiniteCoefficient();
     }
 }
