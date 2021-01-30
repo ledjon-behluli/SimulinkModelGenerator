@@ -52,4 +52,14 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IDerivative WithPositiveInfiniteCoefficient();
         IDerivative WithNegativeInfiniteCoefficient();
     }
+
+    public interface ITransportDelay : ISystemBlock
+    {
+        ITransportDelay SetTimeDelay(double delay);
+        ITransportDelay SetInitialOutput(double output);
+        ITransportDelay SetInitialBufferSize(int memoryInKB);
+        ITransportDelay SetPadeOrder(int order);
+        ITransportDelay WithFixedBufferSize();
+        ITransportDelay WithDirectFeedthrough();
+    }
 }
