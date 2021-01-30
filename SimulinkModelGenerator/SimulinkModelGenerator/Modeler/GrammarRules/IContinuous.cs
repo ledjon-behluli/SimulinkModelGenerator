@@ -62,4 +62,18 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         ITransportDelay WithFixedBufferSize();
         ITransportDelay WithDirectFeedthrough();
     }
+
+    public interface IStateSpace : ISystemBlock
+    {
+        IStateSpaceCharacteristics WithStateSpaceCharacteristics(int numberOfInputs = 1, int numberOfOutputs = 1, int numberOfStates = 1);
+    }
+
+    public interface IStateSpaceCharacteristics : ISystemBlock
+    {
+        IStateSpaceCharacteristics SetMatrixCoefficient_A(double[,] coefficients);
+        IStateSpaceCharacteristics SetMatrixCoefficient_B(double[,] coefficients);
+        IStateSpaceCharacteristics SetMatrixCoefficient_C(double[,] coefficients);
+        IStateSpaceCharacteristics SetMatrixCoefficient_D(double[,] coefficients);
+        IStateSpaceCharacteristics SetInitialStateVector(double[] coefficients);
+    }
 }

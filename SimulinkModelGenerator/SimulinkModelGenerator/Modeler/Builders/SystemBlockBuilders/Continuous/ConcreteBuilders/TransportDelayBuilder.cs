@@ -88,6 +88,5 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
                 }
             });
         }
-
     }
 }
