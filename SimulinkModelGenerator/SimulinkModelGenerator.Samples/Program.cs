@@ -9,12 +9,75 @@ namespace SimulinkModelGenerator.Samples
 
         static void Main(string[] args)
         {
-            Sample0();
-            Sample1();
-            Sample2();
-            Sample3();
-            Sample4();
-            Sample5();
+            Sample_1();
+            //Sample0();
+            //Sample1();
+            //Sample2();
+            //Sample3();
+            //Sample4();
+            //Sample5();
+        }
+
+        static void Sample_1()
+        {
+            new ModelBuilder()
+                .WithName("sample0")
+                .AddControlSystem(cs =>
+                {
+                    cs.AddSources(s => s.AddStep(x => x.SetPosition(100, 100))
+                                        .AddConstant(x => x.SetPosition(100, 170))
+                                        .AddRamp(x => x.SetPosition(100, 240))
+                                        .AddInPort(x => x.SetPosition(100, 310))
+                                        .AddRepeatingSequence(x => x.SetPosition(100, 380))
+                                        .AddFromWorkspace(x => x.SetPosition(100, 450))
+                                        .AddClock(x => x.SetPosition(100, 520))
+                                        .AddDigitalClock(x => x.SetPosition(100, 590))
+                                        .AddRandomNumber(x => x.SetPosition(100, 660))
+                                        .AddUniformRandomNumber(x => x.SetPosition(100, 730))
+                                        .AddSignalGenerator(x => x.SetPosition(100, 800))
+                                        .AddTimeBasedPulseGenerator(x => x.SetPosition(100, 870))
+                                        .AddSampleBasedPulseGenerator(x => x.SetPosition(100, 940))
+                                        .AddTimeBasedSineWaveGenerator(x => x.SetPosition(100, 1010))
+                                        .AddSampleBasedSineWaveGenerator(x => x.SetPosition(100, 1080)));
+                    cs.AddMathOperations(mo => mo.AddSum(x => x.SetPosition(200, 100))
+                                                 .AddAbs(x => x.SetPosition(200, 170))
+                                                 .AddAddition(x => x.SetPosition(200, 240))
+                                                 .AddSubtraction(x => x.SetPosition(200, 310))
+                                                 .AddDivision(x => x.SetPosition(200, 380))
+                                                 .AddProduct(x => x.SetPosition(200, 450))
+                                                 .AddDotProduct(x => x.SetPosition(200, 520))
+                                                 .AddMathFunction(x => x.SetPosition(200, 590))
+                                                 .AddMin(x => x.SetPosition(200, 660))
+                                                 .AddMin(x => x.SetPosition(200, 730))
+                                                 .AddSign(x => x.SetPosition(200, 800))
+                                                 .AddGain(x => x.SetPosition(200, 870))
+                                                 .AddSliderGain(x => x.SetPosition(200, 940))
+                                                 .AddSquareRoot(x => x.SetPosition(200, 1010))
+                                                 .AddSignedSquareRoot(x => x.SetPosition(200, 1080))
+                                                 .AddReciprocalSquareRoot(x => x.SetPosition(200, 1150))
+                                                 .AddTrigonometricFunction(x => x.SetPosition(200, 1220)));
+                    cs.AddContinuous(co => co.AddIntegrator(x => x.SetPosition(300, 100))
+                                             .AddLimitedIntegrator(x => x.SetPosition(300, 170))
+                                             .AddTransferFunction(x => x.SetPosition(300, 240))
+                                             .AddZeroPole(x => x.SetPosition(300, 310))
+                                             .AddDerivative(x => x.SetPosition(300, 380))
+                                             .AddStateSpace(x => x.SetPosition(300, 450))
+                                             .AddTransportDelay(x => x.SetPosition(300, 520))
+                                             .AddPIDController(x => x.SetPosition(300, 590))
+                                             .AddPDController(x => x.SetPosition(300, 660))
+                                             .AddPIController(x => x.SetPosition(300, 730))
+                                             .AddIController(x => x.SetPosition(300, 800))
+                                             .AddPController(x => x.SetPosition(300, 870))
+                                             .Add2DofPIDController(x => x.SetPosition(300, 940))
+                                             .Add2DofPDController(x => x.SetPosition(300, 1010))
+                                             .Add2DofPIController(x => x.SetPosition(300, 1080)));
+                    cs.AddSinks(s => s.AddScope(x => x.SetPosition(425, 100))
+                                      .AddDisplay(x => x.SetPosition(425, 170))
+                                      .AddOutPort(x => x.SetPosition(425, 240))
+                                      .AddToWorkspace(x => x.SetPosition(425, 310))
+                                      .AddXYGraph(x => x.SetPosition(425, 380)));
+                })
+                .Save(path);
         }
 
         static void Sample0()

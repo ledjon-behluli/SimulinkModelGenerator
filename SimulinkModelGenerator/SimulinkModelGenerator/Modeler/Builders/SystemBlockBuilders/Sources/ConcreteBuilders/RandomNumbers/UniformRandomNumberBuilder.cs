@@ -4,7 +4,7 @@ using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.RandomNumbers
 {
-    public sealed class UniformRandomNumberBuilder : BaseRandomNumberBuilder<RandomNumberBuilder>, IUniformRandomNumber
+    public sealed class UniformRandomNumberBuilder : BaseRandomNumberBuilder<UniformRandomNumberBuilder>, IUniformRandomNumber
     {
         internal override SizeU Size => new SizeU(30, 30);
         internal override string BlockType => "UniformRandomNumber";

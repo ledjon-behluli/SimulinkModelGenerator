@@ -36,13 +36,43 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         private ISystemMathOperation AddMathOperation<T>(dynamic action)
         {
             Type systemBlockType = typeof(T);
-            SystemBlockBuilder builder = null;
+            SystemBlockBuilder builder;
 
-            if (systemBlockType == typeof(GainBuilder))
-                builder = new GainBuilder(model);
-            else if (systemBlockType == typeof(SumBuilder))
+            if (systemBlockType == typeof(SumBuilder))
                 builder = new SumBuilder(model);
-            if (builder == null)
+            else if (systemBlockType == typeof(AbsBuilder))
+                builder = new AbsBuilder(model);
+            else if (systemBlockType == typeof(AddBuilder))
+                builder = new AddBuilder(model);
+            else if (systemBlockType == typeof(SubtractBuilder))
+                builder = new SubtractBuilder(model);
+            else if (systemBlockType == typeof(DivideBuilder))
+                builder = new DivideBuilder(model);
+            else if (systemBlockType == typeof(ProductBuilder))
+                builder = new ProductBuilder(model);
+            else if (systemBlockType == typeof(DotProductBuilder))
+                builder = new DotProductBuilder(model);
+            else if (systemBlockType == typeof(MathFunctionBuilder))
+                builder = new MathFunctionBuilder(model);
+            else if (systemBlockType == typeof(MinBuilder))
+                builder = new MinBuilder(model);
+            else if (systemBlockType == typeof(MaxBuilder))
+                builder = new MaxBuilder(model);
+            else if (systemBlockType == typeof(SignBuilder))
+                builder = new SignBuilder(model);
+            else if (systemBlockType == typeof(GainBuilder))
+                builder = new GainBuilder(model);
+            else if (systemBlockType == typeof(SliderGainBuilder))
+                builder = new SliderGainBuilder(model);
+            else if (systemBlockType == typeof(SquareRootBuilder))
+                builder = new SquareRootBuilder(model);
+            else if (systemBlockType == typeof(SignedSquareRootBuilder))
+                builder = new SignedSquareRootBuilder(model);
+            else if (systemBlockType == typeof(ReciprocalSquareRootBuilder))
+                builder = new ReciprocalSquareRootBuilder(model);
+            else if (systemBlockType == typeof(TrigonometricFunctionBuilder))
+                builder = new TrigonometricFunctionBuilder(model);
+            else
                 throw new SimulinkModelGeneratorException("Unsupported math operation builder provided!");
 
             action?.Invoke((dynamic)builder);

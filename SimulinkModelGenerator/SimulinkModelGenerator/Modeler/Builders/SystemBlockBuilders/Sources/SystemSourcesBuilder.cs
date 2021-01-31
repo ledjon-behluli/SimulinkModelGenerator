@@ -40,7 +40,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         private ISystemSource AddSource<T>(dynamic action)
         {
             Type systemBlockType = typeof(T);
-            SystemBlockBuilder builder = null;
+            SystemBlockBuilder builder;
 
             if (systemBlockType == typeof(ConstantBuilder))
                 builder = new ConstantBuilder(model);
@@ -55,7 +55,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             else if (systemBlockType == typeof(FromWorkspaceBuilder))
                 builder = new FromWorkspaceBuilder(model);
             else if (systemBlockType == typeof(ClockBuilder))
-                builder = new StepBuilder(model);
+                builder = new ClockBuilder(model);
             else if (systemBlockType == typeof(DigitalClockBuilder))
                 builder = new DigitalClockBuilder(model);
             else if (systemBlockType == typeof(RandomNumberBuilder))
@@ -66,12 +66,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
                 builder = new SignalGeneratorBuilder(model);
             else if (systemBlockType == typeof(TimeBasedPulseGeneratorBuilder))
                 builder = new TimeBasedPulseGeneratorBuilder(model);
+            else if (systemBlockType == typeof(SampleBasedPulseGeneratorBuilder))
+                builder = new SampleBasedPulseGeneratorBuilder(model);
             else if (systemBlockType == typeof(TimeBasedSineWaveGeneratorBuilder))
                 builder = new TimeBasedSineWaveGeneratorBuilder(model);
             else if (systemBlockType == typeof(SampleBasedSineWaveGeneratorBuilder))
                 builder = new SampleBasedSineWaveGeneratorBuilder(model);
-
-            if (builder == null)
+            else
                 throw new SimulinkModelGeneratorException("Unsupported source builder provided!");
 
             action?.Invoke((dynamic)builder);

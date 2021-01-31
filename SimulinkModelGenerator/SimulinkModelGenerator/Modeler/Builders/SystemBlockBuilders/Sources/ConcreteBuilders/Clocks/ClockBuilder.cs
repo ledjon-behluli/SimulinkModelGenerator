@@ -7,9 +7,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Cl
 {
     public sealed class ClockBuilder : SystemBlockBuilder<ClockBuilder>, IClock
     {
-        internal override SizeU Size => throw new NotImplementedException();
+        internal override SizeU Size => new SizeU(20, 20);
 
-        private bool _DisplayTime = true;
+        private bool _DisplayTime = false;
         private string _Decimation = "10";
 
         public ClockBuilder(Model model)
@@ -18,9 +18,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Cl
 
         }
 
-        public IClock HideSimulationTime()
+        public IClock ShowSimulationTime()
         {
-            _DisplayTime = false;
+            _DisplayTime = true;
             return this;
         }
 

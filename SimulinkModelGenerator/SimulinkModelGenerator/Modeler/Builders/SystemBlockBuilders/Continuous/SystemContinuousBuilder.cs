@@ -33,9 +33,23 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         private ISystemContinuous AddContinous<T>(dynamic action)
         {
             Type blockType = typeof(T);
-            SystemBlockBuilder builder = null;
+            SystemBlockBuilder builder;
 
-            if (blockType == typeof(PIDControllerBuilder))
+            if (blockType == typeof(IntegratorBuilder))
+                builder = new IntegratorBuilder(model);
+            else if (blockType == typeof(LimitedIntegratorBuilder))
+                builder = new LimitedIntegratorBuilder(model);
+            else if (blockType == typeof(TransferFunctionBuilder))
+                builder = new TransferFunctionBuilder(model);
+            else if (blockType == typeof(ZeroPoleBuilder))
+                builder = new ZeroPoleBuilder(model);
+            else if (blockType == typeof(DerivativeBuilder))
+                builder = new DerivativeBuilder(model);
+            else if (blockType == typeof(StateSpaceBuilder))
+                builder = new StateSpaceBuilder(model);
+            else if (blockType == typeof(TransportDelayBuilder))
+                builder = new TransportDelayBuilder(model);
+            else if (blockType == typeof(PIDControllerBuilder))
                 builder = new PIDControllerBuilder(model);
             else if (blockType == typeof(PDControllerBuilder))
                 builder = new PDControllerBuilder(model);
@@ -45,12 +59,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
                 builder = new IControllerBuilder(model);
             else if (blockType == typeof(PControllerBuilder))
                 builder = new PControllerBuilder(model);
-            else if (blockType == typeof(IntegratorBuilder))
-                builder = new IntegratorBuilder(model);
-            else if (blockType == typeof(TransferFunctionBuilder))
-                builder = new TransferFunctionBuilder(model);
-
-            if (builder == null)
+            else if (blockType == typeof(TwoDofPIDControllerBuilder))
+                builder = new TwoDofPIDControllerBuilder(model);
+            else if (blockType == typeof(TwoDofPDControllerBuilder))
+                builder = new TwoDofPDControllerBuilder(model);
+            else if (blockType == typeof(TwoDofPIControllerBuilder))
+                builder = new TwoDofPIControllerBuilder(model);
+            else
                 throw new SimulinkModelGeneratorException("Unsupported continuous builder provided!");
 
             action?.Invoke((dynamic)builder);

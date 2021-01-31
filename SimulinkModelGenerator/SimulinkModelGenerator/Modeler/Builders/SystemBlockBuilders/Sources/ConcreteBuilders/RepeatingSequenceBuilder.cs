@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public sealed partial class RepeatingSequenceBuilder : SystemBlockBuilder<InPortBuilder>, IRepeatingSequence
+    public sealed partial class RepeatingSequenceBuilder : SystemBlockBuilder<RepeatingSequenceBuilder>, IRepeatingSequence
     {
         internal override SizeU Size => new SizeU(30, 30);
 

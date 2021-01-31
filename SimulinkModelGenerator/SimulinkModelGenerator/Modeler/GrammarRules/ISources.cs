@@ -74,7 +74,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
     public interface IClock : ISystemBlock
     {
         
-        IClock HideSimulationTime();
+        IClock ShowSimulationTime();
         IClock SetDecimation(int decimation);
     }
 

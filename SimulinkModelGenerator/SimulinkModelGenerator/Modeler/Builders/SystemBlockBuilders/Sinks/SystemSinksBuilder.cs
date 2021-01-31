@@ -24,7 +24,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
         private ISystemSink AddSink<T>(dynamic action)
         {
             Type systemBlockType = typeof(T);
-            SystemBlockBuilder builder = null;
+            SystemBlockBuilder builder;
 
             if (systemBlockType == typeof(DisplayBuilder))
                 builder = new DisplayBuilder(model);
@@ -36,8 +36,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
                 builder = new ToWorkspaceBuilder(model);
             else if (systemBlockType == typeof(XYGraphBuilder))
                 builder = new XYGraphBuilder(model);
-
-            if (builder == null)
+            else
                 throw new SimulinkModelGeneratorException("Unsupported sink builder provided!");
 
             action?.Invoke((dynamic)builder);
