@@ -1,5 +1,4 @@
 ﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous.PIDControllers;
 using System;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules

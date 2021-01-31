@@ -1,7 +1,7 @@
 ﻿using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous.PIDControllers
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
     public abstract class TwoDofPIDBaseControllerBuilder<T> : PIDBaseControllerBuilder<T>
         where T : PIDBaseControllerBuilder<T>
@@ -12,8 +12,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         protected override string SourceBlock => "simulink/Continuous/PID Controller (2DOF)";
         protected override string SourceType => "PID 2dof";
 
-        protected string _b = "1";
-        protected string _c = "0";
+        protected string _proportionalSetpointWeight = "1";
+        protected string _derivativeSetpointWeight = "0";
 
         public TwoDofPIDBaseControllerBuilder(Model model)
             : base(model)
@@ -27,8 +27,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
             block.InstanceData.P.AddRange(new List<Parameter>()
             {
-                new Parameter() { Name = "b", Text = "" },
-                new Parameter() { Name = "c", Text = "" },
+                new Parameter() { Name = "b", Text = _proportionalSetpointWeight },
+                new Parameter() { Name = "c", Text = _derivativeSetpointWeight },
 
                 new Parameter() { Name = "bParamMin", Text = "[]" },
                 new Parameter() { Name = "bParamMax", Text = "[]" },

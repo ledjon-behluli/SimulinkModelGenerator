@@ -1,11 +1,11 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous.PIDControllers
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
     public sealed class PControllerBuilder : OneDofPIDBaseControllerBuilder<PControllerBuilder>, IPController
     {
-        protected override string ControllerType { get => "P"; }
+        protected override string ControllerType => "P";
 
         public PControllerBuilder(Model model)
             : base(model)

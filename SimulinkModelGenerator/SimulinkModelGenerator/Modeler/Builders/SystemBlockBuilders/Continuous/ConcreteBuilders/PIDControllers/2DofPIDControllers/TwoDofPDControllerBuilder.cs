@@ -3,11 +3,11 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
-    public sealed class PDControllerBuilder : OneDofPIDBaseControllerBuilder<PDControllerBuilder>, IPDController
+    public sealed class TwoDofPDControllerBuilder : TwoDofPIDBaseControllerBuilder<TwoDofPIDControllerBuilder>, ITwoDofPDController
     {
         protected override string ControllerType => "PD";
 
-        public PDControllerBuilder(Model model)
+        public TwoDofPDControllerBuilder(Model model)
             : base(model)
         {
 
@@ -49,6 +49,18 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         {
             base._TimeDomain = TimeDomain.DiscreteTime;
             base._UseFilter = true;
+            return this;
+        }
+
+        public ITwoDofPDController SetProportionalSetpointWeight(double value)
+        {
+            base._proportionalSetpointWeight = value.ToString();
+            return this;
+        }
+
+        public ITwoDofPDController SetDerivativeSetpointWeight(double value)
+        {
+            base._derivativeSetpointWeight = value.ToString();
             return this;
         }
     }

@@ -1,6 +1,6 @@
 ﻿using SimulinkModelGenerator.Models;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous.PIDControllers
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
     public abstract class OneDofPIDBaseControllerBuilder<T> : PIDBaseControllerBuilder<T>
         where T : PIDBaseControllerBuilder<T>

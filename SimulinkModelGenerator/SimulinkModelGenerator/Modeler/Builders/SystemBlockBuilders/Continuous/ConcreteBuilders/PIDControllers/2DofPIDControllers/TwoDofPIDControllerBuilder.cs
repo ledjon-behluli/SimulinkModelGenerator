@@ -3,14 +3,14 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
-    public sealed class PIDControllerBuilder : OneDofPIDBaseControllerBuilder<PIDControllerBuilder>, IPIDController
+    public sealed class TwoDofPIDControllerBuilder : TwoDofPIDBaseControllerBuilder<TwoDofPIDControllerBuilder>, ITwoDofPIDController
     {
         protected override string ControllerType => "PID";
 
-        public PIDControllerBuilder(Model model)
+        public TwoDofPIDControllerBuilder(Model model)
             : base(model)
         {
-                 
+
         }
 
         public IPIDController SetProportional(double value)
@@ -58,15 +58,27 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
         public IPIDController SetFilterMethod(FilterMethod method)
         {
-            base._TimeDomain = TimeDomain.DiscreteTime;             
+            base._TimeDomain = TimeDomain.DiscreteTime;
             base._FilterMethod = method;
             return this;
         }
 
         public IPIDController UseDerivativeFilter()
         {
-            base._TimeDomain = TimeDomain.DiscreteTime;            
+            base._TimeDomain = TimeDomain.DiscreteTime;
             base._UseFilter = true;
+            return this;
+        }
+
+        public ITwoDofPIDController SetProportionalSetpointWeight(double value)
+        {
+            base._proportionalSetpointWeight = value.ToString();
+            return this;
+        }
+
+        public ITwoDofPIDController SetDerivativeSetpointWeight(double value)
+        {
+            base._derivativeSetpointWeight = value.ToString();
             return this;
         }
     }

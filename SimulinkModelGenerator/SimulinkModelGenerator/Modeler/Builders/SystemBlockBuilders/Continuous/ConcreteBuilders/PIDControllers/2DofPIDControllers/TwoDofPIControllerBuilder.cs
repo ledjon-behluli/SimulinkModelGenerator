@@ -3,11 +3,11 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
-    public sealed class PIControllerBuilder : OneDofPIDBaseControllerBuilder<PIControllerBuilder>, IPIController
+    public sealed class TwoDofPIControllerBuilder : TwoDofPIDBaseControllerBuilder<TwoDofPIDControllerBuilder>, ITwoDofPIController
     {
         protected override string ControllerType => "PI";
 
-        public PIControllerBuilder(Model model)
+        public TwoDofPIControllerBuilder(Model model)
             : base(model)
         {
 
@@ -35,6 +35,12 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         {
             base._TimeDomain = TimeDomain.DiscreteTime;
             base._IntegratorMethod = method;
+            return this;
+        }
+
+        public ITwoDofPIController SetProportionalSetpointWeight(double value)
+        {
+            base._proportionalSetpointWeight = value.ToString();
             return this;
         }
     }
