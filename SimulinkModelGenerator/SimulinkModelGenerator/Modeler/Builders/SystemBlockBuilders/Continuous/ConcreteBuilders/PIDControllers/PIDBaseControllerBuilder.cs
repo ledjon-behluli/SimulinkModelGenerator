@@ -52,9 +52,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
     public abstract class PIDBaseControllerBuilder<T> : SystemBlockBuilder<T>, IPIDBaseController, IPIDSampleTime
         where T : PIDBaseControllerBuilder<T>
     {
-        internal override SizeU Size => new SizeU(40, 36);
-
-        public abstract string _ControllerType { get; }
+        protected abstract string BlockName { get; }
+        protected abstract string SourceBlock { get; }
+        protected abstract string SourceType { get; }
+        protected abstract string ControllerType { get; }
 
         protected string _Proportional = "1";
         protected string _Integral = "1";
@@ -100,13 +101,12 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             return this;
         }
 
-
-        internal override void Build()
+        protected Block GetBlock()
         {
-            base.model.System.Block.Add(new Block()
+            return new Block()
             {
                 BlockType = "Reference",
-                Name = $"PID Controller{GetBlockTypeCount("Reference")}",
+                Name = $"{BlockName}{GetBlockTypeCount("Reference")}",
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
@@ -116,7 +116,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
                 {
                     P = new List<Parameter>()
                     {
-                        new Parameter() { Name = "Controller", Text = _ControllerType },
+                        new Parameter() { Name = "Controller", Text = ControllerType },
                         new Parameter() { Name = "P", Text = _Proportional },
                         new Parameter() { Name = "I", Text = _Integral },
                         new Parameter() { Name = "D", Text = _Derivative },
@@ -129,8 +129,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
                         new Parameter() { Name = "FilterMethod", Text = _FilterMethod.GetDescription() },
                         new Parameter() { Name = "SampleTime", Text = _SampleTime },
                         new Parameter() { Name = "UseFilter", Text = _UseFilter ? "on" : "off" },
-                        new Parameter() { Name = "SourceBlock", Text = "simulink/Continuous/PID Controller" },
-                        new Parameter() { Name = "SourceType", Text = "PID 1dof" },
+                        new Parameter() { Name = "SourceBlock", Text = SourceBlock },
+                        new Parameter() { Name = "SourceType", Text = SourceType },
                         new Parameter() { Name = "Ports", Text = "[1, 1]" },
                         new Parameter() { Name = "LibraryVersion", Text = "1.391" },
                         new Parameter() { Name = "ContentPreviewEnabled", Text = "off" },
@@ -233,7 +233,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
                         new Parameter() { Name = "InitialConditionSetting", Text = "State (most efficient)" }
                     }
                 }
-            });
+            };
         }
     }
 }

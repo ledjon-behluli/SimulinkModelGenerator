@@ -1,11 +1,9 @@
 ﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous.PIDControllers;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules
 {
+    #region 1 DOF
+
     public interface IPIDController : IPIDBaseController
     {
         IPIDController SetProportional(double value);
@@ -24,7 +22,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IPDController SetProportional(double value);
         IPDController SetDerivative(double value);
         IPDController SetFilterCoefficient(double value);
-        IPDController SetInitialConditionForFilter(double value);        
+        IPDController SetInitialConditionForFilter(double value);
         IPDController SetFilterMethod(FilterMethod method);
         IPDController UseDerivativeFilter();
     }
@@ -48,4 +46,27 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
     {
         IPController SetProportional(double value);
     }
+
+    #endregion
+
+    #region 2 DOF
+
+    public interface ITwoDofPIDController : IPIDController
+    {
+        ITwoDofPIDController SetProportionalSetpointWeight(double value);
+        ITwoDofPIDController SetDerivativeSetpointWeight(double value);
+    }
+
+    public interface ITwoDofPDController : IPDController
+    {
+        ITwoDofPDController SetProportionalSetpointWeight(double value);
+        ITwoDofPDController SetDerivativeSetpointWeight(double value);
+    }
+
+    public interface ITwoDofPIController : IPIController
+    {
+        ITwoDofPIController SetProportionalSetpointWeight(double value);
+    }
+
+    #endregion
 }

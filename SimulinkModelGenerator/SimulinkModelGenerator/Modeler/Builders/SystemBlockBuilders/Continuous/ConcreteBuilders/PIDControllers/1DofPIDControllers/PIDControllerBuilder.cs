@@ -3,9 +3,9 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous.PIDControllers
 {
-    public sealed class PIDControllerBuilder : PIDBaseControllerBuilder<PIDControllerBuilder>, IPIDController
+    public sealed class PIDControllerBuilder : OneDofPIDBaseControllerBuilder<PIDControllerBuilder>, IPIDController
     {
-        public override string _ControllerType => "PID";
+        protected override string ControllerType => "PID";
 
         public PIDControllerBuilder(Model model)
             : base(model)
