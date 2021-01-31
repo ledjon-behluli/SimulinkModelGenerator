@@ -2,7 +2,7 @@
 using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Math_Operations.ConcreteBuilders
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
     public sealed class SignBuilder : SystemBlockBuilder<SignBuilder>, ISign
     {

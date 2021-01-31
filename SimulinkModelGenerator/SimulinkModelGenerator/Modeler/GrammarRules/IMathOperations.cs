@@ -6,8 +6,23 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 {   
     public interface ISystemMathOperation
     {
-        ISystemMathOperation AddGain(Action<GainBuilder> action = null);
         ISystemMathOperation AddSum(Action<SumBuilder> action = null);
+        ISystemMathOperation AddAbs(Action<AbsBuilder> action = null);
+        ISystemMathOperation AddAddition(Action<AddBuilder> action = null);
+        ISystemMathOperation AddSubtraction(Action<SubtractBuilder> action = null);
+        ISystemMathOperation AddDivision(Action<DivideBuilder> action = null);
+        ISystemMathOperation AddProduct(Action<ProductBuilder> action = null);
+        ISystemMathOperation AddDotProduct(Action<DotProductBuilder> action = null);
+        ISystemMathOperation AddMathFunction(Action<MathFunctionBuilder> action = null);
+        ISystemMathOperation AddMin(Action<MinBuilder> action = null);
+        ISystemMathOperation AddMax(Action<MaxBuilder> action = null);
+        ISystemMathOperation AddSign(Action<SignBuilder> action = null);
+        ISystemMathOperation AddGain(Action<GainBuilder> action = null);
+        ISystemMathOperation AddSliderGain(Action<SliderGainBuilder> action = null);
+        ISystemMathOperation AddSquareRoot(Action<SquareRootBuilder> action = null);
+        ISystemMathOperation AddSignedSquareRoot(Action<SignedSquareRootBuilder> action = null);
+        ISystemMathOperation AddReciprocalSquareRoot(Action<ReciprocalSquareRootBuilder> action = null);
+        ISystemMathOperation AddTrigonometricFunction(Action<TrigonometricFunctionBuilder> action = null);
     }
 
     public interface IMathOperation : ISystemBlock

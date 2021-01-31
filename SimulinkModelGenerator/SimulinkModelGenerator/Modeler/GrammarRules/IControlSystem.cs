@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous;
 using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
 using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks;

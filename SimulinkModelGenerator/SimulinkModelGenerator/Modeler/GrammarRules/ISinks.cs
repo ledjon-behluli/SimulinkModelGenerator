@@ -12,6 +12,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         ISystemSink AddXYGraph(Action<XYGraphBuilder> action = null);
     }
 
+
     public interface IScope : ISystemBlock
     {
         IScope SetInputPorts(uint numberOfPorts);
