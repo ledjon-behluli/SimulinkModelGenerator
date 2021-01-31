@@ -41,10 +41,24 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
     }
 
 
-    public interface IIntegrator : ISystemBlock
+    public interface IBaseIntegrator : ISystemBlock
     {
-        IIntegrator SetInitialCondition(double initialCondition);
+        IBaseIntegrator SetInitialCondition(double initialCondition);
+        IBaseIntegrator ShowSaturationPort();
+        IBaseIntegrator ShowStatePort();
     }
+
+    public interface IIntegrator : IBaseIntegrator
+    {
+      
+    }
+
+    public interface ILimitedIntegrator : IBaseIntegrator
+    {
+        ILimitedIntegrator SetUpperSaturationLimit(double limit);
+        ILimitedIntegrator SetLowerSaturationLimit(double limit);
+    }
+
 
     public interface IDerivative : ISystemBlock
     {
