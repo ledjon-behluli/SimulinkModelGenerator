@@ -1,5 +1,4 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
-using SimulinkModelGenerator.Models;
+﻿using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators.SineWave
 {

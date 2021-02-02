@@ -27,7 +27,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             model.System.Block.Add(new Block()
             {
                 BlockType = "Signum",
-                Name = GetName("Sign"),
+                BlockName = GenerateUniqueName("Sign"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

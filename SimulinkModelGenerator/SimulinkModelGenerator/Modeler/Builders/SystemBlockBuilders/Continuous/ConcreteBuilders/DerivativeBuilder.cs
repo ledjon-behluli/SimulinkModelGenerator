@@ -49,7 +49,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             base.model.System.Block.Add(new Block()
             {
                 BlockType = "Derivative",
-                Name = base.GetName("Derivative"),
+                BlockName = GenerateUniqueName("Derivative"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

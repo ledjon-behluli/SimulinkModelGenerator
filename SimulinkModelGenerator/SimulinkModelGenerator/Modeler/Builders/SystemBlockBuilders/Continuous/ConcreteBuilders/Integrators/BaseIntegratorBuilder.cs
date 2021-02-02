@@ -43,7 +43,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             return new Block()
             {
                 BlockType = "Integrator",
-                Name = $"{BlockName}{GetBlockTypeCount("Integrator")}",
+                BlockName = GenerateUniqueName(BlockName),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

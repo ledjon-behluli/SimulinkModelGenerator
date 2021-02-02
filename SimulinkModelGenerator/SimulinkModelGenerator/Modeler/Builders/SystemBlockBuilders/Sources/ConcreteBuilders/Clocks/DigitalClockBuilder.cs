@@ -32,7 +32,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Cl
             model.System.Block.Add(new Block()
             {
                 BlockType = "DigitalClock",
-                Name = $"Digital Clock{GetBlockTypeCount("DigitalClock")}",
+                BlockName = GenerateUniqueName("DigitalClock"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = _Position },

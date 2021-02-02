@@ -36,7 +36,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             base.model.System.Block.Add(new Block()
             {
                 BlockType = "Scope",
-                Name = base.GetName("Scope"),
+                BlockName = GenerateUniqueName("Scope"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Ports", Text = _Ports },

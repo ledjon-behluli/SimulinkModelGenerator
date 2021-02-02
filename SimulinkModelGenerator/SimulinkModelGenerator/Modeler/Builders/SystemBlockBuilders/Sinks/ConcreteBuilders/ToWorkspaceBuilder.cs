@@ -100,7 +100,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             model.System.Block.Add(new Block()
             {
                 BlockType = "ToWorkspace",
-                Name = $"To\\nWorkspace{GetBlockTypeCount("ToWorkspace")}",
+                BlockName = GenerateUniqueName("To\\nWorkspace"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

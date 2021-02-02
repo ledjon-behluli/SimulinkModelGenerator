@@ -13,7 +13,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         protected override string BlockName => "Substract";
         protected override string OutDataTypeStr => "Inherit: Inherit via internal rule";
 
-        private IconShape _IconShape = IconShape.Round;
+        private IconShape _IconShape = IconShape.Rectangular;
         private string _Ports
         {
             get
@@ -28,7 +28,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
                 return $"[{ports}]";
             }
         }
-        private InputType[] _InputTypes = new[] { InputType.Plus, InputType.Plus };
+        private InputType[] _InputTypes = new[] { InputType.Plus, InputType.Minus };
         private string _Inputs
         {
             get

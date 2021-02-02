@@ -74,7 +74,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             model.System.Block.Add(new Block()
             {
                 BlockType = "TransportDelay",
-                Name = $"Transport\\nDelay{GetBlockTypeCount("TransportDelay")}",
+                BlockName = GenerateUniqueName("Transport\\nDelay"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

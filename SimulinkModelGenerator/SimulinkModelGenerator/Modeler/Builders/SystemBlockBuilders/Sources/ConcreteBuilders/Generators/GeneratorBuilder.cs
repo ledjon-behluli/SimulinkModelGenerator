@@ -50,7 +50,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Ge
             return new Block()
             {
                 BlockType = BlockType,
-                Name = $"{BlockName}{GetBlockTypeCount(BlockType)}",
+                BlockName = GenerateUniqueName(BlockName),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = _Position },

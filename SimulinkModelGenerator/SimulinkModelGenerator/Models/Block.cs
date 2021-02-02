@@ -7,7 +7,7 @@ namespace SimulinkModelGenerator.Models
 	{
 		public List<Parameter> P { get; set; }
 		public string BlockType { get; set; }
-		public string Name { get; set; }
+		public string BlockName { get; set; }
 		public InstanceData InstanceData { get; set; }
 
 		public override string ToString()
@@ -28,7 +28,7 @@ namespace SimulinkModelGenerator.Models
 
 			return $@"Block {{
 						BlockType {BlockType}
-						Name ""{Name}""	
+						Name ""{BlockName}""	
 						{properties}
 					}}";
 		}

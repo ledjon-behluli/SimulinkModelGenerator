@@ -72,7 +72,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             return new Block()
             {
                 BlockType = BlockType,
-                Name = $"{BlockName}{GetBlockTypeCount(BlockType)}",
+                BlockName = GenerateUniqueName(BlockName),
                 P = list
             };
         }

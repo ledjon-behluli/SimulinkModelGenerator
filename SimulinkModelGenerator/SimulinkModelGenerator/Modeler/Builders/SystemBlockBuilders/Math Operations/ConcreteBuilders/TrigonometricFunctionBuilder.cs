@@ -117,7 +117,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             model.System.Block.Add(new Block()
             {
                 BlockType = "Trigonometry",
-                Name = $"Trigonometry\\nFunction{GetBlockTypeCount("Trigonometry")}",
+                BlockName = GenerateUniqueName("Trigonometry\\nFunction"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

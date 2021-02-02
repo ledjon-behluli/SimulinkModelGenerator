@@ -82,7 +82,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             model.System.Block.Add(new Block()
             {
                 BlockType = "Reference",
-                Name = $"Slider\\nGain{GetBlockTypeCount("Reference")}",
+                BlockName = GenerateUniqueName("Slider\\nGain"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

@@ -47,7 +47,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             model.System.Block.Add(new Block()
             {
                 BlockType = "Reference",
-                Name = $"Repeating\\nSequence{GetBlockTypeCount("Reference")}",
+                BlockName = GenerateUniqueName("Repeating\\nSequence"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

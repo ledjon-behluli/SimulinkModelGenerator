@@ -116,7 +116,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             return new Block()
             {
                 BlockType = BlockType,
-                Name = $"{BlockName}{GetBlockTypeCount(BlockType)}",
+                BlockName = GenerateUniqueName(BlockName),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

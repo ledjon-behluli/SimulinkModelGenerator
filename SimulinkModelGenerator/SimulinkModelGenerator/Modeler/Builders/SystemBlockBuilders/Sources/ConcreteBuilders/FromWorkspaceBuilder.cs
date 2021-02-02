@@ -59,7 +59,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             model.System.Block.Add(new Block()
             {
                 BlockType = "FromWorkspace",
-                Name = $"From\\nWorkspace{GetBlockTypeCount("FromWorkspace")}",
+                BlockName = GenerateUniqueName("From\\nWorkspace"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

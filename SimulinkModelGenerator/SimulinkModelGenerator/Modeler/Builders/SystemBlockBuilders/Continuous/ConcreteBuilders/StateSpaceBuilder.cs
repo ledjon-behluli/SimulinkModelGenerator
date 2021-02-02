@@ -115,13 +115,25 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             return this;
         }
 
+        private string ToMatrixString(double[,] coefficients)
+        {
+            var result = string.Join(" ",
+               Enumerable.Range(0, coefficients.GetUpperBound(0) + 1)
+                         .Select(x => Enumerable.Range(0, coefficients.GetUpperBound(1) + 1)
+                               .Select(y => coefficients[x, y]))
+                         .Select(z => "" + string.Join(" ", z) + ";"));
+
+            result = result.Substring(0, result.Length - 1);
+            return result.Length == 1 ? result : $"[{result}]";
+        }
+
 
         internal override void Build()
         {
             model.System.Block.Add(new Block()
             {
                 BlockType = "StateSpace",
-                Name = $"State-Space{GetBlockTypeCount("StateSpace")}",
+                BlockName = GenerateUniqueName("State-Space"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
@@ -138,17 +150,6 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             });
         }
 
-        private string ToMatrixString(double[,] coefficients)
-        {
-            var result = string.Join(" ",
-               Enumerable.Range(0, coefficients.GetUpperBound(0) + 1)
-                         .Select(x => Enumerable.Range(0, coefficients.GetUpperBound(1) + 1)
-                               .Select(y => coefficients[x, y]))
-                         .Select(z => "" + string.Join(" ", z) + ";"));
-
-            result = result.Substring(0, result.Length - 1);
-            return result.Length == 1 ? result : $"[{result}]";
-        }
 
         private class Dimessions
         {

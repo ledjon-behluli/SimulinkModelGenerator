@@ -13,7 +13,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         protected override string BlockName => "Add";
         protected override string OutDataTypeStr => "Inherit: Inherit via internal rule";
 
-        private IconShape _IconShape = IconShape.Round;
+        private IconShape _IconShape = IconShape.Rectangular;
         private string _Ports
         {
             get

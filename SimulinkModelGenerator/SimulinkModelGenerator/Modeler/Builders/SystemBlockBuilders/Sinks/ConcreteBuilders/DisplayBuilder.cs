@@ -20,7 +20,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             base.model.System.Block.Add(new Block()
             {
                 BlockType = "Display",
-                Name = base.GetName("Display"),
+                BlockName = GenerateUniqueName("Display"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

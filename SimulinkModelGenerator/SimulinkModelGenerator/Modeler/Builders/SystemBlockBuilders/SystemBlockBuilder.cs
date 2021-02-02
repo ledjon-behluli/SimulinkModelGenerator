@@ -12,11 +12,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
 
         internal SizeU(uint width, uint height)
         {
-            if (width < 1)
-                throw new ArgumentException("Zero or negative values for width are not allowed.");
+            if (width == 0)
+                throw new ArgumentException("Only positive values for width are not allowed.");
 
-            if (height < 1)
-                throw new ArgumentException("Zero or negative values for height are not allowed.");
+            if (height == 0)
+                throw new ArgumentException("Only positive values for height are not allowed.");
 
             Width = width;
             Height = height;
@@ -45,24 +45,25 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
         {
             this.model = model;
         }
-       
+
         /// <summary>
-        /// Get a new name for the <paramref name="blockType"/> by appending a number at the end if the name is taken.
-        /// Otherwise returns the name of the <paramref name="blockType"/>.
+        /// Generates a unique name by appending a number at the end of <paramref name="blockName"/>, if that name is already taken.
+        /// <para>If <see cref="_Name"/> is already set, than this will be returned.</para>
+        /// <para>If there are no other blocks with the same name, than <paramref name="blockName"/> will be returned.</para>
         /// </summary>
-        protected string GetName(string blockType)
+        protected string GenerateUniqueName(string blockName)
         {
             if (!string.IsNullOrEmpty(_Name))
                 return _Name;
 
-            var blocks = this.model.System.Block.Where(b => b.BlockType.Contains(blockType));
-            if(blocks != null)
+            var blocks = model.System.Block.Where(b => b.BlockName.StartsWith(blockName));
+            if (blocks != null)
             {
                 string number = blocks.Count() == 0 ? string.Empty : blocks.Count().ToString();
-                return $"{blockType}{number}";
+                return $"{blockName}{number}";
             }
 
-            return blockType;
+            return blockName;
         }
 
         /// <summary>

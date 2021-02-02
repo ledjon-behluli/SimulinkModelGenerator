@@ -69,7 +69,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             model.System.Block.Add(new Block()
             {
                 BlockType = "Reference",
-                Name = $"XY Graph{GetBlockTypeCount("Reference")}",
+                BlockName = GenerateUniqueName("XY Graph"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

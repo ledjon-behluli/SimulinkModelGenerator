@@ -9,8 +9,7 @@ namespace SimulinkModelGenerator.Samples
 
         static void Main(string[] args)
         {
-            Sample_1();
-            //Sample0();
+            Sample0();
             //Sample1();
             //Sample2();
             //Sample3();
@@ -18,7 +17,7 @@ namespace SimulinkModelGenerator.Samples
             //Sample5();
         }
 
-        static void Sample_1()
+        static void Sample0()
         {
             new ModelBuilder()
                 .WithName("sample0")
@@ -76,30 +75,6 @@ namespace SimulinkModelGenerator.Samples
                                       .AddOutPort(x => x.SetPosition(425, 240))
                                       .AddToWorkspace(x => x.SetPosition(425, 310))
                                       .AddXYGraph(x => x.SetPosition(425, 380)));
-                })
-                .Save(path);
-        }
-
-        static void Sample0()
-        {
-            new ModelBuilder()
-                .WithName("sample0")
-                .AddControlSystem(cs =>
-                {
-                    cs.AddSources(s => s.AddStep(s => s.SetPosition(100, 100))
-                                        .AddConstant(c => c.SetPosition(100, 170))
-                                        .AddRamp(r => r.SetPosition(100, 240)));
-                    cs.AddMathOperations(mo => mo.AddSum(s => s.SetPosition(200, 105))
-                                                 .AddGain(g => g.SetPosition(200, 170)));
-                    cs.AddContinuous(co => co.AddTransferFunction(tf => tf.SetPosition(300, 100))
-                                             .AddIntegrator(i => i.SetPosition(300, 170))
-                                             .AddPIDController(pid => pid.SetPosition(300, 240))
-                                             .AddPDController(pd => pd.SetPosition(300, 310))
-                                             .AddPIController(pi => pi.SetPosition(300, 380))
-                                             .AddIController(i => i.SetPosition(300, 450))
-                                             .AddPController(p => p.SetPosition(300, 520)));
-                    cs.AddSinks(s => s.AddScope(s => s.SetPosition(425, 104))
-                                      .AddDisplay(d => d.SetPosition(425, 170)));
                 })
                 .Save(path);
         }

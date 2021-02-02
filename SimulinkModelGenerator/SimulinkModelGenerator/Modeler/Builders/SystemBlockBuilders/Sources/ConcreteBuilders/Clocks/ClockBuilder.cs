@@ -38,7 +38,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Cl
             base.model.System.Block.Add(new Block()
             {
                 BlockType = "Clock",
-                Name = base.GetName("Clock"),
+                BlockName = GenerateUniqueName("Clock"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

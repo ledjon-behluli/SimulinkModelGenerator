@@ -52,7 +52,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Common
             return new Block()
             {
                 BlockType = BlockType,
-                Name = $"{BlockName}{_count + 1}",
+                BlockName = $"{BlockName}{_count + 1}",
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },

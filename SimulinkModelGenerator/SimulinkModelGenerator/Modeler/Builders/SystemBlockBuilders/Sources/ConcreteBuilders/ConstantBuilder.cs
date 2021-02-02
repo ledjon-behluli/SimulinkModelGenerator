@@ -27,7 +27,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             base.model.System.Block.Add(new Block()
             {
                 BlockType = "Constant",
-                Name = base.GetName("Constant"),
+                BlockName = GenerateUniqueName("Constant"),
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
