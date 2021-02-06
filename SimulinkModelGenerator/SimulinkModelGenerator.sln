@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimulinkModelGenerator", "SimulinkModelGenerator\SimulinkModelGenerator.csproj", "{ECC2FD7C-BC2D-4FF1-9A95-0EB7476580B9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimulinkModelGenerator.Test", "SimulinkModelGenerator.Test\SimulinkModelGenerator.Test.csproj", "{ABC1B17B-224D-4E31-B774-B0F7C45BBFA9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{DB11CCE1-70B8-4255-AA41-DCAE0C90669A}"
 	ProjectSection(SolutionItems) = preProject
 		scope-output.png = scope-output.png
@@ -14,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 		simulink-icon.png = simulink-icon.png
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulinkModelGenerator.Samples", "SimulinkModelGenerator.Samples\SimulinkModelGenerator.Samples.csproj", "{266F5B61-105D-4E39-8B44-F91A76704439}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimulinkModelGenerator.Samples", "SimulinkModelGenerator.Samples\SimulinkModelGenerator.Samples.csproj", "{266F5B61-105D-4E39-8B44-F91A76704439}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +24,6 @@ Global
 		{ECC2FD7C-BC2D-4FF1-9A95-0EB7476580B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECC2FD7C-BC2D-4FF1-9A95-0EB7476580B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECC2FD7C-BC2D-4FF1-9A95-0EB7476580B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ABC1B17B-224D-4E31-B774-B0F7C45BBFA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ABC1B17B-224D-4E31-B774-B0F7C45BBFA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ABC1B17B-224D-4E31-B774-B0F7C45BBFA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ABC1B17B-224D-4E31-B774-B0F7C45BBFA9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{266F5B61-105D-4E39-8B44-F91A76704439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{266F5B61-105D-4E39-8B44-F91A76704439}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{266F5B61-105D-4E39-8B44-F91A76704439}.Release|Any CPU.ActiveCfg = Release|Any CPU
