@@ -18,26 +18,27 @@ Universal Windows Platform | >= 10.0.16299
 Unity | >= 2018.1
 
 Supported Simulink elements (*more to come*):
-- Sources:
-  - Constant
-  - Step
-  - Ramp
-- Sinks:
-  - Scope
-  - Display
-- Math Operations:
-  - Sum
-  - Gain
-- Continuous:
-  - Integrator
-  - Transfer Function
-  - 1dof PID Controller types:
-    - PID
-    - PD
-    - PI
-    - I
-    - P
-    
+
+Sources | Sinks | Math Operations | Continuous
+------------ | ------------- | ------------ | -------------
+Constant | Scope | Sum | Integrator
+Step | Display | Gain | Integrator Limited
+Ramp | XY Graph | Slider Gain | Transfer Function
+Inport | Outport | Add | Zero Pole
+From Workspace | To Workspace | Product | Derivative
+Clock | | Dot Product | Transport Delay
+Digital Clock | | Divide | State Space
+Repeating Sequence | | Subtract | PID
+Random Number | | Min | PD
+Uniform Random Number | | Max | PI
+Signal Generator | | Sign | I
+Time-based Pulse Generator | | Sqrt | P
+Sample-based Pulse Generator | | Signed Sqrt | 2dof PID
+Time-based Sine Wave Generator | | Reciprocal Sqrt | 2dof PD
+Sample-based Sine Wave Generator | | Math Function | 2dof PI
+ | | | Abs |
+ | | | Trigonometric Function |
+
 Below is a generated model as seen in Simulink (tested with Matlab R2017a).
 
 ![alt text](https://github.com/ledjon-behluli/SimulinkModelGenerator/blob/master/SimulinkModelGenerator/simulink-diagram.png?raw=true)
