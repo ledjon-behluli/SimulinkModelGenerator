@@ -26,7 +26,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         public ITransportDelay SetTimeDelay(double delay)
         {
             if(delay < 0)
-                throw new ArgumentException("Time delay must be greater than or equal to 0.");
+                throw new ArgumentException("Time delay must be greater than or equal to 0");
 
             _TimeDelay = delay.ToString();
             return this;
@@ -41,7 +41,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         public ITransportDelay SetInitialBufferSize(int memoryInKB)
         {
             if (memoryInKB <= 0)
-                throw new ArgumentException("Memory allocation size must be greater than 0.");
+                throw new ArgumentException("Memory allocation size must be greater than 0");
 
             _InitialBufferSize = (1024 * memoryInKB).ToString();
             return this;
@@ -50,7 +50,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         public ITransportDelay SetPadeOrder(int order)
         {
             if (order < 0)
-                throw new ArgumentException("Pade order must be greater than or equal to 0.");
+                throw new ArgumentException("Pade order must be greater than or equal to 0");
 
             _PadeOrder = order.ToString();
             return this;

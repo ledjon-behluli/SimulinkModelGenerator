@@ -29,6 +29,12 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         private int _NumberOfOutputs = 1;
         private int _NumberOfStates = 1;
 
+        private Dimessions A_Dims = Dimessions.Get(new double[,] { { 1 } });
+        private Dimessions B_Dims = Dimessions.Get(new double[,] { { 1 } });
+        private Dimessions C_Dims = Dimessions.Get(new double[,] { { 1 } });
+        private Dimessions D_Dims = Dimessions.Get(new double[,] { { 1 } });
+        private double[] X0_Dims = new double[] { 0.0 };
+
         private string _A = "1";
         private string _B = "1";
         private string _C = "1";
@@ -53,7 +59,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
                 throw new ArgumentException("Number of states must be greater than or equal to 1");
 
             _NumberOfInputs = numberOfInputs;
-            _NumberOfOutputs = numberOfInputs;
+            _NumberOfOutputs = numberOfOutputs;
             _NumberOfStates = numberOfStates;
 
             return this;
@@ -61,56 +67,40 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
         public IStateSpaceCharacteristics SetMatrixCoefficient_A(double[,] coefficients)
         {
-            Dimessions dims = Dimessions.Get(coefficients);
-
-            if (dims.RowCount != dims.ColumnCount || dims.RowCount != _NumberOfStates || dims.ColumnCount != _NumberOfStates)
-                throw new ArgumentException("Matrix coefficient A, must be a real-valued n-by-n matrix, where n is the number of states.");
-
+            A_Dims = Dimessions.Get(coefficients);
             _A = ToMatrixString(coefficients);
+
             return this;
         }
 
         public IStateSpaceCharacteristics SetMatrixCoefficient_B(double[,] coefficients)
         {
-            Dimessions dims = Dimessions.Get(coefficients);
-
-            if (dims.RowCount != _NumberOfStates || dims.ColumnCount != _NumberOfInputs)
-                throw new ArgumentException("Matrix coefficient B, must be a real-valued n-by-m matrix, where n is the number of states and m is the number of inputs.");
-
+            B_Dims = Dimessions.Get(coefficients);
             _B = ToMatrixString(coefficients);
+
             return this;
         }
 
         public IStateSpaceCharacteristics SetMatrixCoefficient_C(double[,] coefficients)
         {
-            Dimessions dims = Dimessions.Get(coefficients);
-
-            if (dims.RowCount != _NumberOfOutputs || dims.ColumnCount != _NumberOfStates)
-                throw new ArgumentException("Matrix coefficient C, must be a real-valued r-by-n matrix, where r is the number of outputs and n is the number of states.");
-
+            C_Dims = Dimessions.Get(coefficients);
             _C = ToMatrixString(coefficients);
+
             return this;
         }
 
         public IStateSpaceCharacteristics SetMatrixCoefficient_D(double[,] coefficients)
         {
-            Dimessions dims = Dimessions.Get(coefficients);
-
-            if (dims.RowCount != _NumberOfOutputs || dims.ColumnCount != _NumberOfInputs)
-                throw new ArgumentException("Matrix coefficient D, must be a real-valued r-by-m matrix, where r is the number of outputs and m is the number of inputs.");
-
+            D_Dims = Dimessions.Get(coefficients);
             _D = ToMatrixString(coefficients);
+
             return this;
         }
 
         public IStateSpaceCharacteristics SetInitialStateVector(double[] coefficients)
         {
-            int rowsCount = coefficients.Length;
-
-            if (rowsCount > 1 && rowsCount != _NumberOfStates)
-                throw new ArgumentException("Initial state vector, must be a real-valued n-vector, where n is the number of states, or can be a 1-vector.");
-
-            _X0 = rowsCount == 1 ? coefficients[0].ToString() : string.Join("; ", coefficients);
+            X0_Dims = coefficients;
+            _X0 = coefficients.Length == 1 ? coefficients[0].ToString() : $"[{string.Join("; ", coefficients)}]";
 
             return this;
         }
@@ -130,6 +120,22 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
         internal override void Build()
         {
+            if (A_Dims.RowCount != A_Dims.ColumnCount || A_Dims.RowCount != _NumberOfStates || A_Dims.ColumnCount != _NumberOfStates)
+                throw new ArgumentException("Matrix coefficient A, must be a real-valued n-by-n matrix, where n is the number of states.");
+
+            if (B_Dims.RowCount != _NumberOfStates || B_Dims.ColumnCount != _NumberOfInputs)
+                throw new ArgumentException("Matrix coefficient B, must be a real-valued n-by-m matrix, where n is the number of states and m is the number of inputs.");
+
+            if (C_Dims.RowCount != _NumberOfOutputs || C_Dims.ColumnCount != _NumberOfStates)
+                throw new ArgumentException("Matrix coefficient C, must be a real-valued r-by-n matrix, where r is the number of outputs and n is the number of states.");
+
+            if (D_Dims.RowCount != _NumberOfOutputs || D_Dims.ColumnCount != _NumberOfInputs)
+                throw new ArgumentException("Matrix coefficient D, must be a real-valued r-by-m matrix, where r is the number of outputs and m is the number of inputs.");
+
+            if (X0_Dims.Length > 1 && X0_Dims.Length != _NumberOfStates)
+                throw new ArgumentException("Initial state vector, must be a real-valued n-vector, where n is the number of states, or can be a 1-vector.");
+
+
             model.System.Block.Add(new Block()
             {
                 BlockType = "StateSpace",

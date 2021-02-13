@@ -49,6 +49,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             return this;
         }
 
+        /// <summary>
+        /// Changing integrator method, automatically changes time domain to <see cref="TimeDomain.DiscreteTime"/>.
+        /// </summary>
         public IPIDController SetIntegratorMethod(IntegratorMethod method)
         {
             base._TimeDomain = TimeDomain.DiscreteTime;
@@ -56,6 +59,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             return this;
         }
 
+        /// <summary>
+        /// Changing filter method, automatically changes time domain to <see cref="TimeDomain.DiscreteTime"/>.
+        /// </summary>
         public IPIDController SetFilterMethod(FilterMethod method)
         {
             base._TimeDomain = TimeDomain.DiscreteTime;             
@@ -63,6 +69,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             return this;
         }
 
+        /// <summary>
+        /// Using derivative filter, automatically changes time domain to <see cref="TimeDomain.DiscreteTime"/>.
+        /// </summary>
         public IPIDController UseDerivativeFilter()
         {
             base._TimeDomain = TimeDomain.DiscreteTime;            
