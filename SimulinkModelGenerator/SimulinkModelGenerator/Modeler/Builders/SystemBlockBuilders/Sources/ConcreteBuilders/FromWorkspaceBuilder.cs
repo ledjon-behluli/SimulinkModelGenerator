@@ -3,7 +3,6 @@ using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {

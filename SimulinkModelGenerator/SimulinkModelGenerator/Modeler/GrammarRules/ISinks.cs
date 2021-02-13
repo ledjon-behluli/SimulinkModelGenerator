@@ -40,10 +40,8 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IXYGraph : ISystemBlock
     {
-        IXYGraph SetXMin(double value);
-        IXYGraph SetXMax(double value);
-        IXYGraph SetYMin(double value);
-        IXYGraph SetYMax(double value);
+        IXYGraph SetX(double xMin = -1, double xMax = 1);
+        IXYGraph SetY(double yMin = -1, double yMax = 1);
         IXYGraph SetSampleTime(double sampleTime);
     }
 }

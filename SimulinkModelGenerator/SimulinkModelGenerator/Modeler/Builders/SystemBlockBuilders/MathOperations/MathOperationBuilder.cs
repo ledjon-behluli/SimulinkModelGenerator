@@ -93,23 +93,18 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             return this;
         }
 
-        public IMathOperation SetMinimumOutputForRangeChecking(double value)
+        public IMathOperation WithOutputRangeChecking(double? outMin = null, double? outMax = null)
         {
-            if (_OutMax != null && value > (double)_OutMax)
-                throw new ArgumentException("Minimum output value must be less than or equal to maximum value.");
+            if (outMin != null && outMax != null)
+                if(outMin > outMax)
+                    throw new ArgumentException("Minimum output value must be less than or equal to maximum value.");
 
-            _OutMin = value;
+            _OutMin = outMin;
+            _OutMax = outMax;
+
             return this;
         }
 
-        public IMathOperation SetMaximumOutputForRangeChecking(double value)
-        {
-            if (_OutMin != null && value < (double)_OutMin)
-                throw new ArgumentException("Maximum output value must be greater than or equal to minimum value.");
-
-            _OutMax = value;
-            return this;
-        }
 
         protected Block GetBlock()
         {

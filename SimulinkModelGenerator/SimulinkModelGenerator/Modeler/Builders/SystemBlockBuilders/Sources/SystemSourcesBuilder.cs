@@ -1,9 +1,4 @@
 ﻿using SimulinkModelGenerator.Exceptions;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Clocks;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators.Pulse;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators.SineWave;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.RandomNumbers;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;

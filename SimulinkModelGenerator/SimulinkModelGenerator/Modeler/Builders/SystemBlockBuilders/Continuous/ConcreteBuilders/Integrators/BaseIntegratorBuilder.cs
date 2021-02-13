@@ -10,7 +10,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         internal override SizeU Size => new SizeU(30, 30);
         internal abstract string BlockName { get; }
 
-        private string _InitialCondition = "0";
+        protected string _InitialCondition = "0";
+        protected string _UpperSaturationLimit;
+        protected string _LowerSaturationLimit;
+
+        private string _Ports = "[1, 1]";
         private bool _ShowSaturationPort = false;
         private bool _ShowStatePort = false;
 
@@ -29,12 +33,16 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         public IBaseIntegrator ShowSaturationPort()
         {
             _ShowSaturationPort = true;
+            _Ports = _ShowStatePort ? "[1, 2, 0, 0, 1]" : "[1, 2]";
+
             return this;
         }
 
         public IBaseIntegrator ShowStatePort()
         {
             _ShowStatePort = true;
+            _Ports = _ShowSaturationPort ? "[1, 2, 0, 0, 1]" : "[1, 1, 0, 0, 1]";
+
             return this;
         }
 
@@ -49,6 +57,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },
                     new Parameter() { Name = "InitialCondition", Text = _InitialCondition },
+                    new Parameter() { Name = "Ports", Text = _Ports },
+                    new Parameter() { Name = "LowerSaturationLimit", Text = _LowerSaturationLimit },
+                    new Parameter() { Name = "UpperSaturationLimit", Text = _UpperSaturationLimit },
                     new Parameter() { Name = "ShowSaturationPort", Text = _ShowSaturationPort ? "on" : "off" },
                     new Parameter() { Name = "ShowStatePort", Text = _ShowStatePort ? "on" : "off" }
                 }

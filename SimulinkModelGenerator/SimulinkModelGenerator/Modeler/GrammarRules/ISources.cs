@@ -1,9 +1,4 @@
 ﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Clocks;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.RandomNumbers;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators.Pulse;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators.SineWave;
 using System;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules
@@ -51,7 +46,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IInPort : IPort
     {
-      
+        IInPort ExtrapolateData();
     }
 
     public interface IRepeatingSequence : ISystemBlock
@@ -101,8 +96,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IUniformRandomNumber : IBaseRandomNumber
     {
-        IUniformRandomNumber SetMinimum(double min);
-        IUniformRandomNumber SetMaximum(double max);
+        IUniformRandomNumber SetRange(double min = -1, double max = 1);
     }
 
     #endregion

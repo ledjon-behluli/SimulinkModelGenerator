@@ -19,66 +19,49 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
 
         }
 
+
+        public ISliderGain SetGainLimits(double lowEnd = -1, double highEnd = 1)
+        {
+            if (lowEnd >= highEnd)
+                throw new ArgumentException("LowEnd must be less than HighEnd.");
+
+            if (lowEnd > double.Parse(_Gain))
+                throw new ArgumentException("LowEnd must be less than or equal to Gain.");
+
+            if (highEnd < double.Parse(_Gain))
+                throw new ArgumentException("HighEnd must be greater than or equal to Gain.");
+
+            _LowEnd = lowEnd.ToString();
+            _HighEnd = highEnd.ToString();
+
+            return this;
+        }
+
+
         public ISliderGain SetGain(double value)
         {
-            if (value < double.Parse(_LowEnd) || value > double.Parse(_HighEnd))
-                throw new ArgumentException("Gain must be inclusive within the bounds of LowEnd and HighEnd.");
-
             _Gain = value.ToString();
             return this;
         }
 
         public ISliderGain IncrementGainBy(double value)
         {
-            double newGain = double.Parse(_Gain) + value;
-
-            if(newGain >= double.Parse(_LowEnd) && newGain <= double.Parse(_HighEnd))
-            {
-                _Gain = newGain.ToString();
-            }
-
+            _Gain = (double.Parse(_Gain) + value).ToString();
             return this;
         }
 
         public ISliderGain DecrementGainBy(double value)
         {
-            double newGain = double.Parse(_Gain) - value;
-
-            if (newGain >= double.Parse(_LowEnd) && newGain <= double.Parse(_HighEnd))
-            {
-                _Gain = newGain.ToString();
-            }
-
-            return this;
-        }
-
-        public ISliderGain SetLowEnd(double value)
-        {
-            if (value >= double.Parse(_HighEnd))
-                throw new ArgumentException("LowEnd must be less than HighEnd.");
-
-            if (value > double.Parse(_Gain))
-                throw new ArgumentException("LowEnd must be less than or equal to Gain.");
-
-            _LowEnd = value.ToString();
-            return this;
-        }
-
-        public ISliderGain SetHighEnd(double value)
-        {
-            if (value <= double.Parse(_LowEnd))
-                throw new ArgumentException("HighEnd must be greater than LowEnd.");
-
-            if (value < double.Parse(_Gain))
-                throw new ArgumentException("HighEnd must be greater than or equal to Gain.");
-
-            _HighEnd = value.ToString();
+            _Gain = (double.Parse(_Gain) - value).ToString();
             return this;
         }
 
 
         internal override void Build()
         {
+            if (double.Parse(_Gain) < double.Parse(_LowEnd) || double.Parse(_Gain) > double.Parse(_HighEnd))
+                throw new ArgumentException("Gain must be inclusive between the bounds of LowEnd and HighEnd.");
+
             model.System.Block.Add(new Block()
             {
                 BlockType = "Reference",

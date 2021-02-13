@@ -21,39 +21,25 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 
         }
 
-        public IXYGraph SetXMin(double value)
+        public IXYGraph SetX(double xMin = -1, double xMax = 1)
         {
-            if (value >= double.Parse(_XMax))
-                throw new ArgumentException("First input (X) min value can not be greater or equal to its max value.");
+            if (xMin >= xMax)
+                throw new ArgumentException("Input (X) min value can not be greater or equal to (X) max value.");
 
-            _XMin = value.ToString();
+            _XMin = xMin.ToString();
+            _XMax = xMax.ToString();
+
             return this;
         }
 
-        public IXYGraph SetXMax(double value)
+        public IXYGraph SetY(double yMin = -1, double yMax = 1)
         {
-            if (value < double.Parse(_XMin))
-                throw new ArgumentException("First input (X) max value can not be less than its min value.");
+            if (yMin >= yMax)
+                throw new ArgumentException("Input (Y) min value can not be greater or equal to (Y) max value.");
 
-            _XMax = value.ToString();
-            return this;
-        }
+            _YMin = yMin.ToString();
+            _YMax = yMax.ToString();
 
-        public IXYGraph SetYMin(double value)
-        {
-            if (value >= double.Parse(_YMax))
-                throw new ArgumentException("Second input (Y) min value can not be greater or equal to its max value.");
-
-            _YMin = value.ToString();
-            return this;
-        }
-
-        public IXYGraph SetYMax(double value)
-        {
-            if (value < double.Parse(_YMin))
-                throw new ArgumentException("Second input (Y) max value can not be less than its min value.");
-
-            _YMax = value.ToString();
             return this;
         }
 

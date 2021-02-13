@@ -73,8 +73,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface ILimitedIntegrator : IBaseIntegrator
     {
-        ILimitedIntegrator SetUpperSaturationLimit(double limit);
-        ILimitedIntegrator SetLowerSaturationLimit(double limit);
+        ILimitedIntegrator SetSaturationLimits(double lowerLimit = 0, double upperLimit = 1);
     }
 
     #endregion

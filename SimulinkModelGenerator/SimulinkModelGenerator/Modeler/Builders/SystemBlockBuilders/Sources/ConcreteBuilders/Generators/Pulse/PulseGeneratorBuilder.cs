@@ -1,6 +1,6 @@
 ﻿using SimulinkModelGenerator.Models;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public abstract class PulseGeneratorBuilder<T> : GeneratorBuilder<T>
         where T : PulseGeneratorBuilder<T>

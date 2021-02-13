@@ -24,9 +24,6 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             var timeStamp = new TimeStamp(values);
             timeStamp.ThrowIfInvalid();
 
-            if (timeStamp.Count != _OutputValue.Count)
-                throw new SimulinkModelGeneratorException("TimeStamps count needs to be the same as OutputValues count.");
-
             _TimeStamp = timeStamp;
             return this;
         }
@@ -35,15 +32,15 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         {
             OutputValue outputValue = new OutputValue(values);
 
-            if (outputValue.Count != _TimeStamp.Count)
-                throw new SimulinkModelGeneratorException("OutputValues count needs to be the same as TimeStamps count.");
-
             _OutputValue = outputValue;
             return this;
         }
 
         internal override void Build()
         {
+            if (_TimeStamp.Count != _OutputValue.Count)
+                throw new SimulinkModelGeneratorException("TimeStamps count needs to be the same as OutputValues count.");
+
             model.System.Block.Add(new Block()
             {
                 BlockType = "Reference",

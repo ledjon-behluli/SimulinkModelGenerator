@@ -3,7 +3,7 @@ using SimulinkModelGenerator.Models;
 using System;
 using System.Collections.Generic;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.RandomNumbers
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public abstract class BaseRandomNumberBuilder<T> : SystemBlockBuilder<T>, IBaseRandomNumber
         where T : BaseRandomNumberBuilder<T>

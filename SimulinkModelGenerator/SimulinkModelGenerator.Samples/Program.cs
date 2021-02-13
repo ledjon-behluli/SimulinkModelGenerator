@@ -9,12 +9,42 @@ namespace SimulinkModelGenerator.Samples
 
         static void Main(string[] args)
         {
-            Sample0();
+            test();
+
+            //Sample0();
             //Sample1();
             //Sample2();
             //Sample3();
             //Sample4();
             //Sample5();
+        }
+
+        static void test()
+        {
+            new ModelBuilder()
+                .WithName("sample0")
+                .AddControlSystem(cs =>
+                {
+                    cs.AddContinuous(co => co
+
+                    .AddStateSpace(x => x
+                        .SetPosition(300, 520))
+
+                    .AddTransportDelay(x => x
+                        .SetPosition(300, 590))
+
+
+                    //.AddPIDController(x => x.SetPosition(300, 590))
+                    //.AddPDController(x => x.SetPosition(300, 660))
+                    //.AddPIController(x => x.SetPosition(300, 730))
+                    //.AddIController(x => x.SetPosition(300, 800))
+                    //.AddPController(x => x.SetPosition(300, 870))
+                    //.Add2DofPIDController(x => x.SetPosition(300, 940))
+                    //.Add2DofPDController(x => x.SetPosition(300, 1010))
+                    //.Add2DofPIController(x => x.SetPosition(300, 1080))
+                    );
+                })
+                .Save(path);
         }
 
         static void Sample0()

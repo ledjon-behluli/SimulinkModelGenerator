@@ -2,7 +2,7 @@
 using SimulinkModelGenerator.Models;
 using System;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators.SineWave
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public sealed class TimeBasedSineWaveGeneratorBuilder : SineWaveGeneratorBuilder<TimeBasedSineWaveGeneratorBuilder>, ITimeBasedSineWaveGenerator
     {

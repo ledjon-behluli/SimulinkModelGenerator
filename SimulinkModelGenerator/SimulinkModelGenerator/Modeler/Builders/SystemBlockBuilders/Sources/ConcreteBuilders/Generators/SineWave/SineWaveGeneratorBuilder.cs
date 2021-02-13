@@ -1,6 +1,6 @@
 ﻿using SimulinkModelGenerator.Models;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators.SineWave
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public abstract class SineWaveGeneratorBuilder<T> : GeneratorBuilder<T>
         where T : SineWaveGeneratorBuilder<T>

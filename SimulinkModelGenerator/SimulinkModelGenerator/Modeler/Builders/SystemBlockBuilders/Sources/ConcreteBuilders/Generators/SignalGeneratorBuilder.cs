@@ -4,7 +4,7 @@ using SimulinkModelGenerator.Models;
 using System;
 using System.ComponentModel;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Generators
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public enum FrequencyUnit
     {

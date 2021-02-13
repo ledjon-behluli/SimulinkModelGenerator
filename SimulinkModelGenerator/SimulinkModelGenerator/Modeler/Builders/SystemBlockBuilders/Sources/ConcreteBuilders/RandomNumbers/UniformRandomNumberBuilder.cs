@@ -2,7 +2,7 @@
 using SimulinkModelGenerator.Models;
 using System;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.RandomNumbers
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public sealed class UniformRandomNumberBuilder : BaseRandomNumberBuilder<UniformRandomNumberBuilder>, IUniformRandomNumber
     {
@@ -19,24 +19,17 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources.Ra
 
         }
 
-        public IUniformRandomNumber SetMinimum(double min)
+        public IUniformRandomNumber SetRange(double min = -1, double max = 1)
         {
-            if (min >= double.Parse(_Maximum))
+            if (min >= max)
                 throw new ArgumentException("Minimum must be less than Maximum.");
 
             _Minimum = min.ToString();
-            return this;
-        }
-
-        public IUniformRandomNumber SetMaximum(double max)
-        {
-            if (max <= double.Parse(_Minimum))
-                throw new ArgumentException("Maximum must be greater than Minimum.");
-
             _Maximum = max.ToString();
-            return this;
-        }
 
+            return this;
+
+        }
 
         internal override void Build()
         {

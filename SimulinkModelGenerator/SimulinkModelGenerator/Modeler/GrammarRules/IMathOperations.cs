@@ -32,8 +32,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IMathOperation LockOutputDataType();
         IMathOperation UnlockOutputDataType();
         IMathOperation WithRoundingMode(IntegerRoundingMode mode);
-        IMathOperation SetMinimumOutputForRangeChecking(double value);
-        IMathOperation SetMaximumOutputForRangeChecking(double value);
+        IMathOperation WithOutputRangeChecking(double? outMin = null, double? outMax = null);
     }
 
     public interface IGain : IMathOperation
@@ -110,14 +109,15 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IReciprocalSqrt SetNumberOfIterations(int count);
     }
 
+   
     public interface ISliderGain : ISystemBlock
     {
+        ISliderGain SetGainLimits(double lowEnd = -1, double highEnd = 1);
         ISliderGain SetGain(double value);
         ISliderGain IncrementGainBy(double value);
         ISliderGain DecrementGainBy(double value);
-        ISliderGain SetLowEnd(double value);
-        ISliderGain SetHighEnd(double value);
     }
+
 
     public interface ITrigonometricFunction : ISystemBlock
     {
