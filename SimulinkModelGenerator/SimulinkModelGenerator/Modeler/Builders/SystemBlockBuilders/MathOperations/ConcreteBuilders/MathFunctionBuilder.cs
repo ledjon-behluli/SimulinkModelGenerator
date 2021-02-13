@@ -1,5 +1,4 @@
 ﻿using SimulinkModelGenerator.Extensions;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Common;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System.ComponentModel;

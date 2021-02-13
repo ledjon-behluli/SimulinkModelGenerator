@@ -1,4 +1,4 @@
-﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Common;
+﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders;
 using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
 using System;
 

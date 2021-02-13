@@ -3,7 +3,6 @@ using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
 using System;
 using System.ComponentModel;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Common;
 using SimulinkModelGenerator.Extensions;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations

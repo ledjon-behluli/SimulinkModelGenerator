@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Common
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
 {
     public enum IconDisplay
     {

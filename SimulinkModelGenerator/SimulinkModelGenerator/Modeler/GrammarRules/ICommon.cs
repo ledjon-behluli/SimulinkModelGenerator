@@ -1,4 +1,4 @@
-﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Common;
+﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules
 {

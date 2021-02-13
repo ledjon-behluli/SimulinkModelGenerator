@@ -4,7 +4,7 @@ using SimulinkModelGenerator.Models;
 using System;
 using System.Collections.Generic;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Common
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
 {
     public abstract class PortBuilder<T> : SystemBlockBuilder<T>, IPort
         where T : PortBuilder<T>
