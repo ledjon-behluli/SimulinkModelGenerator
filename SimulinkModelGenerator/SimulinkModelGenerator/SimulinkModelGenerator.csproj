@@ -6,6 +6,7 @@
     <Authors>Ledjon Behluli</Authors>
     <Company>Ledjon Behluli</Company>
     <Copyright>Copyright © 2021 Ledjon Behluli</Copyright>
+    <Title>Fully .NET managed solution for creating Simulink models in fluent style.</Title>
     <Summary>Fully .NET managed solution for creating Simulink models in fluent style.</Summary>
     <Description>Fully .NET managed solution for creating Simulink models in fluent style.</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
