@@ -2,17 +2,30 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Id>SimulinkModelGenerator</Id>
     <Authors>Ledjon Behluli</Authors>
     <Company>Ledjon Behluli</Company>
-    <Copyright>Copyright © 2020 Ledjon Behluli</Copyright>
+    <Copyright>Copyright © 2021 Ledjon Behluli</Copyright>
+    <Summary>Fully .NET managed solution for creating Simulink models in fluent style.</Summary>
+    <Description>Fully .NET managed solution for creating Simulink models in fluent style.</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/ledjon-behluli/SimulinkModelGenerator/</RepositoryUrl>
-    <PackageTags>Matlab Simulink Model Generator Generation Fluent Api OpenSTSM</PackageTags>
-    <PackageReleaseNotes>First release version.</PackageReleaseNotes>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Description>Fully .NET managed solution for creating Simulink models in fluent style.</Description>
-    <PackageIcon>simulink-icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/ledjon-behluli/SimulinkModelGenerator/</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <PackageTags>Matlab, Simulink, Model, Generator, FluentApi</PackageTags>
+    <PackageIcon>simulink-icon.png</PackageIcon>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.0</FileVersion>
+    <Version>1.1.0</Version>
+    <PackageReleaseNotes>
+      Added support for following Simulink elements:
+
+      - Sources: Inport, From Workspace, Clock, Digital Clock, Repeating Sequence, Random Number, Uniform Random Number, Singal Generator, Time &amp; Sample based Pulse Generators, Time &amp; Sample based Sine Wave Generators.
+      - Sinks: XY Graph, Outport, To Workspace.
+      - Math Operations: Abs, Add, Product, Dot Product, Divide, Subtract, Min, Max, Sign, Sqrt, Signed Sqrt, Reciprocal Sqrt, Math Function, Trigonometric Function.
+      - Continuous: Integrator Limited, Zero Pole, Derivative, Transport Delay, State Space, 2dof PID, 2dof PD, 2dof PI.
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +37,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="E:\Libraries\Desktop\simulink-icon.png">
+    <None Include="..\simulink-icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
