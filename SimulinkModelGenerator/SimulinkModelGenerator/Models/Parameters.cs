@@ -3,8 +3,8 @@ namespace SimulinkModelGenerator.Models
 {
 	public class Parameter
 	{
-		public string Name { get; set; }
-		public string Text { get; set; }
+		public string Name { get; internal set; }
+		public string Text { get; internal set; }
 
 		public override string ToString()
 		{

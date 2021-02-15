@@ -1,14 +1,40 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Extensions;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
+using System.ComponentModel;
 using System.IO;
 
 namespace SimulinkModelGenerator.Modeler.Builders
 {
+    public enum SimulationMode
+    {
+        [Description("normal")]
+        Normal,
+        [Description("accelerator")]
+        Accelerator,
+        [Description("rapid-accelerator")]
+        RapidAccelerator,
+        /// <summary>
+        ///Software-in-the-Loop
+        /// </summary>
+        [Description("software-in-the-loop (sil)")]
+        SIL,
+        ///<summary>
+        ///Processor-in-the-Loop
+        ///</summary>
+        [Description("processor-in-the-loop (pil)")]
+        PIL,
+        [Description("external")]
+        External
+    }
+
     public sealed class ModelBuilder : IModel, IFinalizeModel
     {        
         private Model model;
+
         private string _ModelName = "untitled";
+        private SimulationMode _SimulationMode = SimulationMode.Normal;
 
         public string MDL { get; private set; }
 
@@ -23,6 +49,19 @@ namespace SimulinkModelGenerator.Modeler.Builders
             return this;
         }
 
+        public IModel WithSimulationMode(SimulationMode mode = SimulationMode.Normal)
+        {
+            _SimulationMode = mode;
+            return this;
+        }
+
+        public IModel AddConfigurations(Action<ConfigurationBuilder> action = null)
+        {
+            ConfigurationBuilder builder = new ConfigurationBuilder(model);
+            action?.Invoke(builder);
+            return this;
+        }
+
         public IFinalizeModel AddControlSystem(Action<ControlSystemBuilder> action = null)
         {
             ControlSystemBuilder builder = new ControlSystemBuilder(model);
@@ -33,6 +72,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
         public string Build()
         {
             this.model.Name = _ModelName;
+            this.model.SimulationMode = _SimulationMode.GetDescription();
 
             string blocks = string.Empty;
             foreach(Block block in model.System.Block)
@@ -48,6 +88,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
 
             MDL = $@"Model {{
                         Name ""{model.Name}""
+                        SimulationMode ""{model.SimulationMode}""
                         System {{
                             Name ""{model.Name}""
                             {blocks}

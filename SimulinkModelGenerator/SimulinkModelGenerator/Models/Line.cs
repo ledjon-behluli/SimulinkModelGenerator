@@ -11,8 +11,8 @@ namespace SimulinkModelGenerator.Models
 			P = new List<Parameter>();
 		}
 
-		public List<Parameter> P { get; set; }
-		public List<Branch> Branch { get; set; }
+		public List<Parameter> P { get; internal set; }
+		public List<Branch> Branch { get; internal set; }
 
 		public override string ToString()
 		{
@@ -69,7 +69,7 @@ namespace SimulinkModelGenerator.Models
 
 	public class Branch
 	{
-		public List<Parameter> P { get; set; }
+		public List<Parameter> P { get; internal set; }
 
 		public override string ToString()
 		{

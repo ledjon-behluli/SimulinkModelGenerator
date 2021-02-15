@@ -5,10 +5,10 @@ namespace SimulinkModelGenerator.Models
 {
 	public class Block
 	{
-		public List<Parameter> P { get; set; }
-		public string BlockType { get; set; }
-		public string BlockName { get; set; }
-		public InstanceData InstanceData { get; set; }
+		public List<Parameter> P { get; internal set; }
+		public string BlockType { get; internal set; }
+		public string BlockName { get; internal set; }
+		public InstanceData InstanceData { get; internal set; }
 
 		public override string ToString()
 		{
@@ -36,6 +36,6 @@ namespace SimulinkModelGenerator.Models
 
 	public class InstanceData
 	{
-		public List<Parameter> P { get; set; }
+		public List<Parameter> P { get; internal set; }
 	}
 }
