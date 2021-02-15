@@ -2,7 +2,7 @@
 # Simulink Model Generator 
 Fully .NET managed solution for creating [Simulink](https://www.mathworks.com/products/simulink.html) models in fluent style.
 
-Library is available through [NuGet](https://www.nuget.org/packages/SimulinkModelGenerator/).
+Library is available through [NuGet](https://www.nuget.org/packages/SimulinkModelGenerator/1.1.0).
 
 Create Simulink models right from your C# application. SimulinkModelGenerator targets .NET Standart 2.0, you can consume it within any type of application targeting below platform versions:
 
