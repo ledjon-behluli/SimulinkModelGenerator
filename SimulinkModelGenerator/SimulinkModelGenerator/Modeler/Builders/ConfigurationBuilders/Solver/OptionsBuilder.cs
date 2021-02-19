@@ -1,8 +1,5 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
 {
@@ -14,5 +11,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
         {
             this.model = model;
         }
+
+        public IVariableStepSolverOptions WithVariableStep() => new VariableOptionsBuilder(model);
+        public IFixedStepSolverOptions WithFixedStep() => new FixedOptionsBuilder(model);
     }
 }

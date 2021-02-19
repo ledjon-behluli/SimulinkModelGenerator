@@ -12,7 +12,7 @@ namespace SimulinkModelGenerator.Models
 
     #region Enums
 
-    public enum VariableSolver
+    internal enum VariableSolver
     {
         /// <summary>
         /// Automatic solver
@@ -60,7 +60,7 @@ namespace SimulinkModelGenerator.Models
         [Description("ode23tb")]
         Ode23tb
     }
-    public enum FixedSolver
+    internal enum FixedSolver
     {
         /// <summary>
         /// Automatic solver
@@ -108,6 +108,7 @@ namespace SimulinkModelGenerator.Models
         [Description("ode14x")]
         Ode14x
     }
+   
     public enum ShapePreservation
     {
         [Description("EnableAll")]
@@ -130,6 +131,50 @@ namespace SimulinkModelGenerator.Models
         EnableAll,
         [Description("DisableAll")]
         DisableAll
+    }
+    public enum Jacobian
+    {
+        [Description("auto")]
+        Auto,
+        [Description("SparsePerturbation")]
+        SparsePerturbation,
+        [Description("FullPerturbation")]
+        FullPerturbation,
+        [Description("SparseAnalytical")]
+        SparseAnalytical,
+        [Description("FullAnalytical")]
+        FullAnalytical
+    }
+    public enum ExtrapolationOrder
+    {
+        [Description("1")]
+        One,
+        [Description("2")]
+        Two,
+        [Description("3")]
+        Three,
+        [Description("4")]
+        Four
+    }
+    public enum MaximumOrder
+    {
+        [Description("1")]
+        One,
+        [Description("2")]
+        Two,
+        [Description("3")]
+        Three,
+        [Description("4")]
+        Four,
+        [Description("5")]
+        Five
+    }
+    public enum ResetMethod
+    {
+        [Description("Fast")]
+        Fast,
+        [Description("Robust")]
+        Robust
     }
 
     #endregion
@@ -157,6 +202,9 @@ namespace SimulinkModelGenerator.Models
                 NumberOfConsecutiveMinSteps = 1,
                 RelativeTolerance = "1e-3",
                 AbsoluteToterance = "auto",
+                NumberNewtonIterations = "1",
+                SolverJacobianMethodControl = Jacobian.Auto.GetDescription(),
+                ExtrapolationOrder = ExtrapolationOrder.Four.GetDescription(),
                 ShapePreservation = ShapePreservation.DisableAll.GetDescription(),
                 ZeroCrossingAlgorithm = ZeroCrossingAlgorithm.Nonadaptive.GetDescription(),
                 ZeroCrossingControl = ZeroCrossingControl.UseLocalSettings.GetDescription()
@@ -192,6 +240,9 @@ namespace SimulinkModelGenerator.Models
         public string ShapePreservation { get; internal set; }
         public string ZeroCrossingAlgorithm { get; internal set; }
         public string ZeroCrossingControl { get; internal set; }
+        public string NumberNewtonIterations { get; internal set; }
+        public string SolverJacobianMethodControl { get; internal set; }
+        public string ExtrapolationOrder { get; internal set; }
     }
 
     #endregion

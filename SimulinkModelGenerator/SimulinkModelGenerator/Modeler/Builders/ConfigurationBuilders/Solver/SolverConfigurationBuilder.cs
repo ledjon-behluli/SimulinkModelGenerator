@@ -4,7 +4,7 @@ using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
 {
-    public abstract class SolverConfigurationBuilder : ISolverConfiguration
+    public sealed class SolverConfigurationBuilder : ISolverConfiguration
     {
         private readonly Model model;
 
@@ -15,7 +15,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
 
         public ISolverConfiguration ConfigureSimulationTime(Action<SimulationTimeBuilder> action = null)
         {
-            SimulationTimeBuilder<SolverConfigurationBuilder> builder = new SimulationTimeBuilder<SolverConfigurationBuilder>(this, model);
+            SimulationTimeBuilder builder = new SimulationTimeBuilder(model);
             action?.Invoke(builder);
             return this;
         }
@@ -26,21 +26,5 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
             action?.Invoke(builder);
             return this;
         }
-
-        public abstract IConfiguration Done();
-    }
-
-    public sealed class SolverConfigurationBuilder<T> : SolverConfigurationBuilder
-        where T : IConfiguration
-    {
-        private readonly T instance;
-
-        public SolverConfigurationBuilder(T instance, Model model)
-            : base(model)
-        {
-            this.instance = instance;
-        }
-
-        public override IConfiguration Done() => instance;
     }
 }

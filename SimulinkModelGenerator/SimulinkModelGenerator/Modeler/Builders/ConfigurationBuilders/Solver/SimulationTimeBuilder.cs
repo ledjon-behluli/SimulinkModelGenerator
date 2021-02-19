@@ -1,12 +1,10 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using System;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
 {
-    public abstract class SimulationTimeBuilder : ISolverSimulationTime
+    public sealed class SimulationTimeBuilder : ISolverSimulationTime
     {
         private readonly Model model;
 
@@ -15,30 +13,30 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
             this.model = model;
         }
 
-        public ISolverOptions Set(double startTime = 0, double stopTime = 10)
+        /// <summary>
+        /// <list type="bullet">
+        /// <item><description>If <paramref name="startTime"/> &lt; 0, than it will be set to 0.</description></item>
+        /// <item><description>If <paramref name="stopTime"/> &lt; 0, than it will be set to its absolute value.</description></item>
+        /// <item><description>Invalid input: <paramref name="startTime"/> &gt; <paramref name="stopTime"/>.</description></item>
+        /// </list>
+        /// </summary>
+        /// <param name="startTime">Simulation start time.</param>
+        /// <param name="stopTime">Simulation stop time.</param>
+        /// <exception cref="ArgumentException" />
+        public void Set(double startTime = 0, double stopTime = 10)
         {
+            if (startTime < 0)
+                startTime = 0;
+
+            stopTime = Math.Abs(stopTime);
+
+            if (startTime >= stopTime)
+                throw new ArgumentException("Simulation stop time must be greater than start time.");
+
             SimulationTime simulationTime = model.ConfigSet.Solver.SimulationTime;
 
             simulationTime.StartTime = startTime.ToString();
             simulationTime.StopTime = stopTime.ToString();
-
-            return new OptionsBuilder(model);
         }
-
-        public abstract ISolverConfiguration Done();
-    }
-
-    public sealed class SimulationTimeBuilder<T> : SimulationTimeBuilder
-        where T : ISolverConfiguration
-    {
-        private readonly T instance;
-
-        public SimulationTimeBuilder(T instance, Model model)
-            : base(model)
-        {
-            this.instance = instance;
-        }
-
-        public override ISolverConfiguration Done() => instance;
     }
 }

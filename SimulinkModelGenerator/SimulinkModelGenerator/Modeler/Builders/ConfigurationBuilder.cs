@@ -13,7 +13,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
         {
             model.ConfigSet = new ConfigSet()
             {
-                Solver = ConfigSet.Solver.Default
+                Solver = Solver.Default
             };
 
             this.model = model;
@@ -21,7 +21,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
 
         public IConfiguration ConfigureSolver(Action<SolverConfigurationBuilder> action = null)
         {
-            SolverConfigurationBuilder<ConfigurationBuilder> builder = new SolverConfigurationBuilder<ConfigurationBuilder>(this, model);
+            SolverConfigurationBuilder builder = new SolverConfigurationBuilder(model);
             action?.Invoke(builder);
             return this;
         }
