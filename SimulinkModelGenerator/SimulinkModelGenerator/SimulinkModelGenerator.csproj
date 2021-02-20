@@ -44,9 +44,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Modeler\Builders\ConfigurationBuilders\Solver\FixedTypeBuilders\" />
-    <Folder Include="Modeler\Builders\ConfigurationBuilders\Solver\VariableTypeBuilders\" />
-  </ItemGroup>
-
 </Project>

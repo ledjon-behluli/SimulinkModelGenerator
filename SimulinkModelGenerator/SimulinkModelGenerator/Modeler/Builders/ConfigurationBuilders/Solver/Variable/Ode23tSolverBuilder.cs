@@ -1,0 +1,57 @@
+﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+using SimulinkModelGenerator.Models;
+
+namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.Variable
+{
+    public class Ode23tSolverBuilder : IOde23tVariableSolverType
+    {
+        private readonly Model model;
+
+        public Ode23tSolverBuilder(Model model)
+        {
+            this.model = model;
+        }
+
+        public IOde23tVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1)
+        {
+            model.ConfigSet.Solver.AdditionalSolverOptions.SetStepSize(initialStep, minStep, maxStep, numberOfConsecutiveMinSteps);
+            return this;
+        }
+
+        public IOde23tVariableSolverType WithTolerance(double? relativeTolerance = null, double? absoluteTolerance = null)
+        {
+            model.ConfigSet.Solver.AdditionalSolverOptions.SetTolerance(relativeTolerance, absoluteTolerance);
+            return this;
+        }
+
+        public IOde23tVariableSolverType WithShapePreservation(ShapePreservation shape)
+        {
+            model.ConfigSet.Solver.AdditionalSolverOptions.SetShapePreservation(shape);
+            return this;
+        }
+
+        public IOde23tVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm)
+        {
+            model.ConfigSet.Solver.AdditionalSolverOptions.SetZeroCrossingAlgorithm(algorithm);
+            return this;
+        }
+
+        public IOde23tVariableSolverType WithZeroCrossingControl(ZeroCrossingControl control)
+        {
+            model.ConfigSet.Solver.AdditionalSolverOptions.SetZeroCrossingControl(control);
+            return this;
+        }
+
+        public IOde23tVariableSolverType WithJacobian(Jacobian jacobian)
+        {
+            model.ConfigSet.Solver.AdditionalSolverOptions.SetJacobian(jacobian);
+            return this;
+        }
+
+        public IOde23tVariableSolverType WithReset(ResetMethod method)
+        {
+            model.ConfigSet.Solver.AdditionalSolverOptions.SetResetMethod(method);
+            return this;
+        }
+    }
+}

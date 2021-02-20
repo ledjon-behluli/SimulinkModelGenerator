@@ -1,4 +1,5 @@
 ﻿using SimulinkModelGenerator.Extensions;
+using System;
 using System.ComponentModel;
 
 namespace SimulinkModelGenerator.Models
@@ -195,15 +196,17 @@ namespace SimulinkModelGenerator.Models
             },
             AdditionalSolverOptions = new AdditionalSolverOptions()
             {
-                MaxStepSize = "auto",
-                MinStepSize = "auto",
-                InitialStepSize = "auto",
-                FixedStepSize = "auto",
-                NumberOfConsecutiveMinSteps = 1,
+                MaxStep = "auto",
+                MinStep = "auto",
+                InitialStep = "auto",
+                FixedStep = "auto",
+                MaxConsecutiveMinStep = "1",
                 RelativeTolerance = "1e-3",
                 AbsoluteToterance = "auto",
                 NumberNewtonIterations = "1",
-                SolverJacobianMethodControl = Jacobian.Auto.GetDescription(),
+                SolverResetMethod = ResetMethod.Fast.GetDescription(),
+                SolverJacobianMethodControl = Jacobian.FullPerturbation.GetDescription(),
+                MaxOrder = MaximumOrder.Five.GetDescription(),
                 ExtrapolationOrder = ExtrapolationOrder.Four.GetDescription(),
                 ShapePreservation = ShapePreservation.DisableAll.GetDescription(),
                 ZeroCrossingAlgorithm = ZeroCrossingAlgorithm.Nonadaptive.GetDescription(),
@@ -230,19 +233,63 @@ namespace SimulinkModelGenerator.Models
 
     public class AdditionalSolverOptions
     {
-        public string MaxStepSize { get; internal set; }
-        public string MinStepSize { get; internal set; }
-        public string InitialStepSize { get; internal set; }
-        public string FixedStepSize { get; set; }
-        public int NumberOfConsecutiveMinSteps { get; internal set; }
+        public string MaxStep { get; internal set; }
+        public string MinStep { get; internal set; }
+        public string InitialStep { get; internal set; }
+        public string FixedStep { get; internal set; }
+        public string MaxConsecutiveMinStep { get; internal set; }
         public string RelativeTolerance { get; internal set; }
         public string AbsoluteToterance { get; internal set; }
         public string ShapePreservation { get; internal set; }
         public string ZeroCrossingAlgorithm { get; internal set; }
         public string ZeroCrossingControl { get; internal set; }
         public string NumberNewtonIterations { get; internal set; }
+        public string MaxOrder { get; internal set; }
+        public string SolverResetMethod { get; internal set; }
         public string SolverJacobianMethodControl { get; internal set; }
         public string ExtrapolationOrder { get; internal set; }
+
+        #region Methods
+
+        internal void SetSampleTime(double sampleTime)
+        {
+            if (sampleTime <= 0)
+                throw new ArgumentException("Fundamental sample time can not be less than or equal to 0");
+
+            FixedStep = sampleTime.ToString();
+        }
+
+        internal void SetStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1)
+        {
+            InitialStep = initialStep == null ? "auto" : initialStep.ToString();
+            MinStep = minStep == null ? "auto" : minStep.ToString();
+            MaxStep = maxStep == null ? "auto" : maxStep.ToString();
+            MaxConsecutiveMinStep = numberOfConsecutiveMinSteps.ToString();
+        }
+
+        internal void SetTolerance(double? relativeTolerance = null, double? absoluteTolerance = null)
+        {
+            RelativeTolerance = relativeTolerance == null ? "auto" : relativeTolerance.ToString();
+            AbsoluteToterance = absoluteTolerance == null ? "auto" : absoluteTolerance.ToString();
+        }
+
+        internal void SetShapePreservation(ShapePreservation shape) => ShapePreservation = shape.GetDescription();
+
+        internal void SetJacobian(Jacobian jacobian) => SolverJacobianMethodControl = jacobian.GetDescription();
+
+        internal void SetNewtonInterations(int number) => NumberNewtonIterations = number.ToString();
+
+        internal void SetExtrapolationOrder(ExtrapolationOrder order) => ExtrapolationOrder = order.GetDescription();
+
+        internal void SetMaximumOrder(MaximumOrder order) => MaxOrder = order.GetDescription();
+
+        internal void SetResetMethod(ResetMethod method) => SolverResetMethod = method.GetDescription();
+
+        internal void SetZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm) => ZeroCrossingAlgorithm = algorithm.GetDescription();
+
+        internal void SetZeroCrossingControl(ZeroCrossingControl control) => ZeroCrossingControl = control.GetDescription();
+
+        #endregion
     }
 
     #endregion

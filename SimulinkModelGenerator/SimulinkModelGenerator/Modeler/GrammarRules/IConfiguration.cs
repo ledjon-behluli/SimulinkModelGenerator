@@ -46,8 +46,8 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
     {
         IExtrapolatedFixedSolverType WithSampleTime(double sampleTime = 0.001);
         IExtrapolatedFixedSolverType WithNewtonInterations(int number = 1);
-        IExtrapolatedFixedSolverType WithJacobian(Jacobian jacobian = Jacobian.Auto);
-        IExtrapolatedFixedSolverType WithOrder(ExtrapolationOrder order = ExtrapolationOrder.Four);
+        IExtrapolatedFixedSolverType WithJacobian(Jacobian jacobian);
+        IExtrapolatedFixedSolverType WithOrder(ExtrapolationOrder order);
     }
 
     #endregion
@@ -117,9 +117,9 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IOde15sVariableSolverType WithShapePreservation(ShapePreservation shape);
         IOde15sVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm);
         IOde15sVariableSolverType WithZeroCrossingControl(ZeroCrossingControl control);
-        IOde15sVariableSolverType WithJacobian(Jacobian jacobian = Jacobian.Auto);
-        IOde15sVariableSolverType WithMaximumOrder(MaximumOrder order = MaximumOrder.Five);
-        IOde15sVariableSolverType WithReset(ResetMethod method = ResetMethod.Fast);
+        IOde15sVariableSolverType WithJacobian(Jacobian jacobian);
+        IOde15sVariableSolverType WithOrder(MaximumOrder order);
+        IOde15sVariableSolverType WithReset(ResetMethod method);
     }
 
     public interface IOde23sVariableSolverType
@@ -129,18 +129,18 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IOde23sVariableSolverType WithShapePreservation(ShapePreservation shape);
         IOde23sVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm);
         IOde23sVariableSolverType WithZeroCrossingControl(ZeroCrossingControl control);
-        IOde23sVariableSolverType WithJacobian(Jacobian jacobian = Jacobian.Auto);
+        IOde23sVariableSolverType WithJacobian(Jacobian jacobian);
     }
 
     public interface IOde23tVariableSolverType
     {
-        IOde23sVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1);
-        IOde23sVariableSolverType WithTolerance(double? relativeTolerance = null, double? absoluteTolerance = null);
-        IOde23sVariableSolverType WithShapePreservation(ShapePreservation shape);
-        IOde23sVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm);
-        IOde23sVariableSolverType WithZeroCrossingControl(ZeroCrossingControl control);
-        IOde23sVariableSolverType WithJacobian(Jacobian jacobian = Jacobian.Auto);
-        IOde15sVariableSolverType WithReset(ResetMethod method = ResetMethod.Fast);
+        IOde23tVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1);
+        IOde23tVariableSolverType WithTolerance(double? relativeTolerance = null, double? absoluteTolerance = null);
+        IOde23tVariableSolverType WithShapePreservation(ShapePreservation shape);
+        IOde23tVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm);
+        IOde23tVariableSolverType WithZeroCrossingControl(ZeroCrossingControl control);
+        IOde23tVariableSolverType WithJacobian(Jacobian jacobian);
+        IOde23tVariableSolverType WithReset(ResetMethod method);
     }
 
     public interface IOde23tbVariableSolverType
@@ -150,8 +150,8 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IOde23tbVariableSolverType WithShapePreservation(ShapePreservation shape);
         IOde23tbVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm);
         IOde23tbVariableSolverType WithZeroCrossingControl(ZeroCrossingControl control);
-        IOde23tbVariableSolverType WithJacobian(Jacobian jacobian = Jacobian.Auto);
-        IOde23tbVariableSolverType WithReset(ResetMethod method = ResetMethod.Fast);
+        IOde23tbVariableSolverType WithJacobian(Jacobian jacobian);
+        IOde23tbVariableSolverType WithReset(ResetMethod method);
     }
 
     #endregion

@@ -1,7 +1,7 @@
 ﻿using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
+using SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.Variable;
 using SimulinkModelGenerator.Models;
-using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
 {
@@ -12,24 +12,19 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
         public VariableOptionsBuilder(Model model)
         {
             this.model = model;
-            SetSolverType(VariableSolver.Auto);
+            this.model.ConfigSet.Solver.SolverOptions.Solver = VariableSolver.Auto.GetDescription();
+            this.model.ConfigSet.Solver.SolverOptions.SolverName = VariableSolver.Auto.GetDescription();
         }
 
-        private void SetSolverType(VariableSolver solver)
-        {
-            model.ConfigSet.Solver.SolverOptions.Solver = solver.GetDescription();
-            model.ConfigSet.Solver.SolverOptions.SolverName = solver.GetDescription();
-        }
-
-        public IAutoVariableSolverType Auto() => throw new NotImplementedException();
-        public IDiscreteVariableSolverType Discrete() => throw new NotImplementedException();
-        public IOde45VariableSolverType Ode45() => throw new NotImplementedException();
-        public IOde23VariableSolverType Ode23() => throw new NotImplementedException();
-        public IOde113VariableSolverType Ode113() => throw new NotImplementedException();
-        public IOde15sVariableSolverType Ode15s() => throw new NotImplementedException();
-        public IOde23sVariableSolverType Ode23s() => throw new NotImplementedException();
-        public IOde23tVariableSolverType Ode23t() => throw new NotImplementedException();
-        public IOde23tbVariableSolverType Ode23tb() => throw new NotImplementedException();
+        public IAutoVariableSolverType Auto() => new AutoSolverBuilder(model);
+        public IDiscreteVariableSolverType Discrete() => new DiscreteSolverBuilder(model);
+        public IOde45VariableSolverType Ode45() => new Ode45SolverBuilder(model);
+        public IOde23VariableSolverType Ode23() => new Ode23SolverBuilder(model);
+        public IOde113VariableSolverType Ode113() => new Ode113SolverBuilder(model);
+        public IOde15sVariableSolverType Ode15s() => new Ode15sSolverBuilder(model);
+        public IOde23sVariableSolverType Ode23s() => new Ode23sSolverBuilder(model);
+        public IOde23tVariableSolverType Ode23t() => new Ode23tSolverBuilder(model);
+        public IOde23tbVariableSolverType Ode23tb() => new Ode23tbSolverBuilder(model);
     }
 }
 
