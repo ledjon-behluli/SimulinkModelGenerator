@@ -12,7 +12,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
             this.model = model;
         }
 
-        public IVariableStepSolverOptions WithVariableStep() => new VariableOptionsBuilder(model);
-        public IFixedStepSolverOptions WithFixedStep() => new FixedOptionsBuilder(model);
+        public IVariableStepSolverOptions AsVariableStepSolver() => new VariableOptionsBuilder(model);
+        public IFixedStepSolverOptions AsFixedStepSolver() => new FixedOptionsBuilder(model);
     }
 }

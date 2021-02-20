@@ -13,14 +13,33 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
             this.model = model;
         }
 
-        public ISolverConfiguration ConfigureSimulationTime(Action<SimulationTimeBuilder> action = null)
+        /// <summary>
+        /// <list type="bullet">
+        /// <item><description>If <paramref name="startTime"/> &lt; 0, than it will be set to 0.</description></item>
+        /// <item><description>If <paramref name="stopTime"/> &lt; 0, than it will be set to its absolute value.</description></item>
+        /// <item><description>Invalid input: <paramref name="startTime"/> &gt; <paramref name="stopTime"/>.</description></item>
+        /// </list>
+        /// </summary>
+        /// <param name="startTime">Simulation start time.</param>
+        /// <param name="stopTime">Simulation stop time.</param>
+        /// <exception cref="ArgumentException" />
+        public ISolverConfiguration SetSimulationTimes(double startTime = 0, double stopTime = 10)
         {
-            SimulationTimeBuilder builder = new SimulationTimeBuilder(model);
-            action?.Invoke(builder);
+            if (startTime < 0)
+                startTime = 0;
+
+            stopTime = Math.Abs(stopTime);
+
+            if (startTime >= stopTime)
+                throw new ArgumentException("Simulation stop time must be greater than start time.");
+
+            model.ConfigSet.Solver.SimulationTime.StartTime = startTime.ToString();
+            model.ConfigSet.Solver.SimulationTime.StopTime = stopTime.ToString();
+
             return this;
         }
 
-        public ISolverConfiguration ConfigureOptions(Action<OptionsBuilder> action = null)
+        public ISolverConfiguration Options(Action<OptionsBuilder> action = null)
         {
             OptionsBuilder builder = new OptionsBuilder(model);
             action?.Invoke(builder);

@@ -7,7 +7,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
     {
         IModel WithName(string name);
         IModel WithSimulationMode(SimulationMode mode = SimulationMode.Normal);
-        IModel AddConfigurations(Action<ConfigurationBuilder> action = null);
+        IModel Configure(Action<ConfigurationBuilder> action = null);
         IFinalizeModel AddControlSystem(Action<ControlSystemBuilder> action = null);
     }
 

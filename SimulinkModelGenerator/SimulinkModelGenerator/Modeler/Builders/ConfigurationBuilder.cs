@@ -13,13 +13,13 @@ namespace SimulinkModelGenerator.Modeler.Builders
         {
             model.ConfigSet = new ConfigSet()
             {
-                Solver = Solver.Default
+                Solver = Models.Solver.Default
             };
 
             this.model = model;
         }
 
-        public IConfiguration ConfigureSolver(Action<SolverConfigurationBuilder> action = null)
+        public IConfiguration Solver(Action<SolverConfigurationBuilder> action = null)
         {
             SolverConfigurationBuilder builder = new SolverConfigurationBuilder(model);
             action?.Invoke(builder);

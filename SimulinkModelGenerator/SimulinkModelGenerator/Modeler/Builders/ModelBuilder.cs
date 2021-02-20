@@ -55,7 +55,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
             return this;
         }
 
-        public IModel AddConfigurations(Action<ConfigurationBuilder> action = null)
+        public IModel Configure(Action<ConfigurationBuilder> action = null)
         {
             ConfigurationBuilder builder = new ConfigurationBuilder(model);
             action?.Invoke(builder);

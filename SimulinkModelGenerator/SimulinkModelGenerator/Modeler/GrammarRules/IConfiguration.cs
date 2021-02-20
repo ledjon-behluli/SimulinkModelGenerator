@@ -6,24 +6,19 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 {
     public interface IConfiguration
     {
-        IConfiguration ConfigureSolver(Action<SolverConfigurationBuilder> action = null);
+        IConfiguration Solver(Action<SolverConfigurationBuilder> action = null);
     }
 
     public interface ISolverConfiguration
     {
-        ISolverConfiguration ConfigureSimulationTime(Action<SimulationTimeBuilder> action = null);
-        ISolverConfiguration ConfigureOptions(Action<OptionsBuilder> action = null);
-    }
-
-    public interface ISolverSimulationTime
-    {
-        void Set(double startTime = 0, double stopTime = 10);
+        ISolverConfiguration SetSimulationTimes(double startTime = 0, double stopTime = 10);
+        ISolverConfiguration Options(Action<OptionsBuilder> action = null);
     }
 
     public interface ISolverOptions
     {
-        IVariableStepSolverOptions WithVariableStep();
-        IFixedStepSolverOptions WithFixedStep();
+        IVariableStepSolverOptions AsVariableStepSolver();
+        IFixedStepSolverOptions AsFixedStepSolver();
     }
 
 
