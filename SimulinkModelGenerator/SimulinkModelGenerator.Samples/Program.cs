@@ -11,12 +11,12 @@ namespace SimulinkModelGenerator.Samples
         {
             test();
 
-            //Sample0();
-            //Sample1();
-            //Sample2();
-            //Sample3();
-            //Sample4();
-            //Sample5();
+            //All_Elements();
+            //Common_Elements_With_Set_Names_And_Without_Connections();
+            //Common_Elements_With_Set_Names_And_With_Connections();
+            //Common_Elements_With_Automatic_Names_And_With_Connections_Style_1();
+            //Common_Elements_With_Automatic_Names_And_With_Connections_Style_2();
+            //PID_Example();
         }
 
         static void test()
@@ -50,10 +50,10 @@ namespace SimulinkModelGenerator.Samples
                 .Save(path);
         }
 
-        static void Sample0()
+        static void All_Elements()
         {
             new ModelBuilder()
-                .WithName("sample0")
+                .WithName("all elements")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s => s.AddStep(x => x.SetPosition(100, 100))
@@ -112,10 +112,10 @@ namespace SimulinkModelGenerator.Samples
                 .Save(path);
         }
 
-        static void Sample1()
+        static void Common_Elements_With_Set_Names_And_Without_Connections()
         {
             ModelBuilder builder = new ModelBuilder();
-            builder.WithName("sample1")
+            builder.WithName("common elements with set names and without connections")
                    .AddControlSystem(cs =>
                    {
                        cs.AddSources(s => {
@@ -139,10 +139,10 @@ namespace SimulinkModelGenerator.Samples
                    .Save(path);
         }
 
-        static void Sample2()
+        static void Common_Elements_With_Set_Names_And_With_Connections()
         {
             new ModelBuilder()
-                .WithName("sample2")
+                .WithName("common elements with set names and with connections")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s =>
@@ -173,10 +173,10 @@ namespace SimulinkModelGenerator.Samples
                 .Save(path);
         }
 
-        static void Sample3()
+        static void Common_Elements_With_Automatic_Names_And_With_Connections_Style_1()
         {
             new ModelBuilder()
-                .WithName("sample3")
+                .WithName("common elements with automatic names and with connections")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s =>
@@ -207,39 +207,35 @@ namespace SimulinkModelGenerator.Samples
                 .Save(path);
         }
 
-        static void Sample4()
-        {
+        static void Common_Elements_With_Automatic_Names_And_With_Connections_Style_2()
+        { 
             new ModelBuilder()
-                .WithName("sample4")
-                .AddControlSystem(cs =>
-                {
-                    cs.AddSources(s => s.AddStep(sp => sp.SetPosition(190, 145))
-                                        .AddConstant(c => c.SetValue(3).SetPosition(190, 225)));
-                    cs.AddMathOperations(mo => mo.AddSum(sum => sum.SetInputs(InputType.Plus, InputType.Minus, InputType.Minus).SetPosition(320, 150))
-                                                .AddGain(g => g.SetGain(3).FlipHorizontally().SetPosition(515, 230))
-                                                .AddGain(g => g.SetGain(2).FlipHorizontally().SetPosition(515, 300)));
-                    cs.AddContinuous(co =>
-                    {
-                        co.AddPIDController(pid => pid.SetDerivative(3).SetIntegral(3).SetProportional(3).SetPosition(435, 142));
-                        co.AddTransferFunction(tf => tf.SetNumerator(1).SetDenominator(3, 1, 2).SetPosition(595, 142));
-                    });
-                    cs.AddSinks(s => s.AddScope(scope => scope.SetInputPorts(2).SetPosition(820, 144)));
-                    cs.AddConnections("Step", c =>
-                    {
-                        c.ThanConnect("Sum").ThanConnect("PID Controller").ThanConnect("TransferFcn")
-                        .Branch(b => b.Towards("Scope", 1))
-                        .Branch(b => b.Towards("Gain").ThanConnect("Sum", 3))
-                        .Branch(b => b.Towards("Gain1").ThanConnect("Sum", 2))
-                        .Connect("Constant", "Scope", 1, 2);
-                    });
-                })
+                .WithName("common elements with automatic names and with connections")
+                .AddControlSystem(cs => cs
+                    .AddSources(s => s.AddConstant(c => c.SetPosition(285, 195)))
+                    .AddMathOperations(mo => mo
+                        .AddGain(g => g.SetPosition(595, 120))
+                        .AddGain(g => g.SetPosition(595, 195))
+                        .AddGain(g => g.SetPosition(595, 260))
+                        .AddGain(g => g.SetPosition(380, 195)))
+                    .AddSinks(s => s
+                        .AddScope(sc => sc.SetPosition(720, 194))
+                        .AddScope(sc => sc.SetPosition(720, 119))
+                        .AddScope(sc => sc.SetPosition(720, 259)))
+                    .AddConnections("Constant", c => c
+                        .ThanConnect("Gain3")
+                        .Branch(b => b.Towards("Gain")
+                            .ThanConnect("Scope1"))
+                            .Branch(b => b.Towards("Gain1")
+                                .ThanConnect("Scope"))
+                                .Branch(b => b.Towards("Gain2").ThanConnect("Scope2"))))
                 .Save(path);
         }
 
-        static void Sample5()
+        static void PID_Example()
         {
             new ModelBuilder()
-                .WithName("sample5")
+                .WithName("PID example")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s => s.AddStep(sp => sp.SetStepTime(0).SetPosition(190, 145))
