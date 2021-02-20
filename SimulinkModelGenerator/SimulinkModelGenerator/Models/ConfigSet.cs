@@ -1,5 +1,6 @@
 ﻿using SimulinkModelGenerator.Extensions;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace SimulinkModelGenerator.Models
@@ -7,12 +8,154 @@ namespace SimulinkModelGenerator.Models
     public class ConfigSet
     {
         public Solver Solver { get; internal set; }
+
+        public override string ToString()
+        {
+            string properties = string.Empty;
+            foreach (Parameter p in Solver.Parameters)
+            {
+                properties += p.ToString() + Environment.NewLine;
+            }
+
+            return $@"Simulink.ConfigSet {{
+                        Array {{
+                            Simulink.SolverCC {{
+                                {properties}
+                            }}
+                        }}
+                    }}";
+        }
     }
 
     #region Solver
 
-    #region Enums
+    public class Solver
+    {
+        public List<Parameter> Parameters =>
+            new List<Parameter>()
+            {
+                new Parameter() { Name = "StartTime", Text = SimulationTime.StartTime.ToString() },
+                new Parameter() { Name = "StopTime", Text = SimulationTime.StopTime.ToString() },
+                new Parameter() { Name = "Solver", Text = SolverOptions.Solver },
+                new Parameter() { Name = "SolverName", Text = SolverOptions.SolverName },
+                new Parameter() { Name = "MaxStep", Text = AdditionalSolverOptions.MaxStep == null ? "auto" : AdditionalSolverOptions.MaxStep.ToString() },
+                new Parameter() { Name = "MinStep", Text = AdditionalSolverOptions.MinStep == null ? "auto" : AdditionalSolverOptions.MinStep.ToString() },
+                new Parameter() { Name = "InitialStep", Text = AdditionalSolverOptions.InitialStep == null ? "auto" : AdditionalSolverOptions.InitialStep.ToString() },
+                new Parameter() { Name = "FixedStep", Text = AdditionalSolverOptions.FixedStep == null ? "auto" : AdditionalSolverOptions.FixedStep.ToString() },
+                new Parameter() { Name = "MaxConsecutiveMinStep", Text = AdditionalSolverOptions.MaxConsecutiveMinStep == null ? "auto" : AdditionalSolverOptions.MaxConsecutiveMinStep.ToString() },
+                new Parameter() { Name = "RelTol", Text = AdditionalSolverOptions.RelativeTolerance == null ? "auto" : AdditionalSolverOptions.RelativeTolerance.ToString() },
+                new Parameter() { Name = "AbsTol", Text = AdditionalSolverOptions.AbsoluteToterance == null ? "auto" : AdditionalSolverOptions.AbsoluteToterance.ToString() },
+                new Parameter() { Name = "NumberNewtonIterations", Text = AdditionalSolverOptions.NumberNewtonIterations.ToString() },
+                new Parameter() { Name = "SolverResetMethod", Text = AdditionalSolverOptions.SolverResetMethod.GetDescription() },
+                new Parameter() { Name = "SolverJacobianMethodControl", Text = AdditionalSolverOptions.SolverJacobianMethodControl.GetDescription() },
+                new Parameter() { Name = "MaxOrder", Text = AdditionalSolverOptions.MaxOrder.GetDescription() },
+                new Parameter() { Name = "ExtrapolationOrder", Text = AdditionalSolverOptions.ExtrapolationOrder.GetDescription() },
+                new Parameter() { Name = "ShapePreservation", Text = AdditionalSolverOptions.ShapePreservation.GetDescription() },
+                new Parameter() { Name = "ZeroCrossingAlgorithm", Text = AdditionalSolverOptions.ZeroCrossingAlgorithm.GetDescription() },
+                new Parameter() { Name = "ZeroCrossingControl", Text = AdditionalSolverOptions.ZeroCrossingControl.GetDescription() }
+            };
 
+        internal static Solver Default => new Solver()
+        {
+            SimulationTime = new SimulationTime()
+            {
+                StartTime = 0,
+                StopTime = 10
+            },
+            SolverOptions = new SolverOptions()
+            {
+                Solver = VariableSolver.Auto.GetDescription(),
+                SolverName = VariableSolver.Auto.GetDescription()
+            },
+            AdditionalSolverOptions = new AdditionalSolverOptions()
+            {
+                MaxStep = null,
+                MinStep = null,
+                InitialStep = null,
+                FixedStep = null,
+                MaxConsecutiveMinStep = 1,
+                RelativeTolerance = 0.001,
+                AbsoluteToterance = null,
+                NumberNewtonIterations = 1,
+                SolverResetMethod = ResetMethod.Fast,
+                SolverJacobianMethodControl = Jacobian.FullPerturbation,
+                MaxOrder = MaximumOrder.Five,
+                ExtrapolationOrder = ExtrapolationOrder.Four,
+                ShapePreservation = ShapePreservation.DisableAll,
+                ZeroCrossingAlgorithm = ZeroCrossingAlgorithm.Nonadaptive,
+                ZeroCrossingControl = ZeroCrossingControl.UseLocalSettings
+            }
+        };
+
+        internal SimulationTime SimulationTime { get; set; }
+        internal SolverOptions SolverOptions { get; set; }
+        internal AdditionalSolverOptions AdditionalSolverOptions { get; set; }
+    }
+
+    internal class SimulationTime
+    {
+        public double StartTime { get; internal set; }
+        public double StopTime { get; internal set; }
+    }
+
+    internal class SolverOptions
+    {
+        public string Solver { get; internal set; }
+        public string SolverName { get; internal set; }
+    }
+
+    internal class AdditionalSolverOptions
+    {
+        public double? MaxStep { get; internal set; }
+        public double? MinStep { get; internal set; }
+        public double? InitialStep { get; internal set; }
+        public double? FixedStep { get; internal set; }
+        public int? MaxConsecutiveMinStep { get; internal set; }
+        public double? RelativeTolerance { get; internal set; }
+        public double? AbsoluteToterance { get; internal set; }
+        public ShapePreservation ShapePreservation { get; internal set; }
+        public ZeroCrossingAlgorithm ZeroCrossingAlgorithm { get; internal set; }
+        public ZeroCrossingControl ZeroCrossingControl { get; internal set; }
+        public int NumberNewtonIterations { get; internal set; }
+        public MaximumOrder MaxOrder { get; internal set; }
+        public ResetMethod SolverResetMethod { get; internal set; }
+        public Jacobian SolverJacobianMethodControl { get; internal set; }
+        public ExtrapolationOrder ExtrapolationOrder { get; internal set; }
+
+        #region Methods
+
+        internal void SetSampleTime(double sampleTime)
+        {
+            if (sampleTime <= 0)
+                throw new ArgumentException("Fundamental sample time can not be less than or equal to 0");
+
+            FixedStep = sampleTime;
+        }
+
+        internal void SetStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int? numberOfConsecutiveMinSteps = 1)
+        {
+            InitialStep = initialStep;
+            MinStep = minStep;
+            MaxStep = maxStep;
+            MaxConsecutiveMinStep = numberOfConsecutiveMinSteps;
+        }
+
+        internal void SetTolerance(double? relativeTolerance = null, double? absoluteTolerance = null)
+        {
+            RelativeTolerance = relativeTolerance;
+            AbsoluteToterance = absoluteTolerance;
+        }
+
+        internal void SetNewtonInterations(int number) => NumberNewtonIterations = number;
+
+        #endregion
+    }
+
+    #endregion
+}
+
+namespace SimulinkModelGenerator
+{
     internal enum VariableSolver
     {
         /// <summary>
@@ -109,7 +252,7 @@ namespace SimulinkModelGenerator.Models
         [Description("ode14x")]
         Ode14x
     }
-   
+
     public enum ShapePreservation
     {
         [Description("EnableAll")]
@@ -177,120 +320,4 @@ namespace SimulinkModelGenerator.Models
         [Description("Robust")]
         Robust
     }
-
-    #endregion
-
-    public class Solver
-    {
-        internal static Solver Default => new Solver()
-        {
-            SimulationTime = new SimulationTime()
-            {
-                StartTime = "0.0",
-                StopTime = "10.0"
-            },
-            SolverOptions = new SolverOptions()
-            {
-                Solver = VariableSolver.Auto.GetDescription(),
-                SolverName = VariableSolver.Auto.GetDescription()
-            },
-            AdditionalSolverOptions = new AdditionalSolverOptions()
-            {
-                MaxStep = "auto",
-                MinStep = "auto",
-                InitialStep = "auto",
-                FixedStep = "auto",
-                MaxConsecutiveMinStep = "1",
-                RelativeTolerance = "1e-3",
-                AbsoluteToterance = "auto",
-                NumberNewtonIterations = "1",
-                SolverResetMethod = ResetMethod.Fast.GetDescription(),
-                SolverJacobianMethodControl = Jacobian.FullPerturbation.GetDescription(),
-                MaxOrder = MaximumOrder.Five.GetDescription(),
-                ExtrapolationOrder = ExtrapolationOrder.Four.GetDescription(),
-                ShapePreservation = ShapePreservation.DisableAll.GetDescription(),
-                ZeroCrossingAlgorithm = ZeroCrossingAlgorithm.Nonadaptive.GetDescription(),
-                ZeroCrossingControl = ZeroCrossingControl.UseLocalSettings.GetDescription()
-            }
-        };
-
-        public SimulationTime SimulationTime { get; internal set; }
-        public SolverOptions SolverOptions { get; internal set; }
-        public AdditionalSolverOptions AdditionalSolverOptions { get; internal set; }
-    }
-
-    public class SimulationTime
-    {
-        public string StartTime { get; internal set; }
-        public string StopTime { get; internal set; }
-    }
-
-    public class SolverOptions
-    {
-        public string Solver { get; internal set; }
-        public string SolverName { get; internal set; }
-    }
-
-    public class AdditionalSolverOptions
-    {
-        public string MaxStep { get; internal set; }
-        public string MinStep { get; internal set; }
-        public string InitialStep { get; internal set; }
-        public string FixedStep { get; internal set; }
-        public string MaxConsecutiveMinStep { get; internal set; }
-        public string RelativeTolerance { get; internal set; }
-        public string AbsoluteToterance { get; internal set; }
-        public string ShapePreservation { get; internal set; }
-        public string ZeroCrossingAlgorithm { get; internal set; }
-        public string ZeroCrossingControl { get; internal set; }
-        public string NumberNewtonIterations { get; internal set; }
-        public string MaxOrder { get; internal set; }
-        public string SolverResetMethod { get; internal set; }
-        public string SolverJacobianMethodControl { get; internal set; }
-        public string ExtrapolationOrder { get; internal set; }
-
-        #region Methods
-
-        internal void SetSampleTime(double sampleTime)
-        {
-            if (sampleTime <= 0)
-                throw new ArgumentException("Fundamental sample time can not be less than or equal to 0");
-
-            FixedStep = sampleTime.ToString();
-        }
-
-        internal void SetStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1)
-        {
-            InitialStep = initialStep == null ? "auto" : initialStep.ToString();
-            MinStep = minStep == null ? "auto" : minStep.ToString();
-            MaxStep = maxStep == null ? "auto" : maxStep.ToString();
-            MaxConsecutiveMinStep = numberOfConsecutiveMinSteps.ToString();
-        }
-
-        internal void SetTolerance(double? relativeTolerance = null, double? absoluteTolerance = null)
-        {
-            RelativeTolerance = relativeTolerance == null ? "auto" : relativeTolerance.ToString();
-            AbsoluteToterance = absoluteTolerance == null ? "auto" : absoluteTolerance.ToString();
-        }
-
-        internal void SetShapePreservation(ShapePreservation shape) => ShapePreservation = shape.GetDescription();
-
-        internal void SetJacobian(Jacobian jacobian) => SolverJacobianMethodControl = jacobian.GetDescription();
-
-        internal void SetNewtonInterations(int number) => NumberNewtonIterations = number.ToString();
-
-        internal void SetExtrapolationOrder(ExtrapolationOrder order) => ExtrapolationOrder = order.GetDescription();
-
-        internal void SetMaximumOrder(MaximumOrder order) => MaxOrder = order.GetDescription();
-
-        internal void SetResetMethod(ResetMethod method) => SolverResetMethod = method.GetDescription();
-
-        internal void SetZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm) => ZeroCrossingAlgorithm = algorithm.GetDescription();
-
-        internal void SetZeroCrossingControl(ZeroCrossingControl control) => ZeroCrossingControl = control.GetDescription();
-
-        #endregion
-    }
-
-    #endregion
 }

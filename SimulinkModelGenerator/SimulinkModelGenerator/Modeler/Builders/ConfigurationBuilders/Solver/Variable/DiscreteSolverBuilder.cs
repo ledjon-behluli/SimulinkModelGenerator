@@ -20,13 +20,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.V
 
         public IDiscreteVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetZeroCrossingAlgorithm(algorithm);
+            model.ConfigSet.Solver.AdditionalSolverOptions.ZeroCrossingAlgorithm = algorithm;
             return this;
         }
 
         public IDiscreteVariableSolverType WithZeroCrossingControl(ZeroCrossingControl control)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetZeroCrossingControl(control);
+            model.ConfigSet.Solver.AdditionalSolverOptions.ZeroCrossingControl = control;
             return this;
         }
     }

@@ -13,7 +13,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.V
         }
 
 
-        public IAutoVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1)
+        public IAutoVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int? numberOfConsecutiveMinSteps = 1)
         {
             model.ConfigSet.Solver.AdditionalSolverOptions.SetStepSize(initialStep, minStep, maxStep, numberOfConsecutiveMinSteps);
             return this;
@@ -27,19 +27,19 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.V
 
         public IAutoVariableSolverType WithShapePreservation(ShapePreservation shape)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetShapePreservation(shape);
+            model.ConfigSet.Solver.AdditionalSolverOptions.ShapePreservation = shape;
             return this;
         }
 
         public IAutoVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetZeroCrossingAlgorithm(algorithm);
+            model.ConfigSet.Solver.AdditionalSolverOptions.ZeroCrossingAlgorithm = algorithm;
             return this;
         }
 
         public IAutoVariableSolverType WithZeroCrossingControl(ZeroCrossingControl control)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetZeroCrossingControl(control);
+            model.ConfigSet.Solver.AdditionalSolverOptions.ZeroCrossingControl = control;
             return this;
         }
     }

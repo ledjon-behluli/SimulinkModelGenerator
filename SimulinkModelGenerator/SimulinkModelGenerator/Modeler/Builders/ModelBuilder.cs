@@ -29,7 +29,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
         External
     }
 
-    public sealed class ModelBuilder : IModel, IFinalizeModel
+    public sealed partial class ModelBuilder : IModel, IFinalizeModel
     {        
         private Model model;
 
@@ -37,6 +37,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
         private SimulationMode _SimulationMode = SimulationMode.Normal;
 
         public string MDL { get; private set; }
+        public static IModel Create() => new ModelBuilder();
 
         public ModelBuilder()
         {
@@ -74,6 +75,8 @@ namespace SimulinkModelGenerator.Modeler.Builders
             this.model.Name = _ModelName;
             this.model.SimulationMode = _SimulationMode.GetDescription();
 
+            string configSet = model.ConfigSet.ToString();
+
             string blocks = string.Empty;
             foreach(Block block in model.System.Block)
             {
@@ -89,6 +92,15 @@ namespace SimulinkModelGenerator.Modeler.Builders
             MDL = $@"Model {{
                         Name ""{model.Name}""
                         SimulationMode ""{model.SimulationMode}""
+                        Array {{
+                           Simulink.ConfigSet {{
+                                Array {{
+                                    Simulink.SolverCC {{
+                                        {configSet}
+                                    }}
+                                }}
+                            }}
+                        }}
                         System {{
                             Name ""{model.Name}""
                             {blocks}

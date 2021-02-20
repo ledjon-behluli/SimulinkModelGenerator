@@ -12,7 +12,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.V
             this.model = model;
         }
 
-        public IOde113VariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1)
+        public IOde113VariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int? numberOfConsecutiveMinSteps = 1)
         {
             model.ConfigSet.Solver.AdditionalSolverOptions.SetStepSize(initialStep, minStep, maxStep, numberOfConsecutiveMinSteps);
             return this;
@@ -26,19 +26,19 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.V
 
         public IOde113VariableSolverType WithShapePreservation(ShapePreservation shape)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetShapePreservation(shape);
+            model.ConfigSet.Solver.AdditionalSolverOptions.ShapePreservation = shape;
             return this;
         }
 
         public IOde113VariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetZeroCrossingAlgorithm(algorithm);
+            model.ConfigSet.Solver.AdditionalSolverOptions.ZeroCrossingAlgorithm = algorithm;
             return this;
         }
 
         public IOde113VariableSolverType WithZeroCrossingControl(ZeroCrossingControl control)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetZeroCrossingControl(control);
+            model.ConfigSet.Solver.AdditionalSolverOptions.ZeroCrossingControl = control;
             return this;
         }
     }

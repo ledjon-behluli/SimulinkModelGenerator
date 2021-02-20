@@ -20,19 +20,19 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.F
 
         public IExtrapolatedFixedSolverType WithJacobian(Jacobian jacobian)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetJacobian(jacobian);
+            model.ConfigSet.Solver.AdditionalSolverOptions.SolverJacobianMethodControl = jacobian;
             return this;
         }
 
-        public IExtrapolatedFixedSolverType WithNewtonInterations(int number = 1)
+        public IExtrapolatedFixedSolverType WithNewtonInterations(int numberOfIterations = 1)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetNewtonInterations(number);
+            model.ConfigSet.Solver.AdditionalSolverOptions.NumberNewtonIterations = numberOfIterations;
             return this;
         }
 
         public IExtrapolatedFixedSolverType WithOrder(ExtrapolationOrder order)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetExtrapolationOrder(order);
+            model.ConfigSet.Solver.AdditionalSolverOptions.ExtrapolationOrder = order;
             return this;
         }
     }

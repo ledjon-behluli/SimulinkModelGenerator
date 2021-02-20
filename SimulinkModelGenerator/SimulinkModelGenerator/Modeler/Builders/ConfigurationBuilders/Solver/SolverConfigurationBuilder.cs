@@ -33,8 +33,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
             if (startTime >= stopTime)
                 throw new ArgumentException("Simulation stop time must be greater than start time.");
 
-            model.ConfigSet.Solver.SimulationTime.StartTime = startTime.ToString();
-            model.ConfigSet.Solver.SimulationTime.StopTime = stopTime.ToString();
+            model.ConfigSet.Solver.SimulationTime.StartTime = startTime;
+            model.ConfigSet.Solver.SimulationTime.StopTime = stopTime;
 
             return this;
         }

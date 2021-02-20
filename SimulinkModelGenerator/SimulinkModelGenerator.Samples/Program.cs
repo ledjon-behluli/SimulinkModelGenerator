@@ -21,12 +21,27 @@ namespace SimulinkModelGenerator.Samples
 
         static void test()
         {
-           
+            ModelBuilder
+                .Create()
+                .WithName("test")
+                .WithSimulationMode(SimulationMode.Accelerator)
+                .Configure(c => c
+                    .Solver(s => s
+                        .SetSimulationTimes(0, 10)
+                        .Options(o => o
+                            .AsFixedStepSolver()
+                                .Ode14x()
+                                .WithJacobian(Jacobian.FullPerturbation)
+                                .WithNewtonInterations(4)
+                                .WithOrder(ExtrapolationOrder.Four))))
+                .AddControlSystem()
+                .Build();
         }
 
         static void All_Elements()
         {
-            new ModelBuilder()
+            ModelBuilder
+                .Create()
                 .WithName("all elements")
                 .AddControlSystem(cs =>
                 {
@@ -88,34 +103,36 @@ namespace SimulinkModelGenerator.Samples
 
         static void Common_Elements_With_Set_Names_And_Without_Connections()
         {
-            ModelBuilder builder = new ModelBuilder();
-            builder.WithName("common elements with set names and without connections")
-                   .AddControlSystem(cs =>
-                   {
-                       cs.AddSources(s => {
-                           s.AddStep(step => step.SetPosition(170, 110).WithName("Step"));
-                       })
-                       .AddMathOperations(m =>
-                       {
-                           m.AddGain(gain => gain.SetPosition(355, 60).WithName("Gain1"));
-                           m.AddGain(gain => gain.SetPosition(355, 165).WithName("Gain2"));
-                       })
-                       .AddSinks(s => {
-                           s.AddScope(scope => scope.SetPosition(470, 59).WithName("Scope1"));
-                           s.AddScope(scope => scope.SetPosition(470, 163).WithName("Scope2"));
-                       })
-                       .AddConnections("Step", c =>
-                       {
-                           c.Branch(b => b.Towards("Gain1").ThanConnect("Scope1"));
-                           c.Branch(b => b.Towards("Gain2").ThanConnect("Scope2"));
-                       });
-                   })
-                   .Save(path);
+            ModelBuilder
+                .Create()
+                .WithName("common elements with set names and without connections")
+                .AddControlSystem(cs =>
+                {
+                    cs.AddSources(s => {
+                        s.AddStep(step => step.SetPosition(170, 110).WithName("Step"));
+                    })
+                    .AddMathOperations(m =>
+                    {
+                        m.AddGain(gain => gain.SetPosition(355, 60).WithName("Gain1"));
+                        m.AddGain(gain => gain.SetPosition(355, 165).WithName("Gain2"));
+                    })
+                    .AddSinks(s => {
+                        s.AddScope(scope => scope.SetPosition(470, 59).WithName("Scope1"));
+                        s.AddScope(scope => scope.SetPosition(470, 163).WithName("Scope2"));
+                    })
+                    .AddConnections("Step", c =>
+                    {
+                        c.Branch(b => b.Towards("Gain1").ThanConnect("Scope1"));
+                        c.Branch(b => b.Towards("Gain2").ThanConnect("Scope2"));
+                    });
+                })
+                .Save(path);
         }
 
         static void Common_Elements_With_Set_Names_And_With_Connections()
         {
-            new ModelBuilder()
+            ModelBuilder
+                .Create()
                 .WithName("common elements with set names and with connections")
                 .AddControlSystem(cs =>
                 {
@@ -149,7 +166,8 @@ namespace SimulinkModelGenerator.Samples
 
         static void Common_Elements_With_Automatic_Names_And_With_Connections_Style_1()
         {
-            new ModelBuilder()
+            ModelBuilder
+                .Create()
                 .WithName("common elements with automatic names and with connections")
                 .AddControlSystem(cs =>
                 {
@@ -182,8 +200,9 @@ namespace SimulinkModelGenerator.Samples
         }
 
         static void Common_Elements_With_Automatic_Names_And_With_Connections_Style_2()
-        { 
-            new ModelBuilder()
+        {
+            ModelBuilder
+                .Create()
                 .WithName("common elements with automatic names and with connections")
                 .AddControlSystem(cs => cs
                     .AddSources(s => s.AddConstant(c => c.SetPosition(285, 195)))
@@ -208,7 +227,8 @@ namespace SimulinkModelGenerator.Samples
 
         static void PID_Example()
         {
-            new ModelBuilder()
+            ModelBuilder
+                .Create()
                 .WithName("PID example")
                 .AddControlSystem(cs =>
                 {

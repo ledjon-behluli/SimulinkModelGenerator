@@ -45,7 +45,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
     public interface IExtrapolatedFixedSolverType
     {
         IExtrapolatedFixedSolverType WithSampleTime(double sampleTime = 0.001);
-        IExtrapolatedFixedSolverType WithNewtonInterations(int number = 1);
+        IExtrapolatedFixedSolverType WithNewtonInterations(int numberOfIterations = 1);
         IExtrapolatedFixedSolverType WithJacobian(Jacobian jacobian);
         IExtrapolatedFixedSolverType WithOrder(ExtrapolationOrder order);
     }
@@ -69,7 +69,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IAutoVariableSolverType
     {
-        IAutoVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1);
+        IAutoVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int? numberOfConsecutiveMinSteps = 1);
         IAutoVariableSolverType WithTolerance(double? relativeTolerance = null, double? absoluteTolerance = null);
         IAutoVariableSolverType WithShapePreservation(ShapePreservation shape);
         IAutoVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm);
@@ -85,7 +85,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IOde45VariableSolverType
     {
-        IOde45VariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1);
+        IOde45VariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int? numberOfConsecutiveMinSteps = 1);
         IOde45VariableSolverType WithTolerance(double? relativeTolerance = null, double? absoluteTolerance = null);
         IOde45VariableSolverType WithShapePreservation(ShapePreservation shape);
         IOde45VariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm);
@@ -94,7 +94,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IOde23VariableSolverType
     {
-        IOde23VariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1);
+        IOde23VariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int? numberOfConsecutiveMinSteps = 1);
         IOde23VariableSolverType WithTolerance(double? relativeTolerance = null, double? absoluteTolerance = null);
         IOde23VariableSolverType WithShapePreservation(ShapePreservation shape);
         IOde23VariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm);
@@ -103,7 +103,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IOde113VariableSolverType
     {
-        IOde113VariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1);
+        IOde113VariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int? numberOfConsecutiveMinSteps = 1);
         IOde113VariableSolverType WithTolerance(double? relativeTolerance = null, double? absoluteTolerance = null);
         IOde113VariableSolverType WithShapePreservation(ShapePreservation shape);
         IOde113VariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm);
@@ -112,7 +112,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IOde15sVariableSolverType
     {
-        IOde15sVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1);
+        IOde15sVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int? numberOfConsecutiveMinSteps = 1);
         IOde15sVariableSolverType WithTolerance(double? relativeTolerance = null, double? absoluteTolerance = null);
         IOde15sVariableSolverType WithShapePreservation(ShapePreservation shape);
         IOde15sVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm);
@@ -124,7 +124,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IOde23sVariableSolverType
     {
-        IOde23sVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1);
+        IOde23sVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int? numberOfConsecutiveMinSteps = 1);
         IOde23sVariableSolverType WithTolerance(double? relativeTolerance = null, double? absoluteTolerance = null);
         IOde23sVariableSolverType WithShapePreservation(ShapePreservation shape);
         IOde23sVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm);
@@ -134,7 +134,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IOde23tVariableSolverType
     {
-        IOde23tVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1);
+        IOde23tVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int? numberOfConsecutiveMinSteps = 1);
         IOde23tVariableSolverType WithTolerance(double? relativeTolerance = null, double? absoluteTolerance = null);
         IOde23tVariableSolverType WithShapePreservation(ShapePreservation shape);
         IOde23tVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm);
@@ -145,7 +145,7 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IOde23tbVariableSolverType
     {
-        IOde23tbVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int numberOfConsecutiveMinSteps = 1);
+        IOde23tbVariableSolverType WithStepSize(double? initialStep = null, double? minStep = null, double? maxStep = null, int? numberOfConsecutiveMinSteps = 1);
         IOde23tbVariableSolverType WithTolerance(double? relativeTolerance = null, double? absoluteTolerance = null);
         IOde23tbVariableSolverType WithShapePreservation(ShapePreservation shape);
         IOde23tbVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm);
