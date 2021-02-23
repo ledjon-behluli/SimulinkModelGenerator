@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 
 namespace SimulinkModelGenerator.Models
 {
@@ -14,8 +15,24 @@ namespace SimulinkModelGenerator.Models
             string properties = string.Empty;
             foreach (Parameter p in Solver.Parameters)
             {
-                properties += p.ToString() + Environment.NewLine;
+                properties += $"\t\t\t\t\t{p.ToString() + Environment.NewLine}";
             }
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\t\tSimulink.ConfigSet {");
+            sb.Append(Environment.NewLine);
+            sb.Append("\t\t\tArray {");
+            sb.Append(Environment.NewLine);
+            sb.Append("\t\t\t\tSimulink.SolverCC {");
+            sb.Append(Environment.NewLine);
+            sb.Append(properties);
+            sb.Append("\t\t\t\t}");
+            sb.Append(Environment.NewLine);
+            sb.Append("\t\t\t}");
+            sb.Append(Environment.NewLine);
+            sb.Append("\t\t}");
+
+            return sb.ToString();
 
             return $@"Simulink.ConfigSet {{
                         Array {{

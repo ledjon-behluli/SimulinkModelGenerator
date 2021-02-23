@@ -23,8 +23,8 @@ namespace SimulinkModelGenerator.Samples
         {
             ModelBuilder
                 .Create()
-                .WithName("test")
-                .WithSimulationMode(SimulationMode.Accelerator)
+                .WithName("test1")
+                .WithSimulationMode(SimulationMode.PIL)
                 .Configure(c => c
                     .Solver(s => s
                         .SetSimulationTimes(0, 10)
@@ -34,8 +34,34 @@ namespace SimulinkModelGenerator.Samples
                                 .WithJacobian(Jacobian.FullPerturbation)
                                 .WithNewtonInterations(4)
                                 .WithOrder(ExtrapolationOrder.Four))))
-                .AddControlSystem()
-                .Build();
+                .AddControlSystem(cs =>
+                {
+                    cs.AddSources(s =>
+                    {
+                        s.AddConstant(c => c.SetPosition(285, 195));
+                    });
+                    cs.AddMathOperations(mo =>
+                    {
+                        mo.AddGain(g => g.SetPosition(595, 120))
+                          .AddGain(g => g.SetPosition(595, 195))
+                          .AddGain(g => g.SetPosition(595, 260))
+                          .AddGain(g => g.SetPosition(380, 195));
+                    });
+                    cs.AddSinks(s =>
+                    {
+                        s.AddScope(sc => sc.SetPosition(720, 194))
+                         .AddScope(sc => sc.SetPosition(720, 119))
+                         .AddScope(sc => sc.SetPosition(720, 259));
+                    });
+                    cs.AddConnections("Constant", c =>
+                    {
+                        c.ThanConnect("Gain3")
+                         .Branch(b => b.Towards("Gain").ThanConnect("Scope1"))
+                         .Branch(b => b.Towards("Gain1").ThanConnect("Scope"))
+                         .Branch(b => b.Towards("Gain2").ThanConnect("Scope2"));
+                    });
+                })
+                .Save(path);
         }
 
         static void All_Elements()

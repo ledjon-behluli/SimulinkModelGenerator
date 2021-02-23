@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Text;
 
 namespace SimulinkModelGenerator.Models
 {
@@ -19,7 +20,7 @@ namespace SimulinkModelGenerator.Models
 			string properties = string.Empty;
 			foreach (Parameter p in P)
 			{
-				properties += p.ToString() + Environment.NewLine;
+				properties += $"\t\t\t{p.ToString() + Environment.NewLine}";
 			}
 
 			string branches = string.Empty;
@@ -28,10 +29,14 @@ namespace SimulinkModelGenerator.Models
 				branches += b.ToString() + Environment.NewLine;
 			}
 
-			return $@"Line {{
-						{properties}
-						{branches}	
-					}}";
+			StringBuilder sb = new StringBuilder();
+			sb.Append("\t\tLine {");
+			sb.Append(Environment.NewLine);
+			sb.Append(properties);
+			sb.Append(branches);
+			sb.Append("\t\t}");
+
+			return sb.ToString();
 		}
 
 		public bool Equals(Line x, Line y)
@@ -76,12 +81,16 @@ namespace SimulinkModelGenerator.Models
 			string properties = string.Empty;
 			foreach (Parameter p in P)
 			{
-				properties += p.ToString() + Environment.NewLine;
+				properties += $"\t\t\t\t{p.ToString() + Environment.NewLine}";
 			}
 
-			return $@"Branch {{
-						{properties}
-					}}";
+			StringBuilder sb = new StringBuilder();
+			sb.Append("\t\t\tBranch {");
+			sb.Append(Environment.NewLine);
+			sb.Append(properties);
+			sb.Append("\t\t\t}");
+
+			return sb.ToString();
 		}
 	}
 }

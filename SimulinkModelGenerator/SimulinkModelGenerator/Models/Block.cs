@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Text;
 
 namespace SimulinkModelGenerator.Models
 {
@@ -15,22 +16,28 @@ namespace SimulinkModelGenerator.Models
 			string properties = string.Empty;
 			foreach(Parameter p in P)
 			{
-				properties += p.ToString() + Environment.NewLine;
+				properties += $"\t\t\t{p.ToString() + Environment.NewLine}";
 			}
 
 			if(InstanceData != null)
 			{
 				foreach(Parameter p in InstanceData.P)
 				{
-					properties += p.ToString() + Environment.NewLine;
+					properties += $"\t\t\t{p.ToString() + Environment.NewLine}";
 				}
 			}
 
-			return $@"Block {{
-						BlockType {BlockType}
-						Name ""{BlockName}""	
-						{properties}
-					}}";
+			StringBuilder sb = new StringBuilder();
+			sb.Append("\t\tBlock {");
+			sb.Append(Environment.NewLine);
+			sb.Append($"\t\t\tBlockType \"{BlockType}\"");
+			sb.Append(Environment.NewLine);
+			sb.Append($"\t\t\tName \"{BlockName}\"");
+			sb.Append(Environment.NewLine);
+			sb.Append(properties);
+			sb.Append("\t\t}");
+
+			return sb.ToString();
 		}
 	}
 

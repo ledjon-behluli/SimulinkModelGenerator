@@ -4,6 +4,7 @@ using SimulinkModelGenerator.Models;
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Text;
 
 namespace SimulinkModelGenerator.Modeler.Builders
 {
@@ -75,8 +76,6 @@ namespace SimulinkModelGenerator.Modeler.Builders
             this.model.Name = _ModelName;
             this.model.SimulationMode = _SimulationMode.GetDescription();
 
-            string configSet = model.ConfigSet.ToString();
-
             string blocks = string.Empty;
             foreach(Block block in model.System.Block)
             {
@@ -89,24 +88,35 @@ namespace SimulinkModelGenerator.Modeler.Builders
                 lines += line.ToString() + Environment.NewLine;
             }
 
-            MDL = $@"Model {{
-                        Name ""{model.Name}""
-                        SimulationMode ""{model.SimulationMode}""
-                        Array {{
-                           Simulink.ConfigSet {{
-                                Array {{
-                                    Simulink.SolverCC {{
-                                        {configSet}
-                                    }}
-                                }}
-                            }}
-                        }}
-                        System {{
-                            Name ""{model.Name}""
-                            {blocks}
-                            {lines}
-                         }}
-                    }}";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Model {");
+            sb.Append(Environment.NewLine);
+            sb.Append($"\tName \"{model.Name}\"");
+            sb.Append(Environment.NewLine);
+            sb.Append($"\tSimulationMode \"{model.SimulationMode}\"");
+            sb.Append(Environment.NewLine);
+
+            if (model.ConfigSet != null)
+            {
+                sb.Append("\tArray {");
+                sb.Append(Environment.NewLine);
+                sb.Append(model.ConfigSet.ToString());
+                sb.Append(Environment.NewLine);
+                sb.Append("\t}");
+                sb.Append(Environment.NewLine);
+            }
+
+            sb.Append("\tSystem {");
+            sb.Append(Environment.NewLine);
+            sb.Append($"\t\tName \"{model.Name}\"");
+            sb.Append(Environment.NewLine);
+            sb.Append(blocks);
+            sb.Append(lines);
+            sb.Append("\t}");
+            sb.Append(Environment.NewLine);
+            sb.Append("}");
+
+            MDL = sb.ToString();
 
             return MDL;
         }
