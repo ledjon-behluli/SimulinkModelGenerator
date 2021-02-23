@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Extensions;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.Variable
@@ -9,6 +10,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.V
 
         public AutoSolverBuilder(Model model)
         {
+            model.ConfigSet.Solver.SolverOptions.Solver = VariableSolver.Auto.GetDescription();
+            model.ConfigSet.Solver.SolverOptions.SolverName = VariableSolver.Auto.GetDescription();
+
             this.model = model;
         }
 

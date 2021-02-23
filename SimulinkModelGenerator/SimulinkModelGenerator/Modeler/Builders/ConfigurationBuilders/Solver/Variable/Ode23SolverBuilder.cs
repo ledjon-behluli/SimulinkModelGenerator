@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Extensions;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.Variable
@@ -9,6 +10,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.V
 
         public Ode23SolverBuilder(Model model)
         {
+            model.ConfigSet.Solver.SolverOptions.Solver = VariableSolver.Ode23.GetDescription();
+            model.ConfigSet.Solver.SolverOptions.SolverName = VariableSolver.Ode23.GetDescription();
+
             this.model = model;
         }
 

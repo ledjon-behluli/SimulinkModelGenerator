@@ -27,7 +27,7 @@ namespace SimulinkModelGenerator.Samples
                 .WithSimulationMode(SimulationMode.PIL)
                 .Configure(c => c
                     .Solver(s => s
-                        .SetSimulationTimes(0, 10)
+                        .SetSimulationTimes(1.1, 11.2)
                         .Options(o => o
                             .AsFixedStepSolver()
                                 .Ode14x()

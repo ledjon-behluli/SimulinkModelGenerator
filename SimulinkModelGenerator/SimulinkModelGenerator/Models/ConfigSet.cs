@@ -12,35 +12,10 @@ namespace SimulinkModelGenerator.Models
 
         public override string ToString()
         {
-            string properties = string.Empty;
-            foreach (Parameter p in Solver.Parameters)
-            {
-                properties += $"\t\t\t\t\t{p.ToString() + Environment.NewLine}";
-            }
-
             StringBuilder sb = new StringBuilder();
-            sb.Append("\t\tSimulink.ConfigSet {");
-            sb.Append(Environment.NewLine);
-            sb.Append("\t\t\tArray {");
-            sb.Append(Environment.NewLine);
-            sb.Append("\t\t\t\tSimulink.SolverCC {");
-            sb.Append(Environment.NewLine);
-            sb.Append(properties);
-            sb.Append("\t\t\t\t}");
-            sb.Append(Environment.NewLine);
-            sb.Append("\t\t\t}");
-            sb.Append(Environment.NewLine);
-            sb.Append("\t\t}");
+            sb.Append(Solver.ToString());
 
             return sb.ToString();
-
-            return $@"Simulink.ConfigSet {{
-                        Array {{
-                            Simulink.SolverCC {{
-                                {properties}
-                            }}
-                        }}
-                    }}";
         }
     }
 
@@ -48,7 +23,7 @@ namespace SimulinkModelGenerator.Models
 
     public class Solver
     {
-        public List<Parameter> Parameters =>
+        internal List<Parameter> Parameters =>
             new List<Parameter>()
             {
                 new Parameter() { Name = "StartTime", Text = SimulationTime.StartTime.ToString() },
@@ -107,6 +82,31 @@ namespace SimulinkModelGenerator.Models
         internal SimulationTime SimulationTime { get; set; }
         internal SolverOptions SolverOptions { get; set; }
         internal AdditionalSolverOptions AdditionalSolverOptions { get; set; }
+
+        public override string ToString()
+        {
+            string properties = string.Empty;
+            foreach (Parameter p in Parameters)
+            {
+                properties += $"\t\t\t\t\t{p.ToString() + Environment.NewLine}";
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\t\tSimulink.ConfigSet {");
+            sb.Append(Environment.NewLine);
+            sb.Append("\t\t\tArray {");
+            sb.Append(Environment.NewLine);
+            sb.Append("\t\t\t\tSimulink.SolverCC {");
+            sb.Append(Environment.NewLine);
+            sb.Append(properties);
+            sb.Append("\t\t\t\t}");
+            sb.Append(Environment.NewLine);
+            sb.Append("\t\t\t}");
+            sb.Append(Environment.NewLine);
+            sb.Append("\t\t}");
+
+            return sb.ToString();
+        }
     }
 
     internal class SimulationTime
@@ -175,97 +175,43 @@ namespace SimulinkModelGenerator
 {
     internal enum VariableSolver
     {
-        /// <summary>
-        /// Automatic solver
-        /// </summary>
         [Description("VariableStepAuto")]
         Auto,
-        /// <summary>
-        /// No continous states
-        /// </summary>
         [Description("VariableStepDiscrete")]
         Discrete,
-        /// <summary>
-        /// Dormand-Prince
-        /// </summary>
         [Description("ode45")]
         Ode45,
-        /// <summary>
-        /// Bogacki-Shampine
-        /// </summary>
         [Description("ode23")]
         Ode23,
-        /// <summary>
-        /// Adams
-        /// </summary>
         [Description("ode113")]
         Ode113,
-        /// <summary>
-        /// stiff/NDF
-        /// </summary>
         [Description("ode15s")]
         Ode15s,
-        /// <summary>
-        /// stiff/Mod. Rosenbrock
-        /// </summary>
         [Description("ode23s")]
         Ode23s,
-        /// <summary>
-        /// mod. stiff/Trapezoidal
-        /// </summary>
         [Description("ode23t")]
         Ode23t,
-        /// <summary>
-        /// stiff/TR-BDF2
-        /// </summary>
         [Description("ode23tb")]
         Ode23tb
     }
     internal enum FixedSolver
     {
-        /// <summary>
-        /// Automatic solver
-        /// </summary>
         [Description("FixedStepAuto")]
         Auto,
-        /// <summary>
-        /// No continous states
-        /// </summary>
         [Description("FixedStepDiscrete")]
         Discrete,
-        /// <summary>
-        /// Dormand-Prince
-        /// </summary>
         [Description("ode8")]
         Ode8,
-        /// <summary>
-        /// Dormand-Prince
-        /// </summary>
         [Description("ode5")]
         Ode5,
-        /// <summary>
-        /// Runge-Kutta
-        /// </summary>
         [Description("ode4")]
         Ode4,
-        /// <summary>
-        /// Bogacki-Shampine
-        /// </summary>
         [Description("ode3")]
         Ode3,
-        /// <summary>
-        /// Heun
-        /// </summary>
         [Description("ode2")]
         Ode2,
-        /// <summary>
-        /// Euler
-        /// </summary>
         [Description("ode1")]
         Ode1,
-        /// <summary>
-        /// Extrapolation
-        /// </summary>
         [Description("ode14x")]
         Ode14x
     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver;
-using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules
 {
@@ -21,17 +20,45 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IFixedStepSolverOptions AsFixedStepSolver();
     }
 
+    #region Fixed Solver
 
     public interface IFixedStepSolverOptions
     {
+        /// <summary>
+        /// Automatic solver
+        /// </summary>
         IIntrapolatedFixedSolverType Auto();
+        /// <summary>
+        /// No continous states
+        /// </summary>
         IIntrapolatedFixedSolverType Discrete();
+        /// <summary>
+        /// Dormand-Prince
+        /// </summary>
         IIntrapolatedFixedSolverType Ode8();
+        /// <summary>
+        /// Dormand-Prince
+        /// </summary>
         IIntrapolatedFixedSolverType Ode5();
+        /// <summary>
+        /// Runge-Kutta
+        /// </summary>
         IIntrapolatedFixedSolverType Ode4();
+        /// <summary>
+        /// Bogacki-Shampine
+        /// </summary>
         IIntrapolatedFixedSolverType Ode3();
+        /// <summary>
+        /// Heun
+        /// </summary>
         IIntrapolatedFixedSolverType Ode2();
+        /// <summary>
+        /// Euler
+        /// </summary>
         IIntrapolatedFixedSolverType Ode1();
+        /// <summary>
+        /// Extrapolation
+        /// </summary>
         IExtrapolatedFixedSolverType Ode14x();
     }
 
@@ -52,16 +79,47 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     #endregion
 
+    #endregion
+
+    #region Variable Solver
+
     public interface IVariableStepSolverOptions
     {
+        /// <summary>
+        /// Automatic solver
+        /// </summary>
         IAutoVariableSolverType Auto();
+        /// <summary>
+        /// No continous states
+        /// </summary>
         IDiscreteVariableSolverType Discrete();
+        /// <summary>
+        /// Dormand-Prince
+        /// </summary>
         IOde45VariableSolverType Ode45();
+        /// <summary>
+        /// Bogacki-Shampine
+        /// </summary>
         IOde23VariableSolverType Ode23();
+        /// <summary>
+        /// Adams
+        /// </summary>
         IOde113VariableSolverType Ode113();
+        /// <summary>
+        /// stiff/NDF
+        /// </summary>
         IOde15sVariableSolverType Ode15s();
+        /// <summary>
+        /// stiff/Mod. Rosenbrock
+        /// </summary>
         IOde23sVariableSolverType Ode23s();
+        /// <summary>
+        /// mod. stiff/Trapezoidal
+        /// </summary>
         IOde23tVariableSolverType Ode23t();
+        /// <summary>
+        /// stiff/TR-BDF2
+        /// </summary>
         IOde23tbVariableSolverType Ode23tb();
     }
 
@@ -153,6 +211,8 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
         IOde23tbVariableSolverType WithJacobian(Jacobian jacobian);
         IOde23tbVariableSolverType WithReset(ResetMethod method);
     }
+
+    #endregion
 
     #endregion
 }
