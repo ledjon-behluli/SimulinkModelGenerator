@@ -14,7 +14,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         private string _FinalValue = "1";
         private string _SampleTime = "0";
 
-        public StepBuilder(Model model)
+        internal StepBuilder(Model model)
             : base(model)
         {
 
@@ -54,7 +54,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             {
                 BlockType = "Step",
                 BlockName = GenerateUniqueName("Step"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

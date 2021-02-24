@@ -12,7 +12,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
         private string _NumInputPorts = "1";
         private string _Ports = "[1]";
 
-        public ScopeBuilder(Model model)
+        internal ScopeBuilder(Model model)
             : base(model)
         {
 
@@ -37,7 +37,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             {
                 BlockType = "Scope",
                 BlockName = GenerateUniqueName("Scope"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Ports", Text = _Ports },
                     new Parameter() { Name = "Position", Text = base._Position },

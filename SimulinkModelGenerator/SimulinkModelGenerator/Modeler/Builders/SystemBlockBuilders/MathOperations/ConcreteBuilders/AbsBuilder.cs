@@ -14,7 +14,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
 
         private bool _EnableZeroCrossingDetection = true;
 
-        public AbsBuilder(Model model)
+        internal AbsBuilder(Model model)
             : base(model)
         {
 
@@ -30,7 +30,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "ZeroCross", Text = _EnableZeroCrossingDetection ? "on" : "off" });
+            block.Parameters.Add(new Parameter() { Name = "ZeroCross", Text = _EnableZeroCrossingDetection ? "on" : "off" });
 
             model.System.Block.Add(block);
         }

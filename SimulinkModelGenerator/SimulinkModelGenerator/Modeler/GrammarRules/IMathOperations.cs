@@ -1,5 +1,4 @@
-﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
+﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
 using System;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules

@@ -10,7 +10,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 
         private bool _InterpolateData = true;
 
-        public InPortBuilder(Model model)
+        internal InPortBuilder(Model model)
             : base(model)
         {
 
@@ -26,7 +26,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "Interpolate", Text = _InterpolateData ? "on" : "off" });
+            block.Parameters.Add(new Parameter() { Name = "Interpolate", Text = _InterpolateData ? "on" : "off" });
 
             model.System.Block.Add(block);
         }

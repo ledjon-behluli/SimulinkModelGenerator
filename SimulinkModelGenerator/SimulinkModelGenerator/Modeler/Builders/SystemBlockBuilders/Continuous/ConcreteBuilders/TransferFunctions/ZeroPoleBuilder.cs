@@ -1,6 +1,4 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
-using System.Collections.Generic;
-using System;
 using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
@@ -12,7 +10,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
         private string _Gain = "[1]";
 
-        public ZeroPoleBuilder(Model model)
+        internal ZeroPoleBuilder(Model model)
             : base(model)
         {
             _Numerator = "[1]";
@@ -45,11 +43,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
             if (_NumeratorCount > 0)
             {
-                block.P.Add(new Parameter() { Name = "Zeros", Text = _Numerator });
+                block.Parameters.Add(new Parameter() { Name = "Zeros", Text = _Numerator });
             }
 
-            block.P.Add(new Parameter() { Name = "Poles", Text = _Denominator });
-            block.P.Add(new Parameter() { Name = "Gain", Text = _Gain });
+            block.Parameters.Add(new Parameter() { Name = "Poles", Text = _Denominator });
+            block.Parameters.Add(new Parameter() { Name = "Gain", Text = _Gain });
 
             model.System.Block.Add(block);
         }

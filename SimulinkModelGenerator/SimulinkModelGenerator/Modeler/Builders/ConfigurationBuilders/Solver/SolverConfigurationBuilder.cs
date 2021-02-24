@@ -8,7 +8,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
     {
         private readonly Model model;
 
-        public SolverConfigurationBuilder(Model model)
+        internal SolverConfigurationBuilder(Model model)
         {
             this.model = model;
         }
@@ -33,8 +33,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
             if (startTime >= stopTime)
                 throw new ArgumentException("Simulation stop time must be greater than start time.");
 
-            model.ConfigSet.Solver.SimulationTime.StartTime = startTime;
-            model.ConfigSet.Solver.SimulationTime.StopTime = stopTime;
+            model.Array.ConfigSet.Solver.SimulationTime.StartTime = startTime;
+            model.Array.ConfigSet.Solver.SimulationTime.StopTime = stopTime;
 
             return this;
         }

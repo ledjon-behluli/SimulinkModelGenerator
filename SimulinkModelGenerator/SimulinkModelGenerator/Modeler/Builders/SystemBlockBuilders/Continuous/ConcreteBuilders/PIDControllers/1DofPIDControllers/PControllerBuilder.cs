@@ -7,7 +7,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
     {
         protected override string ControllerType => "P";
 
-        public PControllerBuilder(Model model)
+        internal PControllerBuilder(Model model)
             : base(model)
         {
 

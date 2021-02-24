@@ -12,7 +12,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
         private readonly Model model;
         private string previousBlockName;
 
-        public SystemLineBuilder(Model model, string startingBlockName)
+        internal SystemLineBuilder(Model model, string startingBlockName)
         {            
             this.model = model;
             this.previousBlockName = startingBlockName;

@@ -12,7 +12,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         protected override string SourceType => "PID 1dof";
 
 
-        public OneDofPIDBaseControllerBuilder(Model model)
+        internal OneDofPIDBaseControllerBuilder(Model model)
             : base(model)
         {
 

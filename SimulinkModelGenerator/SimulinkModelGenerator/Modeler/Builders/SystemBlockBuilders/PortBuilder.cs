@@ -17,7 +17,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
         private string _PortNumber = string.Empty;
         private IconDisplay _IconDisplay = IconDisplay.PortNumber;
 
-        public PortBuilder(Model model)
+        internal PortBuilder(Model model)
             : base(model)
         {
 
@@ -44,7 +44,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
             return this;
         }
 
-        protected Block GetBlock()
+        internal Block GetBlock()
         {
             int _count = GetBlockTypeCount(BlockType);
             string _portNumber = string.IsNullOrEmpty(_PortNumber) ? (_count + 1).ToString() : _PortNumber;
@@ -53,7 +53,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
             {
                 BlockType = BlockType,
                 BlockName = $"{BlockName}{_count + 1}",
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

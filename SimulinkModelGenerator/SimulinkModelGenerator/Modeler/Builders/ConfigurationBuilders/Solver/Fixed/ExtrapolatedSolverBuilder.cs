@@ -7,32 +7,32 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.F
     {
         private readonly Model model;
 
-        public ExtrapolatedSolverBuilder(Model model)
+        internal ExtrapolatedSolverBuilder(Model model)
         {
             this.model = model;
         }
 
         public IExtrapolatedFixedSolverType WithSampleTime(double sampleTime = 0.001)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetSampleTime(sampleTime);
+            model.Array.ConfigSet.Solver.AdditionalSolverOptions.SetSampleTime(sampleTime);
             return this;
         }
 
         public IExtrapolatedFixedSolverType WithJacobian(Jacobian jacobian)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SolverJacobianMethodControl = jacobian;
+            model.Array.ConfigSet.Solver.AdditionalSolverOptions.SolverJacobianMethodControl = jacobian;
             return this;
         }
 
         public IExtrapolatedFixedSolverType WithNewtonInterations(int numberOfIterations = 1)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.NumberNewtonIterations = numberOfIterations;
+            model.Array.ConfigSet.Solver.AdditionalSolverOptions.NumberNewtonIterations = numberOfIterations;
             return this;
         }
 
         public IExtrapolatedFixedSolverType WithOrder(ExtrapolationOrder order)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.ExtrapolationOrder = order;
+            model.Array.ConfigSet.Solver.AdditionalSolverOptions.ExtrapolationOrder = order;
             return this;
         }
     }

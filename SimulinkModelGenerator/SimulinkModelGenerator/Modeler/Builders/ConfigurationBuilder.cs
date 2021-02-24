@@ -9,9 +9,9 @@ namespace SimulinkModelGenerator.Modeler.Builders
     {
         private readonly Model model;
 
-        public ConfigurationBuilder(Model model)
+        internal ConfigurationBuilder(Model model)
         {
-            model.ConfigSet = new ConfigSet()
+            model.Array.ConfigSet = new ConfigSet()
             {
                 Solver = Models.Solver.Default
             };

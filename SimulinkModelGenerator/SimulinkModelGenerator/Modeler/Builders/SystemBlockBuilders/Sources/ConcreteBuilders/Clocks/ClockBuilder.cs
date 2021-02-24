@@ -12,7 +12,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         private bool _DisplayTime = false;
         private string _Decimation = "10";
 
-        public ClockBuilder(Model model)
+        internal ClockBuilder(Model model)
             : base(model)
         {
 
@@ -39,7 +39,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             {
                 BlockType = "Clock",
                 BlockName = GenerateUniqueName("Clock"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

@@ -9,7 +9,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
     {
         internal override string BlockName => "Integrator\\nLimited";
 
-        public LimitedIntegratorBuilder(Model model)
+        internal LimitedIntegratorBuilder(Model model)
             : base(model)
         {
             _LowerSaturationLimit = "0";
@@ -41,9 +41,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "LimitOutput", Text = "on" });
-            block.P.Add(new Parameter() { Name = "UpperSaturationLimit", Text = _UpperSaturationLimit });
-            block.P.Add(new Parameter() { Name = "LowerSaturationLimit", Text = _LowerSaturationLimit });
+            block.Parameters.Add(new Parameter() { Name = "LimitOutput", Text = "on" });
+            block.Parameters.Add(new Parameter() { Name = "UpperSaturationLimit", Text = _UpperSaturationLimit });
+            block.Parameters.Add(new Parameter() { Name = "LowerSaturationLimit", Text = _LowerSaturationLimit });
 
             model.System.Block.Add(block);
         }

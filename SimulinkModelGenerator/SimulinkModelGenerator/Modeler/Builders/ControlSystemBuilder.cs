@@ -14,12 +14,13 @@ namespace SimulinkModelGenerator.Modeler.Builders
     {
         private readonly Model model;
 
-        public ControlSystemBuilder(Model model)
+        internal ControlSystemBuilder(Model model)
         {
             model.System = new Models.System()
             {
                 Block = new List<Block>(),
-                Line = new List<Line>()
+                Line = new List<Line>(),
+                Name = model.Name
             };
 
             this.model = model;

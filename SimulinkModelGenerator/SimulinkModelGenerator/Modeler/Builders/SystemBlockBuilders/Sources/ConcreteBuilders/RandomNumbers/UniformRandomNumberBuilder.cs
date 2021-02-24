@@ -13,7 +13,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         private string _Minimum = "-1";
         private string _Maximum = "1";
 
-        public UniformRandomNumberBuilder(Model model)
+        internal UniformRandomNumberBuilder(Model model)
             : base(model)
         {
 
@@ -35,8 +35,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "Minimum", Text = _Minimum });
-            block.P.Add(new Parameter() { Name = "Maximum", Text = _Maximum });
+            block.Parameters.Add(new Parameter() { Name = "Minimum", Text = _Minimum });
+            block.Parameters.Add(new Parameter() { Name = "Maximum", Text = _Maximum });
 
             model.System.Block.Add(block);
         }

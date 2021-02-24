@@ -12,7 +12,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         private string _StartTime = "0";
         private string _InitialOutput = "0";
 
-        public RampBuilder(Model model)
+        internal RampBuilder(Model model)
             : base(model)
         {
 
@@ -43,14 +43,14 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             {
                 BlockType = "Reference",
                 BlockName = GenerateUniqueName("Ramp"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror }
                 },
                 InstanceData = new InstanceData()
                 {
-                    P = new List<Parameter>()
+                    Parameters = new List<Parameter>()
                     {
                         new Parameter() { Name = "slope", Text = _Slope },
                         new Parameter() { Name = "start", Text = _StartTime },

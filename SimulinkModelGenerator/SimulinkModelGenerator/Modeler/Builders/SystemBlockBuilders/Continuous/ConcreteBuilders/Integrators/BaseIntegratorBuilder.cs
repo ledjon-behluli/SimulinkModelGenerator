@@ -18,7 +18,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         private bool _ShowSaturationPort = false;
         private bool _ShowStatePort = false;
 
-        public BaseIntegratorBuilder(Model model)
+        internal BaseIntegratorBuilder(Model model)
             : base(model)
         {
 
@@ -46,13 +46,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             return this;
         }
 
-        protected Block GetBlock()
+        internal Block GetBlock()
         {
             return new Block()
             {
                 BlockType = "Integrator",
                 BlockName = GenerateUniqueName(BlockName),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

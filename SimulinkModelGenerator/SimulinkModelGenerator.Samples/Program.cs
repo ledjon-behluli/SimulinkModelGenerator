@@ -1,5 +1,4 @@
 ﻿using SimulinkModelGenerator.Modeler.Builders;
-using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations;
 
 namespace SimulinkModelGenerator.Samples
 {
@@ -9,22 +8,24 @@ namespace SimulinkModelGenerator.Samples
 
         static void Main(string[] args)
         {
-            test();
+            Fixed_Extrapolation_Ode14x_Solver_Configuration_Example();
+            Fixed_Runge_Kutta_Ode4_Solver_Configuration_Example();
 
-            //All_Elements();
-            //Common_Elements_With_Set_Names_And_Without_Connections();
-            //Common_Elements_With_Set_Names_And_With_Connections();
-            //Common_Elements_With_Automatic_Names_And_With_Connections_Style_1();
-            //Common_Elements_With_Automatic_Names_And_With_Connections_Style_2();
-            //PID_Example();
+            All_Elements();
+            Common_Elements_With_Set_Names_And_Without_Connections();
+            Common_Elements_With_Set_Names_And_With_Connections();
+            Common_Elements_With_Automatic_Names_And_With_Connections_Style_1();
+            Common_Elements_With_Automatic_Names_And_With_Connections_Style_2();
+            PID_Example();
         }
 
-        static void test()
+
+        static void Fixed_Extrapolation_Ode14x_Solver_Configuration_Example()
         {
             ModelBuilder
                 .Create()
-                .WithName("test1")
-                .WithSimulationMode(SimulationMode.PIL)
+                .WithName("fixed_extrapolation_ode14x_solver_configuration_example")
+                .WithSimulationMode(SimulationMode.Normal)
                 .Configure(c => c
                     .Solver(s => s
                         .SetSimulationTimes(1.1, 11.2)
@@ -34,33 +35,23 @@ namespace SimulinkModelGenerator.Samples
                                 .WithJacobian(Jacobian.FullPerturbation)
                                 .WithNewtonInterations(4)
                                 .WithOrder(ExtrapolationOrder.Four))))
-                .AddControlSystem(cs =>
-                {
-                    cs.AddSources(s =>
-                    {
-                        s.AddConstant(c => c.SetPosition(285, 195));
-                    });
-                    cs.AddMathOperations(mo =>
-                    {
-                        mo.AddGain(g => g.SetPosition(595, 120))
-                          .AddGain(g => g.SetPosition(595, 195))
-                          .AddGain(g => g.SetPosition(595, 260))
-                          .AddGain(g => g.SetPosition(380, 195));
-                    });
-                    cs.AddSinks(s =>
-                    {
-                        s.AddScope(sc => sc.SetPosition(720, 194))
-                         .AddScope(sc => sc.SetPosition(720, 119))
-                         .AddScope(sc => sc.SetPosition(720, 259));
-                    });
-                    cs.AddConnections("Constant", c =>
-                    {
-                        c.ThanConnect("Gain3")
-                         .Branch(b => b.Towards("Gain").ThanConnect("Scope1"))
-                         .Branch(b => b.Towards("Gain1").ThanConnect("Scope"))
-                         .Branch(b => b.Towards("Gain2").ThanConnect("Scope2"));
-                    });
-                })
+                .AddControlSystem()
+                .Save(path);
+        }
+
+        static void Fixed_Runge_Kutta_Ode4_Solver_Configuration_Example()
+        {
+            ModelBuilder
+                .Create()
+                .WithName("fixed_runge_kutta_ode4_solver_configuration_example")
+                .WithSimulationMode(SimulationMode.Normal)
+                .Configure(c => c
+                    .Solver(s => s
+                        .SetSimulationTimes(1.1, 11.2)
+                        .Options(o => o
+                            .AsFixedStepSolver()
+                                .Ode4())))
+                .AddControlSystem()
                 .Save(path);
         }
 
@@ -68,7 +59,7 @@ namespace SimulinkModelGenerator.Samples
         {
             ModelBuilder
                 .Create()
-                .WithName("all elements")
+                .WithName("all_elements")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s => s.AddStep(x => x.SetPosition(100, 100))
@@ -131,7 +122,7 @@ namespace SimulinkModelGenerator.Samples
         {
             ModelBuilder
                 .Create()
-                .WithName("common elements with set names and without connections")
+                .WithName("common_elements_with_set_names_and_without_connections")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s => {
@@ -159,7 +150,7 @@ namespace SimulinkModelGenerator.Samples
         {
             ModelBuilder
                 .Create()
-                .WithName("common elements with set names and with connections")
+                .WithName("common_elements_with_set_names_and_with_connections")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s =>
@@ -194,7 +185,7 @@ namespace SimulinkModelGenerator.Samples
         {
             ModelBuilder
                 .Create()
-                .WithName("common elements with automatic names and with connections")
+                .WithName("common_elements_with_automatic_names_and_with_connections")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s =>
@@ -229,7 +220,7 @@ namespace SimulinkModelGenerator.Samples
         {
             ModelBuilder
                 .Create()
-                .WithName("common elements with automatic names and with connections")
+                .WithName("common_elements_with_automatic_names_and_with_connections")
                 .AddControlSystem(cs => cs
                     .AddSources(s => s.AddConstant(c => c.SetPosition(285, 195)))
                     .AddMathOperations(mo => mo
@@ -255,7 +246,7 @@ namespace SimulinkModelGenerator.Samples
         {
             ModelBuilder
                 .Create()
-                .WithName("PID example")
+                .WithName("pid_example")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s => s.AddStep(sp => sp.SetStepTime(0).SetPosition(190, 145))

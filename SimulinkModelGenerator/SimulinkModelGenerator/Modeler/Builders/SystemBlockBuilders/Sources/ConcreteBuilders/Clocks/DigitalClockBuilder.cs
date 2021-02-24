@@ -11,7 +11,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 
         private string _SampleTime = "1";
 
-        public DigitalClockBuilder(Model model)
+        internal DigitalClockBuilder(Model model)
             : base(model)
         {
 
@@ -33,7 +33,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             {
                 BlockType = "DigitalClock",
                 BlockName = GenerateUniqueName("DigitalClock"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = _Position },
                     new Parameter() { Name = "BlockMirror", Text = _BlockMirror },

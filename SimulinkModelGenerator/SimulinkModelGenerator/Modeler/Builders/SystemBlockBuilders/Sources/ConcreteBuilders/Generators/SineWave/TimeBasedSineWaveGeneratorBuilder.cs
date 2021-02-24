@@ -13,7 +13,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         private string _SampleTime = "0";
         protected override string SampleTime => _SampleTime;
 
-        public TimeBasedSineWaveGeneratorBuilder(Model model)
+        internal TimeBasedSineWaveGeneratorBuilder(Model model)
             : base(model)
         {
 
@@ -53,8 +53,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "Frequency", Text = _Frequency });
-            block.P.Add(new Parameter() { Name = "Phase", Text = _Phase });
+            block.Parameters.Add(new Parameter() { Name = "Frequency", Text = _Frequency });
+            block.Parameters.Add(new Parameter() { Name = "Phase", Text = _Phase });
 
             model.System.Block.Add(block);
         }

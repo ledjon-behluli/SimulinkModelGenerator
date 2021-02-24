@@ -19,7 +19,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         protected RootFindingAlgorithm _Algorithm = RootFindingAlgorithm.Exact;
         protected string _NumberOfIterations = "3";
 
-        public BaseSquareRootBuilder(Model model)
+        internal BaseSquareRootBuilder(Model model)
             : base(model)
         {
 
@@ -50,10 +50,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "OutputSignalType", Text = _OutputSignalType.GetDescription() });
-            block.P.Add(new Parameter() { Name = "Operator", Text = Operator });
-            block.P.Add(new Parameter() { Name = "AlgorithmType", Text = _Algorithm.GetDescription() });
-            block.P.Add(new Parameter() { Name = "Iterations", Text = _NumberOfIterations });
+            block.Parameters.Add(new Parameter() { Name = "OutputSignalType", Text = _OutputSignalType.GetDescription() });
+            block.Parameters.Add(new Parameter() { Name = "Operator", Text = Operator });
+            block.Parameters.Add(new Parameter() { Name = "AlgorithmType", Text = _Algorithm.GetDescription() });
+            block.Parameters.Add(new Parameter() { Name = "Iterations", Text = _NumberOfIterations });
 
             model.System.Block.Add(block);
         }
@@ -64,7 +64,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         protected override string Operator => "sqrt";
         protected override string BlockName => "Sqrt";
 
-        public SquareRootBuilder(Model model)
+        internal SquareRootBuilder(Model model)
             : base(model)
         {
 
@@ -78,7 +78,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         protected override string Operator => "signedSqrt";
         protected override string BlockName => "Signed\\nSqrt";
 
-        public SignedSquareRootBuilder(Model model)
+        internal SignedSquareRootBuilder(Model model)
             : base(model)
         {
 
@@ -92,7 +92,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         protected override string Operator => "rSqrt";
         protected override string BlockName => "Reciprocal\\nSqrt";
 
-        public ReciprocalSquareRootBuilder(Model model)
+        internal ReciprocalSquareRootBuilder(Model model)
             : base(model)
         {
 

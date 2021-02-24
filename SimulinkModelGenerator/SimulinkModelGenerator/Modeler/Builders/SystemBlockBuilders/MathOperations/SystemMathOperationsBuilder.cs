@@ -9,7 +9,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
     {
         private readonly Model model;
 
-        public SystemMathOperationsBuilder(Model model)
+        internal SystemMathOperationsBuilder(Model model)
         {
             this.model = model;
         }

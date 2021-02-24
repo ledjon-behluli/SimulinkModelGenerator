@@ -8,29 +8,29 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.V
     {
         private readonly Model model;
 
-        public DiscreteSolverBuilder(Model model)
+        internal DiscreteSolverBuilder(Model model)
         {
-            model.ConfigSet.Solver.SolverOptions.Solver = VariableSolver.Discrete.GetDescription();
-            model.ConfigSet.Solver.SolverOptions.SolverName = VariableSolver.Discrete.GetDescription();
+            model.Array.ConfigSet.Solver.SolverOptions.Solver = VariableSolver.Discrete.GetDescription();
+            model.Array.ConfigSet.Solver.SolverOptions.SolverName = VariableSolver.Discrete.GetDescription();
 
             this.model = model;
         }
 
         public IDiscreteVariableSolverType WithStepSize(double? maxStep = null)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetStepSize(maxStep: maxStep);
+            model.Array.ConfigSet.Solver.AdditionalSolverOptions.SetStepSize(maxStep: maxStep);
             return this;
         }
 
         public IDiscreteVariableSolverType WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm algorithm)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.ZeroCrossingAlgorithm = algorithm;
+            model.Array.ConfigSet.Solver.AdditionalSolverOptions.ZeroCrossingAlgorithm = algorithm;
             return this;
         }
 
         public IDiscreteVariableSolverType WithZeroCrossingControl(ZeroCrossingControl control)
         {
-            model.ConfigSet.Solver.AdditionalSolverOptions.ZeroCrossingControl = control;
+            model.Array.ConfigSet.Solver.AdditionalSolverOptions.ZeroCrossingControl = control;
             return this;
         }
     }

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
+namespace SimulinkModelGenerator
 {
     public enum IntegerRoundingMode
     {
@@ -42,7 +42,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         [Description("-")]
         Minus
     }
+}
 
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
+{
     public abstract class MathOperationBuilder<T> : SystemBlockBuilder<T>, IMathOperation
         where T : MathOperationBuilder<T>
     {
@@ -57,7 +60,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         protected bool _RequireAllInputsToHaveSameDataType = false;
         protected IntegerRoundingMode _RoundingMode = IntegerRoundingMode.Floor;
 
-        public MathOperationBuilder(Model model)
+        internal MathOperationBuilder(Model model)
             : base(model)
         {
 
@@ -106,13 +109,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         }
 
 
-        protected Block GetBlock()
+        internal Block GetBlock()
         {
             return new Block()
             {
                 BlockType = BlockType,
                 BlockName = GenerateUniqueName(BlockName),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

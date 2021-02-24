@@ -8,7 +8,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         internal override string BlockType => "TransferFcn";
         internal override string BlockName => "TransferFcn";
 
-        public TransferFunctionBuilder(Model model)
+        internal TransferFunctionBuilder(Model model)
             : base(model)
         {
             _Numerator = "[1]";
@@ -35,10 +35,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
             if (_NumeratorCount > 0)
             {
-                block.P.Add(new Parameter() { Name = "Numerator", Text = _Numerator });
+                block.Parameters.Add(new Parameter() { Name = "Numerator", Text = _Numerator });
             }
 
-            block.P.Add(new Parameter() { Name = "Denominator", Text = _Denominator });
+            block.Parameters.Add(new Parameter() { Name = "Denominator", Text = _Denominator });
 
             model.System.Block.Add(block);
         }

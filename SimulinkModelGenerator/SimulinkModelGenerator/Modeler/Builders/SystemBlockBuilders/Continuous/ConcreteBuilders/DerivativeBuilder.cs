@@ -10,7 +10,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 
         private string _Coefficient = "inf";
 
-        public DerivativeBuilder(Model model)
+        internal DerivativeBuilder(Model model)
             : base(model)
         {
 
@@ -50,7 +50,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             {
                 BlockType = "Derivative",
                 BlockName = GenerateUniqueName("Derivative"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

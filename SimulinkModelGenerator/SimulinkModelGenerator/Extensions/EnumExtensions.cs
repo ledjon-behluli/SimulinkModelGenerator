@@ -5,7 +5,7 @@ namespace SimulinkModelGenerator.Extensions
 {
     internal static class EnumExtensions
     {
-        internal static string GetDescription<T>(this T enumerationValue) where T : struct
+        public static string GetDescription<T>(this T enumerationValue) where T : struct
         {
             var type = enumerationValue.GetType();
             if (!type.IsEnum)

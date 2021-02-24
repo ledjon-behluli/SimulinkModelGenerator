@@ -12,7 +12,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         protected override string OutDataTypeStr => "Inherit: Inherit via internal rule";
 
 
-        public DotProductBuilder(Model model)
+        internal DotProductBuilder(Model model)
             : base(model)
         {
             _RequireAllInputsToHaveSameDataType = true;

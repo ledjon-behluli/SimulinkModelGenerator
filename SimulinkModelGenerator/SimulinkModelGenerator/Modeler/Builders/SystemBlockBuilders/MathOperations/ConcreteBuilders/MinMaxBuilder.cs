@@ -4,7 +4,7 @@ using SimulinkModelGenerator.Extensions;
 using System.ComponentModel;
 using System;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
+namespace SimulinkModelGenerator
 {
     public enum MinMaxType
     {
@@ -13,7 +13,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         [Description("max")]
         Max
     }
+}
 
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
+{
     public abstract class MinMaxBuilder<T> : MathOperationBuilder<T>, IMinMax
         where T : MinMaxBuilder<T>
     {
@@ -29,7 +32,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         private string _Ports = "[2 1]";
         private string _NumberOfInputs = "2";
 
-        public MinMaxBuilder(Model model)
+        internal MinMaxBuilder(Model model)
             : base(model)
         {
             
@@ -58,10 +61,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "Ports", Text = _Ports });
-            block.P.Add(new Parameter() { Name = "Inputs", Text = _NumberOfInputs });
-            block.P.Add(new Parameter() { Name = "ZeroCross", Text = _EnableZeroCrossingDetection ? "on" : "off" });
-            block.P.Add(new Parameter() { Name = "Function", Text = _FunctionType.GetDescription() });
+            block.Parameters.Add(new Parameter() { Name = "Ports", Text = _Ports });
+            block.Parameters.Add(new Parameter() { Name = "Inputs", Text = _NumberOfInputs });
+            block.Parameters.Add(new Parameter() { Name = "ZeroCross", Text = _EnableZeroCrossingDetection ? "on" : "off" });
+            block.Parameters.Add(new Parameter() { Name = "Function", Text = _FunctionType.GetDescription() });
 
             model.System.Block.Add(block);
         }
@@ -71,7 +74,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
     {
         protected override MinMaxType _FunctionType => MinMaxType.Min;
 
-        public MinBuilder(Model model)
+        internal MinBuilder(Model model)
             : base(model)
         {
 
@@ -82,7 +85,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
     {
         protected override MinMaxType _FunctionType => MinMaxType.Max;
 
-        public MaxBuilder(Model model)
+        internal MaxBuilder(Model model)
             : base(model)
         {
 

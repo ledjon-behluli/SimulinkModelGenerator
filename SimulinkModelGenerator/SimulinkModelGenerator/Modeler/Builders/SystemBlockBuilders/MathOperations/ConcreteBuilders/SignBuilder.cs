@@ -10,7 +10,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
 
         private bool _EnableZeroCrossingDetection = true;
 
-        public SignBuilder(Model model)
+        internal SignBuilder(Model model)
             : base(model)
         {
 
@@ -28,7 +28,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             {
                 BlockType = "Signum",
                 BlockName = GenerateUniqueName("Sign"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

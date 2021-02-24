@@ -15,7 +15,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
         private string _YMax = "1";
         private string _SampleTime = "-1";
 
-        public XYGraphBuilder(Model model)
+        internal XYGraphBuilder(Model model)
             : base(model)
         {
 
@@ -56,7 +56,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             {
                 BlockType = "Reference",
                 BlockName = GenerateUniqueName("XY Graph"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

@@ -15,7 +15,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         protected string _Seed = "0";
         protected string _SampleTime = "0.1";
 
-        public BaseRandomNumberBuilder(Model model)
+        internal BaseRandomNumberBuilder(Model model)
             : base(model)
         {
 
@@ -37,13 +37,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         }
 
 
-        protected Block GetBlock()
+        internal Block GetBlock()
         {
             return new Block()
             {
                 BlockType = BlockType,
                 BlockName = GenerateUniqueName(BlockName),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = _Position },
                     new Parameter() { Name = "BlockMirror", Text = _BlockMirror },

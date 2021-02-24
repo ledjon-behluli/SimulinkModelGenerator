@@ -15,7 +15,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         protected string _proportionalSetpointWeight = "1";
         protected string _derivativeSetpointWeight = "0";
 
-        public TwoDofPIDBaseControllerBuilder(Model model)
+        internal TwoDofPIDBaseControllerBuilder(Model model)
             : base(model)
         {
 
@@ -25,7 +25,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         {
             Block block = GetBlock();
 
-            block.InstanceData.P.AddRange(new List<Parameter>()
+            block.InstanceData.Parameters.AddRange(new List<Parameter>()
             {
                 new Parameter() { Name = "b", Text = _proportionalSetpointWeight },
                 new Parameter() { Name = "c", Text = _derivativeSetpointWeight },

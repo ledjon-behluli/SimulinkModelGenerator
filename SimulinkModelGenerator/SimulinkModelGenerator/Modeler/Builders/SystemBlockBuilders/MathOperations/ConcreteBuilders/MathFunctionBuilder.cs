@@ -3,7 +3,7 @@ using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System.ComponentModel;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
+namespace SimulinkModelGenerator
 {
     public enum MathFunctionType
     {
@@ -36,7 +36,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         [Description("hermitian")]
         hermitian
     }
+}
 
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
+{
     public sealed class MathFunctionBuilder : MathOperationBuilder<MathFunctionBuilder>, IMathFunction
     {
         internal override SizeU Size => new SizeU(30, 30);
@@ -49,7 +52,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         private MathFunctionType _Operator = MathFunctionType.exp;
         private OutputSignalType _SignalType = OutputSignalType.Auto;
 
-        public MathFunctionBuilder(Model model)
+        internal MathFunctionBuilder(Model model)
             : base(model)
         {
             _SaturateOnIntegerOverflow = true;
@@ -76,12 +79,12 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "Ports", Text = _Ports });
-            block.P.Add(new Parameter() { Name = "OutputSignalType", Text = _SignalType.GetDescription() });
-            block.P.Add(new Parameter() { Name = "Operator", Text = _Operator.GetDescription() });
-            block.P.Add(new Parameter() { Name = "AlgorithmType", Text = RootFindingAlgorithm.Newton_Raphson.GetDescription() });
-            block.P.Add(new Parameter() { Name = "Iterations", Text = "3" });
-            block.P.Add(new Parameter() { Name = "IntermediateResultsDataTypeStr", Text = "Inherit: Inherit via internal rule" });
+            block.Parameters.Add(new Parameter() { Name = "Ports", Text = _Ports });
+            block.Parameters.Add(new Parameter() { Name = "OutputSignalType", Text = _SignalType.GetDescription() });
+            block.Parameters.Add(new Parameter() { Name = "Operator", Text = _Operator.GetDescription() });
+            block.Parameters.Add(new Parameter() { Name = "AlgorithmType", Text = RootFindingAlgorithm.Newton_Raphson.GetDescription() });
+            block.Parameters.Add(new Parameter() { Name = "Iterations", Text = "3" });
+            block.Parameters.Add(new Parameter() { Name = "IntermediateResultsDataTypeStr", Text = "Inherit: Inherit via internal rule" });
 
             model.System.Block.Add(block);
         }

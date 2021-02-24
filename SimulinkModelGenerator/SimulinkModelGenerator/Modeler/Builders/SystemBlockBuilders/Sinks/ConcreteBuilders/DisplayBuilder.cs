@@ -8,7 +8,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
     {
         internal override SizeU Size => new SizeU(90, 30);
 
-        public DisplayBuilder(Model model)
+        internal DisplayBuilder(Model model)
             : base(model)
         {
 
@@ -21,7 +21,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             {
                 BlockType = "Display",
                 BlockName = GenerateUniqueName("Display"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror }

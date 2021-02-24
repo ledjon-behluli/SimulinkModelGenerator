@@ -4,7 +4,7 @@ using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
+namespace SimulinkModelGenerator
 {
     public enum TimeSourceType
     {
@@ -13,7 +13,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         [Description("User external signal")]
         ExternalSignal
     }
+}
 
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
+{
     public abstract class GeneratorBuilder<T> : SystemBlockBuilder<T>, IGenerator
         where T : GeneratorBuilder<T>
     {
@@ -26,7 +29,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         private string _Ports => _TimeSourceType == TimeSourceType.SimulationTime ? "[0 1]" : "[1 1]";
 
 
-        public GeneratorBuilder(Model model)
+        internal GeneratorBuilder(Model model)
             : base(model)
         {
 
@@ -45,13 +48,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         }
 
 
-        protected virtual Block GetBlock()
+        internal virtual Block GetBlock()
         {
             return new Block()
             {
                 BlockType = BlockType,
                 BlockName = GenerateUniqueName(BlockName),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = _Position },
                     new Parameter() { Name = "BlockMirror", Text = _BlockMirror },

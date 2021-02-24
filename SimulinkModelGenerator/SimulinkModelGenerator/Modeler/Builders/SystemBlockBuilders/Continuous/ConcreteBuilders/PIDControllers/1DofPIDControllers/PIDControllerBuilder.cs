@@ -7,7 +7,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
     {
         protected override string ControllerType => "PID";
 
-        public PIDControllerBuilder(Model model)
+        internal PIDControllerBuilder(Model model)
             : base(model)
         {
                  

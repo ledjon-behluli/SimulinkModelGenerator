@@ -7,7 +7,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
     {
         protected override string ControllerType => "PI";
 
-        public PIControllerBuilder(Model model)
+        internal PIControllerBuilder(Model model)
             : base(model)
         {
 

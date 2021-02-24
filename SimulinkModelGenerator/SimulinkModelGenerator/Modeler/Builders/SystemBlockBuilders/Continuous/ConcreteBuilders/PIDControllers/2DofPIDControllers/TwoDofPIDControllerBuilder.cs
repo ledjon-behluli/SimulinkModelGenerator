@@ -7,7 +7,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
     {
         protected override string ControllerType => "PID";
 
-        public TwoDofPIDControllerBuilder(Model model)
+        internal TwoDofPIDControllerBuilder(Model model)
             : base(model)
         {
 

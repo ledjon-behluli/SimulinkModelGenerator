@@ -15,7 +15,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         private string _Ports = "[2 1]";
         private string _NumberOfInputs = "*/";
 
-        public DivideBuilder(Model model)
+        internal DivideBuilder(Model model)
             : base(model)
         {
 
@@ -39,8 +39,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "Ports", Text = _Ports });
-            block.P.Add(new Parameter() { Name = "Inputs", Text = _NumberOfInputs });
+            block.Parameters.Add(new Parameter() { Name = "Ports", Text = _Ports });
+            block.Parameters.Add(new Parameter() { Name = "Inputs", Text = _NumberOfInputs });
 
             model.System.Block.Add(block);
         }

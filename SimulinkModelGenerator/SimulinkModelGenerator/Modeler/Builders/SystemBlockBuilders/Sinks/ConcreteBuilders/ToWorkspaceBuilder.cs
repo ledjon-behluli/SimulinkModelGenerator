@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
+namespace SimulinkModelGenerator
 {
     public enum SaveFormat
     {
@@ -32,7 +32,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
         [Description("3-D array (concatenate along third dimension)")]
         _3DArray
     }
+}
 
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
+{
     public sealed class ToWorkspaceBuilder : SystemBlockBuilder<ToWorkspaceBuilder>, IToWorkspace
     {
         internal override SizeU Size => new SizeU(60, 30);
@@ -44,7 +47,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
         private SignalSaveType _SignalSaveType = SignalSaveType._3DArray;
         private SaveFormat _SaveFormat = SaveFormat.Timeseries;
 
-        public ToWorkspaceBuilder(Model model)
+        internal ToWorkspaceBuilder(Model model)
             : base(model)
         {
 
@@ -101,7 +104,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             {
                 BlockType = "ToWorkspace",
                 BlockName = GenerateUniqueName("To\\nWorkspace"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

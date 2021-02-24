@@ -13,7 +13,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         protected string _Bias = "0";
 
 
-        public SineWaveGeneratorBuilder(Model model)
+        internal SineWaveGeneratorBuilder(Model model)
             : base(model)
         {
 
@@ -24,13 +24,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             _Bias = bias.ToString();
         }
 
-        protected override Block GetBlock()
+        internal override Block GetBlock()
         {
             Block block = base.GetBlock();
 
-            block.P.Add(new Parameter() { Name = "SineType", Text = SineType });
-            block.P.Add(new Parameter() { Name = "Bias", Text = _Bias });
-            block.P.Add(new Parameter() { Name = "SampleTime", Text = SampleTime });
+            block.Parameters.Add(new Parameter() { Name = "SineType", Text = SineType });
+            block.Parameters.Add(new Parameter() { Name = "Bias", Text = _Bias });
+            block.Parameters.Add(new Parameter() { Name = "SampleTime", Text = SampleTime });
 
             return block;
         }

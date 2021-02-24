@@ -18,7 +18,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         protected int _NumeratorCount;
         protected int _DenominatorCount;
 
-        public BaseTransferFunctionBuilder(Model model)
+        internal BaseTransferFunctionBuilder(Model model)
             : base(model)
         {
            
@@ -57,7 +57,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             }
         }
 
-        protected Block GetBlock()
+        internal Block GetBlock()
         {
             if (_NumeratorCount > _DenominatorCount)
                 throw new InvalidOperationException("The order of the transfer function numerator must be less than or equal to the order of the denominator!");
@@ -73,7 +73,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             {
                 BlockType = BlockType,
                 BlockName = GenerateUniqueName(BlockName),
-                P = list
+                Parameters = list
             };
         }
     }

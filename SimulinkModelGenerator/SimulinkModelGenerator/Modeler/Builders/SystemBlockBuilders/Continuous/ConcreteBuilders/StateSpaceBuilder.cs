@@ -41,7 +41,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         private string _D = "1";
         private string _X0 = "0.0";
 
-        public StateSpaceBuilder(Model model)
+        internal StateSpaceBuilder(Model model)
             : base(model)
         {
             
@@ -140,7 +140,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             {
                 BlockType = "StateSpace",
                 BlockName = GenerateUniqueName("State-Space"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

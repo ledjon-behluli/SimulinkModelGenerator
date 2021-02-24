@@ -14,7 +14,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
 
         private string _Gain = "1";
 
-        public GainBuilder(Model model)
+        internal GainBuilder(Model model)
             : base(model)
         {
 
@@ -31,7 +31,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "Gain", Text = _Gain });
+            block.Parameters.Add(new Parameter() { Name = "Gain", Text = _Gain });
 
             model.System.Block.Add(block);
         }

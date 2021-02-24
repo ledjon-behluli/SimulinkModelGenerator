@@ -9,7 +9,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
     {
         private readonly Model model;
 
-        public SystemSourcesBuilder(Model model)
+        internal SystemSourcesBuilder(Model model)
         {
             this.model = model;
         }

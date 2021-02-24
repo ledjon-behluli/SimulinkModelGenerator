@@ -16,7 +16,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         private bool _TransportDelayFeedthrough = false;
         private string _PadeOrder = "0";
 
-        public TransportDelayBuilder(Model model)
+        internal TransportDelayBuilder(Model model)
             : base(model)
         {
 
@@ -75,7 +75,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             {
                 BlockType = "TransportDelay",
                 BlockName = GenerateUniqueName("Transport\\nDelay"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

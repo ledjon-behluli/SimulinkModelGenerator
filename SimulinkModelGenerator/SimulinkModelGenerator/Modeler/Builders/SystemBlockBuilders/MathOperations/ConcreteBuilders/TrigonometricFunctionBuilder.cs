@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using SimulinkModelGenerator.Extensions;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
+namespace SimulinkModelGenerator
 {
     public enum TrigonometricFunctionType
     {
@@ -40,7 +40,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         [Description("cos + jsin")]
         cos_jsin
     }
+}
 
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
+{
     public sealed class TrigonometricFunctionBuilder : SystemBlockBuilder<TrigonometricFunctionBuilder>, 
         ITrigonometricFunction, IWithNoneApproximation, IWithCordicApproximation
     {
@@ -60,7 +63,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         private ApproximationMethod _Method = ApproximationMethod.None;
         private OutputSignalType _SignalType = OutputSignalType.Auto;
 
-        public TrigonometricFunctionBuilder(Model model)
+        internal TrigonometricFunctionBuilder(Model model)
             : base(model)
         {
 
@@ -117,7 +120,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             {
                 BlockType = "Trigonometry",
                 BlockName = GenerateUniqueName("Trigonometry\\nFunction"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

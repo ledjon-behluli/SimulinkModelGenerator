@@ -4,6 +4,21 @@ using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 
+namespace SimulinkModelGenerator
+{
+    public enum OutputAfterFinalValue
+    {
+        [Description("Extrapolation")]
+        Extrapolation,
+        [Description("Setting to zero")]
+        SettingToZero,
+        [Description("Holding final value")]
+        HoldingFinalValue,
+        [Description("Cyclic repetition")]
+        CyclicRepetition
+    }
+}
+
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
     public enum OutputAfterFinalValue
@@ -27,7 +42,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         private bool _EnableZeroCrossingDetection = true;
         private OutputAfterFinalValue _OutputAfterFinalValue = OutputAfterFinalValue.Extrapolation;
 
-        public FromWorkspaceBuilder(Model model)
+        internal FromWorkspaceBuilder(Model model)
             : base(model)
         {
 
@@ -59,7 +74,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             {
                 BlockType = "FromWorkspace",
                 BlockName = GenerateUniqueName("From\\nWorkspace"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

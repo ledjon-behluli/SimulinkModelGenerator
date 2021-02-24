@@ -7,7 +7,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
     {
         private readonly Model model;
 
-        public OptionsBuilder(Model model)
+        internal OptionsBuilder(Model model)
         {
             this.model = model;
         }

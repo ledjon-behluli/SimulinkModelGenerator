@@ -4,16 +4,16 @@ using System.Text;
 
 namespace SimulinkModelGenerator.Models
 {
-	public class Line : IEqualityComparer<Line>
+	internal class Line : IEqualityComparer<Line>
 	{	
-		public Line()
+		internal Line()
 		{
 			Branch = new List<Branch>();
 			P = new List<Parameter>();
 		}
 
-		public List<Parameter> P { get; internal set; }
-		public List<Branch> Branch { get; internal set; }
+		public List<Parameter> P { get; set; }
+		public List<Branch> Branch { get; set; }
 
 		public override string ToString()
 		{
@@ -72,14 +72,14 @@ namespace SimulinkModelGenerator.Models
 		}
 	}
 
-	public class Branch
+	internal class Branch
 	{
-		public List<Parameter> P { get; internal set; }
+		public List<Parameter> Parameters { get; set; }
 
 		public override string ToString()
 		{
 			string properties = string.Empty;
-			foreach (Parameter p in P)
+			foreach (Parameter p in Parameters)
 			{
 				properties += $"\t\t\t\t{p.ToString() + Environment.NewLine}";
 			}

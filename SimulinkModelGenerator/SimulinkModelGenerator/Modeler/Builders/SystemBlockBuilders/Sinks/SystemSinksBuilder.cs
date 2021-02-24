@@ -9,7 +9,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
     {
         private readonly Model model;
 
-        public SystemSinksBuilder(Model model)
+        internal SystemSinksBuilder(Model model)
         {
             this.model = model;
         }

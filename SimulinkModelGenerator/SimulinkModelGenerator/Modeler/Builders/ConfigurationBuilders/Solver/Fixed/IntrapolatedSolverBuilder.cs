@@ -7,12 +7,12 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.F
     {
         private readonly Model model;
 
-        public IntrapolatedSolverBuilder(Model model)
+        internal IntrapolatedSolverBuilder(Model model)
         {
             this.model = model;
         }
 
         public void WithSampleTime(double sampleTime = 0.001) => 
-            model.ConfigSet.Solver.AdditionalSolverOptions.SetSampleTime(sampleTime);
+            model.Array.ConfigSet.Solver.AdditionalSolverOptions.SetSampleTime(sampleTime);
     }   
 }

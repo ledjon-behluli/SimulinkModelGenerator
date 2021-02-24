@@ -9,7 +9,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
     {
         private readonly Model model;
 
-        public SystemContinuousBuilder(Model model) 
+        internal SystemContinuousBuilder(Model model) 
         {
             this.model = model;
         }

@@ -4,24 +4,26 @@ using System.Text;
 
 namespace SimulinkModelGenerator.Models
 {
-	public class Block
+	internal class Block
 	{
-		public List<Parameter> P { get; internal set; }
-		public string BlockType { get; internal set; }
-		public string BlockName { get; internal set; }
-		public InstanceData InstanceData { get; internal set; }
+		public List<Parameter> Parameters { get; set; }
+		public InstanceData InstanceData { get; set; }
+
+		public string BlockType { get; set; }
+		public string BlockName { get; set; }
+		
 
 		public override string ToString()
 		{
 			string properties = string.Empty;
-			foreach(Parameter p in P)
+			foreach (Parameter p in Parameters)
 			{
 				properties += $"\t\t\t{p.ToString() + Environment.NewLine}";
 			}
 
-			if(InstanceData != null)
+			if (InstanceData != null)
 			{
-				foreach(Parameter p in InstanceData.P)
+				foreach(Parameter p in InstanceData.Parameters)
 				{
 					properties += $"\t\t\t{p.ToString() + Environment.NewLine}";
 				}
@@ -30,9 +32,9 @@ namespace SimulinkModelGenerator.Models
 			StringBuilder sb = new StringBuilder();
 			sb.Append("\t\tBlock {");
 			sb.Append(Environment.NewLine);
-			sb.Append($"\t\t\tBlockType \"{BlockType}\"");
+			sb.Append($"\t\t\tBlockType\t\t\"{BlockType}\"");
 			sb.Append(Environment.NewLine);
-			sb.Append($"\t\t\tName \"{BlockName}\"");
+			sb.Append($"\t\t\tName\t\t\"{BlockName}\"");
 			sb.Append(Environment.NewLine);
 			sb.Append(properties);
 			sb.Append("\t\t}");
@@ -41,8 +43,8 @@ namespace SimulinkModelGenerator.Models
 		}
 	}
 
-	public class InstanceData
+	internal class InstanceData
 	{
-		public List<Parameter> P { get; internal set; }
+		public List<Parameter> Parameters { get; internal set; }
 	}
 }

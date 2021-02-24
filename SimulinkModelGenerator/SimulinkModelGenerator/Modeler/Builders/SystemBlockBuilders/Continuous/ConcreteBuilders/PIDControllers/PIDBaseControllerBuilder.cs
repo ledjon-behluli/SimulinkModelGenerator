@@ -5,7 +5,7 @@ using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
+namespace SimulinkModelGenerator
 {
     public enum Form
     {
@@ -48,7 +48,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         [Description("Trapezoidal")]
         Trapezoidal
     }
+}
 
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
+{
     public abstract class PIDBaseControllerBuilder<T> : SystemBlockBuilder<T>, IPIDBaseController, IPIDSampleTime
         where T : PIDBaseControllerBuilder<T>
     {
@@ -71,7 +74,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         protected bool _UseFilter = false;
 
 
-        public PIDBaseControllerBuilder(Model model)
+        internal PIDBaseControllerBuilder(Model model)
             : base(model)
         {
 
@@ -101,20 +104,20 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
             return this;
         }
 
-        protected Block GetBlock()
+        internal Block GetBlock()
         {
             return new Block()
             {
                 BlockType = "Reference",
                 BlockName = GenerateUniqueName(BlockName),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror }
                 },
                 InstanceData = new InstanceData()
                 {
-                    P = new List<Parameter>()
+                    Parameters = new List<Parameter>()
                     {
                         new Parameter() { Name = "Controller", Text = ControllerType },
                         new Parameter() { Name = "P", Text = _Proportional },

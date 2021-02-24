@@ -13,7 +13,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         private string _LowEnd = "-1";
         private string _HighEnd = "2";
 
-        public SliderGainBuilder(Model model)
+        internal SliderGainBuilder(Model model)
             : base(model)
         {
 
@@ -66,7 +66,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             {
                 BlockType = "Reference",
                 BlockName = GenerateUniqueName("Slider\\nGain"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

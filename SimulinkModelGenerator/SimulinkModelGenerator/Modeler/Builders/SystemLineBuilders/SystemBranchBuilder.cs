@@ -12,7 +12,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
         private readonly Model model;
         private string previousBlockName;
 
-        public SystemBranchBuilder(SystemLineBuilder systemLineBuilder, Model model, string previousBlockName)
+        internal SystemBranchBuilder(SystemLineBuilder systemLineBuilder, Model model, string previousBlockName)
         {
             this.model = model;
             this.previousBlockName = previousBlockName;
@@ -36,7 +36,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
                     {
                         new Branch()
                         {
-                            P = new List<Parameter>()
+                            Parameters = new List<Parameter>()
                             {
                                 new Parameter() { Name = "DstBlock", Text = destinationBlockName },
                                 new Parameter() { Name = "DstPort", Text = destinationBlockPort.ToString() }
@@ -49,7 +49,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             {
                 matchedLine.Branch.Add(new Branch()
                 {
-                    P = new List<Parameter>()
+                    Parameters = new List<Parameter>()
                     {
                         new Parameter() { Name = "DstBlock", Text = destinationBlockName },
                         new Parameter() { Name = "DstPort", Text = destinationBlockPort.ToString() }

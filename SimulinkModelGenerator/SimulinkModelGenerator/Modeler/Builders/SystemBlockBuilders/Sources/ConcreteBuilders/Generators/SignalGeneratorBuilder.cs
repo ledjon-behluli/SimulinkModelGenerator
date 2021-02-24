@@ -4,7 +4,7 @@ using SimulinkModelGenerator.Models;
 using System;
 using System.ComponentModel;
 
-namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
+namespace SimulinkModelGenerator
 {
     public enum FrequencyUnit
     {
@@ -25,7 +25,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         [Description("random")]
         Random
     }
+}
 
+namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
+{
     public sealed class SignalGeneratorBuilder : GeneratorBuilder<SignalGeneratorBuilder>, ISignalGenerator
     {
         protected override string BlockType => "SignalGenerator";
@@ -35,7 +38,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         private WaveForm _WaveForm = WaveForm.Sine;
         private string _Frequency = "1";
 
-        public SignalGeneratorBuilder(Model model)
+        internal SignalGeneratorBuilder(Model model)
             : base(model)
         {
 
@@ -66,9 +69,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "WaveForm", Text = _WaveForm.GetDescription() });
-            block.P.Add(new Parameter() { Name = "Units", Text = _Unit.GetDescription() });
-            block.P.Add(new Parameter() { Name = "Frequency", Text = _Frequency });
+            block.Parameters.Add(new Parameter() { Name = "WaveForm", Text = _WaveForm.GetDescription() });
+            block.Parameters.Add(new Parameter() { Name = "Units", Text = _Unit.GetDescription() });
+            block.Parameters.Add(new Parameter() { Name = "Frequency", Text = _Frequency });
 
             model.System.Block.Add(block);
         }

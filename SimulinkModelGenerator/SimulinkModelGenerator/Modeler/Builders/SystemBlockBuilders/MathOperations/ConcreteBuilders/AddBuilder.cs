@@ -47,7 +47,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
             }
         }
 
-        public AddBuilder(Model model)
+        internal AddBuilder(Model model)
             : base(model)
         {
            
@@ -73,9 +73,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "IconShape", Text = _IconShape.GetDescription() });
-            block.P.Add(new Parameter() { Name = "Inputs", Text = _Inputs });
-            block.P.Add(new Parameter() { Name = "Ports", Text = _Ports });
+            block.Parameters.Add(new Parameter() { Name = "IconShape", Text = _IconShape.GetDescription() });
+            block.Parameters.Add(new Parameter() { Name = "Inputs", Text = _Inputs });
+            block.Parameters.Add(new Parameter() { Name = "Ports", Text = _Ports });
 
             model.System.Block.Add(block);
         }

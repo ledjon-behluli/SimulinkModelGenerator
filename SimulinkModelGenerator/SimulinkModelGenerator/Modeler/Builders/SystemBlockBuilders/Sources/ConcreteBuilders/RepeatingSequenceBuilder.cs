@@ -13,7 +13,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         private TimeStamp _TimeStamp = TimeStamp.Default;
         private OutputValue _OutputValue = OutputValue.Default;
 
-        public RepeatingSequenceBuilder(Model model)
+        internal RepeatingSequenceBuilder(Model model)
             : base(model)
         {
 
@@ -45,7 +45,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             {
                 BlockType = "Reference",
                 BlockName = GenerateUniqueName("Repeating\\nSequence"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },

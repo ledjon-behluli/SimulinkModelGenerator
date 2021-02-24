@@ -10,7 +10,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 
         private string _SignalName = string.Empty;
 
-        public OutPortBuilder(Model model)
+        internal OutPortBuilder(Model model)
             : base(model)
         {
 
@@ -26,7 +26,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "SignalName", Text = _SignalName });
+            block.Parameters.Add(new Parameter() { Name = "SignalName", Text = _SignalName });
 
             model.System.Block.Add(block);
         }

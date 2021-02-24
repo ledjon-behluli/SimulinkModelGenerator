@@ -13,7 +13,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         private string _Mean = "0";
         private string _Variance = "1";
 
-        public RandomNumberBuilder(Model model)
+        internal RandomNumberBuilder(Model model)
             : base(model)
         {
 
@@ -39,8 +39,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         {
             Block block = GetBlock();
 
-            block.P.Add(new Parameter() { Name = "Mean", Text = _Mean });
-            block.P.Add(new Parameter() { Name = "Variance", Text = _Variance });
+            block.Parameters.Add(new Parameter() { Name = "Mean", Text = _Mean });
+            block.Parameters.Add(new Parameter() { Name = "Variance", Text = _Variance });
 
             model.System.Block.Add(block);
         }

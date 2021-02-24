@@ -9,11 +9,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
     {
         private readonly Model model;
 
-        public VariableOptionsBuilder(Model model)
+        internal VariableOptionsBuilder(Model model)
         {
             this.model = model;
-            this.model.ConfigSet.Solver.SolverOptions.Solver = VariableSolver.Auto.GetDescription();
-            this.model.ConfigSet.Solver.SolverOptions.SolverName = VariableSolver.Auto.GetDescription();
+            this.model.Array.ConfigSet.Solver.SolverOptions.Solver = VariableSolver.Auto.GetDescription();
+            this.model.Array.ConfigSet.Solver.SolverOptions.SolverName = VariableSolver.Auto.GetDescription();
         }
 
         public IAutoVariableSolverType Auto() => new AutoSolverBuilder(model);

@@ -2,6 +2,38 @@
 using System.Linq;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
+using System.ComponentModel;
+
+namespace SimulinkModelGenerator
+{
+    public enum IconDisplay
+    {
+        [Description("Port number")]
+        PortNumber,
+        [Description("Signal name")]
+        SignalName,
+        [Description("Port number and signal name")]
+        Both
+    }
+
+    public enum OutputSignalType
+    {
+        [Description("auto")]
+        Auto,
+        [Description("real")]
+        Real,
+        [Description("complex")]
+        Complex
+    }
+
+    public enum RootFindingAlgorithm
+    {
+        [Description("Excat")]
+        Exact,
+        [Description("Newton-Raphson")]
+        Newton_Raphson
+    }
+}
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
 {
@@ -25,9 +57,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
 
     public abstract class SystemBlockBuilder
     {
-        protected readonly Model model;
+        internal readonly Model model;
 
-        protected string _Name;
+        internal string _Name;
 
         private string _position;
         protected string _Position
@@ -39,9 +71,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
         internal abstract SizeU Size { get; }
 
         internal bool blockMirror = false;
-        protected string _BlockMirror => blockMirror ? "on" : "off";
+        internal string _BlockMirror => blockMirror ? "on" : "off";
 
-        public SystemBlockBuilder(Model model)
+        internal SystemBlockBuilder(Model model)
         {
             this.model = model;
         }
@@ -80,9 +112,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
     public abstract class SystemBlockBuilder<T> : SystemBlockBuilder
         where T : SystemBlockBuilder<T>, ISystemBlock
     {
-        private readonly T _blockBuilderInstance;        
-      
-        public SystemBlockBuilder(Model model) 
+        private readonly T _blockBuilderInstance;
+
+        internal SystemBlockBuilder(Model model) 
             : base(model)
         {
             _blockBuilderInstance = (T)this;

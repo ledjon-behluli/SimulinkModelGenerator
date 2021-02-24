@@ -7,7 +7,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
     {
         protected override string ControllerType => "PI";
 
-        public TwoDofPIControllerBuilder(Model model)
+        internal TwoDofPIControllerBuilder(Model model)
             : base(model)
         {
 

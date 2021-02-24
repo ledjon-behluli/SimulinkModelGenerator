@@ -10,7 +10,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 
         private string _Value = "1";
 
-        public ConstantBuilder(Model model)
+        internal ConstantBuilder(Model model)
             : base(model)
         {
 
@@ -28,7 +28,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
             {
                 BlockType = "Constant",
                 BlockName = GenerateUniqueName("Constant"),
-                P = new List<Parameter>()
+                Parameters = new List<Parameter>()
                 {
                     new Parameter() { Name = "Position", Text = base._Position },
                     new Parameter() { Name = "BlockMirror", Text = base._BlockMirror },
