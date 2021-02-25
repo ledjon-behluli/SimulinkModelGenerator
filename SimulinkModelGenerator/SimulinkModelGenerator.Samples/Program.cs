@@ -8,17 +8,22 @@ namespace SimulinkModelGenerator.Samples
 
         static void Main(string[] args)
         {
-            Fixed_Extrapolation_Ode14x_Solver_Configuration_Example();
-            Fixed_Runge_Kutta_Ode4_Solver_Configuration_Example();
+            //Fixed_Extrapolation_Ode14x_Solver_Configuration_Example();
+            //Fixed_Runge_Kutta_Ode4_Solver_Configuration_Example();
+            //Variable_Rosenbrock_Ode23s_Solver_Configuration_Example();
+            //Variable_Stiff_NDF_Ode15s_Solver_Configuration_Example();
 
-            All_Elements();
-            Common_Elements_With_Set_Names_And_Without_Connections();
-            Common_Elements_With_Set_Names_And_With_Connections();
-            Common_Elements_With_Automatic_Names_And_With_Connections_Style_1();
-            Common_Elements_With_Automatic_Names_And_With_Connections_Style_2();
-            PID_Example();
+            //All_Elements();
+            //Common_Elements_With_Set_Names_And_Without_Connections();
+            //Common_Elements_With_Set_Names_And_With_Connections();
+            //Common_Elements_With_Automatic_Names_And_With_Connections_Style_1();
+            //Common_Elements_With_Automatic_Names_And_With_Connections_Style_2();
+            //PID_Example();
+
+            PID_Example_With_Runge_Kutta_Solver_In_Accelerator_Mode();
         }
 
+        #region Solver Configuration Examples
 
         static void Fixed_Extrapolation_Ode14x_Solver_Configuration_Example()
         {
@@ -54,6 +59,48 @@ namespace SimulinkModelGenerator.Samples
                 .AddControlSystem()
                 .Save(path);
         }
+
+        static void Variable_Rosenbrock_Ode23s_Solver_Configuration_Example()
+        {
+            ModelBuilder
+                .Create()
+                .WithName("variable_stiff_ndf_ode15s_solver_configuration_example")
+                .WithSimulationMode(SimulationMode.Normal)
+                .Configure(c => c
+                    .Solver(s => s
+                        .Options(o => o
+                            .AsVariableStepSolver()
+                                .Ode23s()
+                                .WithJacobian(Jacobian.SparseAnalytical)
+                                .WithStepSize(0.001, 0.0001, 0.0005, 2)
+                                .WithTolerance(0.001, 0.01))))
+                .AddControlSystem()
+                .Save(path);
+        }
+
+        static void Variable_Stiff_NDF_Ode15s_Solver_Configuration_Example()
+        {
+            ModelBuilder
+                .Create()
+                .WithName("variable_rosenbrock_ode23s_solver_configuration_example")
+                .WithSimulationMode(SimulationMode.Normal)
+                .Configure(c => c
+                    .Solver(s => s
+                        .Options(o => o
+                            .AsVariableStepSolver()
+                                .Ode15s()
+                                .WithJacobian(Jacobian.Auto)
+                                .WithOrder(MaximumOrder.Five)
+                                .WithShapePreservation(ShapePreservation.DisableAll)
+                                .WithZeroCrossingAlgorithm(ZeroCrossingAlgorithm.Adaptive)
+                                .WithZeroCrossingControl(ZeroCrossingControl.UseLocalSettings))))
+                .AddControlSystem()
+                .Save(path);
+        }
+
+        #endregion
+
+        #region Control System Examples
 
         static void All_Elements()
         {
@@ -273,5 +320,52 @@ namespace SimulinkModelGenerator.Samples
                 })
                 .Save(path);
         }
+
+        #endregion
+
+        #region Control System With Solver Configuration Examples
+
+        static void PID_Example_With_Runge_Kutta_Solver_In_Accelerator_Mode()
+        {
+            ModelBuilder
+                .Create()
+                .WithName("pid_example_with_runge_kutta_solver_in_accelerator_mode")
+                .WithSimulationMode(SimulationMode.Accelerator)
+                .Configure(c =>
+                {
+                    c.Solver(s =>
+                    {
+                        s.SetSimulationTimes(0.5, 25.5)
+                         .Options(o => o.AsFixedStepSolver().Ode4().WithSampleTime(0.005));
+                    });
+                })
+                .AddControlSystem(cs =>
+                {
+                    cs.AddSources(s => s.AddStep(sp => sp.SetStepTime(0).SetPosition(190, 145))
+                                        .AddConstant(c => c.SetPosition(190, 245)));
+                    cs.AddMathOperations(mo => mo.AddSum(sum => sum.SetInputs(InputType.Plus, InputType.Minus).SetPosition(320, 150))
+                                                .AddGain(g => g.SetGain(1).FlipHorizontally().SetPosition(515, 230)));
+                    cs.AddContinuous(co =>
+                    {
+                        co.AddPIDController(pid => pid.SetProportional(31.0019358281379)
+                                                      .SetIntegral(88.4489521692078)
+                                                      .SetDerivative(1.81032163065042)
+                                                      .SetFilterCoefficient(4337.28406726102)
+                                                      .SetPosition(435, 142));
+                        co.AddTransferFunction(tf => tf.SetNumerator(20).SetDenominator(1, 10, 20).SetPosition(595, 142));
+                    });
+                    cs.AddSinks(s => s.AddScope(scope => scope.SetInputPorts(2).SetPosition(820, 144)));
+                    cs.AddConnections("Step", c =>
+                    {
+                        c.ThanConnect("Sum").ThanConnect("PID Controller").ThanConnect("TransferFcn")
+                        .Branch(b => b.Towards("Scope", 1))
+                        .Branch(b => b.Towards("Gain").ThanConnect("Sum", 2))
+                        .Connect("Constant", "Scope", 1, 2);
+                    });
+                })
+                .Save(path);
+        }
+
+        #endregion
     }
 }

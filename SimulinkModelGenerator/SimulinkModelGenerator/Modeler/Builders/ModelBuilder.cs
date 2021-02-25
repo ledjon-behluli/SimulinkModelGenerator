@@ -1,9 +1,10 @@
 ﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
+using SimulinkModelGenerator.Rules;
+using SimulinkModelGenerator.Rules.ModelBuilder;
 using System;
 using System.IO;
-using System.Linq;
 
 namespace SimulinkModelGenerator.Modeler.Builders
 {
@@ -25,11 +26,8 @@ namespace SimulinkModelGenerator.Modeler.Builders
 
         public IModel WithName(string name)
         {
-            if (string.IsNullOrEmpty(name))
-                throw new SimulinkModelGeneratorException("Model name can not be null or empty!");
-
-            if (name.Any(c => char.IsWhiteSpace(c)))
-                throw new SimulinkModelGeneratorException("Model name can not have whitespace characters!");
+            if (!ModelNameRule.Evaluate(name, out string error))
+                throw new SimulinkModelGeneratorException(error);
 
             model.Name = name;
             return this;

@@ -33,10 +33,10 @@ namespace SimulinkModelGenerator.Models
 {
     internal class Model
     {
-        public Array Array { get; internal set; }
-        public System System { get; internal set; }
-        public string Name { get; internal set; }
-        public SimulationMode SimulationMode { get; internal set; }
+        public Array Array { get; set; }
+        public System System { get; set; }
+        public string Name { get; set; }
+        public SimulationMode SimulationMode { get; set; }
 
         internal List<Parameter> Parameters =>
             new List<Parameter>()
