@@ -1,10 +1,10 @@
 ﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using SimulinkModelGenerator.Rules;
-using SimulinkModelGenerator.Rules.ModelBuilder;
 using System;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace SimulinkModelGenerator.Modeler.Builders
 {
@@ -26,8 +26,23 @@ namespace SimulinkModelGenerator.Modeler.Builders
 
         public IModel WithName(string name)
         {
-            if (!ModelNameRule.Evaluate(name, out string error))
-                throw new SimulinkModelGeneratorException(error);
+            if (string.IsNullOrEmpty(name))
+                throw new SimulinkModelGeneratorException("Model name can not be null or empty");
+
+            if (name.Length < 2 || name.Length >= 64)
+                throw new SimulinkModelGeneratorException("Model name must have more than 2 and less than 64 characters");
+
+            if (!Regex.Match(name, "^[A-Za-z0-9_]+$").Success)
+                throw new SimulinkModelGeneratorException("Model name can only contain these characters: a-z, A-Z, 0-9 and the underscore character");
+
+            if (name.Any(c => char.IsWhiteSpace(c)))
+                throw new SimulinkModelGeneratorException("Model name can not contain any whitespace character");
+
+            if (name.StartsWith("_"))
+                throw new SimulinkModelGeneratorException("Model name can not start with an underscore character");
+
+            if (char.IsNumber(name.ToCharArray().ElementAt(0)))
+                throw new SimulinkModelGeneratorException("Model name can not start with a number");
 
             model.Name = name;
             return this;
