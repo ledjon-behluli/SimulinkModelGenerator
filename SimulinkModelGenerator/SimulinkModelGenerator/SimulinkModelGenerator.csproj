@@ -16,17 +16,10 @@
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <PackageTags>Matlab, Simulink, Model, Generator, FluentApi</PackageTags>
     <PackageIcon>simulink-icon.png</PackageIcon>
-    <AssemblyVersion>1.1.0</AssemblyVersion>
-    <FileVersion>1.1.0</FileVersion>
-    <Version>1.1.0</Version>
-    <PackageReleaseNotes>
-      Added support for following Simulink elements:
-
-      - Sources: Inport, From Workspace, Clock, Digital Clock, Repeating Sequence, Random Number, Uniform Random Number, Singal Generator, Time &amp; Sample based Pulse Generators, Time &amp; Sample based Sine Wave Generators.
-      - Sinks: XY Graph, Outport, To Workspace.
-      - Math Operations: Abs, Add, Product, Dot Product, Divide, Subtract, Min, Max, Sign, Sqrt, Signed Sqrt, Reciprocal Sqrt, Math Function, Trigonometric Function.
-      - Continuous: Integrator Limited, Zero Pole, Derivative, Transport Delay, State Space, 2dof PID, 2dof PD, 2dof PI.
-    </PackageReleaseNotes>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+    <Version>2.0.0</Version>
+    <PackageReleaseNotes>Release notes can be found at: https://github.com/ledjon-behluli/SimulinkModelGenerator/releases </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
