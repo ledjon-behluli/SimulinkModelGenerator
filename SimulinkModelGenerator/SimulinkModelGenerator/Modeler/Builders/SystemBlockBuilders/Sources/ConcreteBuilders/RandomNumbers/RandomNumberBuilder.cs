@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
 
@@ -28,7 +29,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         public IRandomNumber SetVariance(double variance)
         {
             if (variance < 0)
-                throw new ArgumentException("Variance must be greater than or equal to 0.");
+                throw new SimulinkModelGeneratorException("Variance must be greater than or equal to 0.");
 
             _Variance = variance.ToString();
             return this;

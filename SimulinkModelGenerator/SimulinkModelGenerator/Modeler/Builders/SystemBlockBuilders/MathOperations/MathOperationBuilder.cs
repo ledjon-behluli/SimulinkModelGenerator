@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Extensions;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
@@ -100,7 +101,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         {
             if (outMin != null && outMax != null)
                 if(outMin > outMax)
-                    throw new ArgumentException("Minimum output value must be less than or equal to maximum value.");
+                    throw new SimulinkModelGeneratorException("Minimum output value must be less than or equal to maximum value.");
 
             _OutMin = outMin;
             _OutMax = outMax;

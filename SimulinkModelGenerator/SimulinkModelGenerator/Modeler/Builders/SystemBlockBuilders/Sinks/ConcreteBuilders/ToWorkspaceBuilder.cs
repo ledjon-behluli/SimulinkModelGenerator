@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Extensions;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
@@ -64,7 +65,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
         public IToWorkspace SetMaxDataPoints(int points)
         {
             if (points < 1)
-                throw new ArgumentException("Maximum data points must be greater than 0.");
+                throw new SimulinkModelGeneratorException("Maximum data points must be greater than 0.");
 
             _MaxDataPoints = points.ToString();
             return this;
@@ -73,7 +74,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
         public IToWorkspace SetDecimation(int decimation)
         {
             if (decimation < 1)
-                throw new ArgumentException("Decimation must be greater than 0.");
+                throw new SimulinkModelGeneratorException("Decimation must be greater than 0.");
 
             _Decimation = decimation.ToString();
             return this;

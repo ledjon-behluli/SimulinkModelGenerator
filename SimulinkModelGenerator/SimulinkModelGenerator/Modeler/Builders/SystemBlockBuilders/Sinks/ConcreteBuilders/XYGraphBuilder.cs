@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
         public IXYGraph SetX(double xMin = -1, double xMax = 1)
         {
             if (xMin >= xMax)
-                throw new ArgumentException("Input (X) min value can not be greater or equal to (X) max value.");
+                throw new SimulinkModelGeneratorException("Input (X) min value can not be greater or equal to (X) max value.");
 
             _XMin = xMin.ToString();
             _XMax = xMax.ToString();
@@ -35,7 +36,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
         public IXYGraph SetY(double yMin = -1, double yMax = 1)
         {
             if (yMin >= yMax)
-                throw new ArgumentException("Input (Y) min value can not be greater or equal to (Y) max value.");
+                throw new SimulinkModelGeneratorException("Input (Y) min value can not be greater or equal to (Y) max value.");
 
             _YMin = yMin.ToString();
             _YMax = yMax.ToString();

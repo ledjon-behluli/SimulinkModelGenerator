@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Extensions;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
@@ -59,7 +60,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         public ISignalGenerator SetFrequency(double frequency)
         {
             if (frequency < 0)
-                throw new ArgumentException("Frequency must be greater than or equal to 0.");
+                throw new SimulinkModelGeneratorException("Frequency must be greater than or equal to 0.");
 
             _Frequency = frequency.ToString();
             return this;

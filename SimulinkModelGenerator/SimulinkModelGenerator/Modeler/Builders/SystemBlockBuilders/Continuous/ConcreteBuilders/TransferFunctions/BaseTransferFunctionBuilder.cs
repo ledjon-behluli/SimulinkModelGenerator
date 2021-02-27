@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using SimulinkModelGenerator.Models;
+using SimulinkModelGenerator.Exceptions;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
@@ -38,12 +39,12 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         {
             if (coefficients.Length == 0)
             {
-                throw new ArgumentException("Denominator can not have zero number of coefficients!");
+                throw new SimulinkModelGeneratorException("Denominator can not have zero number of coefficients!");
             }
             else if (coefficients.Length == 1)
             {
                 if (coefficients[0] == 0)
-                    throw new InvalidOperationException("The order of the transfer function numerator must be less than or equal to the order of the denominator!");
+                    throw new SimulinkModelGeneratorException("The order of the transfer function numerator must be less than or equal to the order of the denominator!");
                 else
                 {
                     _Denominator = $"[{coefficients[0]}]";
@@ -60,7 +61,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         internal Block GetBlock()
         {
             if (_NumeratorCount > _DenominatorCount)
-                throw new InvalidOperationException("The order of the transfer function numerator must be less than or equal to the order of the denominator!");
+                throw new SimulinkModelGeneratorException("The order of the transfer function numerator must be less than or equal to the order of the denominator!");
 
             List<Parameter> list = new List<Parameter>()
             {

@@ -19,10 +19,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         public ILimitedIntegrator SetSaturationLimits(double lowerLimit = 0, double upperLimit = 1)
         {
             if (upperLimit < 0)
-                throw new ArgumentException("Upper limit must be a positive number.");
+                throw new SimulinkModelGeneratorException("Upper limit must be a positive number.");
 
             if (upperLimit <= lowerLimit)
-                throw new ArgumentException("Upper limit must be greater than the lower limit.");
+                throw new SimulinkModelGeneratorException("Upper limit must be greater than the lower limit.");
 
             _LowerSaturationLimit = lowerLimit.ToString();
             _UpperSaturationLimit = upperLimit.ToString();

@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         public IClock SetDecimation(int decimation)
         {
             if (decimation < 1)
-                throw new ArgumentException("Decimation must be greater than or equal to 1.");
+                throw new SimulinkModelGeneratorException("Decimation must be greater than or equal to 1.");
 
             _Decimation = decimation.ToString();
             return this;

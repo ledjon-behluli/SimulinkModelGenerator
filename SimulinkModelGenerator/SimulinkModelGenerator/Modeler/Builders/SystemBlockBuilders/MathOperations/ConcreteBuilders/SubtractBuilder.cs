@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Extensions;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
@@ -62,7 +63,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         public IBaseSum SetInputs(params InputType[] inputs)
         {
             if (inputs.Length == 0)
-                throw new ArgumentException("Substract must have at least one input.");
+                throw new SimulinkModelGeneratorException("Substract must have at least one input.");
 
             _InputTypes = inputs;
             return this;

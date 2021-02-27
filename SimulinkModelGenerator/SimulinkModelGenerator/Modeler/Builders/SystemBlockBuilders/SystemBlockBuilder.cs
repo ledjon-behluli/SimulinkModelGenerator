@@ -3,6 +3,7 @@ using System.Linq;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System.ComponentModel;
+using SimulinkModelGenerator.Exceptions;
 
 namespace SimulinkModelGenerator
 {
@@ -45,10 +46,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
         internal SizeU(uint width, uint height)
         {
             if (width == 0)
-                throw new ArgumentException("Only positive values for width are not allowed.");
+                throw new SimulinkModelGeneratorException("Only positive values for width are not allowed.");
 
             if (height == 0)
-                throw new ArgumentException("Only positive values for height are not allowed.");
+                throw new SimulinkModelGeneratorException("Only positive values for height are not allowed.");
 
             Width = width;
             Height = height;

@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Extensions;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
@@ -29,7 +30,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
         public IPort SetPortNumber(int port)
         {
             if (port < 1 || port > 65535)
-                throw new ArgumentException("Port number must be a positive integer constant between 1 and 65535");
+                throw new SimulinkModelGeneratorException("Port number must be a positive integer constant between 1 and 65535");
 
             _PortNumber = port.ToString();
             return this;

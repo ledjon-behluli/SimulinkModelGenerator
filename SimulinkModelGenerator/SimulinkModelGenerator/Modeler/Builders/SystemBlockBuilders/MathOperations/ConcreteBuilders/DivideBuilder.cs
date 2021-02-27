@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
 
@@ -29,7 +30,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
                 _Ports = $"[{count} 1]";
             }
             else
-                throw new ArgumentException("A minimum of 1 input is required!");
+                throw new SimulinkModelGeneratorException("A minimum of 1 input is required!");
 
             return this;
         }

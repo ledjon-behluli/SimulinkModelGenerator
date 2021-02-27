@@ -65,10 +65,10 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
         public IControlSystemBranchNewLine ThanConnect(string destinationBlockName, uint destinationBlockPort = 1)
         {            
             if (string.IsNullOrEmpty(destinationBlockName))
-                throw new ArgumentNullException("Destination block name can not be null or empty.");
+                throw new SimulinkModelGeneratorException("Destination block name can not be null or empty.");
 
             if (destinationBlockPort == 0)
-                throw new ArgumentException("Destination block port number can not be zero.");
+                throw new SimulinkModelGeneratorException("Destination block port number can not be zero.");
 
             Line newLine = new Line()
             {

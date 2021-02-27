@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         public IStep SetSampleTime(double sampleTime)
         {
             if (sampleTime < 0)
-                throw new ArgumentException("SampleTime must be a positive number!");
+                throw new SimulinkModelGeneratorException("SampleTime must be a positive number!");
 
             _SampleTime = sampleTime.ToString();
             return this;

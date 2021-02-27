@@ -18,7 +18,6 @@ namespace SimulinkModelGenerator.Modeler.Builders
         private ModelBuilder()
         {
             this.model = new Model();
-
             this.model.Name = "untitled";
             this.model.SimulationMode = SimulationMode.Normal;
             this.model.Array = new Models.Array();

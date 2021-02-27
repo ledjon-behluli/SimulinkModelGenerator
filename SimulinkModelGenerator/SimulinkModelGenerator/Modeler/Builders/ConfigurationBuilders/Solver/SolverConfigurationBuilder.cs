@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
 
@@ -22,7 +23,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
         /// </summary>
         /// <param name="startTime">Simulation start time.</param>
         /// <param name="stopTime">Simulation stop time.</param>
-        /// <exception cref="ArgumentException" />
+        /// <exception cref="SimulinkModelGeneratorException" />
         public ISolverConfiguration SetSimulationTimes(double startTime = 0, double stopTime = 10)
         {
             if (startTime < 0)
@@ -31,7 +32,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
             stopTime = Math.Abs(stopTime);
 
             if (startTime >= stopTime)
-                throw new ArgumentException("Simulation stop time must be greater than start time.");
+                throw new SimulinkModelGeneratorException("Simulation stop time must be greater than start time.");
 
             model.Array.ConfigSet.Solver.SimulationTime.StartTime = startTime;
             model.Array.ConfigSet.Solver.SimulationTime.StopTime = stopTime;

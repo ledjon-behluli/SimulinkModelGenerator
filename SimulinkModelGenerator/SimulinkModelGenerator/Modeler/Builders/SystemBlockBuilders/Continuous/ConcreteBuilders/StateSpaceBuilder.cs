@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
 using System.Collections.Generic;
@@ -50,13 +51,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         public IStateSpaceCharacteristics WithStateSpaceCharacteristics(int numberOfInputs = 1, int numberOfOutputs = 1, int numberOfStates = 1)
         {
             if (numberOfInputs < 1)
-                throw new ArgumentException("Number of inputs must be greater than or equal to 1");
+                throw new SimulinkModelGeneratorException("Number of inputs must be greater than or equal to 1");
 
             if (numberOfOutputs < 1)
-                throw new ArgumentException("Number of outputs must be greater than or equal to 1");
+                throw new SimulinkModelGeneratorException("Number of outputs must be greater than or equal to 1");
 
             if (numberOfStates < 1)
-                throw new ArgumentException("Number of states must be greater than or equal to 1");
+                throw new SimulinkModelGeneratorException("Number of states must be greater than or equal to 1");
 
             _NumberOfInputs = numberOfInputs;
             _NumberOfOutputs = numberOfOutputs;
@@ -121,19 +122,19 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
         internal override void Build()
         {
             if (A_Dims.RowCount != A_Dims.ColumnCount || A_Dims.RowCount != _NumberOfStates || A_Dims.ColumnCount != _NumberOfStates)
-                throw new ArgumentException("Matrix coefficient A, must be a real-valued n-by-n matrix, where n is the number of states.");
+                throw new SimulinkModelGeneratorException("Matrix coefficient A, must be a real-valued n-by-n matrix, where n is the number of states.");
 
             if (B_Dims.RowCount != _NumberOfStates || B_Dims.ColumnCount != _NumberOfInputs)
-                throw new ArgumentException("Matrix coefficient B, must be a real-valued n-by-m matrix, where n is the number of states and m is the number of inputs.");
+                throw new SimulinkModelGeneratorException("Matrix coefficient B, must be a real-valued n-by-m matrix, where n is the number of states and m is the number of inputs.");
 
             if (C_Dims.RowCount != _NumberOfOutputs || C_Dims.ColumnCount != _NumberOfStates)
-                throw new ArgumentException("Matrix coefficient C, must be a real-valued r-by-n matrix, where r is the number of outputs and n is the number of states.");
+                throw new SimulinkModelGeneratorException("Matrix coefficient C, must be a real-valued r-by-n matrix, where r is the number of outputs and n is the number of states.");
 
             if (D_Dims.RowCount != _NumberOfOutputs || D_Dims.ColumnCount != _NumberOfInputs)
-                throw new ArgumentException("Matrix coefficient D, must be a real-valued r-by-m matrix, where r is the number of outputs and m is the number of inputs.");
+                throw new SimulinkModelGeneratorException("Matrix coefficient D, must be a real-valued r-by-m matrix, where r is the number of outputs and m is the number of inputs.");
 
             if (X0_Dims.Length > 1 && X0_Dims.Length != _NumberOfStates)
-                throw new ArgumentException("Initial state vector, must be a real-valued n-vector, where n is the number of states, or can be a 1-vector.");
+                throw new SimulinkModelGeneratorException("Initial state vector, must be a real-valued n-vector, where n is the number of states, or can be a 1-vector.");
 
 
             model.System.Block.Add(new Block()

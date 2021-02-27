@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 
@@ -26,7 +27,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
                 _Ports = $"[{numberOfPorts}]";
             }
             else
-                throw new ArgumentException("Scope can not have less than 1 port!");
+                throw new SimulinkModelGeneratorException("Scope can not have less than 1 port!");
 
             return this;
         }

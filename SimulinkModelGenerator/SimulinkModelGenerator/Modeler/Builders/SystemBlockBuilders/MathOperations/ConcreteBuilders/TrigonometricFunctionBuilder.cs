@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using System.ComponentModel;
 using SimulinkModelGenerator.Extensions;
+using SimulinkModelGenerator.Exceptions;
 
 namespace SimulinkModelGenerator
 {
@@ -107,7 +108,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         public ITrigonometricFunction SetNumberOfIterations(int count)
         {
             if (count < 1)
-                throw new ArgumentException("Number of iterations must be greater than 0");
+                throw new SimulinkModelGeneratorException("Number of iterations must be greater than 0");
 
             _NumberOfIterations = count.ToString();
             return this;

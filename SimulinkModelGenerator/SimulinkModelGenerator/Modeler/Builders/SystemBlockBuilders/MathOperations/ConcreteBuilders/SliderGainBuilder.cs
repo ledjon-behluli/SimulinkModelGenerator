@@ -2,6 +2,7 @@
 using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
 using System;
+using SimulinkModelGenerator.Exceptions;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
@@ -23,13 +24,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         public ISliderGain SetGainLimits(double lowEnd = -1, double highEnd = 1)
         {
             if (lowEnd >= highEnd)
-                throw new ArgumentException("LowEnd must be less than HighEnd.");
+                throw new SimulinkModelGeneratorException("LowEnd must be less than HighEnd.");
 
             if (lowEnd > double.Parse(_Gain))
-                throw new ArgumentException("LowEnd must be less than or equal to Gain.");
+                throw new SimulinkModelGeneratorException("LowEnd must be less than or equal to Gain.");
 
             if (highEnd < double.Parse(_Gain))
-                throw new ArgumentException("HighEnd must be greater than or equal to Gain.");
+                throw new SimulinkModelGeneratorException("HighEnd must be greater than or equal to Gain.");
 
             _LowEnd = lowEnd.ToString();
             _HighEnd = highEnd.ToString();
@@ -60,7 +61,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         internal override void Build()
         {
             if (double.Parse(_Gain) < double.Parse(_LowEnd) || double.Parse(_Gain) > double.Parse(_HighEnd))
-                throw new ArgumentException("Gain must be inclusive between the bounds of LowEnd and HighEnd.");
+                throw new SimulinkModelGeneratorException("Gain must be inclusive between the bounds of LowEnd and HighEnd.");
 
             model.System.Block.Add(new Block()
             {

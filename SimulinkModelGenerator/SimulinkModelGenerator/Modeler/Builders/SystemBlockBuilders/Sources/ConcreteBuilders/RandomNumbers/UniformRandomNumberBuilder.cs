@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
 
@@ -22,7 +23,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         public IUniformRandomNumber SetRange(double min = -1, double max = 1)
         {
             if (min >= max)
-                throw new ArgumentException("Minimum must be less than Maximum.");
+                throw new SimulinkModelGeneratorException("Minimum must be less than Maximum.");
 
             _Minimum = min.ToString();
             _Maximum = max.ToString();

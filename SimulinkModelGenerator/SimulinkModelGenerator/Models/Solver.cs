@@ -237,7 +237,7 @@ namespace SimulinkModelGenerator.Models
         internal void SetSampleTime(double sampleTime)
         {
             if (sampleTime <= 0)
-                throw new ArgumentException("Fundamental sample time can not be less than or equal to 0");
+                throw new SimulinkModelGeneratorException("Fundamental sample time can not be less than or equal to 0");
 
             FixedStep = sampleTime;
         }

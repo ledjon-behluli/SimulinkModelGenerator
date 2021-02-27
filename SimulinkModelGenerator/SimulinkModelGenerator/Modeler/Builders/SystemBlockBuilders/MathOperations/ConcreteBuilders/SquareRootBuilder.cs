@@ -2,6 +2,7 @@
 using SimulinkModelGenerator.Models;
 using SimulinkModelGenerator.Extensions;
 using System;
+using SimulinkModelGenerator.Exceptions;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
@@ -28,7 +29,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         protected T SetNumberOfIterations(int count)
         {
             if (count < 0)
-                throw new ArgumentException("Number of iterations can not be less than 0");
+                throw new SimulinkModelGeneratorException("Number of iterations can not be less than 0");
 
             _NumberOfIterations = count.ToString();
             return (T)this;

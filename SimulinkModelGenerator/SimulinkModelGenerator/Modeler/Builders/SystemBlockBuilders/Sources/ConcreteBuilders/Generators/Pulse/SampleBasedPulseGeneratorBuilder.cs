@@ -20,7 +20,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         public ISampleBasedPulseGenerator SetPeriod(int period)
         {
             if (period <= 0)
-                throw new ArgumentException("Period must be greater than 0.");
+                throw new SimulinkModelGeneratorException("Period must be greater than 0.");
 
             _Period = period.ToString();
             return this;
@@ -40,7 +40,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         public ISampleBasedPulseGenerator SetPhaseDelay(int delay)
         {
             if (delay < 0)
-                throw new ArgumentException("Phase delay must be greater than or equal to 0.");
+                throw new SimulinkModelGeneratorException("Phase delay must be greater than or equal to 0.");
 
             _Period = delay.ToString();
             return this;
@@ -50,7 +50,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         public ISampleBasedPulseGenerator SetSampleTime(double sampleTime)
         {
             if (sampleTime < 0)
-                throw new ArgumentException("Sample time must be greater than or equal to 0.");
+                throw new SimulinkModelGeneratorException("Sample time must be greater than or equal to 0.");
 
             _SampleTime = sampleTime.ToString();
             return this;

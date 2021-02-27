@@ -1,4 +1,5 @@
-﻿using SimulinkModelGenerator.Modeler.GrammarRules;
+﻿using SimulinkModelGenerator.Exceptions;
+using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System;
 
@@ -28,7 +29,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         public ITimeBasedSineWaveGenerator SetFrequency(double frequency)
         {
             if (frequency <= 0)
-                throw new ArgumentException("Frequency must be greater than 0.");
+                throw new SimulinkModelGeneratorException("Frequency must be greater than 0.");
 
             _Frequency = frequency.ToString();
             return this;
@@ -43,7 +44,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         public ITimeBasedSineWaveGenerator SetSampleTime(double sampleTime)
         {
             if (sampleTime < 0)
-                throw new ArgumentException("Frequency must be greater than or equal to 0.");
+                throw new SimulinkModelGeneratorException("Frequency must be greater than or equal to 0.");
 
             _SampleTime = sampleTime.ToString();
             return this;

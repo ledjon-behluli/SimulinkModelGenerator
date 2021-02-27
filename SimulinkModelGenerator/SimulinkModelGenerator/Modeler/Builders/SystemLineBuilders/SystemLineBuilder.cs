@@ -34,16 +34,16 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
         internal IControlSystemLine Build(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1)
         {
             if (string.IsNullOrEmpty(sourceBlockName))
-                throw new ArgumentNullException("Source block name can not be null or empty.");
+                throw new SimulinkModelGeneratorException("Source block name can not be null or empty.");
 
             if (string.IsNullOrEmpty(destinationBlockName))
-                throw new ArgumentNullException("Destination block name can not be null or empty.");
+                throw new SimulinkModelGeneratorException("Destination block name can not be null or empty.");
 
             if(sourceBlockPort == 0)
-                throw new ArgumentException("Source block port number can not be zero.");
+                throw new SimulinkModelGeneratorException("Source block port number can not be zero.");
 
             if(destinationBlockPort == 0)
-                throw new ArgumentException("Destination block port number can not be zero.");
+                throw new SimulinkModelGeneratorException("Destination block port number can not be zero.");
 
             Line newLine = new Line()
             {
