@@ -2,7 +2,7 @@
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
-    public abstract class OneDofPIDBaseControllerBuilder<T> : PIDBaseControllerBuilder<T>
+    internal abstract class OneDofPIDBaseControllerBuilder<T> : PIDBaseControllerBuilder<T>
         where T : PIDBaseControllerBuilder<T>
     {
         internal override SizeU Size => new SizeU(40, 36);

@@ -5,7 +5,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
 {
-    public sealed class VariableOptionsBuilder : IVariableStepSolverOptions
+    internal class VariableOptionsBuilder : IVariableStepSolverOptions
     {
         private readonly Model model;
 

@@ -3,7 +3,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class AbsBuilder : MathOperationBuilder<AbsBuilder>, IAbs
+    internal class AbsBuilder : MathOperationBuilder<AbsBuilder>, IAbs
     {
         internal override SizeU Size => new SizeU(30, 30);
 

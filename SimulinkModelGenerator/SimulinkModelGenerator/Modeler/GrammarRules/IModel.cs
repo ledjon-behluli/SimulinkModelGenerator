@@ -1,5 +1,4 @@
 ﻿using System;
-using SimulinkModelGenerator.Modeler.Builders;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules
 {
@@ -7,8 +6,8 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
     {
         IModel WithName(string name);
         IModel WithSimulationMode(SimulationMode mode = SimulationMode.Normal);
-        IModel Configure(Action<ConfigurationBuilder> action = null);
-        IFinalizeModel AddControlSystem(Action<ControlSystemBuilder> action = null);
+        IModel Configure(Action<IConfiguration> action = null);
+        IFinalizeModel AddControlSystem(Action<IControlSystem> action = null);
     }
 
     public interface IFinalizeModel

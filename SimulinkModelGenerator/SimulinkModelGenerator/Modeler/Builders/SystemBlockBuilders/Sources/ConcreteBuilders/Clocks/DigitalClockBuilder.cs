@@ -1,12 +1,11 @@
 ﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public sealed class DigitalClockBuilder : SystemBlockBuilder<DigitalClockBuilder>, IDigitalClock
+    internal class DigitalClockBuilder : SystemBlockBuilder<DigitalClockBuilder>, IDigitalClock
     {
         internal override SizeU Size => new SizeU(65, 24);
 

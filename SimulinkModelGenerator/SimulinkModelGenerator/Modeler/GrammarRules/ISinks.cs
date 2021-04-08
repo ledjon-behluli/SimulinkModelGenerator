@@ -1,15 +1,14 @@
-﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks;
-using System;
+﻿using System;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules
 {
     public interface ISystemSink
     {
-        ISystemSink AddDisplay(Action<DisplayBuilder> action = null);
-        ISystemSink AddScope(Action<ScopeBuilder> action = null);
-        ISystemSink AddOutPort(Action<OutPortBuilder> action = null);
-        ISystemSink AddToWorkspace(Action<ToWorkspaceBuilder> action = null);
-        ISystemSink AddXYGraph(Action<XYGraphBuilder> action = null);
+        ISystemSink AddDisplay(Action<IDisplay> action = null);
+        ISystemSink AddScope(Action<IScope> action = null);
+        ISystemSink AddOutPort(Action<IOutPort> action = null);
+        ISystemSink AddToWorkspace(Action<IToWorkspace> action = null);
+        ISystemSink AddXYGraph(Action<IXYGraph> action = null);
     }
 
 

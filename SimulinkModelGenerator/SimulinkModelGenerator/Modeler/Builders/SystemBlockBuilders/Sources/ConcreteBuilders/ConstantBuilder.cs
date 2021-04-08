@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public sealed class ConstantBuilder : SystemBlockBuilder<ConstantBuilder>, IConstant
+    internal class ConstantBuilder : SystemBlockBuilder<ConstantBuilder>, IConstant
     {
         internal override SizeU Size => new SizeU(30, 30);
 

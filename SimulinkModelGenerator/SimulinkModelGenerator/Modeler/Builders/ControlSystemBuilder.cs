@@ -9,8 +9,8 @@ using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders
-{  
-    public sealed class ControlSystemBuilder : IControlSystem
+{
+    internal class ControlSystemBuilder : IControlSystem
     {
         private readonly Model model;
 
@@ -26,35 +26,35 @@ namespace SimulinkModelGenerator.Modeler.Builders
             this.model = model;
         }
 
-        public IControlSystem AddSources(Action<SystemSourcesBuilder> action = null)
+        public IControlSystem AddSources(Action<ISystemSource> action = null)
         {
             SystemSourcesBuilder builder = new SystemSourcesBuilder(model);
             action?.Invoke(builder);
             return this;
         }
 
-        public IControlSystem AddSinks(Action<SystemSinksBuilder> action = null)
+        public IControlSystem AddSinks(Action<ISystemSink> action = null)
         {
             SystemSinksBuilder builder = new SystemSinksBuilder(model);
             action?.Invoke(builder);
             return this;
         }
 
-        public IControlSystem AddMathOperations(Action<SystemMathOperationsBuilder> action = null)
+        public IControlSystem AddMathOperations(Action<ISystemMathOperation> action = null)
         {
             SystemMathOperationsBuilder builder = new SystemMathOperationsBuilder(model);
             action?.Invoke(builder);
             return this;
         }
 
-        public IControlSystem AddContinuous(Action<SystemContinuousBuilder> action = null)
+        public IControlSystem AddContinuous(Action<ISystemContinuous> action = null)
         {
             SystemContinuousBuilder builder = new SystemContinuousBuilder(model);
             action?.Invoke(builder);
             return this;
         }
 
-        public IControlSystem AddConnections(string startingBlockName, Action<SystemLineBuilder> action = null)
+        public IControlSystem AddConnections(string startingBlockName, Action<ISystemLine> action = null)
         {
             SystemLineBuilder builder = new SystemLineBuilder(model, startingBlockName);
             action?.Invoke(builder);

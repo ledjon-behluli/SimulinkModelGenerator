@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 {
-    public sealed class DisplayBuilder : SystemBlockBuilder<DisplayBuilder>, IDisplay
+    internal class DisplayBuilder : SystemBlockBuilder<DisplayBuilder>, IDisplay
     {
         internal override SizeU Size => new SizeU(90, 30);
 

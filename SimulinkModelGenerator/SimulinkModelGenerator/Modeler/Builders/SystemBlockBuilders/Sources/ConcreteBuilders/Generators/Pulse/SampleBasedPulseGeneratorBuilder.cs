@@ -1,11 +1,10 @@
 ﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public sealed class SampleBasedPulseGeneratorBuilder : PulseGeneratorBuilder<SampleBasedPulseGeneratorBuilder>, 
+    internal class SampleBasedPulseGeneratorBuilder : PulseGeneratorBuilder<SampleBasedPulseGeneratorBuilder>, 
         ISampleBasedPulseGenerator
     {
         protected override string PulseType => "Sample based";

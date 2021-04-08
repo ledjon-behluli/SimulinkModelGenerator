@@ -4,7 +4,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
-    public abstract class BaseIntegratorBuilder<T> : SystemBlockBuilder<T>, IBaseIntegrator
+    internal abstract class BaseIntegratorBuilder<T> : SystemBlockBuilder<T>, IBaseIntegrator
         where T : BaseIntegratorBuilder<T>
     {
         internal override SizeU Size => new SizeU(30, 30);

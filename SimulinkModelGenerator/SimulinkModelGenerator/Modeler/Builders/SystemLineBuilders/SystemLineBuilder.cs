@@ -7,7 +7,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
 {
-    public sealed class SystemLineBuilder : ISystemLine, IControlSystemLine
+    internal class SystemLineBuilder : ISystemLine
     {
         private readonly Model model;
         private string previousBlockName;
@@ -22,11 +22,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             Build(sourceBlockName, destinationBlockName, sourceBlockPort, destinationBlockPort);
 
         public IControlSystemLine ThanConnect(string destinationBlockName, uint destinationBlockPort = 1) =>
-            Build(previousBlockName, destinationBlockName, 1, destinationBlockPort);        
+            Build(previousBlockName, destinationBlockName, 1, destinationBlockPort);
 
-        public IControlSystemLine Branch(Action<SystemBranchBuilder> action)
+        public IControlSystemLine Branch(Action<ISystemBranch> action)
         {
-            SystemBranchBuilder builder = new SystemBranchBuilder(this, model, previousBlockName);
+            SystemBranchBuilder builder = new SystemBranchBuilder(model, previousBlockName);
             action?.Invoke(builder);
             return this;
         }

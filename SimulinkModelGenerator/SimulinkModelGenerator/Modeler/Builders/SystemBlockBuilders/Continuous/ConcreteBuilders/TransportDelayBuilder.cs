@@ -1,12 +1,11 @@
 ﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
-    public sealed class TransportDelayBuilder : SystemBlockBuilder<TransportDelayBuilder>, ITransportDelay
+    internal class TransportDelayBuilder : SystemBlockBuilder<TransportDelayBuilder>, ITransportDelay
     {
         internal override SizeU Size => new SizeU(40, 40);
 

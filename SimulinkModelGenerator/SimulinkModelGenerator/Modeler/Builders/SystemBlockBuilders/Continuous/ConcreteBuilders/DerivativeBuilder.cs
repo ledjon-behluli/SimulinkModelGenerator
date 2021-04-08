@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
-    public sealed class DerivativeBuilder : SystemBlockBuilder<DerivativeBuilder>, IDerivative
+    internal class DerivativeBuilder : SystemBlockBuilder<DerivativeBuilder>, IDerivative
     {
         internal override SizeU Size => new SizeU(30, 30);
 

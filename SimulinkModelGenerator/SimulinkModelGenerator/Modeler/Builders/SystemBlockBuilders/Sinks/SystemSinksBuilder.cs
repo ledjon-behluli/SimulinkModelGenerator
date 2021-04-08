@@ -5,7 +5,7 @@ using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 {
-    public sealed class SystemSinksBuilder : ISystemSink
+    internal class SystemSinksBuilder : ISystemSink
     {
         private readonly Model model;
 
@@ -14,11 +14,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
             this.model = model;
         }
        
-        public ISystemSink AddDisplay(Action<DisplayBuilder> action = null) => AddSink<DisplayBuilder>(action);
-        public ISystemSink AddScope(Action<ScopeBuilder> action = null) => AddSink<ScopeBuilder>(action);
-        public ISystemSink AddOutPort(Action<OutPortBuilder> action = null) => AddSink<OutPortBuilder>(action);
-        public ISystemSink AddToWorkspace(Action<ToWorkspaceBuilder> action = null) => AddSink<ToWorkspaceBuilder>(action);
-        public ISystemSink AddXYGraph(Action<XYGraphBuilder> action = null) => AddSink<XYGraphBuilder>(action);
+        public ISystemSink AddDisplay(Action<IDisplay> action = null) => AddSink<DisplayBuilder>(action);
+        public ISystemSink AddScope(Action<IScope> action = null) => AddSink<ScopeBuilder>(action);
+        public ISystemSink AddOutPort(Action<IOutPort> action = null) => AddSink<OutPortBuilder>(action);
+        public ISystemSink AddToWorkspace(Action<IToWorkspace> action = null) => AddSink<ToWorkspaceBuilder>(action);
+        public ISystemSink AddXYGraph(Action<IXYGraph> action = null) => AddSink<XYGraphBuilder>(action);
 
 
         private ISystemSink AddSink<T>(dynamic action)

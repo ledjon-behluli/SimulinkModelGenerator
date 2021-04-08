@@ -2,12 +2,11 @@
 using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
 {
-    public abstract class PortBuilder<T> : SystemBlockBuilder<T>, IPort
+    internal abstract class PortBuilder<T> : SystemBlockBuilder<T>, IPort
         where T : PortBuilder<T>
     {
         internal override SizeU Size => new SizeU(30, 14);

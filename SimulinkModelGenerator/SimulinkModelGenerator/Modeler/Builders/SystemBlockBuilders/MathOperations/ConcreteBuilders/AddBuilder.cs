@@ -6,7 +6,7 @@ using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class AddBuilder : MathOperationBuilder<AddBuilder>, IAdd
+    internal class AddBuilder : MathOperationBuilder<AddBuilder>, IAdd
     {
         internal override SizeU Size => new SizeU(30, 30);
 

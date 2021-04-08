@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 {
-    public sealed class ScopeBuilder : SystemBlockBuilder<ScopeBuilder>, IScope
+    internal class ScopeBuilder : SystemBlockBuilder<ScopeBuilder>, IScope
     {
         internal override SizeU Size => new SizeU(30, 32);
 

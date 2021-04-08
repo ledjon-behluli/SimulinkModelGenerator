@@ -3,7 +3,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class DotProductBuilder : MathOperationBuilder<DotProductBuilder>, IDotProduct
+    internal class DotProductBuilder : MathOperationBuilder<DotProductBuilder>, IDotProduct
     {
         internal override SizeU Size => new SizeU(30, 30);
 

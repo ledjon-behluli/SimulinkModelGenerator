@@ -5,7 +5,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
 {
-    public sealed partial class FixedOptionsBuilder : IFixedStepSolverOptions
+    internal class FixedOptionsBuilder : IFixedStepSolverOptions
     {
         private readonly Model model;
 

@@ -2,7 +2,6 @@
 using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -37,7 +36,7 @@ namespace SimulinkModelGenerator
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 {
-    public sealed class ToWorkspaceBuilder : SystemBlockBuilder<ToWorkspaceBuilder>, IToWorkspace
+    internal class ToWorkspaceBuilder : SystemBlockBuilder<ToWorkspaceBuilder>, IToWorkspace
     {
         internal override SizeU Size => new SizeU(60, 30);
 

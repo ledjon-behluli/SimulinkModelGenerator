@@ -2,7 +2,6 @@
 using SimulinkModelGenerator.Models;
 using SimulinkModelGenerator.Extensions;
 using System.ComponentModel;
-using System;
 using SimulinkModelGenerator.Exceptions;
 
 namespace SimulinkModelGenerator
@@ -18,7 +17,7 @@ namespace SimulinkModelGenerator
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public abstract class MinMaxBuilder<T> : MathOperationBuilder<T>, IMinMax
+    internal abstract class MinMaxBuilder<T> : MathOperationBuilder<T>, IMinMax
         where T : MinMaxBuilder<T>
     {
         internal override SizeU Size => new SizeU(30, 30);
@@ -71,7 +70,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         }
     }
 
-    public sealed class MinBuilder : MinMaxBuilder<MinBuilder>
+    internal class MinBuilder : MinMaxBuilder<MinBuilder>, IMin
     {
         protected override MinMaxType _FunctionType => MinMaxType.Min;
 
@@ -82,7 +81,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         }
     }
 
-    public sealed class MaxBuilder : MinMaxBuilder<MaxBuilder>
+    internal class MaxBuilder : MinMaxBuilder<MaxBuilder>, IMax
     {
         protected override MinMaxType _FunctionType => MinMaxType.Max;
 

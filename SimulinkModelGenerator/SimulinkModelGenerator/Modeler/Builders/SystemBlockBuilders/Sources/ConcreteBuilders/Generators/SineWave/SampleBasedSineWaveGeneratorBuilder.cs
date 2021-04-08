@@ -1,11 +1,11 @@
 ﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public sealed class SampleBasedSineWaveGeneratorBuilder : SineWaveGeneratorBuilder<SampleBasedSineWaveGeneratorBuilder>, 
+    internal class SampleBasedSineWaveGeneratorBuilder : 
+        SineWaveGeneratorBuilder<SampleBasedSineWaveGeneratorBuilder>, 
         ISampleBasedSineWaveGenerator
     {
         protected override string SineType => "Time based";

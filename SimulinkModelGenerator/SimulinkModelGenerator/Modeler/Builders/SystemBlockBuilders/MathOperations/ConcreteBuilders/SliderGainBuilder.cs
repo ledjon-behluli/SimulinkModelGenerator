@@ -1,12 +1,11 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
-using System;
 using SimulinkModelGenerator.Exceptions;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class SliderGainBuilder : SystemBlockBuilder<SliderGainBuilder>, ISliderGain
+    internal class SliderGainBuilder : SystemBlockBuilder<SliderGainBuilder>, ISliderGain
     {
         internal override SizeU Size => new SizeU(30, 30);
 
@@ -74,7 +73,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
                     new Parameter() { Name = "Ports", Text = "[1 1]" },
                     new Parameter() { Name = "LibraryVersion", Text = "1.391" },
                     new Parameter() { Name = "SourceType", Text = "Slider Gain" },
-                    new Parameter() { Name = "SourceBlock", Text = "simulink/Math\\nOperations/Slider\nGain" },
+                    new Parameter() { Name = "SourceBlock", Text = "simulink/Math\\nOperations/Slider\\nGain" },
                     new Parameter() { Name = "gain", Text = _Gain },
                     new Parameter() { Name = "low", Text = _LowEnd },
                     new Parameter() { Name = "high", Text = _HighEnd },

@@ -2,11 +2,10 @@
 using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class SumBuilder : MathOperationBuilder<SumBuilder>, ISum
+    internal class SumBuilder : MathOperationBuilder<SumBuilder>, ISum
     {
         internal override SizeU Size => new SizeU(20, 20);
 

@@ -1,25 +1,24 @@
-﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous;
-using System;
+﻿using System;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules
 {
     public interface ISystemContinuous
     {
-        ISystemContinuous AddIntegrator(Action<IntegratorBuilder> action = null);
-        ISystemContinuous AddLimitedIntegrator(Action<LimitedIntegratorBuilder> action = null);
-        ISystemContinuous AddTransferFunction(Action<TransferFunctionBuilder> action = null);
-        ISystemContinuous AddZeroPole(Action<ZeroPoleBuilder> action = null);
-        ISystemContinuous AddDerivative(Action<DerivativeBuilder> action = null);
-        ISystemContinuous AddStateSpace(Action<StateSpaceBuilder> action = null);
-        ISystemContinuous AddTransportDelay(Action<TransportDelayBuilder> action = null);
-        ISystemContinuous AddPIDController(Action<PIDControllerBuilder> action = null);
-        ISystemContinuous AddPDController(Action<PDControllerBuilder> action = null);
-        ISystemContinuous AddPIController(Action<PIControllerBuilder> action = null);
-        ISystemContinuous AddIController(Action<IControllerBuilder> action = null);
-        ISystemContinuous AddPController(Action<PControllerBuilder> action = null);
-        ISystemContinuous Add2DofPIDController(Action<TwoDofPIDControllerBuilder> action = null);
-        ISystemContinuous Add2DofPDController(Action<TwoDofPDControllerBuilder> action = null);
-        ISystemContinuous Add2DofPIController(Action<TwoDofPIControllerBuilder> action = null);
+        ISystemContinuous AddIntegrator(Action<IIntegrator> action = null);
+        ISystemContinuous AddLimitedIntegrator(Action<ILimitedIntegrator> action = null);
+        ISystemContinuous AddTransferFunction(Action<ITransferFunction> action = null);
+        ISystemContinuous AddZeroPole(Action<IZeroPole> action = null);
+        ISystemContinuous AddDerivative(Action<IDerivative> action = null);
+        ISystemContinuous AddStateSpace(Action<IStateSpace> action = null);
+        ISystemContinuous AddTransportDelay(Action<ITransportDelay> action = null);
+        ISystemContinuous AddPIDController(Action<IPIDController> action = null);
+        ISystemContinuous AddPDController(Action<IPDController> action = null);
+        ISystemContinuous AddPIController(Action<IPIController> action = null);
+        ISystemContinuous AddIController(Action<IIController> action = null);
+        ISystemContinuous AddPController(Action<IPController> action = null);
+        ISystemContinuous Add2DofPIDController(Action<ITwoDofPIDController> action = null);
+        ISystemContinuous Add2DofPDController(Action<ITwoDofPDController> action = null);
+        ISystemContinuous Add2DofPIController(Action<ITwoDofPIController> action = null);
     }
 
     #region Uncategorized

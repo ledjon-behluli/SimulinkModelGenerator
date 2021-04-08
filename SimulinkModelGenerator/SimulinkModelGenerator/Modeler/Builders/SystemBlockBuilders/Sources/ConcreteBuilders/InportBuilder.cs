@@ -3,7 +3,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public sealed class InPortBuilder : PortBuilder<InPortBuilder>, IInPort
+    internal class InPortBuilder : PortBuilder<InPortBuilder>, IInPort
     {
         protected override string BlockType => "Inport";
         protected override string BlockName => "In";

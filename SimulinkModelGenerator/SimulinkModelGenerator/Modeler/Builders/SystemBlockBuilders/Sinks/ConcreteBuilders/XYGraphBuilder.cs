@@ -1,12 +1,11 @@
 ﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sinks
 {
-    public sealed class XYGraphBuilder : SystemBlockBuilder<XYGraphBuilder>, IXYGraph
+    internal class XYGraphBuilder : SystemBlockBuilder<XYGraphBuilder>, IXYGraph
     {
         internal override SizeU Size => new SizeU(30, 35);
 

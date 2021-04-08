@@ -3,7 +3,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
-    public sealed class ZeroPoleBuilder : BaseTransferFunctionBuilder<ZeroPoleBuilder>, IZeroPole
+    internal class ZeroPoleBuilder : BaseTransferFunctionBuilder<ZeroPoleBuilder>, IZeroPole
     {
         internal override string BlockType => "ZeroPole";
         internal override string BlockName => "Zero-Pole";

@@ -3,7 +3,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
-    public sealed class IControllerBuilder : OneDofPIDBaseControllerBuilder<IControllerBuilder>, IIController
+    internal class IControllerBuilder : OneDofPIDBaseControllerBuilder<IControllerBuilder>, IIController
     {
         protected override string ControllerType => "I";
 

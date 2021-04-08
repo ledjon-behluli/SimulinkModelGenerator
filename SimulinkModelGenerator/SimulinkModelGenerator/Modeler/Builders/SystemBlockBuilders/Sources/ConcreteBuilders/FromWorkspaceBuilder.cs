@@ -21,19 +21,7 @@ namespace SimulinkModelGenerator
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public enum OutputAfterFinalValue
-    {
-        [Description("Extrapolation")]
-        Extrapolation,
-        [Description("Setting to zero")]
-        SettingToZero,
-        [Description("Holding final value")]
-        HoldingFinalValue,
-        [Description("Cyclic repetition")]
-        CyclicRepetition
-    }
-
-    public sealed class FromWorkspaceBuilder : SystemBlockBuilder<FromWorkspaceBuilder>, IFromWorkspace
+    internal class FromWorkspaceBuilder : SystemBlockBuilder<FromWorkspaceBuilder>, IFromWorkspace
     {
         internal override SizeU Size => new SizeU(65, 24);
 

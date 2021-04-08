@@ -3,11 +3,11 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver
 {
-    public sealed class OptionsBuilder : ISolverOptions
+    internal class SolverOptionsBuilder : ISolverOptions
     {
         private readonly Model model;
 
-        internal OptionsBuilder(Model model)
+        internal SolverOptionsBuilder(Model model)
         {
             this.model = model;
         }

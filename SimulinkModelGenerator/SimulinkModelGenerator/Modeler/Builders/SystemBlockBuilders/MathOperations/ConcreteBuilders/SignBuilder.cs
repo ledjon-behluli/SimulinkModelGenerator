@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class SignBuilder : SystemBlockBuilder<SignBuilder>, ISign
+    internal class SignBuilder : SystemBlockBuilder<SignBuilder>, ISign
     {
         internal override SizeU Size => new SizeU(30, 30);
 

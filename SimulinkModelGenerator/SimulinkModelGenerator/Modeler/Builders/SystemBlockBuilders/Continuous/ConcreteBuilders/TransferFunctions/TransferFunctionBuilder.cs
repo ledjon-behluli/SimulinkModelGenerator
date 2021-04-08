@@ -3,7 +3,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
-    public sealed class TransferFunctionBuilder : BaseTransferFunctionBuilder<TransferFunctionBuilder>, ITransferFunction
+    internal class TransferFunctionBuilder : BaseTransferFunctionBuilder<TransferFunctionBuilder>, ITransferFunction
     {
         internal override string BlockType => "TransferFcn";
         internal override string BlockName => "TransferFcn";

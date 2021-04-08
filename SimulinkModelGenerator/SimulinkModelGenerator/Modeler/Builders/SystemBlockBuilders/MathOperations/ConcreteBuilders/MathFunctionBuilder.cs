@@ -40,7 +40,7 @@ namespace SimulinkModelGenerator
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class MathFunctionBuilder : MathOperationBuilder<MathFunctionBuilder>, IMathFunction
+    internal class MathFunctionBuilder : MathOperationBuilder<MathFunctionBuilder>, IMathFunction
     {
         internal override SizeU Size => new SizeU(30, 30);
 

@@ -4,7 +4,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.Variable
 {
-    public sealed class Ode15sSolverBuilder : IOde15sVariableSolverType
+    internal class Ode15sSolverBuilder : IOde15sVariableSolverType
     {
         private readonly Model model;
 

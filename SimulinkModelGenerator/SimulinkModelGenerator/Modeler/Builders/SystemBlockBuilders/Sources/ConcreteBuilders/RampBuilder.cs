@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public sealed class RampBuilder : SystemBlockBuilder<RampBuilder>, IRamp
+    internal class RampBuilder : SystemBlockBuilder<RampBuilder>, IRamp
     {
         internal override SizeU Size => new SizeU(30, 30);
 

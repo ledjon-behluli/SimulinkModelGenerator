@@ -17,7 +17,7 @@ namespace SimulinkModelGenerator
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public abstract class GeneratorBuilder<T> : SystemBlockBuilder<T>, IGenerator
+    internal abstract class GeneratorBuilder<T> : SystemBlockBuilder<T>, IGenerator
         where T : GeneratorBuilder<T>
     {
         internal override SizeU Size => new SizeU(30, 30);

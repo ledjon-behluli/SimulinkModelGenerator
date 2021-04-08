@@ -5,13 +5,13 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 {
     public interface IConfiguration
     {
-        IConfiguration Solver(Action<SolverConfigurationBuilder> action = null);
+        IConfiguration Solver(Action<ISolverConfiguration> action = null);
     }
 
     public interface ISolverConfiguration
     {
         ISolverConfiguration SetSimulationTimes(double startTime = 0, double stopTime = 10);
-        ISolverConfiguration Options(Action<OptionsBuilder> action = null);
+        ISolverConfiguration Options(Action<ISolverOptions> action = null);
     }
 
     public interface ISolverOptions

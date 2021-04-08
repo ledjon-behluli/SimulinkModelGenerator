@@ -2,7 +2,6 @@
 using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 using System.ComponentModel;
 
 namespace SimulinkModelGenerator
@@ -30,7 +29,7 @@ namespace SimulinkModelGenerator
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public sealed class SignalGeneratorBuilder : GeneratorBuilder<SignalGeneratorBuilder>, ISignalGenerator
+    internal class SignalGeneratorBuilder : GeneratorBuilder<SignalGeneratorBuilder>, ISignalGenerator
     {
         protected override string BlockType => "SignalGenerator";
         protected override string BlockName => "Signal\\nGenerator";

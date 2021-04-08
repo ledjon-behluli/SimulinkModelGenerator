@@ -2,7 +2,7 @@
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public abstract class PulseGeneratorBuilder<T> : GeneratorBuilder<T>
+    internal abstract class PulseGeneratorBuilder<T> : GeneratorBuilder<T>
         where T : PulseGeneratorBuilder<T>
     {
         protected override string BlockType => "DiscretePulseGenerator";

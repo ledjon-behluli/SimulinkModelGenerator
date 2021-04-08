@@ -56,7 +56,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
         }
     }
 
-    public abstract class SystemBlockBuilder
+    internal abstract class SystemBlockBuilder
     {
         internal readonly Model model;
 
@@ -110,7 +110,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
         internal abstract void Build();
     }
 
-    public abstract class SystemBlockBuilder<T> : SystemBlockBuilder
+    internal abstract class SystemBlockBuilder<T> : SystemBlockBuilder
         where T : SystemBlockBuilder<T>, ISystemBlock
     {
         private readonly T _blockBuilderInstance;

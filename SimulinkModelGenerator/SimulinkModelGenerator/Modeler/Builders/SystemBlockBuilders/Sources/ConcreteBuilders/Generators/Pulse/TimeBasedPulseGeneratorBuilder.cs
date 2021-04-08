@@ -1,11 +1,11 @@
 ﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public sealed class TimeBasedPulseGeneratorBuilder : PulseGeneratorBuilder<TimeBasedPulseGeneratorBuilder>, 
+    internal class TimeBasedPulseGeneratorBuilder : 
+        PulseGeneratorBuilder<TimeBasedPulseGeneratorBuilder>, 
         ITimeBasedPulseGenerator
     {
         protected override string PulseType => "Time based";

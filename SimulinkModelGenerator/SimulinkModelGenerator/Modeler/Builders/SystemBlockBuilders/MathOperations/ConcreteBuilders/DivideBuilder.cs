@@ -5,7 +5,7 @@ using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class DivideBuilder : MathOperationBuilder<DivideBuilder>, IDivide
+    internal class DivideBuilder : MathOperationBuilder<DivideBuilder>, IDivide
     {
         internal override SizeU Size => new SizeU(30, 34);
 

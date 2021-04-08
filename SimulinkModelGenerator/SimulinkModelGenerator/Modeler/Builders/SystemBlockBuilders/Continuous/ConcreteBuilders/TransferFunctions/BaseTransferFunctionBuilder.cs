@@ -1,12 +1,11 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 using System.Collections.Generic;
-using System;
 using SimulinkModelGenerator.Models;
 using SimulinkModelGenerator.Exceptions;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
-    public abstract class BaseTransferFunctionBuilder<T> : SystemBlockBuilder<T>
+    internal abstract class BaseTransferFunctionBuilder<T> : SystemBlockBuilder<T>
         where T : BaseTransferFunctionBuilder<T>, ISystemBlock
     {
         internal override SizeU Size => new SizeU(60, 36);

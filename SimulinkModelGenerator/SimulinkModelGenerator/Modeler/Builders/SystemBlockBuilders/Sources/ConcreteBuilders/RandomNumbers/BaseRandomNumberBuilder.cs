@@ -1,12 +1,11 @@
 ﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 using System.Collections.Generic;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public abstract class BaseRandomNumberBuilder<T> : SystemBlockBuilder<T>, IBaseRandomNumber
+    internal abstract class BaseRandomNumberBuilder<T> : SystemBlockBuilder<T>, IBaseRandomNumber
         where T : BaseRandomNumberBuilder<T>
     {
         internal override SizeU Size => new SizeU(30, 30);

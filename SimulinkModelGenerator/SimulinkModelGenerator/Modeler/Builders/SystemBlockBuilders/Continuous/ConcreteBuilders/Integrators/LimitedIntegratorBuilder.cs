@@ -1,11 +1,10 @@
-﻿using System;
-using SimulinkModelGenerator.Exceptions;
+﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
-    public sealed class LimitedIntegratorBuilder : BaseIntegratorBuilder<LimitedIntegratorBuilder>, ILimitedIntegrator
+    internal class LimitedIntegratorBuilder : BaseIntegratorBuilder<LimitedIntegratorBuilder>, ILimitedIntegrator
     {
         internal override string BlockName => "Integrator\\nLimited";
 

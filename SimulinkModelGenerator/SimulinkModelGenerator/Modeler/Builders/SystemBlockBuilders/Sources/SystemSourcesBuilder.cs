@@ -5,7 +5,7 @@ using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
 {
-    public sealed class SystemSourcesBuilder : ISystemSource
+    internal class SystemSourcesBuilder : ISystemSource
     {
         private readonly Model model;
 
@@ -15,21 +15,21 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources
         }
 
        
-        public ISystemSource AddConstant(Action<ConstantBuilder> action = null) => AddSource<ConstantBuilder>(action);
-        public ISystemSource AddRamp(Action<RampBuilder> action = null) => AddSource<RampBuilder>(action);
-        public ISystemSource AddStep(Action<StepBuilder> action = null) => AddSource<StepBuilder>(action);
-        public ISystemSource AddInPort(Action<InPortBuilder> action = null) => AddSource<InPortBuilder>(action);
-        public ISystemSource AddRepeatingSequence(Action<RepeatingSequenceBuilder> action = null) => AddSource<RepeatingSequenceBuilder>(action);
-        public ISystemSource AddFromWorkspace(Action<FromWorkspaceBuilder> action = null) => AddSource<FromWorkspaceBuilder>(action);
-        public ISystemSource AddClock(Action<ClockBuilder> action = null) => AddSource<ClockBuilder>(action);
-        public ISystemSource AddDigitalClock(Action<DigitalClockBuilder> action = null) => AddSource<DigitalClockBuilder>(action);
-        public ISystemSource AddRandomNumber(Action<RandomNumberBuilder> action = null) => AddSource<RandomNumberBuilder>(action);
-        public ISystemSource AddUniformRandomNumber(Action<UniformRandomNumberBuilder> action = null) => AddSource<UniformRandomNumberBuilder>(action);
-        public ISystemSource AddSignalGenerator(Action<SignalGeneratorBuilder> action = null) => AddSource<SignalGeneratorBuilder>(action);
-        public ISystemSource AddTimeBasedPulseGenerator(Action<TimeBasedPulseGeneratorBuilder> action = null) => AddSource<TimeBasedPulseGeneratorBuilder>(action);
-        public ISystemSource AddSampleBasedPulseGenerator(Action<SampleBasedPulseGeneratorBuilder> action = null) => AddSource<SampleBasedPulseGeneratorBuilder>(action);
-        public ISystemSource AddTimeBasedSineWaveGenerator(Action<TimeBasedSineWaveGeneratorBuilder> action = null) => AddSource<TimeBasedSineWaveGeneratorBuilder>(action);
-        public ISystemSource AddSampleBasedSineWaveGenerator(Action<SampleBasedSineWaveGeneratorBuilder> action = null) => AddSource<SampleBasedSineWaveGeneratorBuilder>(action);
+        public ISystemSource AddConstant(Action<IConstant> action = null) => AddSource<ConstantBuilder>(action);
+        public ISystemSource AddRamp(Action<IRamp> action = null) => AddSource<RampBuilder>(action);
+        public ISystemSource AddStep(Action<IStep> action = null) => AddSource<StepBuilder>(action);
+        public ISystemSource AddInPort(Action<IInPort> action = null) => AddSource<InPortBuilder>(action);
+        public ISystemSource AddRepeatingSequence(Action<IRepeatingSequence> action = null) => AddSource<RepeatingSequenceBuilder>(action);
+        public ISystemSource AddFromWorkspace(Action<IFromWorkspace> action = null) => AddSource<FromWorkspaceBuilder>(action);
+        public ISystemSource AddClock(Action<IClock> action = null) => AddSource<ClockBuilder>(action);
+        public ISystemSource AddDigitalClock(Action<IDigitalClock> action = null) => AddSource<DigitalClockBuilder>(action);
+        public ISystemSource AddRandomNumber(Action<IRandomNumber> action = null) => AddSource<RandomNumberBuilder>(action);
+        public ISystemSource AddUniformRandomNumber(Action<IUniformRandomNumber> action = null) => AddSource<UniformRandomNumberBuilder>(action);
+        public ISystemSource AddSignalGenerator(Action<ISignalGenerator> action = null) => AddSource<SignalGeneratorBuilder>(action);
+        public ISystemSource AddTimeBasedPulseGenerator(Action<ITimeBasedPulseGenerator> action = null) => AddSource<TimeBasedPulseGeneratorBuilder>(action);
+        public ISystemSource AddSampleBasedPulseGenerator(Action<ISampleBasedPulseGenerator> action = null) => AddSource<SampleBasedPulseGeneratorBuilder>(action);
+        public ISystemSource AddTimeBasedSineWaveGenerator(Action<ITimeBasedSineWaveGenerator> action = null) => AddSource<TimeBasedSineWaveGeneratorBuilder>(action);
+        public ISystemSource AddSampleBasedSineWaveGenerator(Action<ISampleBasedSineWaveGenerator> action = null) => AddSource<SampleBasedSineWaveGeneratorBuilder>(action);
 
 
         private ISystemSource AddSource<T>(dynamic action)

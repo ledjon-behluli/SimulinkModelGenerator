@@ -2,7 +2,6 @@
 using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -47,7 +46,7 @@ namespace SimulinkModelGenerator
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public abstract class MathOperationBuilder<T> : SystemBlockBuilder<T>, IMathOperation
+    internal abstract class MathOperationBuilder<T> : SystemBlockBuilder<T>, IMathOperation
         where T : MathOperationBuilder<T>
     {
         protected abstract string BlockType { get; }

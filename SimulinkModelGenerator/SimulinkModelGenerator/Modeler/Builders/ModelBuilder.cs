@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace SimulinkModelGenerator.Modeler.Builders
 {
-    public sealed partial class ModelBuilder : IModel, IFinalizeModel
+    public sealed class ModelBuilder : IModel, IFinalizeModel
     {        
         private Model model;
 
@@ -53,14 +53,14 @@ namespace SimulinkModelGenerator.Modeler.Builders
             return this;
         }
 
-        public IModel Configure(Action<ConfigurationBuilder> action = null)
+        public IModel Configure(Action<IConfiguration> action = null)
         {
             ConfigurationBuilder builder = new ConfigurationBuilder(model);
             action?.Invoke(builder);
             return this;
         }
 
-        public IFinalizeModel AddControlSystem(Action<ControlSystemBuilder> action = null)
+        public IFinalizeModel AddControlSystem(Action<IControlSystem> action = null)
         {
             ControlSystemBuilder builder = new ControlSystemBuilder(model);
             action?.Invoke(builder);

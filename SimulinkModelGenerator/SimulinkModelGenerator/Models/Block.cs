@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Text;
+using System.Diagnostics;
 
 namespace SimulinkModelGenerator.Models
 {
+	[DebuggerDisplay("{BlockName}")]
 	internal class Block
 	{
 		public List<Parameter> Parameters { get; set; }

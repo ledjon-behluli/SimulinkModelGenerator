@@ -2,11 +2,10 @@
 using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class SubtractBuilder : MathOperationBuilder<SubtractBuilder>, ISubtract
+    internal class SubtractBuilder : MathOperationBuilder<SubtractBuilder>, ISubtract
     {
         internal override SizeU Size => new SizeU(30, 30);
 

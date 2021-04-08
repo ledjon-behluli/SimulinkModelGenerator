@@ -1,25 +1,24 @@
-﻿using SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Sources;
-using System;
+﻿using System;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules
 {
     public interface ISystemSource
     {
-        ISystemSource AddConstant(Action<ConstantBuilder> action = null);
-        ISystemSource AddRamp(Action<RampBuilder> action = null);
-        ISystemSource AddStep(Action<StepBuilder> action = null);
-        ISystemSource AddInPort(Action<InPortBuilder> action = null);
-        ISystemSource AddRepeatingSequence(Action<RepeatingSequenceBuilder> action = null);
-        ISystemSource AddFromWorkspace(Action<FromWorkspaceBuilder> action = null);
-        ISystemSource AddClock(Action<ClockBuilder> action = null);
-        ISystemSource AddDigitalClock(Action<DigitalClockBuilder> action = null);
-        ISystemSource AddRandomNumber(Action<RandomNumberBuilder> action = null);
-        ISystemSource AddUniformRandomNumber(Action<UniformRandomNumberBuilder> action = null);
-        ISystemSource AddSignalGenerator(Action<SignalGeneratorBuilder> action = null);
-        ISystemSource AddTimeBasedPulseGenerator(Action<TimeBasedPulseGeneratorBuilder> action = null);
-        ISystemSource AddSampleBasedPulseGenerator(Action<SampleBasedPulseGeneratorBuilder> action = null);
-        ISystemSource AddTimeBasedSineWaveGenerator(Action<TimeBasedSineWaveGeneratorBuilder> action = null);
-        ISystemSource AddSampleBasedSineWaveGenerator(Action<SampleBasedSineWaveGeneratorBuilder> action = null);
+        ISystemSource AddConstant(Action<IConstant> action = null);
+        ISystemSource AddRamp(Action<IRamp> action = null);
+        ISystemSource AddStep(Action<IStep> action = null);
+        ISystemSource AddInPort(Action<IInPort> action = null);
+        ISystemSource AddRepeatingSequence(Action<IRepeatingSequence> action = null);
+        ISystemSource AddFromWorkspace(Action<IFromWorkspace> action = null);
+        ISystemSource AddClock(Action<IClock> action = null);
+        ISystemSource AddDigitalClock(Action<IDigitalClock> action = null);
+        ISystemSource AddRandomNumber(Action<IRandomNumber> action = null);
+        ISystemSource AddUniformRandomNumber(Action<IUniformRandomNumber> action = null);
+        ISystemSource AddSignalGenerator(Action<ISignalGenerator> action = null);
+        ISystemSource AddTimeBasedPulseGenerator(Action<ITimeBasedPulseGenerator> action = null);
+        ISystemSource AddSampleBasedPulseGenerator(Action<ISampleBasedPulseGenerator> action = null);
+        ISystemSource AddTimeBasedSineWaveGenerator(Action<ITimeBasedSineWaveGenerator> action = null);
+        ISystemSource AddSampleBasedSineWaveGenerator(Action<ISampleBasedSineWaveGenerator> action = null);
     }
 
     #region Uncategorized

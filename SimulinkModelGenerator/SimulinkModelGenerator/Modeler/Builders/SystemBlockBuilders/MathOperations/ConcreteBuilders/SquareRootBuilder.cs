@@ -1,12 +1,11 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using SimulinkModelGenerator.Extensions;
-using System;
 using SimulinkModelGenerator.Exceptions;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public abstract class BaseSquareRootBuilder<T> : MathOperationBuilder<T>
+    internal abstract class BaseSquareRootBuilder<T> : MathOperationBuilder<T>
         where T : BaseSquareRootBuilder<T>
     {
         internal override SizeU Size => new SizeU(30, 30);
@@ -60,7 +59,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         }
     }
 
-    public sealed class SquareRootBuilder : BaseSquareRootBuilder<SquareRootBuilder>, ISqrt
+    internal class SquareRootBuilder : BaseSquareRootBuilder<SquareRootBuilder>, ISqrt
     {
         protected override string Operator => "sqrt";
         protected override string BlockName => "Sqrt";
@@ -68,13 +67,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         internal SquareRootBuilder(Model model)
             : base(model)
         {
-
+            
         }
 
         public new ISqrt WithOutputSignal(OutputSignalType type) => base.WithOutputSignal(type);
     }
 
-    public sealed class SignedSquareRootBuilder : BaseSquareRootBuilder<SignedSquareRootBuilder>, ISignedSqrt
+    internal class SignedSquareRootBuilder : BaseSquareRootBuilder<SignedSquareRootBuilder>, ISignedSqrt
     {
         protected override string Operator => "signedSqrt";
         protected override string BlockName => "Signed\\nSqrt";
@@ -82,13 +81,13 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
         internal SignedSquareRootBuilder(Model model)
             : base(model)
         {
-
+            
         }
 
         public new ISignedSqrt WithOutputSignal(OutputSignalType type) => base.WithOutputSignal(type);
     }
 
-    public sealed class ReciprocalSquareRootBuilder : BaseSquareRootBuilder<ReciprocalSquareRootBuilder>, IReciprocalSqrt
+    internal class ReciprocalSquareRootBuilder : BaseSquareRootBuilder<ReciprocalSquareRootBuilder>, IReciprocalSqrt
     {
         protected override string Operator => "rSqrt";
         protected override string BlockName => "Reciprocal\\nSqrt";

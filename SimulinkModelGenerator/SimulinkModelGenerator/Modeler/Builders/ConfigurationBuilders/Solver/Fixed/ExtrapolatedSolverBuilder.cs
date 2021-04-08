@@ -3,7 +3,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.Fixed
 {
-    public sealed class ExtrapolatedSolverBuilder : IExtrapolatedFixedSolverType
+    internal class ExtrapolatedSolverBuilder : IExtrapolatedFixedSolverType
     {
         private readonly Model model;
 

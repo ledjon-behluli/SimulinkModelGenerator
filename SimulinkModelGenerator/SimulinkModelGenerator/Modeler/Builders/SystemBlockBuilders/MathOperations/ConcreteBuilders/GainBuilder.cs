@@ -3,7 +3,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class GainBuilder : MathOperationBuilder<GainBuilder>, IGain
+    internal class GainBuilder : MathOperationBuilder<GainBuilder>, IGain
     {
         internal override SizeU Size => new SizeU(30, 30);
 

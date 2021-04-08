@@ -4,7 +4,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver.Variable
 {
-    public sealed class DiscreteSolverBuilder : IDiscreteVariableSolverType
+    internal class DiscreteSolverBuilder : IDiscreteVariableSolverType
     {
         private readonly Model model;
 

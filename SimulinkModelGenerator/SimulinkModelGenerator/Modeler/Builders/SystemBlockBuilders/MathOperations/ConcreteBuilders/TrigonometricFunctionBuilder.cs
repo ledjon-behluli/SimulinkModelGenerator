@@ -1,7 +1,6 @@
 ﻿using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
 using System.Collections.Generic;
-using System;
 using System.ComponentModel;
 using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Exceptions;
@@ -45,7 +44,7 @@ namespace SimulinkModelGenerator
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class TrigonometricFunctionBuilder : SystemBlockBuilder<TrigonometricFunctionBuilder>, 
+    internal class TrigonometricFunctionBuilder : SystemBlockBuilder<TrigonometricFunctionBuilder>, 
         ITrigonometricFunction, IWithNoneApproximation, IWithCordicApproximation
     {
         private enum ApproximationMethod

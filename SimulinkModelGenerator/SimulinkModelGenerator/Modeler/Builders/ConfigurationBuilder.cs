@@ -5,7 +5,7 @@ using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders
 {
-    public sealed class ConfigurationBuilder : IConfiguration
+    internal class ConfigurationBuilder : IConfiguration
     {
         private readonly Model model;
 
@@ -19,7 +19,7 @@ namespace SimulinkModelGenerator.Modeler.Builders
             this.model = model;
         }
 
-        public IConfiguration Solver(Action<SolverConfigurationBuilder> action = null)
+        public IConfiguration Solver(Action<ISolverConfiguration> action = null)
         {
             SolverConfigurationBuilder builder = new SolverConfigurationBuilder(model);
             action?.Invoke(builder);

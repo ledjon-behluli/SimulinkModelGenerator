@@ -1,11 +1,10 @@
 ﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
-    public sealed class ProductBuilder : MathOperationBuilder<ProductBuilder>, IProduct
+    internal class ProductBuilder : MathOperationBuilder<ProductBuilder>, IProduct
     {
         internal override SizeU Size => new SizeU(30, 30);
 

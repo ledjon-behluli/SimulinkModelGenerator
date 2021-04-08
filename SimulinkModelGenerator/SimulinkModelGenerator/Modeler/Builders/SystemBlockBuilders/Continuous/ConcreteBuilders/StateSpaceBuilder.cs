@@ -1,7 +1,6 @@
 ﻿using SimulinkModelGenerator.Exceptions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,7 +21,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
     /// </list>
     /// </para>
     /// </summary>
-    public sealed class StateSpaceBuilder : SystemBlockBuilder<StateSpaceBuilder>, IStateSpace, IStateSpaceCharacteristics
+    internal class StateSpaceBuilder : SystemBlockBuilder<StateSpaceBuilder>, IStateSpace, IStateSpaceCharacteristics
     {
         internal override SizeU Size => new SizeU(60, 34);
 

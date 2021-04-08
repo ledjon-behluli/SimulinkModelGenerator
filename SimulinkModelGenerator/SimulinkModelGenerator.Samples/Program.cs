@@ -8,19 +8,45 @@ namespace SimulinkModelGenerator.Samples
 
         static void Main(string[] args)
         {
-            Fixed_Extrapolation_Ode14x_Solver_Configuration_Example();
-            Fixed_Runge_Kutta_Ode4_Solver_Configuration_Example();
-            Variable_Rosenbrock_Ode23s_Solver_Configuration_Example();
-            Variable_Stiff_NDF_Ode15s_Solver_Configuration_Example();
+            //Fixed_Extrapolation_Ode14x_Solver_Configuration_Example();
+            //Fixed_Runge_Kutta_Ode4_Solver_Configuration_Example();
+            //Variable_Rosenbrock_Ode23s_Solver_Configuration_Example();
+            //Variable_Stiff_NDF_Ode15s_Solver_Configuration_Example();
 
-            All_Elements();
-            Common_Elements_With_Set_Names_And_Without_Connections();
-            Common_Elements_With_Set_Names_And_With_Connections();
-            Common_Elements_With_Automatic_Names_And_With_Connections_Style_1();
-            Common_Elements_With_Automatic_Names_And_With_Connections_Style_2();
-            PID_Example();
+            //All_Elements();
+            //Common_Elements_With_Set_Names_And_Without_Connections();
+            //Common_Elements_With_Set_Names_And_With_Connections();
+            //Common_Elements_With_Automatic_Names_And_With_Connections_Style_1();
+            //Common_Elements_With_Automatic_Names_And_With_Connections_Style_2();
+            //PID_Example();
 
-            PID_Example_With_Rosenbrock_Solver_In_Normal_Mode();
+            //PID_Example_With_Rosenbrock_Solver_In_Normal_Mode();
+
+            ModelBuilder
+               .Create()
+               .WithName("testCopy1")
+               .AddControlSystem(cs =>
+               {
+                   cs.AddSources(s => s.AddStep(sp => sp.SetPosition(190, 145)));
+                   cs.AddMathOperations(mo =>
+                        mo.AddSum(sum => sum.SetInputs(InputType.Minus, InputType.Plus, InputType.Minus).SetPosition(320, 150))
+                          .AddGain(g => g.WithName("Gain1").FlipHorizontally().SetPosition(515, 230))
+                          .AddGain(g => g.WithName("Gain2").FlipHorizontally().SetPosition(515, 60)));
+                   cs.AddContinuous(co =>
+                   {
+                       co.AddPIDController(pid => pid.SetPosition(435, 142));
+                       co.AddTransferFunction(tf => tf.SetPosition(595, 142));
+                   });
+                   cs.AddSinks(s => s.AddScope(scope => scope.SetPosition(820, 142)));
+                   cs.AddConnections("Step", c =>
+                   {
+                       c.ThanConnect("Sum", 2).ThanConnect("PID Controller").ThanConnect("TransferFcn")
+                       .Branch(b => b.Towards("Scope"))
+                       .Branch(b => b.Towards("Gain1").ThanConnect("Sum", 3))
+                       .Branch(b => b.Towards("Gain2").ThanConnect("Sum", 1));
+                   });
+               })
+               .Save(path);
         }
 
         #region Solver Configuration Examples
@@ -114,7 +140,7 @@ namespace SimulinkModelGenerator.Samples
                                         .AddRamp(x => x.SetPosition(100, 240))
                                         .AddInPort(x => x.SetPosition(100, 310))
                                         .AddRepeatingSequence(x => x.SetPosition(100, 380))
-                                        .AddFromWorkspace(x => x.SetPosition(100, 450))
+                                        .AddFromWorkspace(x => x.SetVariableName("test").SetPosition(100, 450))
                                         .AddClock(x => x.SetPosition(100, 520))
                                         .AddDigitalClock(x => x.SetPosition(100, 590))
                                         .AddRandomNumber(x => x.SetPosition(100, 660))
@@ -309,7 +335,7 @@ namespace SimulinkModelGenerator.Samples
                                                       .SetPosition(435, 142));
                         co.AddTransferFunction(tf => tf.SetNumerator(20).SetDenominator(1, 10, 20).SetPosition(595, 142));
                     });
-                    cs.AddSinks(s => s.AddScope(scope => scope.SetInputPorts(2).SetPosition(820, 144)));
+                    cs.AddSinks(s => s.AddScope(scope => scope.SetInputPorts(2).SetPosition(820, 151)));
                     cs.AddConnections("Step", c =>
                     {
                         c.ThanConnect("Sum").ThanConnect("PID Controller").ThanConnect("TransferFcn")

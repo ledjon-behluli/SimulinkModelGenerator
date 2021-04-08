@@ -3,7 +3,7 @@ using SimulinkModelGenerator.Models;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.Continuous
 {
-    public sealed class IntegratorBuilder : BaseIntegratorBuilder<IntegratorBuilder>, IIntegrator
+    internal class IntegratorBuilder : BaseIntegratorBuilder<IntegratorBuilder>, IIntegrator
     {
         internal override string BlockName => "Integrator";
 
