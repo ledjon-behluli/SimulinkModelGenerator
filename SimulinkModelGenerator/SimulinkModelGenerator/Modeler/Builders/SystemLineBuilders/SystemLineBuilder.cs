@@ -18,20 +18,20 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             this.previousBlockName = startingBlockName;
         }
 
-        public IControlSystemLine Connect(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1) =>
-            Build(sourceBlockName, destinationBlockName, sourceBlockPort, destinationBlockPort);
+        public ISystemLine Connect(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1, Action<ILinePath> action = null) 
+            => Build(sourceBlockName, destinationBlockName, sourceBlockPort, destinationBlockPort);
 
-        public IControlSystemLine ThanConnect(string destinationBlockName, uint destinationBlockPort = 1) =>
-            Build(previousBlockName, destinationBlockName, 1, destinationBlockPort);
+        public ISystemLine ThanConnect(string destinationBlockName, uint destinationBlockPort = 1, Action<ILinePath> action = null)
+            => Build(previousBlockName, destinationBlockName, 1, destinationBlockPort);
 
-        public IControlSystemLine Branch(Action<ISystemBranch> action)
+        public ISystemLine Branch(Action<ISystemBranch> action)
         {
             SystemBranchBuilder builder = new SystemBranchBuilder(model, previousBlockName);
             action?.Invoke(builder);
             return this;
         }
 
-        internal IControlSystemLine Build(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1)
+        internal ISystemLine Build(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1)
         {
             if (string.IsNullOrEmpty(sourceBlockName))
                 throw new SimulinkModelGeneratorException("Source block name can not be null or empty.");

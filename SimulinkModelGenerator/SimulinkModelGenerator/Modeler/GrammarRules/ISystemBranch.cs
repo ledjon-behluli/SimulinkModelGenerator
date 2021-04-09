@@ -1,4 +1,6 @@
-﻿namespace SimulinkModelGenerator.Modeler.GrammarRules
+﻿using System;
+
+namespace SimulinkModelGenerator.Modeler.GrammarRules
 {
     public interface ISystemBranch : IControlSystemBranch, IControlSystemBranchNewLine
     {
@@ -7,11 +9,11 @@
 
     public interface IControlSystemBranch
     {
-        IControlSystemBranchNewLine Towards(string destinationBlockName, uint destinationBlockPort = 1);
+        ISystemBranch Towards(string destinationBlockName, uint destinationBlockPort = 1, Action<ILinePath> path = null);
     }
 
     public interface IControlSystemBranchNewLine
     {
-        IControlSystemBranchNewLine ThanConnect(string destinationBlockName, uint destinationBlockPort = 1);
+        ISystemBranch ThanConnect(string destinationBlockName, uint destinationBlockPort = 1, Action<ILinePath> path = null);
     }
 }
