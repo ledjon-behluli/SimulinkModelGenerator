@@ -40,8 +40,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
 {
     internal class SizeU
     {
-        internal uint Width { get; private set; }
-        internal uint Height { get; private set; }
+        internal uint Width { get; }
+        internal uint Height { get; }
 
         internal SizeU(uint width, uint height)
         {
@@ -104,7 +104,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
         /// </summary>
         protected int GetBlockTypeCount(string blockType)
         {
-            return this.model.System.Block.Count(b => b.BlockType.Contains(blockType));
+            return model.System.Block.Count(b => b.BlockType.Contains(blockType));
         }
 
         internal abstract void Build();
@@ -115,7 +115,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
     {
         private readonly T _blockBuilderInstance;
 
-        internal SystemBlockBuilder(Model model) 
+        internal SystemBlockBuilder(Model model)
             : base(model)
         {
             _blockBuilderInstance = (T)this;
@@ -123,20 +123,20 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders
 
         public ISystemBlock WithName(string name)
         {
-            base._Name = name;
+            _Name = name;
             return _blockBuilderInstance;
         }
 
         public ISystemBlock SetPosition(uint x, uint y)
         {
-            
-            base._Position = $"[{x}, {y}, {x + Size.Width}, {y + Size.Height}]";
+
+            _Position = $"[{x}, {y}, {x + Size.Width}, {y + Size.Height}]";
             return _blockBuilderInstance;
         }
 
         public ISystemBlock FlipHorizontally()
         {
-            base.blockMirror = !base.blockMirror;
+            blockMirror = !blockMirror;
             return _blockBuilderInstance;
         }
     }

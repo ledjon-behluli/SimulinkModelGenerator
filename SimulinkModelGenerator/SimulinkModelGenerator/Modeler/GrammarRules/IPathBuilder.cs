@@ -1,6 +1,6 @@
 ﻿namespace SimulinkModelGenerator.Modeler.GrammarRules
 {
-    public interface ILinePath
+    public interface IPathBuilder
     {
         IHorizontalPath GoUp();
         IHorizontalPath GoDown();

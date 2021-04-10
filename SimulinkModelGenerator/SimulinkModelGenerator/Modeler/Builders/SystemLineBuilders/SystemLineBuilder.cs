@@ -4,6 +4,8 @@ using SimulinkModelGenerator.Modeler.GrammarRules;
 using System;
 using System.Collections.Generic;
 using SimulinkModelGenerator.Models;
+using System.Linq;
+using Combination = SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders.LinePathBuilder.LinePath.Combination;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
 {
@@ -18,11 +20,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             this.previousBlockName = startingBlockName;
         }
 
-        public ISystemLine Connect(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1, Action<ILinePath> action = null) 
-            => Build(sourceBlockName, destinationBlockName, sourceBlockPort, destinationBlockPort);
+        public ISystemLine Connect(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1, Action<IPathBuilder> action = null) 
+            => Build(sourceBlockName, destinationBlockName, sourceBlockPort, destinationBlockPort, action);
 
-        public ISystemLine ThanConnect(string destinationBlockName, uint destinationBlockPort = 1, Action<ILinePath> action = null)
-            => Build(previousBlockName, destinationBlockName, 1, destinationBlockPort);
+        public ISystemLine ThanConnect(string destinationBlockName, uint destinationBlockPort = 1, Action<IPathBuilder> action = null)
+            => Build(previousBlockName, destinationBlockName, 1, destinationBlockPort, action);
 
         public ISystemLine Branch(Action<ISystemBranch> action)
         {
@@ -31,7 +33,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             return this;
         }
 
-        internal ISystemLine Build(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1)
+        internal ISystemLine Build(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1, Action<IPathBuilder> action = null)
         {
             if (string.IsNullOrEmpty(sourceBlockName))
                 throw new SimulinkModelGeneratorException("Source block name can not be null or empty.");
@@ -50,8 +52,9 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "SrcBlock", Text = sourceBlockName },
-                    new Parameter() { Name = "DstBlock", Text = destinationBlockName },
                     new Parameter() { Name = "SrcPort", Text = sourceBlockPort.ToString() },
+                    GetBranchPointParameter(previousBlockName, destinationBlockName, action),
+                    new Parameter() { Name = "DstBlock", Text = destinationBlockName },
                     new Parameter() { Name = "DstPort", Text = destinationBlockPort.ToString() },
                 }
             };
@@ -63,6 +66,59 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             this.previousBlockName = destinationBlockName;            
 
             return this;
+        }
+
+        private Parameter GetBranchPointParameter(string sourceBlockName, string destinationBlockName, Action<IPathBuilder> action = null)
+        {
+            Parameter @default = new Parameter() { Name = "Points", Text = "[0, 0]" };
+
+            LinePathBuilder builder = new LinePathBuilder();
+            action?.Invoke(builder);
+            var pathCombination = builder.PathCombination;
+
+            if (!pathCombination.IsStraight())
+            {
+                Block srcBlock = this.model.System.Block.FirstOrDefault(b => b.BlockName == sourceBlockName);
+                if (srcBlock != null)
+                {
+                    Block destBlock = this.model.System.Block.FirstOrDefault(b => b.BlockName == destinationBlockName);
+                    if (destBlock != null)
+                    {
+                        int horizontalDiff = BlockExtensions.GetHorizontalDistance(srcBlock, destBlock);
+                        int verticalDiff = BlockExtensions.GetVerticalDistance(srcBlock, destBlock);
+
+                        switch (pathCombination.CombinationType)
+                        {
+                            case Combination.Up_Left:
+                            case Combination.Up_Right:
+                                {
+                                    @default = new Parameter() { Name = "Points", Text = $"[0, {-1 * (verticalDiff)}]" };
+                                }
+                                break;
+                            case Combination.Down_Left:
+                            case Combination.Down_Right:
+                                {
+                                    @default = new Parameter() { Name = "Points", Text = $"[0, {verticalDiff}]" };
+                                }
+                                break;
+                            case Combination.Left_Up:
+                            case Combination.Left_Down:
+                                {
+                                    @default = new Parameter() { Name = "Points", Text = $"[{-1 * horizontalDiff}, 0]" };
+                                }
+                                break;
+                            case Combination.Right_Up:
+                            case Combination.Right_Down:
+                                {
+                                    @default = new Parameter() { Name = "Points", Text = $"[{horizontalDiff}, 0]" };
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+
+            return @default;
         }
     }
 }

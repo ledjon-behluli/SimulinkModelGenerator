@@ -5,7 +5,7 @@ using SimulinkModelGenerator.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using PathCombination = SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders.LinePathBuilder.LinePath;
+using Combination = SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders.LinePathBuilder.LinePath.Combination;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
 {
@@ -13,7 +13,6 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
     {        
         private readonly Model model;
         private string previousBlockName;
-        private PathCombination pathCombination;
 
         internal SystemBranchBuilder(Model model, string previousBlockName)
         {
@@ -21,12 +20,8 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             this.previousBlockName = previousBlockName;
         }
 
-        public ISystemBranch Towards(string destinationBlockName, uint destinationBlockPort = 1, Action<ILinePath> path = null)
+        public ISystemBranch Towards(string destinationBlockName, uint destinationBlockPort = 1, Action<IPathBuilder> action = null)
         {
-            LinePathBuilder builder = new LinePathBuilder();
-            path?.Invoke(builder);
-            pathCombination = builder.PathCombination;
-
             Line matchedLine = this.model.System.Line.FirstOrDefault(l => l.P.Any(p => p.Name == "SrcBlock" && p.Text == previousBlockName));
             if (matchedLine == null)
             {
@@ -36,7 +31,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
                     {
                         new Parameter() { Name = "SrcBlock", Text = previousBlockName },
                         new Parameter() { Name = "SrcPort", Text = "1" },
-                        new Parameter() { Name = "Points", Text = CalculateConnectionPoint(previousBlockName, destinationBlockName) }
+                        new Parameter() { Name = "Points", Text = CalculateMidPoint(previousBlockName, destinationBlockName) }
                     },
                     Branch = new List<Branch>()
                     {
@@ -44,7 +39,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
                         {
                             Parameters = new List<Parameter>()
                             {
-                                GetBranchPointParameter(previousBlockName, destinationBlockName),  // Important: 'Points' needs to be the first parameter in the list
+                                GetBranchPointParameter(previousBlockName, destinationBlockName, action),  // Important: 'Points' needs to be the first parameter in the list
                                 new Parameter() { Name = "DstBlock", Text = destinationBlockName },
                                 new Parameter() { Name = "DstPort", Text = destinationBlockPort.ToString() }
                             }
@@ -58,7 +53,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
                 {
                     Parameters = new List<Parameter>()
                     {
-                        GetBranchPointParameter(previousBlockName, destinationBlockName), // Important: 'Points' needs to be the first parameter in the list
+                        GetBranchPointParameter(previousBlockName, destinationBlockName, action), // Important: 'Points' needs to be the first parameter in the list
                         new Parameter() { Name = "DstBlock", Text = destinationBlockName },
                         new Parameter() { Name = "DstPort", Text = destinationBlockPort.ToString() }
                     }
@@ -69,7 +64,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             return this;
         }
 
-        public ISystemBranch ThanConnect(string destinationBlockName, uint destinationBlockPort = 1, Action<ILinePath> path = null)
+        public ISystemBranch ThanConnect(string destinationBlockName, uint destinationBlockPort = 1, Action<IPathBuilder> action = null)
         {            
             if (string.IsNullOrEmpty(destinationBlockName))
                 throw new SimulinkModelGeneratorException("Destination block name can not be null or empty.");
@@ -83,7 +78,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
                 {
                     new Parameter() { Name = "SrcBlock", Text = previousBlockName },
                     new Parameter() { Name = "SrcPort", Text = "1" },
-                    GetBranchPointParameter(previousBlockName, destinationBlockName),
+                    GetBranchPointParameter(previousBlockName, destinationBlockName, action),
                     new Parameter() { Name = "DstBlock", Text = destinationBlockName },
                     new Parameter() { Name = "DstPort", Text = destinationBlockPort.ToString() }
                 }
@@ -99,35 +94,33 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
         }     
     
 
-        private string CalculateConnectionPoint(string sourceBlockName, string destinationBlockName)
+        private string CalculateMidPoint(string sourceBlockName, string destinationBlockName)
         {
             string @default = "[0, 0]";
 
-            if (!pathCombination.IsStraight())
+            Block srcBlock = this.model.System.Block.FirstOrDefault(b => b.BlockName == sourceBlockName);
+            if (srcBlock != null)
             {
-                if (pathCombination.IsPartial())
-                    throw new SimulinkModelGeneratorException("Using formated connection lines requires setting either, both horizontal and vertical orientation, or setting neither of them.");
-
-                Block srcBlock = this.model.System.Block.FirstOrDefault(b => b.BlockName == sourceBlockName);
-                if (srcBlock != null)
+                Block destBlock = this.model.System.Block.FirstOrDefault(b => b.BlockName == destinationBlockName);
+                if (destBlock != null)
                 {
-                    Block destBlock = this.model.System.Block.FirstOrDefault(b => b.BlockName == destinationBlockName);
-                    if (destBlock != null)
-                    {
-                        int distance = BlockExtensions.GetHorizontalDistance(srcBlock, destBlock) / 2;
-                        @default = $"[{distance}, 0]";
-                    }
+                    int distance = BlockExtensions.GetHorizontalDistance(srcBlock, destBlock) / 2;
+                    @default = $"[{distance}, 0]";
                 }
             }
 
             return @default;
         }
     
-        private Parameter GetBranchPointParameter(string sourceBlockName, string destinationBlockName, Action<ILinePath> path = null)
+        private Parameter GetBranchPointParameter(string sourceBlockName, string destinationBlockName, Action<IPathBuilder> action = null)
         {
             Parameter @default = new Parameter() { Name = "Points", Text = "[0, 0]" };
 
-            if (path != null)
+            LinePathBuilder builder = new LinePathBuilder();
+            action?.Invoke(builder);
+            var pathCombination = builder.PathCombination;
+
+            if (!pathCombination.IsStraight())
             {
                 Block srcBlock = this.model.System.Block.FirstOrDefault(b => b.BlockName == sourceBlockName);
                 if (srcBlock != null)
@@ -138,10 +131,33 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
                         int horizontalDiff = BlockExtensions.GetHorizontalDistance(srcBlock, destBlock);
                         int verticalDiff = BlockExtensions.GetVerticalDistance(srcBlock, destBlock);
 
-                        var srcCenterPoint = srcBlock.GetCenterPoint();
-                        var destCenterPoint = destBlock.GetCenterPoint();
-
-                        // TODO: WIP
+                        switch (pathCombination.CombinationType)
+                        {
+                            case Combination.Up_Left:
+                            case Combination.Up_Right:
+                                {
+                                    @default = new Parameter() { Name = "Points", Text = $"[0, {-1 * verticalDiff}]" };
+                                }
+                                break;
+                            case Combination.Down_Left:
+                            case Combination.Down_Right:
+                                {
+                                    @default = new Parameter() { Name = "Points", Text = $"[0, {verticalDiff}]" };
+                                }
+                                break;
+                            case Combination.Left_Up:
+                            case Combination.Left_Down:
+                                {
+                                    @default = new Parameter() { Name = "Points", Text = $"[{-1 * horizontalDiff}, 0]" };
+                                }
+                                break;
+                            case Combination.Right_Up:
+                            case Combination.Right_Down:
+                                {
+                                    @default = new Parameter() { Name = "Points", Text = $"[{horizontalDiff}, 0]" };
+                                }
+                                break;
+                        }
                     }
                 }
             }

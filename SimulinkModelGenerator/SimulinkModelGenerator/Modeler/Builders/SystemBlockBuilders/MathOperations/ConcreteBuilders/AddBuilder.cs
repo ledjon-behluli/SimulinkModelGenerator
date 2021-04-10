@@ -2,7 +2,6 @@
 using SimulinkModelGenerator.Extensions;
 using SimulinkModelGenerator.Modeler.GrammarRules;
 using SimulinkModelGenerator.Models;
-using System;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperations
 {
@@ -44,7 +43,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemBlockBuilders.MathOperat
                         inputs += inputType.GetDescription();
                 }
 
-                return $"|{inputs}";
+                return $"{inputs}";
             }
         }
 
