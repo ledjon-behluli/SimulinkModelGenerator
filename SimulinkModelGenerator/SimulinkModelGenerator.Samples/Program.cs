@@ -1,4 +1,6 @@
 ﻿using SimulinkModelGenerator.Modeler.Builders;
+using SimulinkModelGenerator.Modeler.GrammarRules;
+using System;
 
 namespace SimulinkModelGenerator.Samples
 {
@@ -19,7 +21,7 @@ namespace SimulinkModelGenerator.Samples
             //Common_Elements_With_Automatic_Names_And_With_Connections_Style_1();
             //Common_Elements_With_Automatic_Names_And_With_Connections_Style_2();
             //PID_Example();
-            PID_Example_With_Formated_Connection_Lines();
+            Example_With_Formated_Connection_Lines();
 
             //PID_Example_With_Rosenbrock_Solver_In_Normal_Mode();
 
@@ -355,11 +357,11 @@ namespace SimulinkModelGenerator.Samples
                 .Save(path);
         }
 
-        static void PID_Example_With_Formated_Connection_Lines()
+        static void Example_With_Formated_Connection_Lines()
         {
             ModelBuilder
                 .Create()
-                .WithName("pid_example_with_formated_connection_lines")
+                .WithName("example_with_formated_connection_lines")
                 .AddControlSystem(cs =>
                 {
                     cs.AddSources(s =>
@@ -404,7 +406,7 @@ namespace SimulinkModelGenerator.Samples
                          .ThanConnect("TransferFcn")
                          .Branch(b => b.Towards("Scope"))
                          .Branch(b =>
-                             b.Towards("Gain", action: x => x.GoDown().ThanLeft())
+                             b.Towards("Gain", action: x => x.GoDown().ThanRight())
                               .ThanConnect("Sum", 2, x => x.GoLeft().ThanUp()))
                          .Branch(b =>
                              b.Towards("Gain1", action: x => x.GoUp().ThanLeft())
