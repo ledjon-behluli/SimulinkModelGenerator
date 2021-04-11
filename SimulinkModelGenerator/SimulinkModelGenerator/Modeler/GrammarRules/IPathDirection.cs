@@ -5,7 +5,7 @@
         IPathDirectionDistance Upward();
         IPathDirectionDistance Downward();
         IPathDirectionDistance Leftward();
-        IPathDirectionDistance Rightwards();
+        IPathDirectionDistance Rightward();
     }
 
     public interface IPathDirectionDistance

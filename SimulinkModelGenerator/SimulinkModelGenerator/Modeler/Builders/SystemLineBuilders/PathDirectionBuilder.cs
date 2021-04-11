@@ -35,7 +35,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             return this;
         }
 
-        public IPathDirectionDistance Rightwards()
+        public IPathDirectionDistance Rightward()
         {
             Path.Type = LinePath.DirectionType.Right;
             return this;

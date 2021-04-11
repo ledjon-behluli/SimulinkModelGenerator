@@ -438,7 +438,7 @@ namespace SimulinkModelGenerator.Samples
                      .ThanConnect("Add", 2, x => x.Upward())
                      .ThanConnect("Scope2"))
 
-                .Connect("Constant", "Scope", 1, 2, x => x.Rightwards());
+                .Connect("Constant", "Scope", 1, 2, x => x.Rightward());
         };
 
         static Action<ISystemLine> formattedAndCorrected = c =>
@@ -468,7 +468,7 @@ namespace SimulinkModelGenerator.Samples
                      .ThanConnect("Add", 2, x => x.Upward().Shorten(10))
                      .ThanConnect("Scope2"))
 
-                .Connect("Constant", "Scope", 1, 2, x => x.Rightwards().Shorten(50));
+                .Connect("Constant", "Scope", 1, 2, x => x.Rightward().Shorten(50));
         };
 
         static void Example_Of_Connection_Line_Formatting(string name, Action<ISystemLine> action)
