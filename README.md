@@ -1,4 +1,4 @@
-![alt text](https://github.com/ledjon-behluli/SimulinkModelGenerator/blob/master/SimulinkModelGenerator/simulink-icon.png?raw=true)
+![alt text](https://github.com/ledjon-behluli/SimulinkModelGenerator/blob/master/SimulinkModelGenerator/Assets/simulink-icon.png?raw=true)
 # Simulink Model Generator 
 Fully .NET managed solution for creating [Simulink](https://www.mathworks.com/products/simulink.html) models in fluent style.
 
@@ -41,11 +41,11 @@ Sample-based Sine Wave Generator | | Math Function | 2dof PI
 
 Below is a generated model as seen in Simulink (tested with Matlab R2017a).
 
-![alt text](https://github.com/ledjon-behluli/SimulinkModelGenerator/blob/master/SimulinkModelGenerator/simulink-diagram.png?raw=true)
+![alt text](https://github.com/ledjon-behluli/SimulinkModelGenerator/blob/master/SimulinkModelGenerator/Assets/simulink-diagram.png?raw=true)
 
 Scope output for 10s simulation time:
 
-![alt text](https://github.com/ledjon-behluli/SimulinkModelGenerator/blob/master/SimulinkModelGenerator/scope-output.png?raw=true)
+![alt text](https://github.com/ledjon-behluli/SimulinkModelGenerator/blob/master/SimulinkModelGenerator/Assets/scope-output.png?raw=true)
 
 C# code to generate '.mdl' file of the above model. Other examples can be found [here](https://github.com/ledjon-behluli/SimulinkModelGenerator/blob/master/SimulinkModelGenerator/SimulinkModelGenerator.Samples/Program.cs)
 
