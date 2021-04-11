@@ -9,20 +9,11 @@ namespace SimulinkModelGenerator.Modeler.GrammarRules
 
     public interface IControlSystemBranch
     {
-        ISystemBranch Towards(string destinationBlockName, uint destinationBlockPort = 1, Action<IPathBuilder> action = null);
-        //IDirection Towards(string destinationBlockName, uint destinationBlockPort = 1, int extra);
+        ISystemBranch Towards(string destinationBlockName, uint destinationBlockPort = 1, Action<IPathDirection> direction = null);
     }
 
     public interface IControlSystemBranchNewLine
     {
-        ISystemBranch ThanConnect(string destinationBlockName, uint destinationBlockPort = 1, Action<IPathBuilder> action = null);
-    }
-
-    public interface IDirection
-    {
-        ISystemBranch Downwards();
-        ISystemBranch Upwards();
-        ISystemBranch Leftwards();
-        ISystemBranch Rightwards();
+        ISystemBranch ThanConnect(string destinationBlockName, uint destinationBlockPort = 1, Action<IPathDirection> direction = null);
     }
 }

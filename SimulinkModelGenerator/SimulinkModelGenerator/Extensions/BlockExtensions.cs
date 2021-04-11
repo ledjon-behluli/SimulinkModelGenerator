@@ -45,5 +45,17 @@ namespace SimulinkModelGenerator.Extensions
 
             return Math.Abs(destCenter.Y - srcCenter.Y);
         }
+
+        public static int GetWidth(this Block block)
+        {
+            (int x1, int y1, int x2, int y2) = block.GetCoordinates();
+            return x2 - x1;
+        }
+
+        public static int GetHeight(this Block block)
+        {
+            (int x1, int y1, int x2, int y2) = block.GetCoordinates();
+            return y2 - y1;
+        }
     }
 }

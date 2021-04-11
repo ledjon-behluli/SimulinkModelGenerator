@@ -1,5 +1,4 @@
 ﻿using System;
-using SimulinkModelGenerator.Modeler.Builders.ConfigurationBuilders.Solver;
 
 namespace SimulinkModelGenerator.Modeler.GrammarRules
 {

@@ -4,8 +4,6 @@ using SimulinkModelGenerator.Modeler.GrammarRules;
 using System;
 using System.Collections.Generic;
 using SimulinkModelGenerator.Models;
-using System.Linq;
-using Combination = SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders.LinePathBuilder.LinePath.Combination;
 
 namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
 {
@@ -20,11 +18,11 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             this.previousBlockName = startingBlockName;
         }
 
-        public ISystemLine Connect(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1, Action<IPathBuilder> action = null) 
-            => Build(sourceBlockName, destinationBlockName, sourceBlockPort, destinationBlockPort, action);
+        public ISystemLine Connect(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1, Action<IPathDirection> direction = null) 
+            => Build(sourceBlockName, destinationBlockName, sourceBlockPort, destinationBlockPort, direction);
 
-        public ISystemLine ThanConnect(string destinationBlockName, uint destinationBlockPort = 1, Action<IPathBuilder> action = null)
-            => Build(previousBlockName, destinationBlockName, 1, destinationBlockPort, action);
+        public ISystemLine ThanConnect(string destinationBlockName, uint destinationBlockPort = 1, Action<IPathDirection> direction = null)
+            => Build(previousBlockName, destinationBlockName, 1, destinationBlockPort, direction);
 
         public ISystemLine Branch(Action<ISystemBranch> action)
         {
@@ -33,7 +31,7 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             return this;
         }
 
-        internal ISystemLine Build(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1, Action<IPathBuilder> action = null)
+        internal ISystemLine Build(string sourceBlockName, string destinationBlockName, uint sourceBlockPort = 1, uint destinationBlockPort = 1, Action<IPathDirection> direction = null)
         {
             if (string.IsNullOrEmpty(sourceBlockName))
                 throw new SimulinkModelGeneratorException("Source block name can not be null or empty.");
@@ -47,14 +45,15 @@ namespace SimulinkModelGenerator.Modeler.Builders.SystemLineBuilders
             if(destinationBlockPort == 0)
                 throw new SimulinkModelGeneratorException("Destination block port number can not be zero.");
 
-            LinePathBuilder builder = new LinePathBuilder(model);
+
+            PathDirectionBuilder builder = new PathDirectionBuilder(model);
             Line newLine = new Line()
             {
                 P = new List<Parameter>()
                 {
                     new Parameter() { Name = "SrcBlock", Text = sourceBlockName },
                     new Parameter() { Name = "SrcPort", Text = sourceBlockPort.ToString() },
-                    builder.GetBranchPointParameter(previousBlockName, destinationBlockName, action),
+                    builder.CalculateBranchPoint(sourceBlockName, destinationBlockName, direction),
                     new Parameter() { Name = "DstBlock", Text = destinationBlockName },
                     new Parameter() { Name = "DstPort", Text = destinationBlockPort.ToString() },
                 }

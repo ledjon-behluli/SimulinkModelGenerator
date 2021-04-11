@@ -10,53 +10,23 @@ namespace SimulinkModelGenerator.Samples
 
         static void Main(string[] args)
         {
-            //Fixed_Extrapolation_Ode14x_Solver_Configuration_Example();
-            //Fixed_Runge_Kutta_Ode4_Solver_Configuration_Example();
-            //Variable_Rosenbrock_Ode23s_Solver_Configuration_Example();
-            //Variable_Stiff_NDF_Ode15s_Solver_Configuration_Example();
+            Fixed_Extrapolation_Ode14x_Solver_Configuration_Example();
+            Fixed_Runge_Kutta_Ode4_Solver_Configuration_Example();
+            Variable_Rosenbrock_Ode23s_Solver_Configuration_Example();
+            Variable_Stiff_NDF_Ode15s_Solver_Configuration_Example();
 
-            //All_Elements();
-            //Common_Elements_With_Set_Names_And_Without_Connections();
-            //Common_Elements_With_Set_Names_And_With_Connections();
-            //Common_Elements_With_Automatic_Names_And_With_Connections_Style_1();
-            //Common_Elements_With_Automatic_Names_And_With_Connections_Style_2();
-            //PID_Example();
-            Example_With_Formated_Connection_Lines();
+            All_Elements();
+            Common_Elements_With_Set_Names_And_Without_Connections();
+            Common_Elements_With_Set_Names_And_With_Connections();
+            Common_Elements_With_Automatic_Names_And_With_Connections_Style_1();
+            Common_Elements_With_Automatic_Names_And_With_Connections_Style_2();
+            PID_Example();
 
-            //PID_Example_With_Rosenbrock_Solver_In_Normal_Mode();
+            PID_Example_With_Rosenbrock_Solver_In_Normal_Mode();
 
-        }
-
-        public void test()
-        {
-            ModelBuilder
-               .Create()
-               .WithName("testCopyAngled")
-               .AddControlSystem(cs =>
-               {
-                   cs.AddSources(s => s.AddStep(sp => sp.SetPosition(190, 145)));
-                   cs.AddMathOperations(mo =>
-                        mo.AddSum(sum => sum.SetInputs(InputType.Minus, InputType.Plus, InputType.Minus).SetPosition(320, 150))
-                          .AddGain(g => g.WithName("Gain1").FlipHorizontally().SetPosition(515, 230))
-                          .AddGain(g => g.WithName("Gain2").FlipHorizontally().SetPosition(515, 60)));
-                   cs.AddContinuous(co =>
-                   {
-                       co.AddPIDController(pid => pid.SetPosition(435, 142));
-                       co.AddTransferFunction(tf => tf.SetPosition(595, 142));
-                   });
-                   cs.AddSinks(s => s.AddScope(scope => scope.SetPosition(820, 142)));
-                   cs.AddConnections("Step", c =>
-                   {
-                       c.ThanConnect("Sum", 2).ThanConnect("PID Controller").ThanConnect("TransferFcn")
-                         .Branch(b => b.Towards("Scope"))
-                         .Branch(b => b.Towards("Gain1", 1, x => x.GoDown().ThanLeft())
-                                       .ThanConnect("Sum", 3, x => x.GoLeft().ThanUp()))
-                         .Branch(b => b.Towards("Gain2", 1, x => x.GoUp().ThanLeft())
-                                       .ThanConnect("Sum", 1, x => x.GoLeft().ThanDown()))
-                         .Connect("Constant", "Scope", 1, 2);
-                   });
-               })
-               .Save(path);
+            Example_Of_Connection_Line_Formatting("unformatted", unformatted);
+            Example_Of_Connection_Line_Formatting("formatted_only", formattedOnly);
+            Example_Of_Connection_Line_Formatting("formatted_and_corrected", formattedAndCorrected);
         }
 
         #region Solver Configuration Examples
@@ -357,73 +327,6 @@ namespace SimulinkModelGenerator.Samples
                 .Save(path);
         }
 
-        static void Example_With_Formated_Connection_Lines()
-        {
-            ModelBuilder
-                .Create()
-                .WithName("example_with_formated_connection_lines")
-                .AddControlSystem(cs =>
-                {
-                    cs.AddSources(s =>
-                    {
-                        s.AddStep(sp => sp.SetStepTime(0).SetPosition(190, 145))
-                         .AddConstant(c => c.SetPosition(190, 245));
-                    });
-
-                    cs.AddMathOperations(mo =>
-                    {
-                        mo.AddSum(sum => sum.SetInputs(InputType.Plus, InputType.Minus).SetPosition(320, 150))
-                          .AddGain(g => g.FlipHorizontally().SetPosition(515, 230))
-                          .AddGain(g => g.SetGain(2).FlipHorizontally().SetPosition(515, 45))
-                          .AddGain(g => g.SetGain(3).SetPosition(890, 230))
-                          .AddGain(g => g.SetGain(4).SetPosition(890, 310))
-                          .AddAddition(s => s.SetPosition(960, 270));
-                    });
-
-                    cs.AddContinuous(co =>
-                    {
-                        co.AddPIDController(pid => 
-                            pid.SetProportional(31.0019358281379)
-                               .SetIntegral(88.4489521692078)
-                               .SetDerivative(1.81032163065042)
-                               .SetFilterCoefficient(4337.28406726102)
-                               .SetPosition(435, 142))
-
-                          .AddTransferFunction(tf => tf.SetNumerator(20).SetDenominator(1, 10, 20).SetPosition(595, 142));
-                    });
-
-                    cs.AddSinks(s =>
-                    {
-                        s.AddScope(scope => scope.SetInputPorts(2).SetPosition(820, 151))
-                         .AddScope(scope => scope.FlipHorizontally().SetPosition(190, 45))
-                         .AddScope(scope => scope.SetPosition(1080, 272));
-                    });
-
-                    cs.AddConnections("Step", c =>
-                    {
-                        c.ThanConnect("Sum")
-                         .ThanConnect("PID Controller")
-                         .ThanConnect("TransferFcn")
-                         .Branch(b => b.Towards("Scope"))
-                         .Branch(b =>
-                             b.Towards("Gain", action: x => x.GoDown().ThanRight())
-                              .ThanConnect("Sum", 2, x => x.GoLeft().ThanUp()))
-                         .Branch(b =>
-                             b.Towards("Gain1", action: x => x.GoUp().ThanLeft())
-                              .ThanConnect("Scope1"))
-                         .Branch(b =>
-                             b.Towards("Gain2", action: x => x.GoDown().ThanRight())
-                              .ThanConnect("Add", 1, x => x.GoDown().ThanRight()))
-                         .Branch(b =>
-                             b.Towards("Gain3", action: x => x.GoDown().ThanRight())
-                              .ThanConnect("Add", 2, x => x.GoUp().ThanRight())
-                              .ThanConnect("Scope2"))
-                         .Connect("Constant", "Scope", 1, 2, x => x.GoRight().ThanUp());
-                    });
-                })
-                .Save(path);
-        }
-
         #endregion
 
         #region Control System With Solver Configuration Examples
@@ -475,5 +378,148 @@ namespace SimulinkModelGenerator.Samples
         }
 
         #endregion
+
+        #region Control System Formatting Examples
+
+        static Action<ISystemLine> unformatted = c =>
+        {
+            c.ThanConnect("Sum")
+                .ThanConnect("PID Controller")
+                .ThanConnect("TransferFcn")
+                .Branch(b => b.Towards("Scope"))
+
+                .Branch(b =>
+                    b.Towards("Gain")
+                     .ThanConnect("Sum", 2))
+
+                .Branch(b => b.Towards("Product", 1))
+
+                .Branch(b =>
+                    b.Towards("Product", 2)
+                     .ThanConnect("Gain1")
+                     .ThanConnect("Scope1"))
+
+                .Branch(b =>
+                    b.Towards("Gain2")
+                     .ThanConnect("Add", 1))
+
+                .Branch(b =>
+                    b.Towards("Gain3")
+                     .ThanConnect("Add", 2)
+                     .ThanConnect("Scope2"))
+
+                .Connect("Constant", "Scope", 1, 2);
+        };
+
+        static Action<ISystemLine> formattedOnly = c =>
+        {
+            c.ThanConnect("Sum")
+                .ThanConnect("PID Controller")
+                .ThanConnect("TransferFcn")
+                .Branch(b => b.Towards("Scope"))
+
+                .Branch(b =>
+                    b.Towards("Gain", direction: x => x.Downward())
+                     .ThanConnect("Sum", 2, x => x.Leftward()))
+
+                .Branch(b => b.Towards("Product", 1, x => x.Upward()))
+
+                .Branch(b =>
+                    b.Towards("Product", 2, x => x.Upward())
+                     .ThanConnect("Gain1")
+                     .ThanConnect("Scope1"))
+
+                .Branch(b =>
+                    b.Towards("Gain2", direction: x => x.Downward())
+                     .ThanConnect("Add", 1, x => x.Downward()))
+
+                .Branch(b =>
+                    b.Towards("Gain3", direction: x => x.Downward())
+                     .ThanConnect("Add", 2, x => x.Upward())
+                     .ThanConnect("Scope2"))
+
+                .Connect("Constant", "Scope", 1, 2, x => x.Rightwards());
+        };
+
+        static Action<ISystemLine> formattedAndCorrected = c =>
+        {
+            c.ThanConnect("Sum")
+                .ThanConnect("PID Controller")
+                .ThanConnect("TransferFcn")
+                .Branch(b => b.Towards("Scope"))
+
+                .Branch(b =>
+                    b.Towards("Gain", direction: x => x.Downward())
+                     .ThanConnect("Sum", 2, x => x.Leftward().Lengthen(10)))
+
+                .Branch(b => b.Towards("Product", 1, x => x.Upward().Lengthen(5)))
+
+                .Branch(b =>
+                    b.Towards("Product", 2, x => x.Upward().Shorten(10))
+                     .ThanConnect("Gain1")
+                     .ThanConnect("Scope1"))
+
+                .Branch(b =>
+                    b.Towards("Gain2", direction: x => x.Downward())
+                     .ThanConnect("Add", 1, x => x.Downward().Shorten(5)))
+
+                .Branch(b =>
+                    b.Towards("Gain3", direction: x => x.Downward())
+                     .ThanConnect("Add", 2, x => x.Upward().Shorten(10))
+                     .ThanConnect("Scope2"))
+
+                .Connect("Constant", "Scope", 1, 2, x => x.Rightwards().Shorten(50));
+        };
+
+        static void Example_Of_Connection_Line_Formatting(string name, Action<ISystemLine> action)
+        {
+            ModelBuilder
+                .Create()
+                .WithName(name)
+                .AddControlSystem(cs =>
+                {
+                    cs.AddSources(s =>
+                    {
+                        s.AddStep(sp => sp.SetStepTime(0).SetPosition(190, 145))
+                         .AddConstant(c => c.SetPosition(190, 265));
+                    });
+
+                    cs.AddMathOperations(mo =>
+                    {
+                        mo.AddSum(sum => sum.SetInputs(InputType.Plus, InputType.Minus).SetPosition(320, 150))
+                          .AddGain(g => g.FlipHorizontally().SetPosition(515, 230))
+                          .AddGain(g => g.SetGain(2).FlipHorizontally().SetPosition(315, 45))
+                          .AddProduct(d => d.FlipHorizontally().SetPosition(515, 40))
+                          .AddGain(g => g.SetGain(3).SetPosition(890, 230))
+                          .AddGain(g => g.SetGain(4).SetPosition(890, 305))
+                          .AddAddition(a => a.SetPosition(960, 270));
+                    });
+
+                    cs.AddContinuous(co =>
+                    {
+                        co.AddPIDController(pid =>
+                            pid.SetProportional(31.0019358281379)
+                               .SetIntegral(88.4489521692078)
+                               .SetDerivative(1.81032163065042)
+                               .SetFilterCoefficient(4337.28406726102)
+                               .SetPosition(435, 142))
+
+                          .AddTransferFunction(tf => tf.SetNumerator(20).SetDenominator(1, 10, 20).SetPosition(595, 142));
+                    });
+
+                    cs.AddSinks(s =>
+                    {
+                        s.AddScope(scope => scope.SetInputPorts(2).SetPosition(820, 151))
+                         .AddScope(scope => scope.FlipHorizontally().SetPosition(190, 45))
+                         .AddScope(scope => scope.SetPosition(1080, 272));
+                    });
+
+                    cs.AddConnections("Step", action);
+                })
+                .Save(path);
+        }
+
+        #endregion
+
     }
 }
