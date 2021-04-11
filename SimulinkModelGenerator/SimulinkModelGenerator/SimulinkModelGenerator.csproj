@@ -19,7 +19,7 @@
     <AssemblyVersion>2.1.0</AssemblyVersion>
     <FileVersion>2.1.0</FileVersion>
     <Version>2.1.0</Version>
-    <PackageReleaseNotes>Release notes can be found at: https://github.com/ledjon-behluli/SimulinkModelGenerator/releases </PackageReleaseNotes>
+    <PackageReleaseNotes>Release notes can be found at: https://github.com/ledjon-behluli/SimulinkModelGenerator/releases/tag/v2.1.0 </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
