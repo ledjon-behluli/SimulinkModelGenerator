@@ -5,14 +5,17 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimulinkModelGenerator", "SimulinkModelGenerator\SimulinkModelGenerator.csproj", "{ECC2FD7C-BC2D-4FF1-9A95-0EB7476580B9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{DB11CCE1-70B8-4255-AA41-DCAE0C90669A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimulinkModelGenerator.Samples", "SimulinkModelGenerator.Samples\SimulinkModelGenerator.Samples.csproj", "{266F5B61-105D-4E39-8B44-F91A76704439}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{226772EC-6E58-4302-AFA7-0084FB5303F4}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\..\Users\behlu\Desktop\formatted-and-corrected.png = ..\..\..\Users\behlu\Desktop\formatted-and-corrected.png
+		..\..\..\Users\behlu\Desktop\formatted-only.png = ..\..\..\Users\behlu\Desktop\formatted-only.png
 		scope-output.png = scope-output.png
 		simulink-diagram.png = simulink-diagram.png
 		simulink-icon.png = simulink-icon.png
+		..\..\..\Users\behlu\Desktop\unformatted.png = ..\..\..\Users\behlu\Desktop\unformatted.png
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimulinkModelGenerator.Samples", "SimulinkModelGenerator.Samples\SimulinkModelGenerator.Samples.csproj", "{266F5B61-105D-4E39-8B44-F91A76704439}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

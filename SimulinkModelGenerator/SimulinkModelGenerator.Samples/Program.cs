@@ -520,6 +520,5 @@ namespace SimulinkModelGenerator.Samples
         }
 
         #endregion
-
     }
 }

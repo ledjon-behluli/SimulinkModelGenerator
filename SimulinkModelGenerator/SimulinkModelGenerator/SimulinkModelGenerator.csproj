@@ -31,7 +31,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="..\simulink-icon.png">
+    <None Include="..\Assets\simulink-icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
