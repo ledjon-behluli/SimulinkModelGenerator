@@ -4,7 +4,7 @@ Fully .NET managed solution for creating [Simulink](https://www.mathworks.com/pr
 
 Library is available through [NuGet](https://www.nuget.org/packages/SimulinkModelGenerator/).
 
-Create Simulink models right from your C# application. SimulinkModelGenerator targets .NET Standart 2.0, you can consume it within any type of application targeting below platform versions:
+Create Simulink models right from your C# application. SimulinkModelGenerator targets .NET Standard 2.0, you can consume it within any type of application targeting below platform versions:
 
 Platform | Supported Versions
 ------------ | -------------
